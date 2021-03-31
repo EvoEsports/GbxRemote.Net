@@ -19,8 +19,8 @@ namespace GbxRemoteNet {
         /// <param name="method"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params XmlRpcBaseType[] args) {
-            var msg = await CallAsync(method, args);
+        private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
+            var msg = await CallAsync(method, Arguments(args));
 
             if (msg.IsFault)
                 throw new XmlRpcFaultException((XmlRpcFault)msg.ResponseData);
