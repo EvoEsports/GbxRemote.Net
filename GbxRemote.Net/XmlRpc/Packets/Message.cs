@@ -12,6 +12,7 @@ namespace GbxRemoteNet.XmlRpc.Packets {
         public string RawMessage;
         public XDocument MessageXml;
         public bool IsFault;
+        public bool IsCallback => Header.IsCallback;
 
         public Message() { }
         public Message(MessageHeader header, string message) {
@@ -20,7 +21,7 @@ namespace GbxRemoteNet.XmlRpc.Packets {
             MessageXml = XDocument.Parse(message);
             IsFault = false;
 
-            if (!Header.IsCallback)
+            if (!IsCallback)
                 IsFault = MessageXml.Elements(XmlRpcElementNames.MethodResponse)
                                     .First()
                                     .Elements(XmlRpcElementNames.Fault)
@@ -28,7 +29,7 @@ namespace GbxRemoteNet.XmlRpc.Packets {
         }
 
         public XmlRpcBaseType GetResponseData() {
-            if (Header.IsCallback)
+            if (IsCallback)
                 throw new InvalidOperationException("Message is not a response.");
 
             XElement response = MessageXml.Elements(XmlRpcElementNames.MethodResponse).First();

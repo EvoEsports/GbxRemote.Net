@@ -45,7 +45,7 @@ namespace GbxRemoteNet.XmlRpc {
 
                     Message message = await Message.FromIOAsync(xmlRpcIO);
 
-                    if (message.Header.IsCallback) {
+                    if (message.IsCallback) {
                         // just invoke the callback event
                         OnCallback?.Invoke(message);
                     } else if (responseHandles.ContainsKey(message.Header.Handle)) {

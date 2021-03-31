@@ -13,7 +13,7 @@ namespace GbxRemoteNet {
         /// Return an array of all available XML-RPC methods on this server.
         /// </summary>
         /// <returns></returns>
-        public async Task<string[]> SystemListMethods() {
+        public async Task<string[]> SystemListMethodsAsync() {
             var msg = await CallAsync("system.listMethods");
             var response = msg.GetResponseData();
 
@@ -23,6 +23,8 @@ namespace GbxRemoteNet {
             var arr = (XmlRpcArray)msg.GetResponseData();
             return arr.Values.Select((method, i) => ((XmlRpcString)method).Value).ToArray();
         }
+
+
         #endregion
 
         #region Session Methods
@@ -51,7 +53,7 @@ namespace GbxRemoteNet {
         /// <param name="login"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public async Task<bool> ChangeAuthPassword(string login, string password) {
+        public async Task<bool> ChangeAuthPasswordAsync(string login, string password) {
             var msg = await CallAsync("ChangeAuthPassword",
                 new XmlRpcString(login),
                 new XmlRpcString(password)
@@ -68,7 +70,7 @@ namespace GbxRemoteNet {
         /// Allow the GameServer to call you back.
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> EnableCallbacks() {
+        public async Task<bool> EnableCallbacksAsync() {
             var msg = await CallAsync("EnableCallbacks");
             var response = msg.GetResponseData();
 
@@ -83,7 +85,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="version"></param>
         /// <returns></returns>
-        public async Task<bool> SetApiVersion(string version) {
+        public async Task<bool> SetApiVersionAsync(string version) {
             var msg = await CallAsync("SetApiVersion", new XmlRpcString(version));
             var response = msg.GetResponseData();
 

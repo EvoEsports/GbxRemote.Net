@@ -24,10 +24,12 @@ namespace BasicExample {
 
             Console.WriteLine("Connected and authenticated!");
 
-            string[] methods = await client.SystemListMethods();
+            await
+
+            /* string[] methods = await client.SystemListMethods();
             foreach (var method in methods) {
                 Console.WriteLine(method);
-            }
+            } */
 
             await Task.Delay(-1);
         }
