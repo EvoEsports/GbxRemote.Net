@@ -1,10 +1,12 @@
 ﻿using GbxRemoteNet;
+using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.ExtraTypes;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
 using System;
 using System.Buffers.Text;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -24,14 +26,14 @@ namespace BasicExample {
 
             Console.WriteLine("Connected and authenticated!");
 
-            await
+            var ret = await client.ChatSendServerMessageAsync("test");
 
-            /* string[] methods = await client.SystemListMethods();
-            foreach (var method in methods) {
+            /* string[][] methods = await client.SystemMethodSignatureAsync("CallVoteEx");
+            foreach (var method in methods[0]) {
                 Console.WriteLine(method);
             } */
 
-            await Task.Delay(-1);
+            await client.DisconnectAsync();
         }
 
         static void Main(string[] args) {

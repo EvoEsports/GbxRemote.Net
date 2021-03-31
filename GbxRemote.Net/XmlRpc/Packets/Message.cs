@@ -13,6 +13,7 @@ namespace GbxRemoteNet.XmlRpc.Packets {
         public XDocument MessageXml;
         public bool IsFault;
         public bool IsCallback => Header.IsCallback;
+        public XmlRpcBaseType ResponseData;
 
         public Message() { }
         public Message(MessageHeader header, string message) {
@@ -21,13 +22,19 @@ namespace GbxRemoteNet.XmlRpc.Packets {
             MessageXml = XDocument.Parse(message);
             IsFault = false;
 
-            if (!IsCallback)
+            if (!IsCallback) {
                 IsFault = MessageXml.Elements(XmlRpcElementNames.MethodResponse)
                                     .First()
                                     .Elements(XmlRpcElementNames.Fault)
                                     .Any();
+                ResponseData = GetResponseData();
+            }
         }
 
+        /// <summary>
+        /// Convert the xml response to XML-RPC type data.
+        /// </summary>
+        /// <returns></returns>
         public XmlRpcBaseType GetResponseData() {
             if (IsCallback)
                 throw new InvalidOperationException("Message is not a response.");

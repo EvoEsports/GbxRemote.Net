@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -28,6 +29,20 @@ namespace GbxRemoteNet.XmlRpc.Types {
                 XmlRpcBaseType value = XmlRpcTypes.ElementToInstance(valueElement);
 
                 Fields.Add(name, value);
+            }
+        }
+
+        /// <summary>
+        /// Create a struct from an object.
+        /// </summary>
+        /// <param name="obj"></param>
+        public XmlRpcStruct(object obj) : base(null) {
+            Type t = obj.GetType();
+            var fields = t.GetFields(BindingFlags.Public | BindingFlags.Instance);
+            Fields = new Struct();
+
+            foreach (var field in fields) {
+                Fields.Add(field.Name, XmlRpcTypes.ToXmlRpcValue(t.GetField(field.Name).GetValue(obj)));
             }
         }
 
