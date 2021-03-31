@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GbxRemote.Net", "GbxRemote.Net\GbxRemote.Net.csproj", "{58E89DC1-A4F7-4F67-9C37-3ED7DEFC62D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{2D219B44-4695-4039-94DD-0FD184FF5BA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicExample", "BasicExample\BasicExample.csproj", "{1E29480F-7438-4609-8F94-59E23E9218B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58E89DC1-A4F7-4F67-9C37-3ED7DEFC62D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E89DC1-A4F7-4F67-9C37-3ED7DEFC62D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E89DC1-A4F7-4F67-9C37-3ED7DEFC62D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E89DC1-A4F7-4F67-9C37-3ED7DEFC62D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E29480F-7438-4609-8F94-59E23E9218B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E29480F-7438-4609-8F94-59E23E9218B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E29480F-7438-4609-8F94-59E23E9218B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E29480F-7438-4609-8F94-59E23E9218B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E29480F-7438-4609-8F94-59E23E9218B6} = {2D219B44-4695-4039-94DD-0FD184FF5BA6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0181D9E0-A6BA-47B0-899F-00362C2501E9}
+	EndGlobalSection
+EndGlobal
