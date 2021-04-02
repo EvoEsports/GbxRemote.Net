@@ -141,6 +141,9 @@ namespace GbxRemoteNet.XmlRpc {
         /// <param name="arr"></param>
         /// <returns></returns>
         public static XmlRpcBaseType ToXmlRpcValue(object obj) {
+            if (obj == null) 
+                return null;
+
             Type t = obj.GetType();
 
             if (t == typeof(Base64)) {

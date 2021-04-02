@@ -14,9 +14,10 @@ namespace GbxRemoteNet.XmlRpc {
 
             // add the arguments with their proper elements
             foreach (XmlRpcBaseType arg in args)
-                arguments.Add(new XElement(XmlRpcElementNames.Param,
-                    new XElement(XmlRpcElementNames.Value, arg.GetXml())
-                ));
+                if (arg != null)
+                    arguments.Add(new XElement(XmlRpcElementNames.Param,
+                        new XElement(XmlRpcElementNames.Value, arg.GetXml())
+                    ));
 
             MainDocument.Root.Add(methodName);
             MainDocument.Root.Add(arguments);

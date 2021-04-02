@@ -26,7 +26,7 @@ namespace BasicExample {
 
             Console.WriteLine("Connected and authenticated!");
 
-            var ret = await client.ChatSendServerMessageAsync("test");
+            var ret = await client.KickAsync("test");
 
             /* string[][] methods = await client.SystemMethodSignatureAsync("CallVoteEx");
             foreach (var method in methods[0]) {
