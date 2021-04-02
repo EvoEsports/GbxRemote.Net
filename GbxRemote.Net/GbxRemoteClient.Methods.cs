@@ -198,9 +198,64 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SetHideServer", hiddenState)
             );
 
-        public async Task<int> GetHideServer() =>
+        public async Task<int> GetHideServerAsync() =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("GetHideServer")
+            );
+
+        public async Task<bool> IsRelayServerAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("IsRelayServer")
+            );
+
+        public async Task<bool> SetServerPasswordAsync(string password) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerPassword", password)
+            );
+
+        public async Task<string> GetServerPasswordAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetServerPassword")
+            );
+
+        public async Task<bool> SetServerPasswordForSpectatorAsync(string password) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerPasswordForSpectator", password)
+            );
+
+        public async Task<string> GetServerPasswordForSpectatorAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetServerPasswordForSpectator")
+            );
+
+        public async Task<bool> SetMaxPlayersAsync(int maxPlayers) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetMaxPlayers", maxPlayers)
+            );
+
+        public async Task<MaxPlayersStruct> GetMaxPlayersAsync() =>
+            (MaxPlayersStruct)XmlRpcTypes.ToNativeValue<MaxPlayersStruct>(
+                await CallOrFaultAsync("GetMaxPlayers")
+            );
+
+        public async Task<bool> SetMaxSpectatorsAsync(int maxPlayers) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetMaxSpectators", maxPlayers)
+            );
+
+        public async Task<MaxPlayersStruct> GetMaxSpectatorsAsync() =>
+            (MaxPlayersStruct)XmlRpcTypes.ToNativeValue<MaxPlayersStruct>(
+                await CallOrFaultAsync("GetMaxSpectators")
+            );
+
+        public async Task<bool> SetLobbyInfoAsync(bool isLobby, int lobbyPlayers, int lobbyMaxPlayers, double lobbyPlayersLevel) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetLobbyInfo", isLobby, lobbyPlayers, lobbyMaxPlayers, lobbyPlayersLevel)
+            );
+
+        public async Task<LobbyInfoStruct> GetLobbyInfoAsync() =>
+            (LobbyInfoStruct)XmlRpcTypes.ToNativeValue<LobbyInfoStruct>(
+                await CallOrFaultAsync("GetLobbyInfo")
             );
         #endregion
 
