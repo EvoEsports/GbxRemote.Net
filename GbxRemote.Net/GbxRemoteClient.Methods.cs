@@ -137,6 +137,71 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("Echo", par1, par2)
             );
+
+        public async Task<int> GetServerPlanetsAsync() =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("GetServerPlanets")
+            );
+
+        public async Task<SystemInfoStruct> SystemInfoStructAsync() =>
+            (SystemInfoStruct)XmlRpcTypes.ToNativeValue<SystemInfoStruct>(
+                await CallOrFaultAsync("SystemInfoStruct")
+            );
+
+        public async Task<bool> SetConnectionRatesAsync(int download, int upload) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetConnectionRates", download, upload)
+            );
+
+        public async Task<ServerTagStruct[]> GetServerTagsAsync() =>
+            (ServerTagStruct[])XmlRpcTypes.ToNativeValue<ServerTagStruct>(
+                await CallOrFaultAsync("GetServerTags")
+            );
+
+        public async Task<bool> SetServerTagAsync(string name, string value) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerTag", name, value)
+            );
+
+        public async Task<bool> UnsetServerTagAsync(string name,) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerTag", name)
+            );
+
+        public async Task<bool> ResetServerTagsAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ResetServerTags")
+            );
+
+        public async Task<bool> SetServerNameAsync(string name) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerName", name)
+            );
+
+        public async Task<string> GetServerNameAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetServerName")
+            );
+
+        public async Task<bool> SetServerCommentAsync(string comment) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerComment", comment)
+            );
+
+        public async Task<string> GetServerCommentAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetServerComment")
+            );
+
+        public async Task<bool> SetHideServerAsync(int hiddenState) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetHideServer", hiddenState)
+            );
+
+        public async Task<int> GetHideServer() =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("GetHideServer")
+            );
         #endregion
 
         #region Votes
@@ -670,7 +735,7 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SendBill", loginFrom, planets, label, loginTo)
             );
 
-        public async Task<BillStateStruct> GetBillState(int billId) =>
+        public async Task<BillStateStruct> GetBillStateAsync(int billId) =>
             (BillStateStruct)XmlRpcTypes.ToNativeValue<BillStateStruct>(
                 await CallOrFaultAsync("SendBill", billId)
             );
