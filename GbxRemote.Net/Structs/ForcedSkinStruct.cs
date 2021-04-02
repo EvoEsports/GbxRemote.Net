@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
-    public class CurrentCallVoteStruct {
-        public string CallerLogin;
-        public string CmdName;
-        public string CmdParam;
+    public class ForcedSkinStruct {
+        public string Orig;
+        public string Name;
+        public string Checksum;
+        public string Url;
     }
 }

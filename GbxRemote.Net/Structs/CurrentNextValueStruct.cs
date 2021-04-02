@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
-    public class GbxRemoteBaseStruct {
-
+    public class CurrentNextValueStruct<T> {
+        public T CurrentValue;
+        public T NextValue;
     }
 }

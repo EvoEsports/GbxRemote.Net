@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
-    public class CurrentCallVoteStruct {
-        public string CallerLogin;
-        public string CmdName;
-        public string CmdParam;
+    public class ForcedModsStruct {
+        public bool Override;
+        public ForcedModsStruct[] Mods;
     }
 }

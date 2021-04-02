@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
-    public class CallVoteTimeOutStruct : GbxRemoteBaseStruct {
-        public int CurrentValue;
-        public int NextValue;
+    public class LadderServerLimitsStruct {
+        public double LadderServerLimitMin;
+        public double LadderServerLimitMax;
     }
 }

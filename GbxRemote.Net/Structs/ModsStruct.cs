@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
-    public class MaxPlayersStruct {
-        public int CurrentValue;
-        public int NextValue;
+    public class ModsStruct {
+        public string EnvName;
+        public string Url;
     }
 }

@@ -163,7 +163,7 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SetServerTag", name, value)
             );
 
-        public async Task<bool> UnsetServerTagAsync(string name,) =>
+        public async Task<bool> UnsetServerTagAsync(string name) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetServerTag", name)
             );
@@ -233,8 +233,8 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SetMaxPlayers", maxPlayers)
             );
 
-        public async Task<MaxPlayersStruct> GetMaxPlayersAsync() =>
-            (MaxPlayersStruct)XmlRpcTypes.ToNativeValue<MaxPlayersStruct>(
+        public async Task<CurrentNextValueStruct<int>> GetMaxPlayersAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
                 await CallOrFaultAsync("GetMaxPlayers")
             );
 
@@ -243,8 +243,8 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SetMaxSpectators", maxPlayers)
             );
 
-        public async Task<MaxPlayersStruct> GetMaxSpectatorsAsync() =>
-            (MaxPlayersStruct)XmlRpcTypes.ToNativeValue<MaxPlayersStruct>(
+        public async Task<CurrentNextValueStruct<int>> GetMaxSpectatorsAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
                 await CallOrFaultAsync("GetMaxSpectators")
             );
 
@@ -256,6 +256,225 @@ namespace GbxRemoteNet {
         public async Task<LobbyInfoStruct> GetLobbyInfoAsync() =>
             (LobbyInfoStruct)XmlRpcTypes.ToNativeValue<LobbyInfoStruct>(
                 await CallOrFaultAsync("GetLobbyInfo")
+            );
+
+        public async Task<bool> SendToServerAfterMatchEndAsync(string sendToServerUrl) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendToServerAfterMatchEnd", sendToServerUrl)
+            );
+
+        public async Task<bool> KeepPlayerSlotsAsync(bool keepSlots) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("KeepPlayerSlots", keepSlots)
+            );
+
+        public async Task<bool> IsKeepingPlayerSlotsAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("IsKeepingPlayerSlots")
+            );
+
+        public async Task<bool> EnableP2PUploadAsync(bool enable) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("EnableP2PUpload", enable)
+            );
+
+        public async Task<bool> IsP2PUploadAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("IsP2PUpload")
+            );
+
+        public async Task<bool> EnableP2PDownloadAsync(bool enable) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("EnableP2PDownload", enable)
+            );
+
+        public async Task<bool> IsP2PDownloadAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("IsP2PDownload")
+            );
+
+        public async Task<bool> AllowMapDownloadAsync(bool allow) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("AllowMapDownload", allow)
+            );
+
+        public async Task<bool> IsMapDownloadAllowedAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("IsMapDownloadAllowed")
+            );
+
+        public async Task<string> GameDataDirectoryAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GameDataDirectory")
+            );
+
+        public async Task<string> GetMapsDirectoryAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetMapsDirectory")
+            );
+
+        public async Task<string> GetSkinsDirectoryAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetSkinsDirectory")
+            );
+
+        public async Task<string> ConnectFakePlayerAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("ConnectFakePlayer")
+            );
+
+        public async Task<bool> DisconnectFakePlayerAsync(string login) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("DisconnectFakePlayer", login)
+            );
+
+        public async Task<DemoTokenInfoStruct> GetDemoTokenInfosForPlayerAsync(string login) =>
+            (DemoTokenInfoStruct)XmlRpcTypes.ToNativeValue<DemoTokenInfoStruct>(
+                await CallOrFaultAsync("GetDemoTokenInfosForPlayer", login)
+            );
+
+        public async Task<bool> DisableHorns(string disable) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("DisableHorns", disable)
+            );
+
+        public async Task<bool> AreHornsDisabledAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("AreHornsDisabled")
+            );
+
+        public async Task<bool> DisableServiceAnnouncesAsync(string disable) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("DisableServiceAnnounces", disable)
+            );
+
+        public async Task<bool> AreServiceAnnouncesDisabledAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("AreServiceAnnouncesDisabled")
+            );
+
+        public async Task<bool> SetLadderModeAsync(int mode) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetLadderMode", mode)
+            );
+
+        public async Task<CurrentNextValueStruct<int>> GetLadderModeAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetLadderMode")
+            );
+
+        public async Task<LadderServerLimitsStruct> GetLadderServerLimitsAsync() =>
+            (LadderServerLimitsStruct)XmlRpcTypes.ToNativeValue<LadderServerLimitsStruct>(
+                await CallOrFaultAsync("GetLadderServerLimits")
+            );
+
+        public async Task<bool> SetVehicleNetQualityAsync(int quality) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetVehicleNetQuality", quality)
+            );
+
+        public async Task<CurrentNextValueStruct<int>> GetVehicleNetQualityAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetVehicleNetQuality")
+            );
+
+        public async Task<bool> SetServerOptionsAsync(ServerOptionsStruct options) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerOptions", options)
+            );
+
+        public async Task<ServerOptionsStruct> GetServerOptionsAsync() =>
+            (ServerOptionsStruct)XmlRpcTypes.ToNativeValue<ServerOptionsStruct>(
+                await CallOrFaultAsync("GetServerOptions")
+            );
+
+        public async Task<bool> SetForcedModsAsync(bool forced, ModsStruct mods) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetForcedMods", forced, mods)
+            );
+
+        public async Task<ForcedModsStruct> GetForcedModsAsync() =>
+            (ForcedModsStruct)XmlRpcTypes.ToNativeValue<ForcedModsStruct>(
+                await CallOrFaultAsync("GetForcedMods")
+            );
+
+        public async Task<bool> SetForcedMusicAsync(bool forced, string urlOrFileName) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetForcedMusic", forced, urlOrFileName)
+            );
+
+        public async Task<MusicSettingStruct> GetForcedMusicAsync() =>
+            (MusicSettingStruct)XmlRpcTypes.ToNativeValue<MusicSettingStruct>(
+                await CallOrFaultAsync("GetForcedMusic")
+            );
+
+        public async Task<bool> SetForcedSkinsAsync(ForcedSkinStruct[] skins) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetForcedSkins", skins)
+            );
+
+        public async Task<ForcedSkinStruct[]> GetForcedSkinsAsync() =>
+            (ForcedSkinStruct[])XmlRpcTypes.ToNativeValue<ForcedSkinStruct>(
+                await CallOrFaultAsync("GetForcedSkins")
+            );
+
+        public async Task<string> GetLastConnectionErrorMessageAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetLastConnectionErrorMessage")
+            );
+
+        public async Task<bool> SetRefereePasswordAsync(string password) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetRefereePassword", password)
+            );
+
+        public async Task<string> GetRefereePasswordAsync() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("GetRefereePassword")
+            );
+
+        public async Task<bool> SetRefereeModeAsync(int mode) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetRefereeMode", mode)
+            );
+
+        public async Task<int> GetRefereeModeAsync() =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("GetRefereeMode")
+            );
+
+        #endregion
+
+        #region Teams
+        [Obsolete("Deprecated and not used in TM2 and later games.")]
+        public async Task<string> SetTeamInfo(string par1, double par2, string par3, string par4, double par5, string par6, string par7, double par8, string par9) =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("SetTeamInfo", par1, par2, par3, par4, par5, par6, par7, par8, par9)
+            );
+
+        public async Task<TeamInfoStruct> GetTeamInfoAsync(int team) =>
+            (TeamInfoStruct)XmlRpcTypes.ToNativeValue<TeamInfoStruct>(
+                await CallOrFaultAsync("GetTeamInfo", team)
+            );
+
+        public async Task<bool> SetForcedClubLinksAsync(string clubLink1, string clubLink2) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetForcedClubLinks", clubLink1, clubLink2)
+            );
+
+        public async Task<ClubLinksStruct> GetForcedClubLinksAsync(int team) =>
+            (ClubLinksStruct)XmlRpcTypes.ToNativeValue<ClubLinksStruct>(
+                await CallOrFaultAsync("GetForcedClubLinks", team)
+            );
+
+        public async Task<bool> SetForcedTeamsAsync(bool forced) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetForcedTeams", forced)
+            );
+
+        public async Task<bool> GetForcedTeamsAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("GetForcedTeams")
             );
         #endregion
 
@@ -324,8 +543,8 @@ namespace GbxRemoteNet {
         /// Get the current and next timeout for waiting for votes. The struct returned contains two fields 'CurrentValue' and 'NextValue'.
         /// </summary>
         /// <returns></returns>
-        public async Task<CallVoteTimeOutStruct> GetCallVoteTimeOutAsync() =>
-            (CallVoteTimeOutStruct)XmlRpcTypes.ToNativeValue<CallVoteTimeOutStruct>(
+        public async Task<CurrentNextValueStruct<int>> GetCallVoteTimeOutAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
                 await CallOrFaultAsync("GetCallVoteTimeOut")
             );
 
@@ -637,9 +856,15 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("GetBuddyNotification", login)
             );
+
+        public async Task<bool> CustomizeQuitDialogAsync(string manialinkPage, string sendToServerUrl, bool proposeAddToFavorites, int delayQuiteButton) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("CustomizeQuitDialog", manialinkPage, sendToServerUrl, proposeAddToFavorites, delayQuiteButton)
+            );
         #endregion
 
         #region Players
+        #region Kicking
         public async Task<bool> KickAsync(string login, string message=null) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("Kick", login, message)
@@ -649,7 +874,9 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("KickId", id, message)
             );
+        #endregion
 
+        #region Ban List
         public async Task<bool> BanAsync(string login, string message = null) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("Ban", login, message)
@@ -679,7 +906,9 @@ namespace GbxRemoteNet {
             (BanListEntryStruct[])XmlRpcTypes.ToNativeValue<BanListEntryStruct>(
                 await CallOrFaultAsync("GetBanList", maxInfos, startIndex)
             );
+        #endregion
 
+        #region Black List
         public async Task<bool> BlackListAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("BlackList", login)
@@ -709,7 +938,9 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SaveBlackList", fileName)
             );
+        #endregion
 
+        #region Guest List
         public async Task<bool> AddGuestAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("AddGuest", login)
@@ -750,6 +981,9 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SaveGuestList", fileName)
             );
 
+        #endregion
+
+        #region Ignore List
         public async Task<bool> IgnoreAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("Ignore", login)
@@ -779,7 +1013,9 @@ namespace GbxRemoteNet {
             (IgnoreListEntryStruct[])XmlRpcTypes.ToNativeValue<IgnoreListEntryStruct>(
                 await CallOrFaultAsync("CleanIgnoreList", maxInfos, startIndex)
             );
+        #endregion
 
+        #region Payments & Bills
         public async Task<int> PayAsync(string login, int planets, string label) =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("Pay", login, planets, label)
@@ -793,6 +1029,39 @@ namespace GbxRemoteNet {
         public async Task<BillStateStruct> GetBillStateAsync(int billId) =>
             (BillStateStruct)XmlRpcTypes.ToNativeValue<BillStateStruct>(
                 await CallOrFaultAsync("SendBill", billId)
+            );
+        #endregion
+        #endregion
+
+        #region Replays
+        public async Task<bool> AutoSaveReplaysAsync(string autoSave) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("AutoSaveReplays", autoSave)
+            );
+
+        public async Task<bool> AutoSaveValidationReplaysAsync(string autoSave) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("AutoSaveValidationReplays", autoSave)
+            );
+
+        public async Task<bool> IsAutoSaveValidationReplaysEnabledAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("IsAutoSaveValidationReplaysEnabled")
+            );
+
+        public async Task<bool> SaveCurrentReplayAsync(string fileName) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SaveCurrentReplay", fileName)
+            );
+
+        public async Task<bool> SaveBestGhostsReplayAsync(string login, string fileName) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SaveBestGhostsReplay", login, fileName)
+            );
+
+        public async Task<Base64> GetValidationReplayAsync(string login) =>
+            (Base64)XmlRpcTypes.ToNativeValue<Base64>(
+                await CallOrFaultAsync("GetValidationReplay", login)
             );
         #endregion
     }

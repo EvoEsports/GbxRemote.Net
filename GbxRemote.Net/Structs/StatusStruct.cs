@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
-    public class StatusStruct : GbxRemoteBaseStruct {
+    public class StatusStruct {
         public int Code;
         public string Name;
     }
