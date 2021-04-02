@@ -629,6 +629,51 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SaveGuestList", fileName)
             );
+
+        public async Task<bool> IgnoreAsync(string login) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("Ignore", login)
+            );
+
+        public async Task<bool> IgnoreIdAsync(int id) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("IgnoreId", id)
+            );
+
+        public async Task<bool> UnIgnoreAsync(string login) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("UnIgnore", login)
+            );
+
+        public async Task<bool> UnIgnoreIdAsync(int id) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("UnIgnoreId", id)
+            );
+
+        public async Task<bool> CleanIgnoreListAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("CleanIgnoreList")
+            );
+
+        public async Task<IgnoreListEntryStruct[]> GetIgnoreListAsync(int maxInfos, int startIndex) =>
+            (IgnoreListEntryStruct[])XmlRpcTypes.ToNativeValue<IgnoreListEntryStruct>(
+                await CallOrFaultAsync("CleanIgnoreList", maxInfos, startIndex)
+            );
+
+        public async Task<int> PayAsync(string login, int planets, string label) =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("Pay", login, planets, label)
+            );
+
+        public async Task<int> SendBillAsync(string loginFrom, int planets, string label, string loginTo=null) =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("SendBill", loginFrom, planets, label, loginTo)
+            );
+
+        public async Task<BillStateStruct> GetBillState(int billId) =>
+            (BillStateStruct)XmlRpcTypes.ToNativeValue<BillStateStruct>(
+                await CallOrFaultAsync("SendBill", billId)
+            );
         #endregion
     }
 }
