@@ -1,5 +1,6 @@
 ﻿using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
+using GbxRemoteNet.XmlRpc.ExtraTypes;
 using GbxRemoteNet.XmlRpc.Types;
 using System;
 using System.Collections.Generic;
@@ -115,6 +116,26 @@ namespace GbxRemoteNet {
         public async Task<bool> QuitGameAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("QuitGame")
+            );
+
+        public async Task<bool> WriteFileAsync(string fileName, Base64 data) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("WriteFile", fileName, data)
+            );
+
+        public async Task<bool> TunnelSendDataToIdAsync(int id, Base64 data) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("TunnelSendDataToId", id, data)
+            );
+
+        public async Task<bool> TunnelSendDataToLoginAsync(string login, Base64 data) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("TunnelSendDataToLogin", login, data)
+            );
+
+        public async Task<bool> EchoAsync(string par1, string par2) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("Echo", par1, par2)
             );
         #endregion
 
