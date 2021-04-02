@@ -486,6 +486,16 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SendOpenLinkToId", playerLogin, url, linkType)
             );
+
+        public async Task<bool> SetBuddyNotificationAsync(string login, bool enabled) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetBuddyNotification", login, enabled)
+            );
+
+        public async Task<bool> GetBuddyNotificationAsync(string login) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("GetBuddyNotification", login)
+            );
         #endregion
 
         #region Players
