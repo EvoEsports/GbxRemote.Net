@@ -1064,57 +1064,81 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("GetValidationReplay", login)
             );
 
-        public async Task<bool> ForceSpectatorTargetId(int spectator, int target, int cameraType) =>
+        /// <summary>
+        /// Force the spectating status of the player. You have to pass the playerid and the spectator mode (0: user selectable, 1: spectator, 2: player, 3: spectator but keep selectable). Only available to Admin.
+        /// </summary>
+        /// <param name="spectatorId"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForceSpectatorIdAsync(int spectatorId, int cameraType) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("ForceSpectatorTargetId", spectator, target, cameraType)
+                await CallOrFaultAsync("ForceSpectatorId", spectatorId, cameraType)
             );
 
-        public async Task<bool> SpectatorReleasePlayerSlot(string player) =>
+        /// <summary>
+        /// Force spectators to look at a specific player. You have to pass the login of the spectator (or '' for all) and the login of the target (or '' for automatic),
+        /// and an integer for the camera type to use (-1 = leave unchanged, 0 = replay, 1 = follow, 2 = free). Only available to Admin.
+        /// </summary>
+        /// <param name="spectatorLogin"></param>
+        /// <param name="targetLogin"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForceSpectatorTargetAsync(string spectatorLogin, string targetLogin, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceSpectatorTarget", spectatorLogin, targetLogin, cameraType)
+            );
+        
+        public async Task<bool> ForceSpectatorTargetIdAsync(int spectatorId, int target, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceSpectatorTargetId", spectatorId, target, cameraType)
+            );
+
+        public async Task<bool> SpectatorReleasePlayerSlotAsync(string player) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SpectatorReleasePlayerSlot", player)
             );
 
-        public async Task<bool> SpectatorReleasePlayerSlotId(int slotId) =>
+        public async Task<bool> SpectatorReleasePlayerSlotIdAsync(int slotId) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SpectatorReleasePlayerSlotId", slotId)
             );
         
-        public async Task<bool> ManualFlowControlEnable(bool enabled) =>
+        public async Task<bool> ManualFlowControlEnableAsync(bool enabled) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ManualFlowControlEnable", enabled)
             );
 
-        public async Task<bool> ManualFlowControlProceed() =>
+        public async Task<bool> ManualFlowControlProceedAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ManualFlowControlProceed")
             );
 
-        public async Task<int> ManualFlowControlIsEnabled() =>
+        public async Task<int> ManualFlowControlIsEnabledAsync() =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("ManualFlowControlIsEnabled")
             );
 
-        public async Task<string> ManualFlowControlGetCurTransition() =>
+        public async Task<string> ManualFlowControlGetCurTransitionAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("ManualFlowControlGetCurTransition")
             );
         
-        public async Task<string> CheckEndMatchCondition() =>
+        public async Task<string> CheckEndMatchConditionAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("CheckEndMatchCondition")
             );
 
-        public async Task<NetworkStatsStruct> GetNetworkStats() =>
+        public async Task<NetworkStatsStruct> GetNetworkStatsAsync() =>
             (NetworkStatsStruct)XmlRpcTypes.ToNativeValue<NetworkStatsStruct>(
                 await CallOrFaultAsync("GetNetworkStats")
             );
 
-        public async Task<bool> StartServerLan() =>
+        public async Task<bool> StartServerLanAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("StartServerLan")
             );
         
-        public async Task<bool> StartServerInternet() =>
+        public async Task<bool> StartServerInternetAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("StartServerInternet")
             );

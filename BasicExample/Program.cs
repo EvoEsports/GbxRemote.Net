@@ -26,7 +26,7 @@ namespace BasicExample {
 
             Console.WriteLine("Connected and authenticated!");
 
-            var ret = await client.CallAsync("GetForcedSkins");
+            var ret = await client.CallAsync("GetModeScriptSettings");
             // var ret = await client.GetMaxPlayersAsync();
 
             /* string[][] methods = await client.SystemMethodSignatureAsync("CallVoteEx");
