@@ -1,0 +1,167 @@
+﻿using GbxRemoteNet.Structs;
+using GbxRemoteNet.XmlRpc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GbxRemoteNet {
+    /// <summary>
+    /// Method Category: Client
+    /// </summary>
+    public partial class GbxRemoteClient {
+        /// <summary>
+        /// Display a notice on all clients. The parameters are the text message to display, and the login of the avatar to display next to it (or '' for no avatar), and an optional 'variant' in [0 = normal, 1 = Sad, 2 = Happy]. Only available to Admin.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="playerLogin"></param>
+        /// <param name="variant"></param>
+        /// <returns></returns>
+        public async Task<bool> SendNoticeAsync(string message, string playerLogin, int variant) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendNotice", message, playerLogin, variant)
+            );
+
+        /// <summary>
+        /// Display a notice on the client with the specified UId. The parameters are the Uid of the client to whom the notice is sent, the text message to display, and the UId of the avatar to display next to it (or '255' for no avatar), and an optional 'variant' in [0 = normal, 1 = Sad, 2 = Happy]. Only available to Admin.
+        /// </summary>
+        /// <param name="clientUid"></param>
+        /// <param name="message"></param>
+        /// <param name="avatarUid"></param>
+        /// <param name="variant"></param>
+        /// <returns></returns>
+        public async Task<bool> SendNoticeToIdAsync(int clientUid, string message, int avatarUid, int variant) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendNoticeToId", clientUid, message, avatarUid, variant)
+            );
+
+        /// <summary>
+        /// Display a notice on the client with the specified login. The parameters are the login of the client to whom the notice is sent, the text message to display, and the login of the avatar to display next to it (or '' for no avatar), and an optional 'variant' in [0 = normal, 1 = Sad, 2 = Happy]. Login can be a single login or a list of comma-separated logins. Only available to Admin.
+        /// </summary>
+        /// <param name="clientLogin"></param>
+        /// <param name="message"></param>
+        /// <param name="avatarLogin"></param>
+        /// <param name="variant"></param>
+        /// <returns></returns>
+        public async Task<bool> SendNoticeToLoginAsync(string clientLogin, string message, string avatarLogin, int variant) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendNoticeToLogin", clientLogin, message, avatarLogin, variant)
+            );
+
+        /// <summary>
+        /// Display a manialink page on all clients. The parameters are the xml description of the page to display, a timeout to autohide it (0 = permanent), and a boolean to indicate whether the page must be hidden as soon as the user clicks on a page option. Only available to Admin.
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <param name="timeout"></param>
+        /// <param name="autohide"></param>
+        /// <returns></returns>
+        public async Task<bool> SendDisplayManialinkPageAsync(string xml, int timeout, bool autohide) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendDisplayManialinkPage", xml, timeout, autohide)
+            );
+
+        /// <summary>
+        /// Display a manialink page on the client with the specified UId. The first parameter is the UId of the player, the other are identical to 'SendDisplayManialinkPage'. Only available to Admin.
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="xml"></param>
+        /// <param name="timeout"></param>
+        /// <param name="autohide"></param>
+        /// <returns></returns>
+        public async Task<bool> SendDisplayManialinkPageToIdAsync(int clientId, string xml, int timeout, bool autohide) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendDisplayManialinkPageToId", clientId, xml, timeout, autohide)
+            );
+
+        /// <summary>
+        /// Display a manialink page on the client with the specified login. The first parameter is the login of the player, the other are identical to 'SendDisplayManialinkPage'. Login can be a single login or a list of comma-separated logins. Only available to Admin.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <param name="xml"></param>
+        /// <param name="timeout"></param>
+        /// <param name="autohide"></param>
+        /// <returns></returns>
+        public async Task<bool> SendDisplayManialinkPageToLoginAsync(string playerLogin, string xml, int timeout, bool autohide) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendDisplayManialinkPageToLogin", playerLogin, xml, timeout, autohide)
+            );
+
+        /// <summary>
+        /// Hide the displayed manialink page on all clients. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> SendHideManialinkPageAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendHideManialinkPage")
+            );
+
+        /// <summary>
+        /// Hide the displayed manialink page on the client with the specified UId. Only available to Admin.
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <returns></returns>
+        public async Task<bool> SendHideManialinkPageToIdAsync(int clientId) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendHideManialinkPageToId", clientId)
+            );
+
+        /// <summary>
+        /// Hide the displayed manialink page on the client with the specified login. Login can be a single login or a list of comma-separated logins. Only available to Admin.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <returns></returns>
+        public async Task<bool> SendHideManialinkPageToLoginAsync(string playerLogin) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendHideManialinkPageToLogin", playerLogin)
+            );
+
+        /// <summary>
+        /// Returns the latest results from the current manialink page, as an array of structs {string Login, int PlayerId, int Result} Result==0 -> no answer, Result>0.... -> answer from the player.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ManialinkPageAnswerStruct[]> GetManialinkPageAnswersAsync() =>
+            (ManialinkPageAnswerStruct[])XmlRpcTypes.ToNativeValue<ManialinkPageAnswerStruct>(
+                await CallOrFaultAsync("GetManialinkPageAnswers")
+            );
+
+        /// <summary>
+        /// Opens a link in the client with the specified UId. The parameters are the Uid of the client to whom the link to open is sent, the link url, and the 'LinkType' (0 in the external browser, 1 in the internal manialink browser). Only available to Admin.
+        /// </summary>
+        /// <param name="clientId"></param>
+        /// <param name="url"></param>
+        /// <param name="linkType"></param>
+        /// <returns></returns>
+        public async Task<bool> SendOpenLinkToId(int clientId, string url, int linkType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendOpenLinkToId", clientId, url, linkType)
+            );
+
+        /// <summary>
+        /// Opens a link in the client with the specified login. The parameters are the login of the client to whom the link to open is sent, the link url, and the 'LinkType' (0 in the external browser, 1 in the internal manialink browser). Login can be a single login or a list of comma-separated logins. Only available to Admin.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <param name="url"></param>
+        /// <param name="linkType"></param>
+        /// <returns></returns>
+        public async Task<bool> SendOpenLinkToLogin(string playerLogin, string url, int linkType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendOpenLinkToId", playerLogin, url, linkType)
+            );
+
+        public async Task<bool> SetBuddyNotificationAsync(string login, bool enabled) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetBuddyNotification", login, enabled)
+            );
+
+        public async Task<bool> GetBuddyNotificationAsync(string login) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("GetBuddyNotification", login)
+            );
+
+        public async Task<bool> CustomizeQuitDialogAsync(string manialinkPage, string sendToServerUrl, bool proposeAddToFavorites, int delayQuiteButton) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("CustomizeQuitDialog", manialinkPage, sendToServerUrl, proposeAddToFavorites, delayQuiteButton)
+            );
+    }
+}
