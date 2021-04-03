@@ -1065,6 +1065,524 @@ namespace GbxRemoteNet {
             );
 
         /// <summary>
+        /// Change the settings of the mode script. Only available to Admin.
+        /// </summary>
+        /// <param name="modescriptSettings"></param>
+        /// <returns></returns>
+        public async Task<bool> SetModeScriptSettingsAsync(Object modescriptSettings) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetModeScriptSettings", modescriptSettings)
+            );
+
+        /// <summary>
+        /// Send commands to the mode script. Only available to Admin.
+        /// </summary>
+        /// <param name="commands"></param>
+        /// <returns></returns>
+        public async Task<bool> SendModeScriptCommandsAsync(Object commands) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SendModeScriptCommands", commands)
+            );
+
+        /// <summary>
+        /// Change the settings and send commands to the mode script. Only available to Admin.
+        /// </summary>
+        /// <param name="settings"></param>
+        /// <param name="modeScript"></param>
+        /// <returns></returns>
+        public async Task<bool> SetModeScriptSettingsAndCommandsAsync(Object settings, Object modeScript) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetModeScriptSettingsAndCommands", settings, modeScript)
+            );
+
+        /// <summary>
+        /// Returns the current xml-rpc variables of the mode script.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Object> GetModeScriptVariablesAsync() =>
+            (Object)XmlRpcTypes.ToNativeValue<Object>(
+                await CallOrFaultAsync("GetModeScriptVariables")
+            );
+
+        /// <summary>
+        /// Set the xml-rpc variables of the mode script. Only available to Admin.
+        /// </summary>
+        /// <param name="xmlRpcVar"></param>
+        /// <returns></returns>
+        public async Task<bool> SetModeScriptVariablesAsync(Object xmlRpcVar) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetModeScriptVariables", xmlRpcVar)
+            );
+
+        /// <summary>
+        /// Send an event to the mode script. Only available to Admin. 
+        /// </summary>
+        /// <param name="modeScript"></param>
+        /// <param name="eventName"></param>
+        /// <returns></returns>
+        public async Task<bool> TriggerModeScriptEventAsync(string modeScript, string eventName) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("TriggerModeScriptEvent", modeScript, eventName)
+            );
+
+        /// <summary>
+        /// Send an event to the mode script. Only available to Admin. 
+        /// </summary>
+        /// <param name="modeScript"></param>
+        /// <param name="events"></param>
+        /// <returns></returns>
+        public async Task<bool> TriggerModeScriptEventArrayAsync(string modeScript, Array events) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("TriggerModeScriptEventArray", modeScript, events)
+            );
+
+        /// <summary>
+        /// Set the ServerPlugin settings. 
+        /// </summary>
+        /// <param name="forceReload">Whether to reload from disk</param>
+        /// <param name="filename">OPTIONAL: Name the filename relative to Scripts/directory</param>
+        /// <param name="script">OPTIONAL: The script #Settings to apply.</param>
+        /// <returns></returns>
+        public async Task<bool> SetServerPluginAsync(bool forceReload, string filename = null, Object script = null) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetServerPlugin", forceReload, filename, script)
+            );
+
+        /// <summary>
+        /// Get the ServerPlugin current settings.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Object> GetServerPluginAsync() =>
+            (Object)XmlRpcTypes.ToNativeValue<Object>(
+                await CallOrFaultAsync("GetServerPlugin")
+            );
+
+        /// <summary>
+        /// Send an event to the server script. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Object> GetServerPluginVariablesAsync() =>
+            (Object)XmlRpcTypes.ToNativeValue<Object>(
+                await CallOrFaultAsync("Returns the current xml-rpc variables of the server script.")
+            );
+
+        /// <summary>
+        /// Send an event to the server script. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+
+        // TODO : Missing implementation due to lacking documentation on method.
+        public async Task<bool> TriggerServerPluginEventAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("TriggerServerPluginEvent")
+            );
+
+        /// <summary>
+        /// Send an event to the server script. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+
+        // TODO : Missing implementation due to lacking documentation on method.
+        public async Task<bool> TriggerServerPluginEventArrayAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("TriggerServerPluginEventArray")
+            );
+
+        /// <summary>
+        /// Get the script cloud variables of given object. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+
+        // TODO : Missing implementation due to lacking documentation on method.
+        public async Task<bool> GetScriptCloudVariablesAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("GetScriptCloudVariables")
+            );
+
+        /// <summary>
+        /// Set the script cloud variables of given object. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+
+        // TODO : Missing implementation due to lacking documentation on method.
+        public async Task<bool> SetScriptCloudVariablesAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetScriptCloudVariables")
+            );
+
+        /// <summary>
+        /// Restarts the map, with an optional boolean parameter DontClearCupScores (only available in cup mode). Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> RestartMapAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("RestartMap")
+            );
+
+        /// <summary>
+        /// Switch to next map, with an optional boolean parameter DontClearCupScores (only available in cup mode). Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> NextMapAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("NextMap")
+            );
+
+        /// <summary>
+        /// Attempt to balance teams. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> AutoTeamBalanceAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("AutoTeamBalance")
+            );
+
+        /// <summary>
+        /// Stop the server. Only available to SuperAdmin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> StopServerAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("StopServer")
+            );
+
+        /// <summary>
+        /// In Rounds or Laps mode, force the end of round without waiting for all players to giveup/finish. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> ForceEndRoundAsync() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceEndRound")
+            );
+
+        /// <summary>
+        /// Set new game settings using the struct passed as parameters. This struct must contain the following fields :
+        /// GameMode, ChatTime, RoundsPointsLimit, RoundsUseNewRules, RoundsForcedLaps, TimeAttackLimit, TimeAttackSynchStartPeriod, TeamPointsLimit, TeamMaxPoints, TeamUseNewRules, LapsNbLaps, LapsTimeLimit, FinishTimeout,
+        /// and optionally: AllWarmUpDuration, DisableRespawn, ForceShowAllOpponents, RoundsPointsLimitNewRules, TeamPointsLimitNewRules, CupPointsLimit, CupRoundsPerMap, CupNbWinners, CupWarmUpDuration.
+        /// Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="gameInfo"></param>
+        /// <returns></returns>
+        public async Task<bool> SetGameInfos(GameInfoStruct gameInfo) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetGameInfos", gameInfo)
+            );
+
+        /// <summary>
+        /// Returns a struct containing the current game settings.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<GameInfoStruct> GetCurrentGameInfoAsync() =>
+            (GameInfoStruct)XmlRpcTypes.ToNativeValue<GameInfoStruct>(
+                await CallOrFaultAsync("GetCurrentGameInfo")
+            );
+
+        /// <summary>
+        /// Returns a struct containing the game settings for the next map.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<GameInfoStruct> GetNextGameInfoAsync() =>
+            (GameInfoStruct)XmlRpcTypes.ToNativeValue<GameInfoStruct>(
+                await CallOrFaultAsync("GetNextGameInfo")
+            );
+        
+        /// <summary>
+        /// Returns a struct containing two other structures, the first containing the current game settings and the second the game settings for next map. The first structure is named CurrentGameInfos and the second NextGameInfos.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<GameInfoStruct>> GetGameInfosAsync() =>
+            (CurrentNextValueStruct<GameInfoStruct>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<GameInfoStruct>>(
+                await CallOrFaultAsync("GetGameInfos")
+            );
+
+        /// <summary>
+        /// Set a new game mode between Script (0), Rounds (1), TimeAttack (2), Team (3), Laps (4), Cup (5) and Stunts (6). Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="gamemode">Script (0), Rounds (1), TimeAttack (2), Team (3), Laps (4), Cup (5) and Stunts (6).</param>
+        /// <returns></returns>
+        public async Task<bool> SetGameModeAsync(int gamemode) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetGameMode", gamemode)
+            );
+        
+        /// <summary>
+        /// Get the current game mode.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> GetGamemodeAsync() =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("GetGameMode")
+            );
+
+        /// <summary>
+        /// Set a new chat time value in milliseconds (actually 'chat time' is the duration of the end race podium). Only available to Admin.
+        /// </summary>
+        /// <param name="chatTime">0 means no podium displayed.</param>
+        /// <returns></returns>
+        public async Task<bool> SetChatTimeAsync(int chatTime) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetChatTime", chatTime)
+            );
+        
+        /// <summary>
+        /// Get the current and next chat time. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetChatTimeAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetChatTime")
+            );
+
+        /// <summary>
+        /// Set a new finish timeout (for rounds/laps mode) value in milliseconds. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="finishTimeout">0 means default. 1 means adaptative to the duration of the map.</param>
+        /// <returns></returns>
+        public async Task<bool> SetFinishTimeoutAsync(int finishTimeout) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetFinishTimeout", finishTimeout)
+            );
+        
+        /// <summary>
+        /// Get the current and next FinishTimeout. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetFinishTimeoutAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetFinishTimeout")
+            );
+
+        /// <summary>
+        /// Set whether to enable the automatic warm-up phase in all modes. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="warmupDuration">0 = no, otherwise it's the duration of the phase, expressed in number of rounds (in rounds/team mode), or in number of times the gold medal time (other modes).</param>
+        /// <returns></returns>
+        public async Task<bool> SetAllWarmUpDurationAsync(int warmupDuration) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetAllWarmUpDuration", warmupDuration)
+            );
+        
+        /// <summary>
+        /// Get whether the automatic warm-up phase is enabled in all modes. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetAllWarmUpDurationAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetAllWarmUpDuration")
+            );
+
+        /// <summary>
+        /// Set whether to disallow players to respawn. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="disableRespawn"></param>
+        /// <returns></returns>
+        public async Task<bool> SetDisableRespawnAsync(bool disableRespawn) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetDisableRespawn", disableRespawn)
+            );
+        
+        /// <summary>
+        /// Get whether players are disallowed to respawn. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<bool>> GetDisableRespawnAsync() =>
+            (CurrentNextValueStruct<bool>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<bool>>(
+                await CallOrFaultAsync("GetDisableRespawn")
+            );
+
+        /// <summary>
+        /// Set whether to override the players preferences and always display all opponents). Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="playersPreferenceOverride">0=no override, 1=show all, other value=minimum number of opponents</param>
+        /// <returns></returns>
+        public async Task<bool> SetForceShowAllOpponentsAsync(int playersPreferenceOverride) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetForceShowAllOpponents", playersPreferenceOverride)
+            );
+        
+        /// <summary>
+        /// Get whether players are forced to show all opponents. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetForceShowAllOpponentsAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetTimeAttackLimit")
+            );
+
+        /// <summary>
+        /// Set a new mode script name for script mode. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="scriptName"></param>
+        /// <returns></returns>
+        public async Task<bool> SetScriptNameAsync(string scriptName) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetScriptName", scriptName)
+            );
+        
+        /// <summary>
+        /// Get the current and next mode script name for script mode. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<string>> GetScriptNameAsync() =>
+            (CurrentNextValueStruct<string>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<string>>(
+                await CallOrFaultAsync("GetScriptName")
+            );
+
+        /// <summary>
+        /// Set a new time limit for laps mode. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="timelimit"></param>
+        /// <returns></returns>
+        public async Task<bool> SetTimeAttackLimitAsync(int timelimit) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetTimeAttackLimit", timelimit)
+            );
+        
+        /// <summary>
+        /// Get the current and next time limit for time attack mode. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetTimeAttackLimitAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetTimeAttackLimit")
+            );
+
+        /// <summary>
+        /// Set a new synchronized start period for time attack mode. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="syncStartPeriod"></param>
+        /// <returns></returns>
+        public async Task<bool> SetTimeAttackSynchStartPeriodAsync(int syncStartPeriod) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetTimeAttackSynchStartPeriod", syncStartPeriod)
+            );
+        
+        /// <summary>
+        /// Get the current and synchronized start period for time attack mode. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetTimeAttackSynchStartPeriodAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetTimeAttackSynchStartPeriod")
+            );
+
+        /// <summary>
+        /// Set a new time limit for laps mode. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="timelimit"></param>
+        /// <returns></returns>
+        public async Task<bool> SetLapsTimeLimitAsync(int timelimit) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetLapsTimeLimit", timelimit)
+            );
+        
+        /// <summary>
+        /// Get the current and next number of laps for rounds mode. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetLapsTimeLimitAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetLapsTimeLimit")
+            );
+
+        /// <summary>
+        /// Set a new number of laps for laps mode. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="nbrLaps"></param>
+        /// <returns></returns>
+        public async Task<bool> SetNbLapsAsync(int nbrLaps) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetNbLaps", nbrLaps)
+            );
+        
+        /// <summary>
+        /// Get the current and next number of laps for laps mode. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetNbLapsAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetNbLaps")
+            );
+
+        /// <summary>
+        /// Set a new number of laps for rounds mode. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="nbrLaps">0 = default, use the number of laps from the maps, otherwise forces the number of rounds for multilaps maps</param>
+        /// <returns></returns>
+        public async Task<bool> SetRoundForcedLapsAsync(int nbrLaps) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetRoundForcedLaps", nbrLaps)
+            );
+        
+        /// <summary>
+        /// 	Get the current and next number of laps for rounds mode. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetRoundForcedLapsAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetRoundForcedLaps")
+            );
+
+        /// <summary>
+        /// Set a new points limit for rounds mode (value set depends on UseNewRulesRound). Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <returns></returns>
+        public async Task<bool> SetRoundPointsLimitAsync(int limit) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetRoundPointsLimit", limit)
+            );
+        
+        /// <summary>
+        /// Get the current and next points limit for rounds mode (values returned depend on UseNewRulesRound). The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<string>> GetRoundPointsLimitAsync() =>
+            (CurrentNextValueStruct<string>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<string>>(
+                await CallOrFaultAsync("GetRoundPointsLimit")
+            );
+
+        /// <summary>
+        /// Set the points used for the scores in rounds mode. Points is an array of decreasing integers for the players from the first to last.
+        /// And you can add an optional boolean to relax the constraint checking on the scores. Only available to Admin.
+        /// </summary>
+        /// <param name="points">An array of points which should be sorted in a descending order from first to last</param>
+        /// <param name="scoreConstraintCheck">Optional boolean to relax the constraint checking on the scores. </param>
+        /// <returns></returns>
+        public async Task<bool> SetRoundCustomPointsAsync(int[] points, bool scoreConstraintCheck = false) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetRoundCustomPoints", points, scoreConstraintCheck)
+            );
+        
+        /// <summary>
+        /// Gets the points used for the scores in rounds mode.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int[]> GetRoundCustomPointsAsync() =>
+            (int[])XmlRpcTypes.ToNativeValue<int[]>(
+                await CallOrFaultAsync("GetRoundCustomPoints")
+            );
+
+        /// <summary>
+        /// Set if new rules are used for rounds mode. Only available to Admin. Requires a map restart to be taken into account.
+        /// </summary>
+        /// <param name="newRules"></param>
+        /// <returns></returns>
+        public async Task<bool> SetUseNewRulesRoundAsync(bool newRules) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetUseNewRulesRound", newRules)
+            );
+        
+        /// <summary>
+        /// Get if the new rules are used for rounds mode (Current and next values). The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<string>> GetUseNewRulesRoundAsync() =>
+            (CurrentNextValueStruct<string>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<string>>(
+                await CallOrFaultAsync("GetUseNewRulesRound")
+            );
+
+        /// <summary>
         /// Set a new number of maximum points per round for team mode. Only available to Admin. Requires a map restart to be taken into account.
         /// </summary>
         /// <param name="maxPoints"></param>
