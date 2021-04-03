@@ -1064,9 +1064,9 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("GetValidationReplay", login)
             );
 
-        public async Task<bool> ForceSpectatorTargetId(string player) =>
+        public async Task<bool> ForceSpectatorTargetId(int spectator, int target, int cameraType) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("ForceSpectatorTargetId", player)
+                await CallOrFaultAsync("ForceSpectatorTargetId", spectator, target, cameraType)
             );
 
         public async Task<bool> SpectatorReleasePlayerSlot(string player) =>
