@@ -1063,6 +1063,61 @@ namespace GbxRemoteNet {
             (Base64)XmlRpcTypes.ToNativeValue<Base64>(
                 await CallOrFaultAsync("GetValidationReplay", login)
             );
+
+        public async Task<bool> ForceSpectatorTargetId(string player) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceSpectatorTargetId", player)
+            );
+
+        public async Task<bool> SpectatorReleasePlayerSlot(string player) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SpectatorReleasePlayerSlot", player)
+            );
+
+        public async Task<bool> SpectatorReleasePlayerSlotId(int slotId) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SpectatorReleasePlayerSlotId", slotId)
+            );
+        
+        public async Task<bool> ManualFlowControlEnable(bool enabled) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ManualFlowControlEnable", enabled)
+            );
+
+        public async Task<bool> ManualFlowControlProceed() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ManualFlowControlProceed")
+            );
+
+        public async Task<int> ManualFlowControlIsEnabled() =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("ManualFlowControlIsEnabled")
+            );
+
+        public async Task<string> ManualFlowControlGetCurTransition() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("ManualFlowControlGetCurTransition")
+            );
+        
+        public async Task<string> CheckEndMatchCondition() =>
+            (string)XmlRpcTypes.ToNativeValue<string>(
+                await CallOrFaultAsync("CheckEndMatchCondition")
+            );
+
+        public async Task<NetworkStatsStruct> GetNetworkStats() =>
+            (NetworkStatsStruct)XmlRpcTypes.ToNativeValue<NetworkStatsStruct>(
+                await CallOrFaultAsync("GetNetworkStats")
+            );
+
+        public async Task<bool> StartServerLan() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("StartServerLan")
+            );
+        
+        public async Task<bool> StartServerInternet() =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("StartServerInternet")
+            );
         #endregion
     }
 }
