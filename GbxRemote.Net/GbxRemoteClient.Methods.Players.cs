@@ -12,11 +12,23 @@ namespace GbxRemoteNet {
     /// </summary>
     public partial class GbxRemoteClient {
         #region Kicking
+        /// <summary>
+        /// Kick the player with the specified login, with an optional message. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<bool> KickAsync(string login, string message = null) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("Kick", login, message)
             );
 
+        /// <summary>
+        /// Kick the player with the specified PlayerId, with an optional message. Only available to Admin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<bool> KickIdAsync(int id, string message = null) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("KickId", id, message)
@@ -24,31 +36,65 @@ namespace GbxRemoteNet {
         #endregion
 
         #region Ban List
+        /// <summary>
+        /// Ban the player with the specified login, with an optional message. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<bool> BanAsync(string login, string message = null) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("Ban", login, message)
             );
 
+        /// <summary>
+        /// Ban the player with the specified login, with a message. Add it to the black list, and optionally save the new list. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="message"></param>
+        /// <param name="saveToFile"></param>
+        /// <returns></returns>
         public async Task<bool> BanAndBlackListAsync(string login, string message, string saveToFile = null) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("BanAndBlackList", login, message, saveToFile)
             );
 
+        /// <summary>
+        /// Ban the player with the specified PlayerId, with an optional message. Only available to Admin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public async Task<bool> BanIdAsync(int id, string message) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("BanId", id, message)
             );
 
+        /// <summary>
+        /// Unban the player with the specified login. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> UnBanAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("UnBan", login)
             );
 
+        /// <summary>
+        /// Clean the ban list of the server. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> CleanBanListAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("CleanBanList")
             );
 
+        /// <summary>
+        /// Returns the list of banned players. This method takes two parameters. The first parameter specifies the maximum number of infos to be returned, and the second one the starting index in the list. The list is an array of structures. Each structure contains the following fields : Login, ClientName and IPAddress.
+        /// </summary>
+        /// <param name="maxInfos"></param>
+        /// <param name="startIndex"></param>
+        /// <returns></returns>
         public async Task<BanListEntryStruct[]> GetBanListAsync(int maxInfos, int startIndex) =>
             (BanListEntryStruct[])XmlRpcTypes.ToNativeValue<BanListEntryStruct>(
                 await CallOrFaultAsync("GetBanList", maxInfos, startIndex)
@@ -56,31 +102,71 @@ namespace GbxRemoteNet {
         #endregion
 
         #region Black List
+        /// <summary>
+        /// Blacklist the player with the specified login. Only available to SuperAdmin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> BlackListAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("BlackList", login)
             );
 
+        /// <summary>
+        /// Blacklist the player with the specified PlayerId. Only available to SuperAdmin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> BlackListIdAsync(int id) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("BlackListId", id)
             );
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> UnBlackListAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("UnBlackList", login)
             );
 
+        /// <summary>
+        /// Clean the blacklist of the server. Only available to SuperAdmin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> CleanBlackListAsync() =>
+           (bool)XmlRpcTypes.ToNativeValue<bool>(
+               await CallOrFaultAsync("CleanBlackList")
+           );
+
+        /// <summary>
+        /// Returns the list of blacklisted players. This method takes two parameters. The first parameter specifies the maximum number of infos to be returned, and the second one the starting index in the list. The list is an array of structures. Each structure contains the following fields : Login.
+        /// </summary>
+        /// <param name="maxInfos"></param>
+        /// <param name="startIndex"></param>
+        /// <returns></returns>
         public async Task<BlackListEntryStruct[]> GetBlackListAsync(int maxInfos, int startIndex) =>
             (BlackListEntryStruct[])XmlRpcTypes.ToNativeValue<BlackListEntryStruct>(
                 await CallOrFaultAsync("GetBanList", maxInfos, startIndex)
             );
 
+        /// <summary>
+        /// Load the black list file with the specified file name. Only available to Admin.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public async Task<bool> LoadBlackListAsync(string fileName) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("LoadBlackList", fileName)
             );
 
+        /// <summary>
+        /// Save the black list in the file with specified file name. Only available to Admin.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public async Task<bool> SaveBlackListAsync(string fileName) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SaveBlackList", fileName)
@@ -88,41 +174,81 @@ namespace GbxRemoteNet {
         #endregion
 
         #region Guest List
+        /// <summary>
+        /// Add the player with the specified login on the guest list. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> AddGuestAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("AddGuest", login)
             );
 
+        /// <summary>
+        /// Add the player with the specified PlayerId on the guest list. Only available to Admin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> AddGuestIdAsync(int id) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("AddGuestId", id)
             );
 
+        /// <summary>
+        /// Remove the player with the specified login from the guest list. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> RemoveGuestAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("RemoveGuest", login)
             );
 
+        /// <summary>
+        /// Remove the player with the specified PlayerId from the guest list. Only available to Admin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> RemoveGuestIdAsync(int id) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("RemoveGuestId", id)
             );
 
+        /// <summary>
+        /// Clean the guest list of the server. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> CleanGuestListAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("CleanGuestList")
             );
 
-        public async Task<GuestListEntryStruct[]> GuestListEntryStructAsync(int maxInfos, int startIndex) =>
+        /// <summary>
+        /// Returns the list of players on the guest list. This method takes two parameters. The first parameter specifies the maximum number of infos to be returned, and the second one the starting index in the list. The list is an array of structures. Each structure contains the following fields : Login.
+        /// </summary>
+        /// <param name="maxInfos"></param>
+        /// <param name="startIndex"></param>
+        /// <returns></returns>
+        public async Task<GuestListEntryStruct[]> GetGuestListAsync(int maxInfos, int startIndex) =>
             (GuestListEntryStruct[])XmlRpcTypes.ToNativeValue<GuestListEntryStruct>(
-                await CallOrFaultAsync("GuestListEntryStruct", maxInfos, startIndex)
+                await CallOrFaultAsync("GetGuestList", maxInfos, startIndex)
             );
 
+        /// <summary>
+        /// Load the guest list file with the specified file name. Only available to Admin.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public async Task<bool> LoadGuestListAsync(string fileName) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("LoadGuestList", fileName)
             );
 
+        /// <summary>
+        /// Save the guest list in the file with specified file name. Only available to Admin.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public async Task<bool> SaveGuestListAsync(string fileName) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SaveGuestList", fileName)
@@ -131,31 +257,61 @@ namespace GbxRemoteNet {
         #endregion
 
         #region Ignore List
+        /// <summary>
+        /// Ignore the player with the specified login. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> IgnoreAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("Ignore", login)
             );
 
+        /// <summary>
+        /// Ignore the player with the specified PlayerId. Only available to Admin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> IgnoreIdAsync(int id) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("IgnoreId", id)
             );
 
+        /// <summary>
+        /// Unignore the player with the specified login. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> UnIgnoreAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("UnIgnore", login)
             );
 
+        /// <summary>
+        /// Unignore the player with the specified PlayerId. Only available to Admin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<bool> UnIgnoreIdAsync(int id) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("UnIgnoreId", id)
             );
 
+        /// <summary>
+        /// Clean the ignore list of the server. Only available to Admin.
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> CleanIgnoreListAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("CleanIgnoreList")
             );
 
+        /// <summary>
+        /// Returns the list of ignored players. This method takes two parameters. The first parameter specifies the maximum number of infos to be returned, and the second one the starting index in the list. The list is an array of structures. Each structure contains the following fields : Login.
+        /// </summary>
+        /// <param name="maxInfos"></param>
+        /// <param name="startIndex"></param>
+        /// <returns></returns>
         public async Task<IgnoreListEntryStruct[]> GetIgnoreListAsync(int maxInfos, int startIndex) =>
             (IgnoreListEntryStruct[])XmlRpcTypes.ToNativeValue<IgnoreListEntryStruct>(
                 await CallOrFaultAsync("CleanIgnoreList", maxInfos, startIndex)
@@ -163,16 +319,36 @@ namespace GbxRemoteNet {
         #endregion
 
         #region Payments & Bills
+        /// <summary>
+        /// Pay planets from the server account to a player, returns the BillId. This method takes three parameters: Login of the payee, Cost in planets to pay and a Label to send with the payment. The creation of the transaction itself may cost planets, so you need to have planets on the server account. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="planets"></param>
+        /// <param name="label"></param>
+        /// <returns></returns>
         public async Task<int> PayAsync(string login, int planets, string label) =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("Pay", login, planets, label)
             );
 
+        /// <summary>
+        /// Create a bill, send it to a player, and return the BillId. This method takes four parameters: LoginFrom of the payer, Cost in planets the player has to pay, Label of the transaction and an optional LoginTo of the payee (if empty string, then the server account is used). The creation of the transaction itself may cost planets, so you need to have planets on the server account. Only available to Admin.
+        /// </summary>
+        /// <param name="loginFrom"></param>
+        /// <param name="planets"></param>
+        /// <param name="label"></param>
+        /// <param name="loginTo"></param>
+        /// <returns></returns>
         public async Task<int> SendBillAsync(string loginFrom, int planets, string label, string loginTo = null) =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("SendBill", loginFrom, planets, label, loginTo)
             );
 
+        /// <summary>
+        /// Returns the current state of a bill. This method takes one parameter, the BillId. Returns a struct containing State, StateName and TransactionId. Possible enum values are: CreatingTransaction, Issued, ValidatingPayement, Payed, Refused, Error.
+        /// </summary>
+        /// <param name="billId"></param>
+        /// <returns></returns>
         public async Task<BillStateStruct> GetBillStateAsync(int billId) =>
             (BillStateStruct)XmlRpcTypes.ToNativeValue<BillStateStruct>(
                 await CallOrFaultAsync("SendBill", billId)

@@ -9,21 +9,38 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient {
+        /// <summary>
+        /// Get the current mode script.
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> GetModeScriptText() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("GetModeScriptText")
             );
 
+        /// <summary>
+        /// Set the mode script and restart. Only available to Admin.
+        /// </summary>
+        /// <param name="script"></param>
+        /// <returns></returns>
         public async Task<bool> SetModeScriptTextAsync(string script) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetModeScriptText", script)
             );
 
+        /// <summary>
+        /// Returns the description of the current mode script, as a structure containing: Name, CompatibleTypes, Description, Version and the settings available.
+        /// </summary>
+        /// <returns></returns>
         public async Task<ScriptInfoStruct> GetModeScriptInfoAsync() =>
             (ScriptInfoStruct)XmlRpcTypes.ToNativeValue<ScriptInfoStruct>(
                 await CallOrFaultAsync("GetModeScriptInfo")
             );
 
+        /// <summary>
+        /// Returns the current settings of the mode script.
+        /// </summary>
+        /// <returns></returns>
         public async Task<DynamicObject> GetModeScriptSettingsAsync() =>
             (DynamicObject)XmlRpcTypes.ToNativeValue<DynamicObject>(
                 await CallOrFaultAsync("GetModeScriptSettings")

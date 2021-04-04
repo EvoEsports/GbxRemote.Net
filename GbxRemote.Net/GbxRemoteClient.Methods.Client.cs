@@ -149,16 +149,35 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SendOpenLinkToId", playerLogin, url, linkType)
             );
 
+        /// <summary>
+        /// Sets whether buddy notifications should be sent in the chat. login is the login of the player, or '' for global setting, and enabled is the value. Only available to Admin.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="enabled"></param>
+        /// <returns></returns>
         public async Task<bool> SetBuddyNotificationAsync(string login, bool enabled) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetBuddyNotification", login, enabled)
             );
 
+        /// <summary>
+        /// Gets whether buddy notifications are enabled for login, or '' to get the global setting.
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public async Task<bool> GetBuddyNotificationAsync(string login) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("GetBuddyNotification", login)
             );
 
+        /// <summary>
+        /// Customize the clients 'leave server' dialog box. Parameters are: ManialinkPage, SendToServer url '#qjoin=login@title', ProposeAddToFavorites and DelayQuitButton (in milliseconds). Only available to Admin.
+        /// </summary>
+        /// <param name="manialinkPage"></param>
+        /// <param name="sendToServerUrl"></param>
+        /// <param name="proposeAddToFavorites"></param>
+        /// <param name="delayQuiteButton"></param>
+        /// <returns></returns>
         public async Task<bool> CustomizeQuitDialogAsync(string manialinkPage, string sendToServerUrl, bool proposeAddToFavorites, int delayQuiteButton) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("CustomizeQuitDialog", manialinkPage, sendToServerUrl, proposeAddToFavorites, delayQuiteButton)

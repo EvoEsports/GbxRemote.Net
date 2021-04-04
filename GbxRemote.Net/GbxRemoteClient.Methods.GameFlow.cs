@@ -103,11 +103,20 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("GetGameMode")
             );
 
+        /// <summary>
+        /// Sets whether the server is in warm-up phase or not. Only available to Admin.
+        /// </summary>
+        /// <param name="useWarmup"></param>
+        /// <returns></returns>
         public async Task<bool> SetWarmUpAsync(bool useWarmup) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetWarmUp", useWarmup)
             );
 
+        /// <summary>
+        /// Returns whether the server is in warm-up phase.
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> GetWarmUpAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("GetWarmUp")
