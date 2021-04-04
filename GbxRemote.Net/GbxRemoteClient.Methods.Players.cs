@@ -178,5 +178,166 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("SendBill", billId)
             );
         #endregion
+
+        /// <summary>
+        /// Returns the list of players on the server. This method take two parameters. The first parameter specifies the maximum number of infos to be returned, and the second one the starting index in the list, an optional 3rd parameter is used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers).
+        /// The list is an array of PlayerInfo structures. Forever PlayerInfo struct is: Login, NickName, PlayerId, TeamId, SpectatorStatus, LadderRanking, and Flags.
+        /// LadderRanking is 0 when not in official mode,
+        /// Flags = ForceSpectator(0,1,2) + IsReferee * 10 + IsPodiumReady * 100 + StereoDisplayMode * 1000 + IsManagedByAnOtherServer * 10000 + IsServer * 100000 + HasPlayerSlot * 1000000 + IsBroadcasting * 10000000 + HasJoinedGame * 100000000
+        /// SpectatorStatus = Spectator + TemporarySpectator * 10 + PureSpectator * 100 + AutoTarget * 1000 + CurrentTargetId * 10000
+        /// </summary>
+        /// <param name="maxInfos"></param>
+        /// <param name="startIndex"></param>
+        /// <param name="serverType">OPTIONAL: Used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers)</param>
+        /// <returns></returns>
+        public async Task<PlayerInfoStruct[]> GetPlayerListAsync(int maxInfos, int startIndex, int? serverType = -1) =>
+            (PlayerInfoStruct[])XmlRpcTypes.ToNativeValue<PlayerInfoStruct[]>(
+                await CallOrFaultAsync("GetPlayerList", maxInfos, startIndex, serverType)
+            );
+
+        /// <summary>
+        /// Returns a struct containing the infos on the player with the specified login, with an optional parameter for compatibility: struct version (0 = united, 1 = forever). The structure is identical to the ones from GetPlayerList. Forever PlayerInfo struct is: Login, NickName, PlayerId, TeamId, SpectatorStatus, LadderRanking, and Flags.
+        /// LadderRanking is 0 when not in official mode,
+        /// Flags = ForceSpectator(0,1,2) + IsReferee * 10 + IsPodiumReady * 100 + StereoDisplayMode * 1000 + IsManagedByAnOtherServer * 10000 + IsServer * 100000 + HasPlayerSlot * 1000000 + IsBroadcasting * 10000000 + HasJoinedGame * 100000000
+        /// SpectatorStatus = Spectator + TemporarySpectator * 10 + PureSpectator * 100 + AutoTarget * 1000 + CurrentTargetId * 10000
+        /// Each structure of the array Skins contains two fields Environnement and a struct PackDesc. Each structure PackDesc, as well as the struct Avatar, contains two fields FileName and Checksum.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <param name="serverType"></param>
+        /// <returns></returns>
+        public async Task<PlayerInfoStruct> GetPlayerInfoAsync(string playerLogin, int serverType) =>
+            (PlayerInfoStruct)XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
+                await CallOrFaultAsync("GetPlayerInfo", playerLogin, serverType)
+            );
+
+        /// <summary>
+        /// Returns a struct containing the infos on the player with the specified login. The structure contains the following fields : Login, NickName, PlayerId, TeamId, IPAddress, DownloadRate, UploadRate, Language, IsSpectator, IsInOfficialMode, a structure named Avatar, an array of structures named Skins, a structure named LadderStats, HoursSinceZoneInscription and OnlineRights (0: nations account, 3: united account).
+        /// Each structure of the array Skins contains two fields Environnement and a struct PackDesc. Each structure PackDesc, as well as the struct Avatar, contains two fields FileName and Checksum.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <returns></returns>
+        public async Task<PlayerDetailedInfoStruct> GetDetailedPlayerInfoAsync(string playerLogin) =>
+            (PlayerDetailedInfoStruct)XmlRpcTypes.ToNativeValue<PlayerDetailedInfoStruct>(
+                await CallOrFaultAsync("GetDetailedPlayerInfo", playerLogin)
+            );
+
+        /// <summary>
+        /// Returns a struct containing the player infos of the game server (ie: in case of a basic server, itself; in case of a relay server, the main server), with an optional parameter for compatibility: struct version (0 = united, 1 = forever).
+        /// The structure is identical to the ones from GetPlayerList. Forever PlayerInfo struct is: Login, NickName, PlayerId, TeamId, SpectatorStatus, LadderRanking, and Flags.
+        /// LadderRanking is 0 when not in official mode,
+        /// Flags = ForceSpectator(0,1,2) + IsReferee * 10 + IsPodiumReady * 100 + StereoDisplayMode * 1000 + IsManagedByAnOtherServer * 10000 + IsServer * 100000 + HasPlayerSlot * 1000000 + IsBroadcasting * 10000000 + HasJoinedGame * 100000000
+        /// SpectatorStatus = Spectator + TemporarySpectator * 10 + PureSpectator * 100 + AutoTarget * 1000 + CurrentTargetId * 10000
+        /// Each structure contains the following fields : Login, NickName, PlayerId and Rank. In addition, for legacy trackmania modes it also contains BestTime, Score, NbrLapsFinished, LadderScore, and an array BestCheckpoints that contains the checkpoint times for the best race. 
+        /// </summary>
+        /// <param name="serverType"></param>
+        /// <returns></returns>
+        public async Task<PlayerInfoStruct> GetMainServerPlayerInfoAsync(int serverType) =>
+            (PlayerInfoStruct)XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
+                await CallOrFaultAsync("GetMainServerPlayerInfo", serverType)
+            );
+
+        /// <summary>
+        /// Returns the current rankings for the race in progress. (In trackmania legacy team modes, the scores for the two teams are returned. In other modes, it's the individual players' scores) This method take two parameters. The first parameter specifies the maximum number of infos to be returned, and the second one the starting index in the ranking.  The ranking returned is a list of structures.
+        /// Each structure contains the following fields : Login, NickName, PlayerId and Rank. In addition, for legacy trackmania modes it also contains BestTime, Score, NbrLapsFinished, LadderScore, and an array BestCheckpoints that contains the checkpoint times for the best race. 
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <returns></returns>
+        public async Task<PlayerRankingStruct[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex) =>
+            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct[]>(
+                await CallOrFaultAsync("GetCurrentRanking")
+            );
+
+        /// <summary>
+        /// Returns the current ranking for the race in progressof the player with the specified login (or list of comma-separated logins). The ranking returned is a list of structures.
+        /// Each structure contains the following fields : Login, NickName, PlayerId and Rank. In addition, for legacy trackmania modes it also contains BestTime, Score, NbrLapsFinished, LadderScore, and an array BestCheckpoints that contains the checkpoint times for the best race. 
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <returns></returns>
+        public async Task<PlayerRankingStruct[]> GetCurrentRankingForLoginAsync(string playerLogin) =>
+            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct[]>(
+                await CallOrFaultAsync("GetCurrentRankingForLogin")
+            );
+
+        /// <summary>
+        /// Force the scores of the current game. Only available in rounds and team mode. You have to pass an array of structs {int PlayerId, int Score}.
+        /// And a boolean SilentMode - if true, the scores are silently updated (only available for SuperAdmin), allowing an external controller to do its custom counting... Only available to Admin/SuperAdmin.
+        /// </summary>
+        /// <param name="playerScores"></param>
+        /// <param name="silentMode"></param>
+        /// <returns></returns>
+        public async Task<bool> ForceScoresAsync(PlayerScoreStruct[] playerScores, bool silentMode) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceScores", playerScores, silentMode)
+            );
+
+        /// <summary>
+        /// Force the spectating status of the player. You have to pass the login and the spectator mode (0: user selectable, 1: spectator, 2: player, 3: spectator but keep selectable). Only available to Admin.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForceSpectatorAsync(int playerLogin, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceSpectator", playerLogin, cameraType)
+            );
+
+        /// <summary>
+        /// Force the spectating status of the player. You have to pass the playerid and the spectator mode (0: user selectable, 1: spectator, 2: player, 3: spectator but keep selectable). Only available to Admin.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForceSpectatorIdAsync(int playerId, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceSpectatorId", playerId, cameraType)
+            );
+
+        /// <summary>
+        /// Force spectators to look at a specific player. You have to pass the login of the spectator (or '' for all) and the login of the target (or '' for automatic),
+        /// and an integer for the camera type to use (-1 = leave unchanged, 0 = replay, 1 = follow, 2 = free). Only available to Admin.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <param name="targetLogin"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForceSpectatorTargetAsync(string playerLogin, string targetLogin, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceSpectatorTarget", playerLogin, targetLogin, cameraType)
+            );
+
+        /// <summary>
+        /// Force spectators to look at a specific player. You have to pass the id of the spectator (or -1 for all) and the id of the target (or -1 for automatic),
+        /// and an integer for the camera type to use (-1 = leave unchanged, 0 = replay, 1 = follow, 2 = free). Only available to Admin.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <param name="targetId"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForceSpectatorTargetIdAsync(int playerId, int targetId, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForceSpectatorTargetId", playerId, targetId, cameraType)
+            );
+
+        /// <summary>
+        /// Pass the login of the spectator. A spectator that once was a player keeps his player slot, so that he can go back to race mode.
+        /// Calling this function frees this slot for another player to connect. Only available to Admin.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <returns></returns>
+        public async Task<bool> SpectatorReleasePlayerSlotAsync(string playerLogin) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SpectatorReleasePlayerSlot", playerLogin)
+            );
+
+        /// <summary>
+        /// Pass the playerid of the spectator. A spectator that once was a player keeps his player slot, so that he can go back to race mode.
+        /// Calling this function frees this slot for another player to connect. Only available to Admin.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <returns></returns>
+        public async Task<bool> SpectatorReleasePlayerSlotIdAsync(int playerId) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SpectatorReleasePlayerSlotId", playerId)
+            );
     }
 }

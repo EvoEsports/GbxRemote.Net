@@ -384,34 +384,41 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("GetClientInputsMaxLatency")
             );
 
-        public async Task<bool> SetWarmUpAsync(bool useWarmup) =>
+        /// <summary>
+        /// Stop the server. Only available to SuperAdmin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> StopServerAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("SetWarmUp", useWarmup)
+                await CallOrFaultAsync("StopServer")
             );
 
-        public async Task<bool> GetWarmUpAsync() =>
+        /// <summary>
+        /// Returns a struct containing the networks stats of the server. The structure contains the following fields : Uptime, NbrConnection, MeanConnectionTime, MeanNbrPlayer, RecvNetRate, SendNetRate, TotalReceivingSize, TotalSendingSize and an array of structures named PlayerNetInfos.
+        /// Each structure of the array PlayerNetInfos contains the following fields : Login, IPAddress, LastTransferTime, DeltaBetweenTwoLastNetState, PacketLossRate. Only available to SuperAdmin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<NetworkStatsStruct> GetNetworkStatsAsync() =>
+            (NetworkStatsStruct)XmlRpcTypes.ToNativeValue<NetworkStatsStruct>(
+                await CallOrFaultAsync("GetNetworkStats")
+            );
+
+        /// <summary>
+        /// Start a server on lan, using the current configuration. Only available to SuperAdmin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> StartServerLanAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("GetWarmUp")
+                await CallOrFaultAsync("StartServerLan")
             );
 
-        public async Task<string> GetModeScriptText() =>
-            (string)XmlRpcTypes.ToNativeValue<string>(
-                await CallOrFaultAsync("GetModeScriptText")
-            );
-
-        public async Task<bool> SetModeScriptTextAsync(string script) =>
+        /// <summary>
+        /// Start a server on internet, using the current configuration. Only available to SuperAdmin.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> StartServerInternetAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("SetModeScriptText", script)
-            );
-
-        public async Task<ScriptInfoStruct> GetModeScriptInfoAsync() =>
-            (ScriptInfoStruct)XmlRpcTypes.ToNativeValue<ScriptInfoStruct>(
-                await CallOrFaultAsync("GetModeScriptInfo")
-            );
-
-        public async Task<DynamicObject> GetModeScriptSettingsAsync() =>
-            (DynamicObject)XmlRpcTypes.ToNativeValue<DynamicObject>(
-                await CallOrFaultAsync("GetModeScriptSettings")
+                await CallOrFaultAsync("StartServerInternet")
             );
     }
 }

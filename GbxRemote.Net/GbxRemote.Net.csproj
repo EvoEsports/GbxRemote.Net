@@ -5,4 +5,12 @@
     <RootNamespace>GbxRemoteNet</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="GbxRemoteClient.Methods.Script.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="GbxRemoteClient.Methods.Script.cs" />
+  </ItemGroup>
+
 </Project>

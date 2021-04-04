@@ -41,5 +41,36 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("GetForcedTeams")
             );
+
+        /// <summary>
+        /// Returns the current winning team for the race in progress. (-1: if not in team mode, or draw match)
+        /// </summary>
+        /// <returns></returns>
+        public async Task<int> GetCurrentWinnerTeamAsync() =>
+            (int)XmlRpcTypes.ToNativeValue<int>(
+                await CallOrFaultAsync("GetCurrentWinnerTeam")
+            );
+
+        /// <summary>
+        /// Force the team of the player. Only available in team mode. You have to pass the login and the team number (0 or 1). Only available to Admin.
+        /// </summary>
+        /// <param name="playerLogin"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForcePlayerTeamAsync(int playerLogin, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForcePlayerTeam", playerLogin, cameraType)
+            );
+
+        /// <summary>
+        /// Force the team of the player. Only available in team mode. You have to pass the playerid and the team number (0 or 1). Only available to Admin.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <param name="cameraType"></param>
+        /// <returns></returns>
+        public async Task<bool> ForcePlayerTeamIdAsync(int playerId, int cameraType) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("ForcePlayerTeamId", playerId, cameraType)
+            );
     }
 }
