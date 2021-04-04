@@ -16,7 +16,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <returns></returns>
         public async Task<string[]> SystemListMethodsAsync() =>
-            (string[])XmlRpcTypes.ToNativeValue<string>((XmlRpcArray)
+            (string[])XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("system.listMethods")
             );
 

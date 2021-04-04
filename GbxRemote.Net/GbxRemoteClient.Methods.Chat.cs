@@ -128,5 +128,24 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ChatForwardToLogin", text, senderLogin, destinationLogin)
             );
+
+        /// <summary>
+        /// Set a new chat time value in milliseconds (actually 'chat time' is the duration of the end race podium). Only available to Admin.
+        /// </summary>
+        /// <param name="chatTime">0 means no podium displayed.</param>
+        /// <returns></returns>
+        public async Task<bool> SetChatTimeAsync(int chatTime) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("SetChatTime", chatTime)
+            );
+
+        /// <summary>
+        /// Get the current and next chat time. The struct returned contains two fields CurrentValue and NextValue.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CurrentNextValueStruct<int>> GetChatTimeAsync() =>
+            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+                await CallOrFaultAsync("GetChatTime")
+            );
     }
 }

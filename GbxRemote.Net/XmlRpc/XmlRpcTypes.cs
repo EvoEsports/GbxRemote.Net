@@ -96,8 +96,18 @@ namespace GbxRemoteNet.XmlRpc {
         /// <typeparam name="T"></typeparam>
         /// <param name="xmlStruct"></param>
         /// <returns></returns>
-        public static T ToNativeStruct<T>(XmlRpcStruct xmlStruct) {
+        public static object ToNativeStruct<T>(XmlRpcStruct xmlStruct) {
             Type t = typeof(T);
+
+            if (t == typeof(DynamicObject)) {
+                DynamicObject obj = new();
+
+                foreach (var kv in xmlStruct.Fields)
+                    obj.Add(kv.Key, ToNativeValue<object>(kv.Value));
+
+                return obj;
+            }
+
             T nativeStruct = (T)Activator.CreateInstance(t);
             var fields = t.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
@@ -167,6 +177,9 @@ namespace GbxRemoteNet.XmlRpc {
 
             } else if (t == typeof(string)) {
                 return new XmlRpcString((string)obj);
+
+            } else if (t == typeof(DynamicObject)) {
+                return new XmlRpcStruct(obj);
 
             } else if (t.IsArray) {
                 return ToXmlRpcArray(obj);
