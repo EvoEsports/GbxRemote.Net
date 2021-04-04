@@ -18,7 +18,7 @@ namespace BasicExample {
     class Program {
         static async Task MainAsync(string[] args) {
             // create client instance
-            GbxRemoteClient client = new("192.168.1.57", 5001);
+            GbxRemoteClient client = new("127.0.0.1", 5001);
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {

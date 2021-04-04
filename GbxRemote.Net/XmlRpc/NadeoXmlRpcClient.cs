@@ -15,7 +15,7 @@ namespace GbxRemoteNet.XmlRpc {
         uint handler = 0x80000000;
         object handlerLock = new object();
         ConcurrentDictionary<uint, ManualResetEvent> responseHandles = new();
-        ConcurrentDictionary<uint, Message> responseMessages = new();
+        ConcurrentDictionary<uint, ResponseMessage> responseMessages = new();
 
         // connection
         IPAddress connectAddr;
@@ -29,7 +29,7 @@ namespace GbxRemoteNet.XmlRpc {
 
         // events
         public delegate Task TaskAction();
-        public delegate Task CallbackAction(Message message);
+        public delegate Task CallbackAction(MethodCall call);
 
         public event TaskAction OnConnected;
         public event CallbackAction OnCallback;
@@ -43,15 +43,18 @@ namespace GbxRemoteNet.XmlRpc {
             try {
                 while (!recvCancel.IsCancellationRequested) {
 
-                    Message message = await Message.FromIOAsync(xmlRpcIO);
+                    ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
-                    if (message.IsCallback) {
-                        // just invoke the callback event
-                        OnCallback?.Invoke(message);
-                    } else if (responseHandles.ContainsKey(message.Header.Handle)) {
+                    if (response.IsCallback) {
+                        // invoke listeners
+                        Console.WriteLine("=========== CALLBACK START ===========");
+                        Console.WriteLine(response.MessageXml);
+                        Console.WriteLine("=========== CALLBACK END ===========");
+                        OnCallback?.Invoke(new MethodCall(response));
+                    } else if (responseHandles.ContainsKey(response.Header.Handle)) {
                         // attempt to signal the call method
-                        responseMessages[message.Header.Handle] = message;
-                        responseHandles[message.Header.Handle].Set();
+                        responseMessages[response.Header.Handle] = response;
+                        responseHandles[response.Header.Handle].Set();
                     }
                 }
             } catch (Exception e) {
@@ -110,9 +113,11 @@ namespace GbxRemoteNet.XmlRpc {
         /// <param name="method">Method name</param>
         /// <param name="args">Arguments to the method if available.</param>
         /// <returns></returns>
-        public async Task<Message> CallAsync(string method, params XmlRpcBaseType[] args) {
+        public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args) {
             uint handle = await GetNextHandle();
             MethodCall call = new(method, handle, args);
+
+            Console.WriteLine(call.Call.MainDocument);
 
             responseHandles[handle] = new ManualResetEvent(false);
 
@@ -121,7 +126,7 @@ namespace GbxRemoteNet.XmlRpc {
 
             // wait for response
             responseHandles[handle].WaitOne();
-            Message message = responseMessages[handle];
+            ResponseMessage message = responseMessages[handle];
             return message;
         }
     }
