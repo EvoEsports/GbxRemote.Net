@@ -132,7 +132,7 @@ namespace GbxRemoteNet {
         /// <param name="url"></param>
         /// <param name="linkType"></param>
         /// <returns></returns>
-        public async Task<bool> SendOpenLinkToId(int clientId, string url, int linkType) =>
+        public async Task<bool> SendOpenLinkToIdAsync(int clientId, string url, int linkType) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SendOpenLinkToId", clientId, url, linkType)
             );
@@ -144,7 +144,7 @@ namespace GbxRemoteNet {
         /// <param name="url"></param>
         /// <param name="linkType"></param>
         /// <returns></returns>
-        public async Task<bool> SendOpenLinkToLogin(string playerLogin, string url, int linkType) =>
+        public async Task<bool> SendOpenLinkToLoginAsync(string playerLogin, string url, int linkType) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SendOpenLinkToId", playerLogin, url, linkType)
             );

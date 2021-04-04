@@ -52,7 +52,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="gameInfo"></param>
         /// <returns></returns>
-        public async Task<bool> SetGameInfos(GameInfoStruct gameInfo) =>
+        public async Task<bool> SetGameInfosAsync(GameInfoStruct gameInfo) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetGameInfos", gameInfo)
             );

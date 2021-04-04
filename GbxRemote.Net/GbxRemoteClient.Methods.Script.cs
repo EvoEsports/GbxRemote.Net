@@ -13,7 +13,7 @@ namespace GbxRemoteNet {
         /// Get the current mode script.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> GetModeScriptText() =>
+        public async Task<string> GetModeScriptTextAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("GetModeScriptText")
             );
