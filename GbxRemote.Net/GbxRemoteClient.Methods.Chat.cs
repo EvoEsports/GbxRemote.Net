@@ -102,7 +102,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <returns></returns>
         public async Task<string[]> GetChatLinesAsync() =>
-            (string[])XmlRpcTypes.ToNativeValue<string[]>(
+            (string[])XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("GetChatLines")
             );
 

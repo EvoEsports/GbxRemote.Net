@@ -26,8 +26,8 @@ namespace BasicExample {
 
             Console.WriteLine("Connected and authenticated!");
 
+            // var ret = await client.CallAsync("GetChatLines");
             var ret = await client.GetChatLinesAsync();
-            // var ret = await client.GetMaxPlayersAsync();
 
             /* string[][] methods = await client.SystemMethodSignatureAsync("CallVoteEx");
             foreach (var method in methods[0]) {

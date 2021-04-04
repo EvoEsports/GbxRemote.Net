@@ -348,7 +348,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <returns></returns>
         public async Task<int[]> GetRoundCustomPointsAsync() =>
-            (int[])XmlRpcTypes.ToNativeValue<int[]>(
+            (int[])XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("GetRoundCustomPoints")
             );
 
