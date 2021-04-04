@@ -366,7 +366,7 @@ namespace GbxRemoteNet {
         /// <param name="startIndex"></param>
         /// <param name="serverType">OPTIONAL: Used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers)</param>
         /// <returns></returns>
-        public async Task<PlayerInfoStruct[]> GetPlayerListAsync(int maxInfos, int startIndex, int? serverType = -1) =>
+        public async Task<PlayerInfoStruct[]> GetPlayerListAsync(int maxInfos=-1, int startIndex=0, int? serverType = -1) =>
             (PlayerInfoStruct[])XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
                 await CallOrFaultAsync("GetPlayerList", maxInfos, startIndex, serverType)
             );

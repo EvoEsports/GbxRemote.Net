@@ -112,7 +112,8 @@ namespace GbxRemoteNet.XmlRpc {
             var fields = t.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var field in fields) {
-                field.SetValue(nativeStruct, ToNativeValue<object>(xmlStruct.Fields[field.Name]));
+                if (xmlStruct.Fields.ContainsKey(field.Name))
+                    field.SetValue(nativeStruct, ToNativeValue<object>(xmlStruct.Fields[field.Name]));
             }
 
             return nativeStruct;

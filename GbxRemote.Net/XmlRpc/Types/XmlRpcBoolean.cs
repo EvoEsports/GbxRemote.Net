@@ -23,7 +23,7 @@ namespace GbxRemoteNet.XmlRpc.Types {
         }
 
         public override XElement GetXml() {
-            return new XElement(XmlRpcElementNames.Boolean, Value);
+            return new XElement(XmlRpcElementNames.Boolean, Value ? '1' : '0');
         }
     }
 }
