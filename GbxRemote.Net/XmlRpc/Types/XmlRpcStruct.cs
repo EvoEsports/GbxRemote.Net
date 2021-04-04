@@ -46,6 +46,18 @@ namespace GbxRemoteNet.XmlRpc.Types {
             }
         }
 
+        /// <summary>
+        /// Create a struct from a dynamic object.
+        /// </summary>
+        /// <param name="obj"></param>
+        public XmlRpcStruct(DynamicObject obj) : base(null) {
+            Fields = new Struct();
+
+            foreach (var kv in obj) {
+                Fields.Add(kv.Key, XmlRpcTypes.ToXmlRpcValue(obj));
+            }
+        }
+
         public override XElement GetXml() {
             XElement structElement = new(XmlRpcElementNames.Struct);
 

@@ -409,8 +409,8 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("GetModeScriptInfo")
             );
 
-        public async Task<ScriptSettingStruct> GetModeScriptSettingsAsync() =>
-            (ScriptSettingStruct)XmlRpcTypes.ToNativeValue<ScriptSettingStruct>(
+        public async Task<DynamicObject> GetModeScriptSettingsAsync() =>
+            (DynamicObject)XmlRpcTypes.ToNativeValue<DynamicObject>(
                 await CallOrFaultAsync("GetModeScriptSettings")
             );
     }
