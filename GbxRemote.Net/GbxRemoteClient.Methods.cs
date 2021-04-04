@@ -22,7 +22,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="modescriptSettings"></param>
         /// <returns></returns>
-        public async Task<bool> SetModeScriptSettingsAsync(Object modescriptSettings) =>
+        public async Task<bool> SetModeScriptSettingsAsync(object modescriptSettings) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetModeScriptSettings", modescriptSettings)
             );
@@ -32,7 +32,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="commands"></param>
         /// <returns></returns>
-        public async Task<bool> SendModeScriptCommandsAsync(Object commands) =>
+        public async Task<bool> SendModeScriptCommandsAsync(object commands) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SendModeScriptCommands", commands)
             );
@@ -43,7 +43,7 @@ namespace GbxRemoteNet {
         /// <param name="settings"></param>
         /// <param name="modeScript"></param>
         /// <returns></returns>
-        public async Task<bool> SetModeScriptSettingsAndCommandsAsync(Object settings, Object modeScript) =>
+        public async Task<bool> SetModeScriptSettingsAndCommandsAsync(object settings, object modeScript) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetModeScriptSettingsAndCommands", settings, modeScript)
             );
@@ -52,8 +52,8 @@ namespace GbxRemoteNet {
         /// Returns the current xml-rpc variables of the mode script.
         /// </summary>
         /// <returns></returns>
-        public async Task<Object> GetModeScriptVariablesAsync() =>
-            (Object)XmlRpcTypes.ToNativeValue<Object>(
+        public async Task<object> GetModeScriptVariablesAsync() =>
+            XmlRpcTypes.ToNativeValue<object>(
                 await CallOrFaultAsync("GetModeScriptVariables")
             );
 
@@ -62,7 +62,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="xmlRpcVar"></param>
         /// <returns></returns>
-        public async Task<bool> SetModeScriptVariablesAsync(Object xmlRpcVar) =>
+        public async Task<bool> SetModeScriptVariablesAsync(object xmlRpcVar) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetModeScriptVariables", xmlRpcVar)
             );
@@ -96,7 +96,7 @@ namespace GbxRemoteNet {
         /// <param name="filename">OPTIONAL: Name the filename relative to Scripts/directory</param>
         /// <param name="script">OPTIONAL: The script #Settings to apply.</param>
         /// <returns></returns>
-        public async Task<bool> SetServerPluginAsync(bool forceReload, string filename = null, Object script = null) =>
+        public async Task<bool> SetServerPluginAsync(bool forceReload, string filename = null, object script = null) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetServerPlugin", forceReload, filename, script)
             );
@@ -105,8 +105,8 @@ namespace GbxRemoteNet {
         /// Get the ServerPlugin current settings.
         /// </summary>
         /// <returns></returns>
-        public async Task<Object> GetServerPluginAsync() =>
-            (Object)XmlRpcTypes.ToNativeValue<Object>(
+        public async Task<object> GetServerPluginAsync() =>
+            XmlRpcTypes.ToNativeValue<object>(
                 await CallOrFaultAsync("GetServerPlugin")
             );
 
@@ -114,8 +114,8 @@ namespace GbxRemoteNet {
         /// Send an event to the server script. Only available to Admin.
         /// </summary>
         /// <returns></returns>
-        public async Task<Object> GetServerPluginVariablesAsync() =>
-            (Object)XmlRpcTypes.ToNativeValue<Object>(
+        public async Task<object> GetServerPluginVariablesAsync() =>
+            XmlRpcTypes.ToNativeValue<object>(
                 await CallOrFaultAsync("Returns the current xml-rpc variables of the server script.")
             );
 
