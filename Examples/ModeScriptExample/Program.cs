@@ -36,7 +36,8 @@ namespace ModeScriptExample {
 
         private static async Task Client_OnModeScriptCallback(string method, JObject data) {
             if (method == "Trackmania.Event.GiveUp") {
-                var player = await client.GetPlayerInfoAsync("pGepluulRL-eK4VDtQ85rg");
+                string playerLogin = data["login"].Value<string>();
+                var player = await client.GetPlayerInfoAsync(playerLogin);
                 Console.WriteLine($"{player.NickName } gave up");
             }
         }
