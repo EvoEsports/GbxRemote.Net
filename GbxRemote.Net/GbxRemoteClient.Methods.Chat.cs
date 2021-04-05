@@ -101,8 +101,8 @@ namespace GbxRemoteNet {
         /// Returns the last chat lines. Maximum of 40 lines. Only available to Admin.
         /// </summary>
         /// <returns></returns>
-        public async Task<string[]> GetChatLines() =>
-            (string[])XmlRpcTypes.ToNativeValue<string[]>(
+        public async Task<string[]> GetChatLinesAsync() =>
+            (string[])XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("GetChatLines")
             );
 

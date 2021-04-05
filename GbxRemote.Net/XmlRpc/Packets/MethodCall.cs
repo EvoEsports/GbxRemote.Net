@@ -9,7 +9,7 @@ using System.Xml.Linq;
 namespace GbxRemoteNet.XmlRpc.Packets {
     public class MethodCall : IPacket {
         public string Method;
-        public object[] Arguments;
+        public XmlRpcBaseType[] Arguments;
         public uint Handle;
         public XmlRpcCall Call;
 
@@ -18,6 +18,36 @@ namespace GbxRemoteNet.XmlRpc.Packets {
             Arguments = args;
             Call = new(method, args);
             Handle = handle;
+        }
+
+        public MethodCall(ResponseMessage response) {
+            if (!response.IsCallback)
+                throw new InvalidOperationException("Response must be a callback.");
+
+            Handle = response.Header.Handle;
+
+            // get method name
+            var xmlCall = response.MessageXml.Elements(XmlRpcElementNames.MethodCall).First();
+            Method = xmlCall.Elements(XmlRpcElementNames.MethodName).First().Value;
+
+            // parse method parameters
+            var xmlPars = xmlCall.Elements(XmlRpcElementNames.Params)
+                                 .First()
+                                 .Elements(XmlRpcElementNames.Param);
+
+            Arguments = new XmlRpcBaseType[xmlPars.Count()];
+
+            for (int i = 0; i < Arguments.Length; i++) {
+                var xmlValue = xmlPars.ElementAt(i)
+                                      .Elements(XmlRpcElementNames.Value)
+                                      .First()
+                                      .Elements()
+                                      .First();
+
+                Arguments[i] = XmlRpcTypes.ElementToInstance(xmlValue);
+            }
+
+            Call = new(Method, Arguments);
         }
 
         public async Task<byte[]> Serialize() {

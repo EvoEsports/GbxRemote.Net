@@ -13,7 +13,7 @@ namespace GbxRemoteNet {
         /// Get the current mode script.
         /// </summary>
         /// <returns></returns>
-        public async Task<string> GetModeScriptText() =>
+        public async Task<string> GetModeScriptTextAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("GetModeScriptText")
             );
@@ -110,12 +110,12 @@ namespace GbxRemoteNet {
         /// <summary>
         /// Send an event to the mode script. Only available to Admin. 
         /// </summary>
-        /// <param name="modeScript"></param>
-        /// <param name="events"></param>
+        /// <param name="method"></param>
+        /// <param name="parameters"></param>
         /// <returns></returns>
-        public async Task<bool> TriggerModeScriptEventArrayAsync(string modeScript, Array events) =>
+        public async Task<bool> TriggerModeScriptEventArrayAsync(string method, params string[] parameters) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("TriggerModeScriptEventArray", modeScript, events)
+                await CallOrFaultAsync("TriggerModeScriptEventArray", method, parameters)
             );
 
         /// <summary>
@@ -145,49 +145,50 @@ namespace GbxRemoteNet {
         /// <returns></returns>
         public async Task<DynamicObject> GetServerPluginVariablesAsync() =>
             (DynamicObject)XmlRpcTypes.ToNativeValue<DynamicObject>(
-                await CallOrFaultAsync("Returns the current xml-rpc variables of the server script.")
+                await CallOrFaultAsync("GetServerPluginVariables")
+            );
+
+        /// <summary>
+        /// Returns the current xml-rpc variables of the server script.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="param2"></param>
+        /// <returns></returns>
+        public async Task<bool> TriggerServerPluginEventAsync(string method, string param2) =>
+            (bool)XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("TriggerServerPluginEvent", method, param2)
             );
 
         /// <summary>
         /// Send an event to the server script. Only available to Admin.
         /// </summary>
+        /// <param name="method"></param>
+        /// <param name="param2"></param>
         /// <returns></returns>
-
-        // TODO : Missing implementation due to lacking documentation on method.
-        public async Task<bool> TriggerServerPluginEventAsync() =>
+        public async Task<bool> TriggerServerPluginEventArrayAsync(string method, string[] param2) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("TriggerServerPluginEvent")
-            );
-
-        /// <summary>
-        /// Send an event to the server script. Only available to Admin.
-        /// </summary>
-        /// <returns></returns>
-
-        // TODO : Missing implementation due to lacking documentation on method.
-        public async Task<bool> TriggerServerPluginEventArrayAsync() =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("TriggerServerPluginEventArray")
+                await CallOrFaultAsync("TriggerServerPluginEventArray", method, param2)
             );
 
         /// <summary>
         /// Get the script cloud variables of given object. Only available to Admin.
         /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-
-        // TODO : Missing implementation due to lacking documentation on method.
-        public async Task<bool> GetScriptCloudVariablesAsync() =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
+        public async Task<DynamicObject> GetScriptCloudVariablesAsync(string type, string id) =>
+            (DynamicObject)XmlRpcTypes.ToNativeValue<DynamicObject>(
                 await CallOrFaultAsync("GetScriptCloudVariables")
             );
 
         /// <summary>
         /// Set the script cloud variables of given object. Only available to Admin.
         /// </summary>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <param name="variables"></param>
         /// <returns></returns>
-
-        // TODO : Missing implementation due to lacking documentation on method.
-        public async Task<bool> SetScriptCloudVariablesAsync() =>
+        public async Task<bool> SetScriptCloudVariablesAsync(string type, string id, DynamicObject variables) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetScriptCloudVariables")
             );

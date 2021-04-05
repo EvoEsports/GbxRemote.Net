@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient : NadeoXmlRpcClient {
-        public GbxRemoteClient(string host, int port) : base(host, port) {
+        public const string ApiVersion = "2013-04-16";
 
+        public GbxRemoteClient(string host, int port) : base(host, port) {
+            OnCallback += GbxRemoteClient_OnCallback;
+            InvokeEventOnModeScriptMethodResponse = false;
         }
 
         /// <summary>
@@ -20,7 +23,7 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
-            var msg = await CallAsync(method, Arguments(args));
+            var msg = await CallAsync(method, MethodArgs(args));
 
             if (msg.IsFault)
                 throw new XmlRpcFaultException((XmlRpcFault)msg.ResponseData);
@@ -33,7 +36,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        private XmlRpcBaseType[] Arguments(params object[] args) {
+        private XmlRpcBaseType[] MethodArgs(params object[] args) {
             XmlRpcBaseType[] xmlRpcArgs = new XmlRpcBaseType[args.Length];
             
             for (int i = 0; i < args.Length; i++)
@@ -50,6 +53,7 @@ namespace GbxRemoteNet {
         /// <returns></returns>
         public async Task<bool> LoginAsync(string login, string password) {
             await ConnectAsync();
+            await SetApiVersionAsync(ApiVersion);
 
             if (await AuthenticateAsync(login, password))
                 return true;

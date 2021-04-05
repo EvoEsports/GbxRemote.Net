@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Packets {
-    public class Message : IPacket {
+    public class ResponseMessage : IPacket {
         public MessageHeader Header;
         public string RawMessage;
         public XDocument MessageXml;
@@ -15,8 +15,8 @@ namespace GbxRemoteNet.XmlRpc.Packets {
         public bool IsCallback => Header.IsCallback;
         public XmlRpcBaseType ResponseData;
 
-        public Message() { }
-        public Message(MessageHeader header, string message) {
+        public ResponseMessage() { }
+        public ResponseMessage(MessageHeader header, string message) {
             Header = header;
             RawMessage = message;
             MessageXml = XDocument.Parse(message);
@@ -61,11 +61,11 @@ namespace GbxRemoteNet.XmlRpc.Packets {
             return XmlRpcTypes.ElementToInstance(valueElement);
         }
 
-        public static async Task<Message> FromIOAsync(XmlRpcIO io) {
+        public static async Task<ResponseMessage> FromIOAsync(XmlRpcIO io) {
             var header = await MessageHeader.FromIOAsync(io);
             var message = Encoding.UTF8.GetString(await io.ReadBytesAsync(header.MessageLength));
 
-            return new Message(header, message);
+            return new ResponseMessage(header, message);
         }
 
         public Task<byte[]> Serialize() {

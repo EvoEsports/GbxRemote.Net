@@ -25,7 +25,7 @@ namespace GbxRemoteNet {
         /// <param name="par9"></param>
         /// <returns></returns>
         [Obsolete("Deprecated and not used in TM2 and later games.")]
-        public async Task<string> SetTeamInfo(string par1, double par2, string par3, string par4, double par5, string par6, string par7, double par8, string par9) =>
+        public async Task<string> SetTeamInfoAsync(string par1, double par2, string par3, string par4, double par5, string par6, string par7, double par8, string par9) =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("SetTeamInfo", par1, par2, par3, par4, par5, par6, par7, par8, par9)
             );

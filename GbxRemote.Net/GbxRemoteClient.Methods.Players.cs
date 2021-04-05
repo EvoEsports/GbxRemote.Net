@@ -366,8 +366,8 @@ namespace GbxRemoteNet {
         /// <param name="startIndex"></param>
         /// <param name="serverType">OPTIONAL: Used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers)</param>
         /// <returns></returns>
-        public async Task<PlayerInfoStruct[]> GetPlayerListAsync(int maxInfos, int startIndex, int? serverType = -1) =>
-            (PlayerInfoStruct[])XmlRpcTypes.ToNativeValue<PlayerInfoStruct[]>(
+        public async Task<PlayerInfoStruct[]> GetPlayerListAsync(int maxInfos=-1, int startIndex=0, int? serverType = -1) =>
+            (PlayerInfoStruct[])XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
                 await CallOrFaultAsync("GetPlayerList", maxInfos, startIndex, serverType)
             );
 
@@ -381,7 +381,7 @@ namespace GbxRemoteNet {
         /// <param name="playerLogin"></param>
         /// <param name="serverType"></param>
         /// <returns></returns>
-        public async Task<PlayerInfoStruct> GetPlayerInfoAsync(string playerLogin, int serverType) =>
+        public async Task<PlayerInfoStruct> GetPlayerInfoAsync(string playerLogin, int serverType=1) =>
             (PlayerInfoStruct)XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
                 await CallOrFaultAsync("GetPlayerInfo", playerLogin, serverType)
             );
@@ -419,7 +419,7 @@ namespace GbxRemoteNet {
         /// <param name="playerLogin"></param>
         /// <returns></returns>
         public async Task<PlayerRankingStruct[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex) =>
-            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct[]>(
+            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct>(
                 await CallOrFaultAsync("GetCurrentRanking")
             );
 
@@ -430,7 +430,7 @@ namespace GbxRemoteNet {
         /// <param name="playerLogin"></param>
         /// <returns></returns>
         public async Task<PlayerRankingStruct[]> GetCurrentRankingForLoginAsync(string playerLogin) =>
-            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct[]>(
+            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct>(
                 await CallOrFaultAsync("GetCurrentRankingForLogin")
             );
 

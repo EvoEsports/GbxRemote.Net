@@ -115,7 +115,7 @@ namespace GbxRemoteNet {
         /// <param name="startIndex"></param>
         /// <returns></returns>
         public async Task<MapStruct[]> GetMapListAsync(int maxInfos, int startIndex) =>
-            (MapStruct[])XmlRpcTypes.ToNativeValue<MapStruct[]>(
+            (MapStruct[])XmlRpcTypes.ToNativeValue<MapStruct>(
                 await CallOrFaultAsync("GetMapList", maxInfos, startIndex)
             );
 

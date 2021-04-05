@@ -462,7 +462,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="disable"></param>
         /// <returns></returns>
-        public async Task<bool> DisableHorns(string disable) =>
+        public async Task<bool> DisableHornsAsync(string disable) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("DisableHorns", disable)
             );
