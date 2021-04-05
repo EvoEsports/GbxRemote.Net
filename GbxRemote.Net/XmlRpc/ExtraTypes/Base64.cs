@@ -8,6 +8,8 @@ namespace GbxRemoteNet.XmlRpc.ExtraTypes {
     public class Base64 : IEquatable<Base64> {
         private byte[] data;
 
+        public byte[] Data => data;
+
         public Base64(byte[] data) {
             this.data = data;
         }

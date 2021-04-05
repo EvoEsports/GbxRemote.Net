@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallbackExample", "Examples
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModeScriptExample", "Examples\ModeScriptExample\ModeScriptExample.csproj", "{BD5876F1-2F90-4567-B742-4BFC0FF430F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GbxRemote.Net.Tests", "GbxRemote.Net.Tests\GbxRemote.Net.Tests.csproj", "{915A003F-0719-4E5E-8E22-1E034774C464}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{BD5876F1-2F90-4567-B742-4BFC0FF430F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD5876F1-2F90-4567-B742-4BFC0FF430F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD5876F1-2F90-4567-B742-4BFC0FF430F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{915A003F-0719-4E5E-8E22-1E034774C464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{915A003F-0719-4E5E-8E22-1E034774C464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{915A003F-0719-4E5E-8E22-1E034774C464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{915A003F-0719-4E5E-8E22-1E034774C464}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
