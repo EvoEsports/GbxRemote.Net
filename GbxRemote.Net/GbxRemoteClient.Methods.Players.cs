@@ -381,7 +381,7 @@ namespace GbxRemoteNet {
         /// <param name="playerLogin"></param>
         /// <param name="serverType"></param>
         /// <returns></returns>
-        public async Task<PlayerInfoStruct> GetPlayerInfoAsync(string playerLogin, int serverType) =>
+        public async Task<PlayerInfoStruct> GetPlayerInfoAsync(string playerLogin, int serverType=1) =>
             (PlayerInfoStruct)XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
                 await CallOrFaultAsync("GetPlayerInfo", playerLogin, serverType)
             );

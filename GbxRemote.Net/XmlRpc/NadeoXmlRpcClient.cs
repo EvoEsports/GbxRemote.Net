@@ -42,15 +42,12 @@ namespace GbxRemoteNet.XmlRpc {
         private async void RecvLoop() {
             try {
                 while (!recvCancel.IsCancellationRequested) {
-
                     ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
                     if (response.IsCallback) {
-                        // invoke listeners
-                        /* Console.WriteLine("=========== CALLBACK START ===========");
-                        Console.WriteLine(response.MessageXml);
-                        Console.WriteLine("=========== CALLBACK END ==========="); */
-                        OnCallback?.Invoke(new MethodCall(response));
+                        // invoke listeners and
+                        // run callback handler in a new thread to avoid blocking of new responses
+                        Task.Run(() => OnCallback?.Invoke(new MethodCall(response)));
                     } else if (responseHandles.ContainsKey(response.Header.Handle)) {
                         // attempt to signal the call method
                         responseMessages[response.Header.Handle] = response;
