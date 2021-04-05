@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 namespace GbxRemoteNet.XmlRpc {
     public class XmlRpcIO {
         TcpClient tcpClient;
-        NetworkStream stream;
+        Stream stream;
 
         public XmlRpcIO(TcpClient tcpClient) {
             stream = tcpClient.GetStream();
+        }
+
+        public XmlRpcIO(Stream stream) {
+            this.stream = stream;
         }
 
         public async Task<byte[]> ReadBytesAsync(int n) {

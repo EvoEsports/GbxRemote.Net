@@ -44,6 +44,13 @@ namespace GbxRemoteNet.XmlRpc {
                 while (!recvCancel.IsCancellationRequested) {
                     ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
+                    Console.WriteLine("================== MESSAGE START ==================");
+                    Console.WriteLine($"Message length: {response.Header.MessageLength}");
+                    Console.WriteLine($"Handle: {response.Header.Handle}");
+                    Console.WriteLine($"Is callback: {response.Header.IsCallback}");
+                    Console.WriteLine(response.MessageXml);
+                    Console.WriteLine("================== MESSAGE END ==================");
+
                     if (response.IsCallback) {
                         // invoke listeners and
                         // run callback handler in a new thread to avoid blocking of new responses
