@@ -47,9 +47,9 @@ namespace GbxRemoteNet.XmlRpc {
 
                     if (response.IsCallback) {
                         // invoke listeners
-                        Console.WriteLine("=========== CALLBACK START ===========");
+                        /* Console.WriteLine("=========== CALLBACK START ===========");
                         Console.WriteLine(response.MessageXml);
-                        Console.WriteLine("=========== CALLBACK END ===========");
+                        Console.WriteLine("=========== CALLBACK END ==========="); */
                         OnCallback?.Invoke(new MethodCall(response));
                     } else if (responseHandles.ContainsKey(response.Header.Handle)) {
                         // attempt to signal the call method
