@@ -3,10 +3,29 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>GbxRemoteNet</RootNamespace>
+    <Version>0.0.1</Version>
+    <Authors>Evo</Authors>
+    <Description>GBXRemote client for connecting to the XML-RPC protocol of TrackMania servers.</Description>
+    <Copyright>Evo © 2021</Copyright>
+    <PackageProjectUrl>https://github.com/EvoTM/GbxRemote.Net</PackageProjectUrl>
+    <PackageTags>gbxremote,xmlrpc,client,trackmania</PackageTags>
+    <PackageReleaseNotes>This is the first BETA version of the client.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/EvoTM/GbxRemote.Net</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RepositoryType>Git</RepositoryType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
