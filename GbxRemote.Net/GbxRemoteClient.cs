@@ -1,6 +1,7 @@
 ﻿using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,11 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient : NadeoXmlRpcClient {
+        private readonly ILogger<GbxRemoteClient> _logger;
         public const string ApiVersion = "2013-04-16";
 
-        public GbxRemoteClient(string host, int port) : base(host, port) {
+        public GbxRemoteClient(ILogger<GbxRemoteClient> logger, string host, int port) : base(host, port) {
+            _logger = logger;
             OnCallback += GbxRemoteClient_OnCallback;
             InvokeEventOnModeScriptMethodResponse = false;
         }
@@ -23,9 +26,11 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
+            _logger.LogDebug("Calling remote with method {method}.", method);
             var msg = await CallAsync(method, MethodArgs(args));
 
             if (msg.IsFault)
+                _logger.LogWarning("Remote call failed with reason: {message}", (XmlRpcFault)msg.ResponseData);
                 throw new XmlRpcFaultException((XmlRpcFault)msg.ResponseData);
 
             return msg.ResponseData;
@@ -37,6 +42,7 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private XmlRpcBaseType[] MethodArgs(params object[] args) {
+            _logger.LogDebug("Converting C# types to XML-RPC");
             XmlRpcBaseType[] xmlRpcArgs = new XmlRpcBaseType[args.Length];
             
             for (int i = 0; i < args.Length; i++)
@@ -52,14 +58,17 @@ namespace GbxRemoteNet {
         /// <param name="password"></param>
         /// <returns></returns>
         public async Task<bool> LoginAsync(string login, string password) {
+            _logger.LogInformation("Client connecting to GbxRemote.");
             await ConnectAsync();
             await SetApiVersionAsync(ApiVersion);
 
             if (await AuthenticateAsync(login, password))
+                _logger.LogInformation("Client connected to GbxRemote.");
                 return true;
 
             // disconnect if login failed
             await DisconnectAsync();
+            _logger.LogWarning("Client failed to connect to GbxRemote.");
             return false;
         }
     }
