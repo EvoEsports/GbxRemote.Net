@@ -11,6 +11,12 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient {
+        /// <summary>
+        /// If true, OnModeScriptCallback is triggered in addition when the callback
+        /// is a response for a ModeScript method call.
+        /// </summary>
+        public bool InvokeEventOnModeScriptMethodResponse { get; set; }
+
         private JObject ParseModeScriptCallback(MethodCall call) {
             XmlRpcArray dataArr = (XmlRpcArray)call.Arguments[1];
             XmlRpcString dataStr = (XmlRpcString)dataArr.Values[0];
@@ -21,6 +27,9 @@ namespace GbxRemoteNet {
         ConcurrentDictionary<string, ManualResetEvent> msSignals= new ConcurrentDictionary<string, ManualResetEvent>();
 
         public delegate Task ModeScriptCallbackAction(string method, JObject data);
+        /// <summary>
+        /// Triggered when any ModeScript callback is sent from the server.
+        /// </summary>
         public event ModeScriptCallbackAction OnModeScriptCallback;
 
         /// <summary>
@@ -37,6 +46,9 @@ namespace GbxRemoteNet {
                     // we have a modescript callback response
                     msResponses[responseId] = data;
                     msSignals[responseId].Set();
+
+                    if (!InvokeEventOnModeScriptMethodResponse)
+                        return Task.CompletedTask;
                 }
             }
 

@@ -13,6 +13,7 @@ namespace GbxRemoteNet {
 
         public GbxRemoteClient(string host, int port) : base(host, port) {
             OnCallback += GbxRemoteClient_OnCallback;
+            InvokeEventOnModeScriptMethodResponse = false;
         }
 
         /// <summary>

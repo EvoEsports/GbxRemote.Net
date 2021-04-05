@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace GbxRemoteNet.XmlRpc {
     public class NadeoXmlRpcClient {
         uint handler = 0x80000000;
-        object handlerLock = new object();
+        object handlerLock = new();
         ConcurrentDictionary<uint, ManualResetEvent> responseHandles = new();
         ConcurrentDictionary<uint, ResponseMessage> responseMessages = new();
 
