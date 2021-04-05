@@ -10,7 +10,7 @@ namespace CallbackExample {
     class Program {
         static async Task MainAsync(string[] args) {
             // create client instance
-            GbxRemoteClient client = new("192.168.1.57", 5001);
+            GbxRemoteClient client = new("trackmania.test.server", 5001);
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {

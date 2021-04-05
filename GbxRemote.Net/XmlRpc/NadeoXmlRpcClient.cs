@@ -18,7 +18,7 @@ namespace GbxRemoteNet.XmlRpc {
         ConcurrentDictionary<uint, ResponseMessage> responseMessages = new();
 
         // connection
-        IPAddress connectAddr;
+        string connectHost;
         int connectPort;
         TcpClient tcpClient;
         XmlRpcIO xmlRpcIO;
@@ -35,7 +35,7 @@ namespace GbxRemoteNet.XmlRpc {
         public event CallbackAction OnCallback;
 
         public NadeoXmlRpcClient(string host, int port) {
-            connectAddr = IPAddress.Parse(host);
+            connectHost = host;
             connectPort = port;
         }
 
@@ -64,8 +64,10 @@ namespace GbxRemoteNet.XmlRpc {
         /// </summary>
         /// <returns></returns>
         public async Task ConnectAsync() {
+            var connectAddr = await Dns.GetHostAddressesAsync(connectHost);
+
             tcpClient = new TcpClient();
-            await tcpClient.ConnectAsync(connectAddr, connectPort);
+            await tcpClient.ConnectAsync(connectAddr[0], connectPort);
             xmlRpcIO = new XmlRpcIO(tcpClient);
 
             // check header

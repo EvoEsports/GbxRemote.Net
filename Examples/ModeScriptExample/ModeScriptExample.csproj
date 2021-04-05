@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GbxRemote.Net\GbxRemote.Net.csproj" />
+    <ProjectReference Include="..\..\GbxRemote.Net\GbxRemote.Net.csproj" />
   </ItemGroup>
 
 </Project>

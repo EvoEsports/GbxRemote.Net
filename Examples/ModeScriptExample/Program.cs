@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ModeScriptExample {
     class Program {
         // create client instance
-        static GbxRemoteClient client = new("192.168.1.57", 5001);
+        static GbxRemoteClient client = new("trackmania.test.server", 5001);
 
         static async Task MainAsync(string[] args) {
             // connect and login
