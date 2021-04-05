@@ -84,10 +84,6 @@ namespace GbxRemoteNet {
                 await TriggerModeScriptEventArrayAsync("Trackmania.Event.SetCurLapCheckpointsMode", "always");
         }
 
-        private Task HandleModeScriptCallback(MethodCall call) {
-            return Task.CompletedTask;
-        }
-
         /// <summary>
         /// Main callback handler.
         /// </summary>

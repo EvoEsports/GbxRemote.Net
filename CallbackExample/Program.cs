@@ -20,6 +20,7 @@ namespace CallbackExample {
 
             Console.WriteLine("Connected and authenticated!");
 
+            // register callback events
             client.OnPlayerConnect += Client_OnPlayerConnect;
             client.OnPlayerDisconnect += Client_OnPlayerDisconnect;
             client.OnPlayerChat += Client_OnPlayerChat;
@@ -31,6 +32,7 @@ namespace CallbackExample {
             client.OnStatusChanged += Client_OnStatusChanged;
             client.OnPlayerInfoChanged += Client_OnPlayerInfoChanged;
 
+            // enable callbacks
             await client.EnableCallbackTypeAsync();
 
             // wait indefinitely

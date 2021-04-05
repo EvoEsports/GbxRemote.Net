@@ -117,9 +117,9 @@ namespace GbxRemoteNet.XmlRpc {
             uint handle = await GetNextHandle();
             MethodCall call = new(method, handle, args);
 
-            Console.WriteLine(call.Call.MainDocument);
+            //Console.WriteLine(call.Call.MainDocument);
 
-            responseHandles[handle] = new ManualResetEvent(false);
+            responseHandles[handle] = new(false);
 
             byte[] data = await call.Serialize();
             await xmlRpcIO.WriteBytesAsync(data);
