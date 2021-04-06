@@ -18,8 +18,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
 
         [Fact]
         public void FromIOAsync_Correctly_Parses_MethodCall_Message() {
-            MemoryStream stream = new(fixture.MethodCallBytes);
-            XmlRpcIO io = new(stream);
+            XmlRpcIO io = fixture.NewIO(fixture.MethodCallHeaderBytes);
 
             MessageHeader header = MessageHeader.FromIOAsync(io).GetAwaiter().GetResult();
 
@@ -29,8 +28,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
 
         [Fact]
         public void FromIOAsync_Correctly_Parses_MethodResponse_Message() {
-            MemoryStream stream = new MemoryStream(fixture.MethodResponseBytes);
-            XmlRpcIO io = new(stream);
+            XmlRpcIO io = fixture.NewIO(fixture.MethodResponseHeaderBytes);
 
             MessageHeader header = MessageHeader.FromIOAsync(io).GetAwaiter().GetResult();
 
@@ -40,8 +38,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
 
         [Fact]
         public void IsCallback_Returns_True_On_MethodCall() {
-            MemoryStream stream = new(fixture.MethodCallBytes);
-            XmlRpcIO io = new(stream);
+            XmlRpcIO io = fixture.NewIO(fixture.MethodCallHeaderBytes);
 
             MessageHeader header = MessageHeader.FromIOAsync(io).GetAwaiter().GetResult();
 
@@ -50,8 +47,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
 
         [Fact]
         public void IsCallback_Returns_False_On_MethodResponse() {
-            MemoryStream stream = new(fixture.MethodResponseBytes);
-            XmlRpcIO io = new(stream);
+            XmlRpcIO io = fixture.NewIO(fixture.MethodResponseHeaderBytes);
 
             MessageHeader header = MessageHeader.FromIOAsync(io).GetAwaiter().GetResult();
 

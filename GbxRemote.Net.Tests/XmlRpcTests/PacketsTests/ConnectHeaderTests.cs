@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
-    public class ConnectHeaderTests {
+    public class ConnectHeaderTests : IClassFixture<MessageFixture> {
+        MessageFixture fixture;
+
+        public ConnectHeaderTests(MessageFixture fixture) {
+            this.fixture = fixture;
+        }
+
         [Fact]
         public void FromIOAsync_Parses_Correctly_From_Stream() {
-            MemoryStream stream = new MemoryStream(
-                new byte[] { 0xa, 0x0, 0x0, 0x0, 0x54, 0x65, 0x73, 0x74, 0x20, 0x49, 0x6e, 0x70, 0x75, 0x74 }
-            );
-            XmlRpcIO io = new XmlRpcIO(stream);
+            XmlRpcIO io = fixture.NewIO(fixture.ConnectionHeaderBytes);
             ConnectHeader header = ConnectHeader.FromIOAsync(io).GetAwaiter().GetResult();
 
             Assert.Equal(10, header.Length);
