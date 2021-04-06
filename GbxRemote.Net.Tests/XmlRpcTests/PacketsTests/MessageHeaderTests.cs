@@ -28,11 +28,11 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
 
         [Fact]
         public void FromIOAsync_Correctly_Parses_MethodResponse_Message() {
-            XmlRpcIO io = fixture.NewIO(fixture.MethodResponseHeaderBytes);
+            XmlRpcIO io = fixture.NewIO(fixture.MethodResponseBytes);
 
             MessageHeader header = MessageHeader.FromIOAsync(io).GetAwaiter().GetResult();
 
-            Assert.Equal(140, header.MessageLength);
+            Assert.Equal(159, header.MessageLength);
             Assert.Equal(0x80000004, header.Handle);
         }
 
@@ -47,7 +47,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
 
         [Fact]
         public void IsCallback_Returns_False_On_MethodResponse() {
-            XmlRpcIO io = fixture.NewIO(fixture.MethodResponseHeaderBytes);
+            XmlRpcIO io = fixture.NewIO(fixture.MethodResponseBytes);
 
             MessageHeader header = MessageHeader.FromIOAsync(io).GetAwaiter().GetResult();
 

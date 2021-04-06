@@ -1,4 +1,5 @@
-﻿using GbxRemoteNet.XmlRpc.Packets;
+﻿using GbxRemoteNet.XmlRpc;
+using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,18 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
             ResponseMessage response = new(fixture.ExampleMethodCallHeader, fixture.MethodCallString);
 
             Assert.True(response.IsCallback);
+        }
+
+        [Fact]
+        public void FromIOAsync_Correctly_Parses_Message() {
+            XmlRpcIO io = fixture.NewIO(fixture.MethodResponseBytes);
+            ResponseMessage response = ResponseMessage.FromIOAsync(io).GetAwaiter().GetResult();
+
+            var responseValue = ((XmlRpcString)response.ResponseData).Value;
+
+            Assert.False(response.IsCallback);
+            Assert.False(response.IsFault);
+            Assert.Equal("Example Response Value", responseValue);
         }
     }
 }
