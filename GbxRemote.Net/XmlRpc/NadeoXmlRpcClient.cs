@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.XmlRpc {
     public class NadeoXmlRpcClient {
-        private readonly ILogger<NadeoXmlRpcClient> _logger;
+        private readonly ILogger logger;
 
         uint handler = 0x80000000;
         object handlerLock = new();
@@ -37,15 +37,15 @@ namespace GbxRemoteNet.XmlRpc {
         public event TaskAction OnConnected;
         public event CallbackAction OnCallback;
 
-        public NadeoXmlRpcClient(ILogger<NadeoXmlRpcClient> logger, string host, int port) {
-            _logger = logger;
+        public NadeoXmlRpcClient(ILogger logger, string host, int port) {
+            this.logger = logger;
             connectHost = host;
             connectPort = port;
         }
 
         private async void RecvLoop() {
             try {
-                _logger.LogInformation("Recieve loop initiated.");
+                logger.LogInformation("Recieve loop initiated.");
                 while (!recvCancel.IsCancellationRequested) {
                     ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
@@ -67,7 +67,7 @@ namespace GbxRemoteNet.XmlRpc {
                     }
                 }
             } catch (Exception e) {
-               _logger.LogInformation("Recieve Loop Exception", e);
+               logger.LogInformation("Recieve Loop Exception", e);
             }
         }
 
@@ -76,19 +76,19 @@ namespace GbxRemoteNet.XmlRpc {
         /// </summary>
         /// <returns></returns>
         public async Task ConnectAsync() {
-            _logger.LogInformation("Client connecting to the remote XML-RPC server.");
+            logger.LogInformation("Client connecting to the remote XML-RPC server.");
             var connectAddr = await Dns.GetHostAddressesAsync(connectHost);
 
             tcpClient = new TcpClient();
             await tcpClient.ConnectAsync(connectAddr[0], connectPort);
             xmlRpcIO = new XmlRpcIO(tcpClient);
 
-            _logger.LogInformation("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
+            logger.LogInformation("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
 
             // check header
             ConnectHeader header = await ConnectHeader.FromIOAsync(xmlRpcIO);
             if (!header.IsValid) {
-                _logger.LogInformation("Client is using an invalid header protocol: {header.protocol}", header.Protocol);
+                logger.LogInformation("Client is using an invalid header protocol: {header.protocol}", header.Protocol);
                 throw new Exception($"Invalid protocol: {header.Protocol}");
             }
 
@@ -104,11 +104,11 @@ namespace GbxRemoteNet.XmlRpc {
         /// </summary>
         /// <returns></returns>
         public async Task DisconnectAsync() {
-            _logger.LogInformation("Client is disconnecting from XML-RPC server.");
+            logger.LogInformation("Client is disconnecting from XML-RPC server.");
             recvCancel.Cancel();
             await taskRecvLoop;
             tcpClient.Close();
-            _logger.LogInformation("Client disconnected from XML-RPC server.");
+            logger.LogInformation("Client disconnected from XML-RPC server.");
         }
 
         /// <summary>
