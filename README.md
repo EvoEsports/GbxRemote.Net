@@ -1,8 +1,13 @@
+![GbxRemote.NET](logo.png)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/EvoTM/GbxRemote.NET?style=flat-square)
+![GitHub](https://img.shields.io/github/license/EvoTM/GbxRemote.NET?style=flat-square)
+![Lines of code](https://img.shields.io/tokei/lines/github/EvoTM/GbxRemote.NET?style=flat-square)
+![Discord](https://img.shields.io/discord/384138149686935562?style=flat-square)
 
-Trackmania dedicated server XML-RPC library for .NET Core
+A library for interacting with the XML-RPC protocol of TrackMania servers and similar titles built with .NET Core. It is built using the async task pattern. It comes with pre-made methods for all the documented XML-RPC methods provided by the trackmania server and allows you to easily hook into and react on callbacks. Interacting with ModeScript is also simplified through special features.
 
 # Installation
-The client is available on [Nuget](https://www.nuget.org/packages/GbxRemote.Net).
+The client library is available on [Nuget](https://www.nuget.org/packages/GbxRemote.Net).
 
 **Install with Nuget Manager:**
 ```
