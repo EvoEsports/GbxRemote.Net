@@ -1,8 +1,9 @@
-# GbxRemote.Net
+
 Trackmania dedicated server XML-RPC library for .NET Core
 
 # Installation
 The client is available on [Nuget](https://www.nuget.org/packages/GbxRemote.Net).
+
 **Install with Nuget Manager:**
 ```
 Install-Package GbxRemote.Net
