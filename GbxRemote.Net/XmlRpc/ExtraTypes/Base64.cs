@@ -19,7 +19,7 @@ namespace GbxRemoteNet.XmlRpc.ExtraTypes {
         }
 
         public bool Equals(Base64 other) {
-            return data.Equals(other.data);
+            return data.SequenceEqual(other.data);
         }
 
         public override string ToString() {
