@@ -99,7 +99,7 @@ namespace GbxRemoteNet.XmlRpc {
         public static object ToNativeStruct<T>(XmlRpcStruct xmlStruct) {
             Type t = typeof(T);
 
-            if (t == typeof(DynamicObject)) {
+            if (t == typeof(DynamicObject) || t == typeof(object)) {
                 DynamicObject obj = new();
 
                 foreach (var kv in xmlStruct.Fields)

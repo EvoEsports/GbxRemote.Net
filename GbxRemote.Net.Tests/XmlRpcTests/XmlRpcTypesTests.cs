@@ -33,7 +33,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                     new XElement("value", new XElement("int", 2)),
                     new XElement("value", new XElement("string", "3")),
                     new XElement("value", new XElement("double", 4))
-                )), new XmlRpcArray(new XmlRpcBaseType[]{ 
+                )), new XmlRpcArray(new XmlRpcBaseType[]{
                     new XmlRpcInteger(1),
                     new XmlRpcInteger(2),
                     new XmlRpcString("3"),
@@ -70,6 +70,64 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             XmlRpcBaseType result = XmlRpcTypes.ElementToInstance(element);
 
             Assert.Equal(result, expected);
+        }
+
+        [Fact]
+        public static void ToNativeValue_Returns_Null_If_Null() {
+            var result = XmlRpcTypes.ToNativeValue<object>(null);
+
+            Assert.Null(result);
+        }
+
+        class ToNativeValue_NonExistentElement : XmlRpcBaseType {
+            public ToNativeValue_NonExistentElement() : base(null) { }
+
+            public override XElement GetXml() {
+                throw new NotImplementedException();
+            }
+        }
+
+        [Fact]
+        public static void ToNativeValue_Returns_Null_If_NonExistent_Element() {
+            ToNativeValue_NonExistentElement element = new();
+            var result = XmlRpcTypes.ToNativeValue<object>(element);
+
+            Assert.Null(result);
+        }
+
+        public static IEnumerable<object[]> ToNativeValueData => new List<object[]> {
+            new object[]{ new XmlRpcInteger(3462), 3462 },
+            new object[]{ new XmlRpcDouble(345.2), 345.2 },
+            new object[]{ new XmlRpcBoolean(false), false },
+            new object[]{ new XmlRpcBoolean(true), true },
+            new object[]{ new XmlRpcString("Test String"), "Test String" },
+            new object[]{ new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")), Base64.FromBase64String("VGVzdCBTdHJpbmc=") },
+            new object[]{ new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00")), DateTime.Parse("2021-04-06T16:36:44.1557489+02:00") },
+            new object[]{ new XmlRpcArray(new XmlRpcBaseType[] { 
+                new XmlRpcInteger(1),
+                new XmlRpcInteger(2),
+                new XmlRpcString("3"),
+                new XmlRpcDouble(4),
+            }), new object[] { 1, 2, "3", (double)4 } },
+            new object[]{ new XmlRpcStruct(new Struct() {
+                { "Key1", new XmlRpcInteger(1) },
+                { "Key2", new XmlRpcInteger(2) },
+                { "Key3", new XmlRpcString("3") },
+                { "Key4", new XmlRpcDouble(4) }
+            }), new DynamicObject(){
+                { "Key1", 1 },
+                { "Key2", 2 },
+                { "Key3", "3" },
+                { "Key4", (double)4 }
+            }}
+        };
+
+        [Theory]
+        [MemberData(nameof(ToNativeValueData))]
+        public static void ToNativeValue_Returns_Correct_Type_For_Various_Basic_XmlRpcTypes(XmlRpcBaseType element, object expected) {
+            object result = XmlRpcTypes.ToNativeValue<object>(element);
+
+            Assert.Equal(expected, result);
         }
     }
 }
