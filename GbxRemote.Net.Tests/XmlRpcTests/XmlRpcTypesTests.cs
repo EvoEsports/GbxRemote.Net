@@ -39,6 +39,29 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                     new XmlRpcString("3"),
                     new XmlRpcDouble(4),
                 })},
+            new object[] { new XElement("struct",
+                new XElement("member",
+                        new XElement("name", "Key1"),
+                        new XElement("value", new XElement("i4", 1))
+                ),
+                new XElement("member",
+                        new XElement("name", "Key2"),
+                        new XElement("value", new XElement("int", 2))
+                ),
+                new XElement("member",
+                        new XElement("name", "Key3"),
+                        new XElement("value", new XElement("string", "3"))
+                ),
+                new XElement("member",
+                        new XElement("name", "Key4"),
+                        new XElement("value", new XElement("double", 4))
+                )
+                ), new XmlRpcStruct(new Struct() {
+                    { "Key1", new XmlRpcInteger(1) },
+                    { "Key2", new XmlRpcInteger(2) },
+                    { "Key3", new XmlRpcString("3") },
+                    { "Key4", new XmlRpcDouble(4) }
+                })}
         };
 
         [Theory]

@@ -59,7 +59,7 @@ namespace GbxRemoteNet.XmlRpc.Types {
         }
 
         public bool Equals(XmlRpcStruct other) {
-            return Fields.Equals(other.Fields);
+            return Fields.SequenceEqual(other.Fields);
         }
 
         public override bool Equals(object obj) {
