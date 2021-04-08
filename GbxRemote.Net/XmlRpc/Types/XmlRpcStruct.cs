@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
-    public class XmlRpcStruct : XmlRpcBaseType {
+    public class XmlRpcStruct : XmlRpcBaseType, IEquatable<XmlRpcStruct> {
         public Struct Fields;
 
         public XmlRpcStruct(Struct fields) : base(null) {
@@ -56,6 +56,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
             foreach (var kv in obj) {
                 Fields.Add(kv.Key, XmlRpcTypes.ToXmlRpcValue(obj));
             }
+        }
+
+        public bool Equals(XmlRpcStruct other) {
+            return Fields.Equals(other.Fields);
         }
 
         public override XElement GetXml() {

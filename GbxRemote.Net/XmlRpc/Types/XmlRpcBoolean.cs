@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
-    public class XmlRpcBoolean : XmlRpcBaseType {
+    public class XmlRpcBoolean : XmlRpcBaseType, IEquatable<XmlRpcBoolean> {
         public bool Value;
 
         public XmlRpcBoolean(bool value) : base(null) {
@@ -20,6 +20,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
                 Value = Convert.ToBoolean(Convert.ToInt32(value));
             else
                 Value = Convert.ToBoolean(value);
+        }
+
+        public bool Equals(XmlRpcBoolean other) {
+            return Value.Equals(other.Value);
         }
 
         public override XElement GetXml() {

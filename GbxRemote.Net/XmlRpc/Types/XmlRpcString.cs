@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
-    public class XmlRpcString : XmlRpcBaseType {
+    public class XmlRpcString : XmlRpcBaseType, IEquatable<XmlRpcString> {
         public string Value;
 
         public XmlRpcString(string value) : base(null) {
@@ -15,6 +15,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
 
         public XmlRpcString(XElement element) : base(element) {
             Value = element.Value;
+        }
+
+        public bool Equals(XmlRpcString other) {
+            return Value.Equals(other.Value);
         }
 
         public override XElement GetXml() {

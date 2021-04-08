@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
-    public class XmlRpcFault : XmlRpcBaseType {
+    public class XmlRpcFault : XmlRpcBaseType, IEquatable<XmlRpcFault> {
         public int FaultCode;
         public string FaultString;
 
@@ -23,6 +23,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
 
         public override XElement GetXml() {
             throw new NotImplementedException();
+        }
+
+        public bool Equals(XmlRpcFault other) {
+            return FaultCode.Equals(other.FaultCode) && FaultString.Equals(other.FaultString);
         }
     }
 }

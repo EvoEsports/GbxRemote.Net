@@ -54,7 +54,7 @@ namespace GbxRemoteNet.XmlRpc {
                     if (response.IsCallback) {
                         // invoke listeners and
                         // run callback handler in a new thread to avoid blocking of new responses
-                        Task.Run(() => OnCallback?.Invoke(new MethodCall(response)));
+                        _ = Task.Run(() => OnCallback?.Invoke(new MethodCall(response)));
                     } else if (responseHandles.ContainsKey(response.Header.Handle)) {
                         // attempt to signal the call method
                         responseMessages[response.Header.Handle] = response;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
-    public class XmlRpcBase64 : XmlRpcBaseType {
+    public class XmlRpcBase64 : XmlRpcBaseType, IEquatable<XmlRpcBase64> {
         public Base64 Value;
 
         public XmlRpcBase64(Base64 value) : base(null) {
@@ -16,6 +16,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
 
         public XmlRpcBase64(XElement element) : base(element) {
             Value =  Base64.FromBase64String(element.Value);
+        }
+
+        public bool Equals(XmlRpcBase64 other) {
+            return Value.Equals(other.Value);
         }
 
         public override XElement GetXml() {
