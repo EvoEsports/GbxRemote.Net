@@ -1,7 +1,7 @@
 ﻿using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
-using Microsoft.Extensions.Logging;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +10,10 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient : NadeoXmlRpcClient {
-        private readonly ILogger<GbxRemoteClient> logger;
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
         public const string ApiVersion = "2013-04-16";
 
-        public GbxRemoteClient(ILogger<GbxRemoteClient> logger, string host, int port) : base(logger, host, port) {
-            this.logger = logger;
+        public GbxRemoteClient(string host, int port) : base(host, port) {
             OnCallback += GbxRemoteClient_OnCallback;
             InvokeEventOnModeScriptMethodResponse = false;
         }
@@ -26,11 +25,11 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
-            logger.LogDebug("Calling remote with method {method}.", method);
+            logger.Info("Calling remote with method {method}", method);
             var msg = await CallAsync(method, MethodArgs(args));
 
             if (msg.IsFault)
-                logger.LogWarning("Remote call failed with reason: {message}", (XmlRpcFault)msg.ResponseData);
+                logger.Warn("Remote call failed with reason: {message}", (XmlRpcFault)msg.ResponseData);
                 throw new XmlRpcFaultException((XmlRpcFault)msg.ResponseData);
 
             return msg.ResponseData;
@@ -42,7 +41,7 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private XmlRpcBaseType[] MethodArgs(params object[] args) {
-            logger.LogDebug("Converting C# types to XML-RPC");
+            logger.Debug("Converting C# types to XML-RPC");
             XmlRpcBaseType[] xmlRpcArgs = new XmlRpcBaseType[args.Length];
             
             for (int i = 0; i < args.Length; i++)
@@ -58,17 +57,17 @@ namespace GbxRemoteNet {
         /// <param name="password"></param>
         /// <returns></returns>
         public async Task<bool> LoginAsync(string login, string password) {
-            logger.LogInformation("Client connecting to GbxRemote.");
+            logger.Info("Client connecting to GbxRemote");
             await ConnectAsync();
             await SetApiVersionAsync(ApiVersion);
 
             if (await AuthenticateAsync(login, password))
-                logger.LogInformation("Client connected to GbxRemote.");
+                logger.Info("Client connected to GbxRemote");
                 return true;
 
             // disconnect if login failed
             await DisconnectAsync();
-            logger.LogWarning("Client failed to connect to GbxRemote.");
+            logger.Warn("Client failed to connect to GbxRemote");
             return false;
         }
     }
