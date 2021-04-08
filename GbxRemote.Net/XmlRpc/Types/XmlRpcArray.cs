@@ -28,7 +28,15 @@ namespace GbxRemoteNet.XmlRpc.Types {
         }
 
         public bool Equals(XmlRpcArray other) {
-            return Values.Equals(other.Values);
+            return Values.SequenceEqual(other.Values);
+        }
+
+        public override bool Equals(object obj) {
+            return Equals((XmlRpcArray)obj);
+        }
+
+        public override int GetHashCode() {
+            return GetHashCode();
         }
 
         public override XElement GetXml() {

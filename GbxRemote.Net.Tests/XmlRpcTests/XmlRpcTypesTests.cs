@@ -27,7 +27,18 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             new object[]{ new XElement("boolean", "0"), new XmlRpcBoolean(false) },
             new object[]{ new XElement("double", "34534.1234"), new XmlRpcDouble(34534.1234) },
             new object[]{ new XElement("dateTime.iso8601", "2021-04-06T16:36:44.1557489+02:00"), new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00")) },
-            new object[]{ new XElement("base64", "VGVzdCBTdHJpbmc="), new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) }
+            new object[]{ new XElement("base64", "VGVzdCBTdHJpbmc="), new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) },
+            new object[]{ new XElement("array", new XElement("data",
+                    new XElement("value", new XElement("i4", 1)),
+                    new XElement("value", new XElement("int", 2)),
+                    new XElement("value", new XElement("string", "3")),
+                    new XElement("value", new XElement("double", 4))
+                )), new XmlRpcArray(new XmlRpcBaseType[]{ 
+                    new XmlRpcInteger(1),
+                    new XmlRpcInteger(2),
+                    new XmlRpcString("3"),
+                    new XmlRpcDouble(4),
+                })},
         };
 
         [Theory]

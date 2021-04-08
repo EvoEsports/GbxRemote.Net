@@ -28,5 +28,13 @@ namespace GbxRemoteNet.XmlRpc.Types {
         public bool Equals(XmlRpcFault other) {
             return FaultCode.Equals(other.FaultCode) && FaultString.Equals(other.FaultString);
         }
+
+        public override bool Equals(object obj) {
+            return Equals((XmlRpcFault)obj);
+        }
+
+        public override int GetHashCode() {
+            return GetHashCode();
+        }
     }
 }

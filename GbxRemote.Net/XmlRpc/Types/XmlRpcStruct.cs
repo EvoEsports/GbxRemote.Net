@@ -62,6 +62,14 @@ namespace GbxRemoteNet.XmlRpc.Types {
             return Fields.Equals(other.Fields);
         }
 
+        public override bool Equals(object obj) {
+            return Equals((XmlRpcStruct)obj);
+        }
+
+        public override int GetHashCode() {
+            return GetHashCode();
+        }
+
         public override XElement GetXml() {
             XElement structElement = new(XmlRpcElementNames.Struct);
 

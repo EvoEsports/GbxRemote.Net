@@ -21,6 +21,14 @@ namespace GbxRemoteNet.XmlRpc.Types {
             return Value.Equals(other.Value);
         }
 
+        public override bool Equals(object obj) {
+            return Equals((XmlRpcDateTime)obj);
+        }
+
+        public override int GetHashCode() {
+            return GetHashCode();
+        }
+
         public override XElement GetXml() {
             return new XElement(XmlRpcElementNames.DateTime, Value.ToString("o") /* ISO 8601 */);
         }
