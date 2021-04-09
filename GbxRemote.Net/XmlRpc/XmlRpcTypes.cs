@@ -82,7 +82,7 @@ namespace GbxRemoteNet.XmlRpc {
             } else if (t == typeof(XmlRpcString)) {
                 return ((XmlRpcString)xmlValue).Value;
             } else if (t == typeof(XmlRpcArray)) {
-                return ToNativeArray<T>((XmlRpcArray)xmlValue,instanceType);
+                return ToNativeArray<T>((XmlRpcArray)xmlValue, instanceType);
             } else if (t == typeof(XmlRpcStruct)) {
                 return ToNativeStruct<T>((XmlRpcStruct)xmlValue, instanceType);
             }

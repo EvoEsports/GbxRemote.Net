@@ -63,7 +63,6 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                     { "Key4", new XmlRpcDouble(4) }
                 })}
         };
-
         [Theory]
         [MemberData(nameof(ElementToInstanceData))]
         public void ElementToInstance_Converts_Types_Correctly(XElement element, object expected) {
@@ -121,7 +120,6 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                 { "Key4", (double)4 }
             }}
         };
-
         [Theory]
         [MemberData(nameof(ToNativeValueData))]
         public void ToNativeValue_Returns_Correct_Type_For_Various_Basic_XmlRpcTypes(XmlRpcBaseType element, object expected) {
@@ -163,8 +161,6 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                 public int Field3;
             }
         }
-
-
         [Fact]
         public void ToNativeStruct_Returns_Correct_Values_In_Custom_Struct() {
             XmlRpcStruct str = new XmlRpcStruct(new Struct() {
@@ -205,6 +201,98 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             Assert.Equal(1, result.Field9.Field1);
             Assert.Equal(2, result.Field9.Field2);
             Assert.Equal(3, result.Field9.Field3);
+        }
+
+        [Fact]
+        public void ToNativeArray_Returns_Integer_Array_With_Integer_XmlRpcArray_Array() {
+            XmlRpcArray arr = new(new XmlRpcBaseType[]{
+                new XmlRpcInteger(1),
+                new XmlRpcInteger(2),
+                new XmlRpcInteger(3)
+            });
+
+            int[] result = XmlRpcTypes.ToNativeArray<int>(arr);
+
+            Assert.Equal(new int[] { 1, 2, 3 }, result);
+        }
+
+        [Fact]
+        public void ToNative2DArray_Returns_Correct_2D_Integer_Array() {
+            XmlRpcArray arr = new(new XmlRpcBaseType[] {
+                new XmlRpcArray(new XmlRpcBaseType[]{
+                    new XmlRpcInteger(1),
+                    new XmlRpcInteger(2),
+                    new XmlRpcInteger(3)
+                }),
+                new XmlRpcArray(new XmlRpcBaseType[]{
+                    new XmlRpcInteger(4),
+                    new XmlRpcInteger(5),
+                    new XmlRpcInteger(6)
+                }),
+                new XmlRpcArray(new XmlRpcBaseType[]{
+                    new XmlRpcInteger(7),
+                    new XmlRpcInteger(8),
+                    new XmlRpcInteger(9)
+                })
+            });
+
+            int[][] result = XmlRpcTypes.ToNative2DArray<int>(arr);
+
+            Assert.Equal(new int[][] {
+                new int[]{ 1, 2, 3 },
+                new int[]{ 4, 5, 6 },
+                new int[]{ 7, 8, 9 }
+            }, result);
+        }
+
+        class ToXmlRpcValue_ExampleStruct {
+            public int Field1;
+            public int Field2;
+            public int Field3;
+        }
+        public static IEnumerable<object[]> ToXmlRpcValueData => new List<object[]> {
+            new object[]{ 34612, new XmlRpcInteger(34612) },
+            new object[]{ true, new XmlRpcBoolean(true) },
+            new object[]{ false, new XmlRpcBoolean(false) },
+            new object[]{ 734.267, new XmlRpcDouble(734.267) },
+            new object[]{ DateTime.Parse("2021-04-06T16:36:44.1557489+02:00"), new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00")) },
+            new object[]{ "Test String", new XmlRpcString("Test String") },
+            new object[]{ Base64.FromBase64String("VGVzdCBTdHJpbmc="), new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) },
+            new object[]{ new int[] { 1, 2, 3 }, new XmlRpcArray(new XmlRpcBaseType[] { 
+                new XmlRpcInteger(1),
+                new XmlRpcInteger(2),
+                new XmlRpcInteger(3)
+            }) },
+            new object[]{ new ToXmlRpcValue_ExampleStruct{
+                Field1=1,
+                Field2=2,
+                Field3=3
+            }, new XmlRpcStruct(new Struct(){
+                { "Field1", new XmlRpcInteger(1) },
+                { "Field2", new XmlRpcInteger(2) },
+                { "Field3", new XmlRpcInteger(3) }
+            }) }
+        };
+        [Theory]
+        [MemberData(nameof(ToXmlRpcValueData))]
+        public void ToXmlRpcValue_Returns_Correct_XmlRpc_Instance_From_Various_Native_Values(object value, object expected) {
+            XmlRpcBaseType xmlRpcValue = XmlRpcTypes.ToXmlRpcValue(value);
+
+            Assert.Equal(expected, xmlRpcValue);
+        }
+
+        [Fact]
+        public void ToXmlRpcArray_Returns_XmlRpcArray_of_Integers_From_Int_Array() {
+            int[] arr = new int[] { 1, 2, 3 };
+
+            XmlRpcArray result = XmlRpcTypes.ToXmlRpcArray(arr);
+            XmlRpcArray expected = new XmlRpcArray(new XmlRpcBaseType[] {
+                new XmlRpcInteger(1),
+                new XmlRpcInteger(2),
+                new XmlRpcInteger(3)
+            });
+
+            Assert.Equal(expected, result);
         }
     }
 }
