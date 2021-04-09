@@ -107,7 +107,7 @@ string[] GetChatLinesAsync()
 ---
 #### Player List
 Returns all players currently connected to the server.
-```
+```csharp
 PlayerInfoStruct[] GetPlayerListAsync(int maxInfos=-1, int startIndex=0, int? serverType = -1)
 ```
 The paramters are optional:

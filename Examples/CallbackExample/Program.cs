@@ -20,10 +20,6 @@ namespace CallbackExample {
 
             Console.WriteLine("Connected and authenticated!");
 
-            client.OnAnyCallback += (MethodCall call, object[] pars) => { 
-
-            };
-
             // register callback events
             client.OnPlayerConnect += Client_OnPlayerConnect;
             client.OnPlayerDisconnect += Client_OnPlayerDisconnect;
@@ -41,10 +37,6 @@ namespace CallbackExample {
 
             // wait indefinitely
             await Task.Delay(-1);
-        }
-
-        private static Task Client_OnAnyCallback1(MethodCall call, object[] pars) {
-            throw new NotImplementedException();
         }
 
         private static Task Client_OnPlayerInfoChanged(GbxRemoteNet.Structs.SPlayerInfo playerInfo) {
