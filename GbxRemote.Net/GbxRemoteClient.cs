@@ -25,12 +25,14 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
-            logger.Info("Calling remote with method {method}", method);
+            logger.Debug("Calling remote with method {method}", method);
+
             var msg = await CallAsync(method, MethodArgs(args));
 
-            if (msg.IsFault)
-                logger.Warn("Remote call failed with reason: {message}", (XmlRpcFault)msg.ResponseData);
+            if (msg.IsFault) {
+                logger.Error("Remote call failed with reason: {message}", (XmlRpcFault)msg.ResponseData);
                 throw new XmlRpcFaultException((XmlRpcFault)msg.ResponseData);
+            }
 
             return msg.ResponseData;
         }
@@ -57,17 +59,18 @@ namespace GbxRemoteNet {
         /// <param name="password"></param>
         /// <returns></returns>
         public async Task<bool> LoginAsync(string login, string password) {
-            logger.Info("Client connecting to GbxRemote");
+            logger.Debug("Client connecting to GbxRemote");
             await ConnectAsync();
             await SetApiVersionAsync(ApiVersion);
 
-            if (await AuthenticateAsync(login, password))
-                logger.Info("Client connected to GbxRemote");
+            if (await AuthenticateAsync(login, password)) {
+                logger.Debug("Client connected to GbxRemote");
                 return true;
+            }
 
             // disconnect if login failed
             await DisconnectAsync();
-            logger.Warn("Client failed to connect to GbxRemote");
+            logger.Error("Client failed to connect to GbxRemote");
             return false;
         }
     }
