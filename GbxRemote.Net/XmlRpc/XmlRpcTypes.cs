@@ -99,7 +99,7 @@ namespace GbxRemoteNet.XmlRpc {
         public static object ToNativeStruct<T>(XmlRpcStruct xmlStruct) {
             Type t = typeof(T);
 
-            if (t == typeof(DynamicObject) || t == typeof(object)) {
+            if (t == typeof(DynamicObject)) {
                 DynamicObject obj = new();
 
                 foreach (var kv in xmlStruct.Fields)
@@ -112,8 +112,19 @@ namespace GbxRemoteNet.XmlRpc {
             var fields = t.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
             foreach (var field in fields) {
-                if (xmlStruct.Fields.ContainsKey(field.Name))
-                    field.SetValue(nativeStruct, ToNativeValue<object>(xmlStruct.Fields[field.Name]));
+                if (xmlStruct.Fields.ContainsKey(field.Name)) {
+                    object objValue = ToNativeValue<object>(xmlStruct.Fields[field.Name]);
+                    Type objType = objValue.GetType();
+
+                    if (objType.IsArray) {
+                        int length = (int)objType.GetProperty("Length").GetValue(objValue);
+                        Array fieldInstance = Array.CreateInstance(field.FieldType.GetElementType(), length);
+                        Array.Copy((Array)objValue, fieldInstance, length);
+                        field.SetValue(nativeStruct, fieldInstance);
+                    } else {
+                        field.SetValue(nativeStruct, objValue);
+                    }
+                }
             }
 
             return nativeStruct;

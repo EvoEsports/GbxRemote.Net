@@ -1,5 +1,8 @@
 ﻿using GbxRemoteNet;
 using GbxRemoteNet.Structs;
+using GbxRemoteNet.XmlRpc;
+using GbxRemoteNet.XmlRpc.ExtraTypes;
+using GbxRemoteNet.XmlRpc.Types;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
@@ -42,8 +45,48 @@ namespace ModeScriptExample {
             }
         }
 
+        public class ExampleStruct {
+            public int Field1;
+            public double Field2;
+            public string Field3;
+            public bool Field4;
+            public bool Field5;
+            public Base64 Field6;
+            public DateTime Field7;
+            public int[] Field8;
+            public ExampleSubStruct Field9;
+
+            public class ExampleSubStruct {
+                public int Field1;
+                public int Field2;
+                public int Field3;
+            }
+        }
+
         static void Main(string[] args) {
-            MainAsync(args).GetAwaiter().GetResult();
+            // MainAsync(args).GetAwaiter().GetResult();
+
+            XmlRpcStruct str = new XmlRpcStruct(new Struct() {
+                { "Field1", new XmlRpcInteger(3425) },
+                { "Field2", new XmlRpcDouble(325.235) },
+                { "Field3", new XmlRpcString("Test String") },
+                { "Field4", new XmlRpcBoolean(true) },
+                { "Field5", new XmlRpcBoolean(false) },
+                { "Field6", new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) },
+                { "Field7", new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00")) },
+                { "Field8", new XmlRpcArray(new XmlRpcBaseType[]{
+                    new XmlRpcInteger(1),
+                    new XmlRpcInteger(2),
+                    new XmlRpcInteger(3)
+                }) },
+                { "Field9", new XmlRpcStruct(new Struct(){
+                    { "Field1", new XmlRpcInteger(1) },
+                    { "Field2", new XmlRpcInteger(2) },
+                    { "Field3", new XmlRpcInteger(3) }
+                }) },
+            });
+
+            ExampleStruct result = (ExampleStruct)XmlRpcTypes.ToNativeStruct<ExampleStruct>(str);
         }
     }
 }

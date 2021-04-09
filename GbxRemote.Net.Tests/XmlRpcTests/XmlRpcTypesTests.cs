@@ -73,7 +73,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
         }
 
         [Fact]
-        public static void ToNativeValue_Returns_Null_If_Null() {
+        public void ToNativeValue_Returns_Null_If_Null() {
             var result = XmlRpcTypes.ToNativeValue<object>(null);
 
             Assert.Null(result);
@@ -88,7 +88,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
         }
 
         [Fact]
-        public static void ToNativeValue_Returns_Null_If_NonExistent_Element() {
+        public void ToNativeValue_Returns_Null_If_NonExistent_Element() {
             ToNativeValue_NonExistentElement element = new();
             var result = XmlRpcTypes.ToNativeValue<object>(element);
 
@@ -103,7 +103,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             new object[]{ new XmlRpcString("Test String"), "Test String" },
             new object[]{ new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")), Base64.FromBase64String("VGVzdCBTdHJpbmc=") },
             new object[]{ new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00")), DateTime.Parse("2021-04-06T16:36:44.1557489+02:00") },
-            new object[]{ new XmlRpcArray(new XmlRpcBaseType[] { 
+            new object[]{ new XmlRpcArray(new XmlRpcBaseType[] {
                 new XmlRpcInteger(1),
                 new XmlRpcInteger(2),
                 new XmlRpcString("3"),
@@ -122,12 +122,88 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             }}
         };
 
-        [Theory]
         [MemberData(nameof(ToNativeValueData))]
-        public static void ToNativeValue_Returns_Correct_Type_For_Various_Basic_XmlRpcTypes(XmlRpcBaseType element, object expected) {
+        public void ToNativeValue_Returns_Correct_Type_For_Various_Basic_XmlRpcTypes(XmlRpcBaseType element, object expected) {
             object result = XmlRpcTypes.ToNativeValue<object>(element);
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact(Skip = "Removed the check from the code.")]
+        public void ToNativeStruct_Returns_DynamicObject_If_Object_Type() {
+            XmlRpcStruct str = new(new Struct());
+            object result = XmlRpcTypes.ToNativeStruct<object>(str);
+
+            Assert.IsType<DynamicObject>(result);
+        }
+
+        [Fact]
+        public void ToNativeStruct_Returns_DynamicObject_If_DynamicObject_Type() {
+            XmlRpcStruct str = new(new Struct());
+            object result = XmlRpcTypes.ToNativeStruct<DynamicObject>(str);
+
+            Assert.IsType<DynamicObject>(result);
+        }
+
+        public class ExampleStruct {
+            public int Field1;
+            public double Field2;
+            public string Field3;
+            public bool Field4;
+            public bool Field5;
+            public Base64 Field6;
+            public DateTime Field7;
+            public int[] Field8;
+            public ExampleSubStruct Field9;
+
+            public class ExampleSubStruct {
+                public int Field1;
+                public int Field2;
+                public int Field3;
+            }
+        }
+
+
+        [Fact]
+        public void ToNativeStruct_Returns_Correct_Values_In_Custom_Struct() {
+            XmlRpcStruct str = new XmlRpcStruct(new Struct() {
+                { "Field1", new XmlRpcInteger(3425) },
+                { "Field2", new XmlRpcDouble(325.235) },
+                { "Field3", new XmlRpcString("Test String") },
+                { "Field4", new XmlRpcBoolean(true) },
+                { "Field5", new XmlRpcBoolean(false) },
+                { "Field6", new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) },
+                { "Field7", new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00")) },
+                { "Field8", new XmlRpcArray(new XmlRpcBaseType[]{ 
+                    new XmlRpcInteger(1),
+                    new XmlRpcInteger(2),
+                    new XmlRpcInteger(3)
+                }) },
+                { "Field9", new XmlRpcStruct(new Struct(){
+                    { "Field1", new XmlRpcInteger(1) },
+                    { "Field2", new XmlRpcInteger(2) },
+                    { "Field3", new XmlRpcInteger(3) }
+                }) },
+            });
+
+            ExampleStruct result = (ExampleStruct)XmlRpcTypes.ToNativeStruct<ExampleStruct>(str);
+
+            Base64 field6Expected = Base64.FromBase64String("VGVzdCBTdHJpbmc=");
+            DateTime field7Expected = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00");
+
+            Assert.NotNull(result);
+            Assert.Equal(3425, result.Field1);
+            Assert.Equal(325.235, result.Field2);
+            Assert.Equal("Test String", result.Field3);
+            Assert.True(result.Field4);
+            Assert.False(result.Field5);
+            Assert.Equal(field6Expected, result.Field6);
+            Assert.Equal(field7Expected, result.Field7);
+            Assert.Equal(new int[] { 1, 2, 3 }, result.Field8);
+            Assert.NotNull(result.Field9);
+            Assert.Equal(1, result.Field9.Field1);
+            Assert.Equal(2, result.Field9.Field2);
+            Assert.Equal(3, result.Field9.Field3);
         }
     }
 }
