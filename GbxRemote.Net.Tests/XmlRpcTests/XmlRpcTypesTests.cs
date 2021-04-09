@@ -122,6 +122,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             }}
         };
 
+        [Theory]
         [MemberData(nameof(ToNativeValueData))]
         public void ToNativeValue_Returns_Correct_Type_For_Various_Basic_XmlRpcTypes(XmlRpcBaseType element, object expected) {
             object result = XmlRpcTypes.ToNativeValue<object>(element);
@@ -129,7 +130,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             Assert.Equal(expected, result);
         }
 
-        [Fact(Skip = "Removed the check from the code.")]
+        [Fact]
         public void ToNativeStruct_Returns_DynamicObject_If_Object_Type() {
             XmlRpcStruct str = new(new Struct());
             object result = XmlRpcTypes.ToNativeStruct<object>(str);

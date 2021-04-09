@@ -60,6 +60,14 @@ namespace ModeScriptExample {
                 public int Field1;
                 public int Field2;
                 public int Field3;
+                public ExampleSubSubStruct Field4;
+                public string[] Field5;
+
+                public class ExampleSubSubStruct {
+                    public string Field1;
+                    public string Field2;
+                    public string Field3;
+                }
             }
         }
 
@@ -82,11 +90,22 @@ namespace ModeScriptExample {
                 { "Field9", new XmlRpcStruct(new Struct(){
                     { "Field1", new XmlRpcInteger(1) },
                     { "Field2", new XmlRpcInteger(2) },
-                    { "Field3", new XmlRpcInteger(3) }
+                    { "Field3", new XmlRpcInteger(3) },
+                    { "Field4", new XmlRpcStruct(new Struct(){
+                        { "Field1", new XmlRpcString("Test String 1") },
+                        { "Field2", new XmlRpcString("Test String 2") },
+                        { "Field3", new XmlRpcString("Test String 3") }
+                    }) },
+                    { "Field5", new XmlRpcArray(new XmlRpcBaseType[]{
+                        new XmlRpcString("Test Array String 1"),
+                        new XmlRpcString("Test Array String 2"),
+                        new XmlRpcString("Test Array String 3")
+                    }) }
                 }) },
             });
 
             ExampleStruct result = (ExampleStruct)XmlRpcTypes.ToNativeStruct<ExampleStruct>(str);
+            Console.WriteLine();
         }
     }
 }

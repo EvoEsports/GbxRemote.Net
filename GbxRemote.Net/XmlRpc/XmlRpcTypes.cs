@@ -63,7 +63,7 @@ namespace GbxRemoteNet.XmlRpc {
         /// <typeparam name="T">Array or struct type to cast to.</typeparam>
         /// <param name="xmlValue"></param>
         /// <returns>Null if value isnt found.</returns>
-        public static object ToNativeValue<T>(XmlRpcBaseType xmlValue) {
+        public static object ToNativeValue<T>(XmlRpcBaseType xmlValue, Type instanceType = null) {
             if (xmlValue == null)
                 return null;
 
@@ -82,9 +82,9 @@ namespace GbxRemoteNet.XmlRpc {
             } else if (t == typeof(XmlRpcString)) {
                 return ((XmlRpcString)xmlValue).Value;
             } else if (t == typeof(XmlRpcArray)) {
-                return ToNativeArray<T>((XmlRpcArray)xmlValue);
+                return ToNativeArray<T>((XmlRpcArray)xmlValue,instanceType);
             } else if (t == typeof(XmlRpcStruct)) {
-                return ToNativeStruct<T>((XmlRpcStruct)xmlValue);
+                return ToNativeStruct<T>((XmlRpcStruct)xmlValue, instanceType);
             }
 
             return null;
@@ -96,10 +96,14 @@ namespace GbxRemoteNet.XmlRpc {
         /// <typeparam name="T"></typeparam>
         /// <param name="xmlStruct"></param>
         /// <returns></returns>
-        public static object ToNativeStruct<T>(XmlRpcStruct xmlStruct) {
-            Type t = typeof(T);
+        public static object ToNativeStruct<T>(XmlRpcStruct xmlStruct, Type instanceType = null) {
+            // use correct type
+            Type t = instanceType;
+            if (instanceType == null)
+                t = typeof(T);
 
-            if (t == typeof(DynamicObject)) {
+            if (t == typeof(DynamicObject) || t == typeof(object)) {
+                // just copy the value if we have a dynamic object
                 DynamicObject obj = new();
 
                 foreach (var kv in xmlStruct.Fields)
@@ -108,15 +112,18 @@ namespace GbxRemoteNet.XmlRpc {
                 return obj;
             }
 
-            T nativeStruct = (T)Activator.CreateInstance(t);
+            object nativeStruct = Activator.CreateInstance(t);
+
             var fields = t.GetFields(BindingFlags.Public | BindingFlags.Instance);
 
+            // copy all the available fields to the instance
             foreach (var field in fields) {
                 if (xmlStruct.Fields.ContainsKey(field.Name)) {
-                    object objValue = ToNativeValue<object>(xmlStruct.Fields[field.Name]);
+                    object objValue = ToNativeValue<object>(xmlStruct.Fields[field.Name], field.FieldType);
                     Type objType = objValue.GetType();
 
                     if (objType.IsArray) {
+                        // array requires special conversion to work
                         int length = (int)objType.GetProperty("Length").GetValue(objValue);
                         Array fieldInstance = Array.CreateInstance(field.FieldType.GetElementType(), length);
                         Array.Copy((Array)objValue, fieldInstance, length);
@@ -136,8 +143,8 @@ namespace GbxRemoteNet.XmlRpc {
         /// <typeparam name="T"></typeparam>
         /// <param name="arr"></param>
         /// <returns></returns>
-        public static T[] ToNativeArray<T>(XmlRpcArray arr) {
-            return arr.Values.Select((v, i) => (T)ToNativeValue<T>(v)).ToArray();
+        public static T[] ToNativeArray<T>(XmlRpcArray arr, Type instanceType = null) {
+            return arr.Values.Select((v, i) => (T)ToNativeValue<T>(v, instanceType)).ToArray();
         }
 
         /// <summary>
