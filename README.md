@@ -1,8 +1,8 @@
 ![GbxRemote.NET](logo.png)
 <div align="center">
     
-![Nuget](https://img.shields.io/nuget/v/GbxRemote.NET?style=flat-square)
-![GitHub](https://img.shields.io/github/license/EvoTM/GbxRemote.NET?style=flat-square)
+[![Nuget](https://img.shields.io/nuget/v/GbxRemote.NET?style=flat-square)](https://www.nuget.org/packages/GbxRemote.Net)
+[![GitHub](https://img.shields.io/github/license/EvoTM/GbxRemote.NET?style=flat-square)](./LICENSE)
 ![Lines of code](https://img.shields.io/tokei/lines/github/EvoTM/GbxRemote.NET?style=flat-square)
 [![Discord](https://img.shields.io/discord/384138149686935562?label=Discord&style=flat-square)](https://discord.gg/4PKKesS)
     
