@@ -234,14 +234,14 @@ await client.EnableCallbackTypeAsync();
 The method can also enable different types of callbacks if you chose so by providing an argument.
 
 ## ModeScript Functions
-ModeScript is a feature in GBXRemote to interact with the functionality of game modes and maniascript on the server. These functions have special callbacks and is called through the `TriggerModeScript*` methods. Due to way it is set up, you must call a ModeScript method through and wait for the response in a callback. GbxRemote.NET tries to simplify this a bit by providing a method that can call a ModeScript method and wait for a response all in one:
+ModeScript is a feature in GBXRemote to interact with the functionality of game modes and maniascript on the server. These functions have special callbacks and is called through the `TriggerModeScript*` methods. Due to way it is set up, you must call a ModeScript method through one of these methods and wait for the response in a callback. GbxRemote.NET tries to simplify this a bit by providing a method that can call a ModeScript method and wait for a response all in one:
 ```csharp
 Task<JObject> GetModeScriptResponseAsync(string method, params string[] args)
 ```
-ModeScript returns responses in JSON, so you will get a `JObject` from [Json.NET](https://www.newtonsoft.com/json) back which holds the response.
+ModeScript returns responses in JSON, so you will get a `JObject` back from [Json.NET](https://www.newtonsoft.com/json) which holds the response.
 So for example, let's say you want to get a list of callbacks and print them:
 ```csharp
-JObject callbacks = await client.GetModeScriptResponseAsync("XmlRpc.GetCallbacksList")
+JObject ret = await client.GetModeScriptResponseAsync("XmlRpc.GetCallbacksList")
 
 foreach (string callback in ret["callbacks"].Values<string>())
                 Console.WriteLine($"- {callback}");
@@ -256,6 +256,6 @@ You can listen to any ModeScript callbacks by creating a listener for the `OnMod
 Library reference and full documentation is currently being worked on and will be released soon. In the meantime, all methods are documented in the code.
 
 # Contributing
-If you have any questions, issues, bugs or suggestions, don't hesitate create open an [Issue](https://github.com/EvoTM/GbxRemote.Net/issues)! You can also join our [Discord](https://discord.gg/4PKKesS) for questions.
+If you have any questions, issues, bugs or suggestions, don't hesitate create open an [Issue](https://github.com/EvoTM/GbxRemote.Net/issues/new)! You can also join our [Discord](https://discord.gg/4PKKesS) for questions.
 
 You may also help with development by creating a pull request, _but please create a new branch first_.
