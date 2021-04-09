@@ -3,7 +3,6 @@ using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.ExtraTypes;
 using GbxRemoteNet.XmlRpc.Packets;
-using GbxRemoteNet.XmlRpc.Types;
 using System;
 using System.Buffers.Text;
 using System.Collections;
