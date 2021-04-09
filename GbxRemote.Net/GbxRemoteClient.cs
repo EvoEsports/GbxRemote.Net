@@ -9,11 +9,23 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
+    /// <summary>
+    /// GBXRemote client for connecting to and managing TrackMania servers through XML-RPC.
+    /// </summary>
     public partial class GbxRemoteClient : NadeoXmlRpcClient {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
+        /// This is the API version the client will be using.
+        /// </summary>
         public const string ApiVersion = "2013-04-16";
 
-        public GbxRemoteClient(string host, int port) : base(host, port) {
+        /// <summary>
+        /// Create a new instance of the GBXRemote client.
+        /// </summary>
+        /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
+        /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
+        public GbxRemoteClient(string host="127.0.0.1", int port=5000) : base(host, port) {
             OnCallback += GbxRemoteClient_OnCallback;
             InvokeEventOnModeScriptMethodResponse = false;
         }

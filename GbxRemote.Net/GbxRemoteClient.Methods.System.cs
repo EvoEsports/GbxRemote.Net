@@ -40,6 +40,6 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("system.methodHelp", method)
             );
 
-        // todo: multicall
+        // TODO: multicall
     }
 }

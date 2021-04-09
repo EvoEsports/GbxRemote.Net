@@ -30,11 +30,25 @@ namespace GbxRemoteNet.XmlRpc {
         Task taskRecvLoop;
         CancellationTokenSource recvCancel;
 
-        // events
+        /// <summary>
+        /// Generic action for events.
+        /// </summary>
+        /// <returns></returns>
         public delegate Task TaskAction();
+        /// <summary>
+        /// Action for the OnCallback event.
+        /// </summary>
+        /// <param name="call">Information about the call.</param>
+        /// <returns></returns>
         public delegate Task CallbackAction(MethodCall call);
 
+        /// <summary>
+        /// Invoked when the client is connected to the XML-RPC server.
+        /// </summary>
         public event TaskAction OnConnected;
+        /// <summary>
+        /// Called when a callback occured from the XML-RPC server.
+        /// </summary>
         public event CallbackAction OnCallback;
 
         public NadeoXmlRpcClient(string host, int port) {
@@ -42,6 +56,9 @@ namespace GbxRemoteNet.XmlRpc {
             connectPort = port;
         }
 
+        /// <summary>
+        /// Handles all responses from the XML-RPC server.
+        /// </summary>
         private async void RecvLoop() {
             try {
                 logger.Debug("Recieve loop initiated.");
@@ -114,7 +131,7 @@ namespace GbxRemoteNet.XmlRpc {
         /// <summary>
         /// Get the next handler value.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The next handle value.</returns>
         public async Task<uint> GetNextHandle() {
             // lock because we may access this in multiple threads
             lock (handlerLock) {
@@ -129,7 +146,7 @@ namespace GbxRemoteNet.XmlRpc {
         /// </summary>
         /// <param name="method">Method name</param>
         /// <param name="args">Arguments to the method if available.</param>
-        /// <returns></returns>
+        /// <returns>Response returned by the call.</returns>
         public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args) {
             uint handle = await GetNextHandle();
             MethodCall call = new(method, handle, args);

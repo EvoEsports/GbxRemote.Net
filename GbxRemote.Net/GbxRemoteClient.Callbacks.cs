@@ -12,13 +12,63 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient {
+        /// <summary>
+        /// Action for the OnAnyCallback event.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="call">Information about the callback.</param>
+        /// <param name="pars">Parameters of the callback.</param>
+        /// <returns></returns>
         public delegate Task CallbackAction<T>(MethodCall call, T[] pars);
+        /// <summary>
+        /// Action for the OnPlayerConnect event.
+        /// </summary>
+        /// <param name="login">Player's login/user name.</param>
+        /// <param name="isSpectator">Whether the player is in spectator mode.</param>
+        /// <returns></returns>
         public delegate Task PlayerConnectAction(string login, bool isSpectator);
+        /// <summary>
+        /// Action for the OnPlayerDisconnect event.
+        /// </summary>
+        /// <param name="login">Player's login/user name.</param>
+        /// <param name="reason">The reason the player disconnected.</param>
+        /// <returns></returns>
         public delegate Task PlayerDisconnectAction(string login, string reason);
+        /// <summary>
+        /// Action for the OnPlayerChat event.
+        /// </summary>
+        /// <param name="playerUid">The ID of the player on the server.</param>
+        /// <param name="login">Login/user name of the player.</param>
+        /// <param name="text">The message the player sent to the chat.</param>
+        /// <param name="isRegisteredCmd">Whether the message is a command.</param>
+        /// <returns></returns>
         public delegate Task PlayerChatAction(int playerUid, string login, string text, bool isRegisteredCmd);
+        /// <summary>
+        /// Action for the OnEcho event.
+        /// </summary>
+        /// <param name="internalParam">The internal parameter, or simply "parameter 1".</param>
+        /// <param name="publicParam">The public parameter, or simply "parameter 2".</param>
+        /// <returns></returns>
         public delegate Task EchoAction(string internalParam, string publicParam);
+        /// <summary>
+        /// Action for the OnEndMatch event.
+        /// </summary>
+        /// <param name="rankings">Array containing the ranking results of the match.</param>
+        /// <param name="winnerTeam">The ID of the team that won the match if the Teams gamemode is played.</param>
+        /// <returns></returns>
         public delegate Task EndMatchAction(SPlayerRanking[] rankings, int winnerTeam);
+        /// <summary>
+        /// Action for the OnBeginMap and OnEndMap events.
+        /// </summary>
+        /// <param name="map">Information about the map that will be/was played.</param>
+        /// <returns></returns>
         public delegate Task BeginEndMapAction(SMapInfo map);
+        /// <summary>
+        /// Action for the OnStatusChanged event.
+        /// </summary>
+        /// <param name="statusCode">Code/ID of the status.</param>
+        /// <param name="statusName">A friendly string that represents the status.</param>
+        /// <returns></returns>
         public delegate Task StatusChangedAction(int statusCode, string statusName);
         public delegate Task PlayerInfoChangedAction(SPlayerInfo playerInfo);
 
@@ -31,7 +81,7 @@ namespace GbxRemoteNet {
         /// </summary>
         public event PlayerConnectAction OnPlayerConnect;
         /// <summary>
-        /// When a player disconnects from the server
+        /// When a player disconnects from the server.
         /// </summary>
         public event PlayerDisconnectAction OnPlayerDisconnect;
         /// <summary>
@@ -39,7 +89,7 @@ namespace GbxRemoteNet {
         /// </summary>
         public event PlayerChatAction OnPlayerChat;
         /// <summary>
-        /// When a echo message is sent. Can be used for communication with other
+        /// When a echo message is sent. Can be used for communication with other.
         /// XMLRPC-clients.
         /// </summary>
         public event EchoAction OnEcho;
@@ -87,7 +137,7 @@ namespace GbxRemoteNet {
         /// <summary>
         /// Main callback handler.
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="call"></param>
         /// <returns></returns>
         private async Task GbxRemoteClient_OnCallback(MethodCall call) {
             switch (call.Method) {
@@ -167,6 +217,7 @@ namespace GbxRemoteNet {
                     break;
             }
 
+            // always invoke the OnAnyCallback event
             OnAnyCallback?.Invoke(call, (object[])XmlRpcTypes.ToNativeValue<object>(
                 new XmlRpcArray(call.Arguments)
             ));

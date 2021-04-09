@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
+    /// <summary>
+    /// Method Category: Maps
+    /// </summary>
     public partial class GbxRemoteClient {
         /// <summary>
         /// Returns the current map index in the selection, or -1 if the map is no longer in the selection.
@@ -71,8 +74,8 @@ namespace GbxRemoteNet {
         /// (NbLaps and NbCheckpoints are also present but always set to -1)
         /// </summary>
         /// <returns></returns>
-        public async Task<MapStruct> GetCurrentMapInfoAsync() =>
-            (MapStruct)XmlRpcTypes.ToNativeValue<MapStruct>(
+        public async Task<MapInfo> GetCurrentMapInfoAsync() =>
+            (MapInfo)XmlRpcTypes.ToNativeValue<MapInfo>(
                 await CallOrFaultAsync("GetCurrentMapInfo")
             );
 
@@ -81,8 +84,8 @@ namespace GbxRemoteNet {
         /// (NbLaps and NbCheckpoints are also present but always set to -1)
         /// </summary>
         /// <returns></returns>
-        public async Task<MapStruct> GetNextMapInfoAsync() =>
-            (MapStruct)XmlRpcTypes.ToNativeValue<MapStruct>(
+        public async Task<MapInfo> GetNextMapInfoAsync() =>
+            (MapInfo)XmlRpcTypes.ToNativeValue<MapInfo>(
                 await CallOrFaultAsync("GetNextMapInfo")
             );
 
@@ -92,8 +95,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public async Task<MapStruct> GetMapInfoAsync(string filename) =>
-            (MapStruct)XmlRpcTypes.ToNativeValue<MapStruct>(
+        public async Task<MapInfo> GetMapInfoAsync(string filename) =>
+            (MapInfo)XmlRpcTypes.ToNativeValue<MapInfo>(
                 await CallOrFaultAsync("GetMapInfo", filename)
             );
 
@@ -114,8 +117,8 @@ namespace GbxRemoteNet {
         /// <param name="maxInfos"></param>
         /// <param name="startIndex"></param>
         /// <returns></returns>
-        public async Task<MapStruct[]> GetMapListAsync(int maxInfos, int startIndex) =>
-            (MapStruct[])XmlRpcTypes.ToNativeValue<MapStruct>(
+        public async Task<MapInfo[]> GetMapListAsync(int maxInfos, int startIndex) =>
+            (MapInfo[])XmlRpcTypes.ToNativeValue<MapInfo>(
                 await CallOrFaultAsync("GetMapList", maxInfos, startIndex)
             );
 

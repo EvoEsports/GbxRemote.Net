@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
+    /// <summary>
+    /// Represents an XML-RPC string.
+    /// </summary>
     public class XmlRpcString : XmlRpcBaseType, IEquatable<XmlRpcString> {
         public string Value;
 
@@ -29,6 +32,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
             return GetHashCode();
         }
 
+        /// <summary>
+        /// Generate the XML element for this value.
+        /// </summary>
+        /// <returns>Generated element</returns>
         public override XElement GetXml() {
             return new XElement(XmlRpcElementNames.String, Value);
         }

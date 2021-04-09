@@ -26,6 +26,12 @@ namespace GbxRemoteNet {
         ConcurrentDictionary<string, JObject> msResponses = new ConcurrentDictionary<string, JObject>();
         ConcurrentDictionary<string, ManualResetEvent> msSignals= new ConcurrentDictionary<string, ManualResetEvent>();
 
+        /// <summary>
+        /// Action for the OnModeScriptCallback event-
+        /// </summary>
+        /// <param name="method">Name of the method that was called.</param>
+        /// <param name="data">Parsed JSON data that came with the callback.</param>
+        /// <returns></returns>
         public delegate Task ModeScriptCallbackAction(string method, JObject data);
         /// <summary>
         /// Triggered when any ModeScript callback is sent from the server.
@@ -61,6 +67,12 @@ namespace GbxRemoteNet {
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Call a ModeScript method and wait for the response.
+        /// </summary>
+        /// <param name="method">Name of the method.</param>
+        /// <param name="args">Parameters to be passed with the method call.</param>
+        /// <returns>Parsed JSON result from the method call.</returns>
         public async Task<JObject> GetModeScriptResponseAsync(string method, params string[] args) {
             string responseId = Guid.NewGuid().ToString();
             List<string> passArgs = new(args);

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
+    /// <summary>
+    /// Represents an XML-RPC struct.
+    /// </summary>
     public class XmlRpcStruct : XmlRpcBaseType, IEquatable<XmlRpcStruct> {
         public Struct Fields;
 
@@ -70,6 +73,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
             return GetHashCode();
         }
 
+        /// <summary>
+        /// Generate the XML element for this value.
+        /// </summary>
+        /// <returns>Generated element</returns>
         public override XElement GetXml() {
             XElement structElement = new(XmlRpcElementNames.Struct);
 

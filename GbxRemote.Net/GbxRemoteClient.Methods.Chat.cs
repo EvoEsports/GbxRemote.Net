@@ -27,7 +27,7 @@ namespace GbxRemoteNet {
         /// <param name="lang"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task<bool> ChatSendServerMessageToLanguageAsync(LanguageStruct[] lang, string message) =>
+        public async Task<bool> ChatSendServerMessageToLanguageAsync(Language[] lang, string message) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ChatSendServerMessage", lang, message)
             );
@@ -70,7 +70,7 @@ namespace GbxRemoteNet {
         /// <param name="lang"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task<bool> ChatSendToLanguageAsync(LanguageStruct[] lang, string message) =>
+        public async Task<bool> ChatSendToLanguageAsync(Language[] lang, string message) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ChatSendToLanguage", lang, message)
             );
@@ -143,8 +143,8 @@ namespace GbxRemoteNet {
         /// Get the current and next chat time. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentNextValueStruct<int>> GetChatTimeAsync() =>
-            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+        public async Task<CurrentNextValue<int>> GetChatTimeAsync() =>
+            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetChatTime")
             );
     }

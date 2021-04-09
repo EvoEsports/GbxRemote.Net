@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
+    /// <summary>
+    /// Represents an XML-RPC fault.
+    /// </summary>
     public class XmlRpcFault : XmlRpcBaseType, IEquatable<XmlRpcFault> {
         public int FaultCode;
         public string FaultString;
@@ -21,6 +24,10 @@ namespace GbxRemoteNet.XmlRpc.Types {
             FaultString = ((XmlRpcString)faultStruct.Fields["faultString"]).Value;
         }
 
+        /// <summary>
+        /// Generate the XML element for this value.
+        /// </summary>
+        /// <returns>Generated element</returns>
         public override XElement GetXml() {
             throw new NotImplementedException();
         }
