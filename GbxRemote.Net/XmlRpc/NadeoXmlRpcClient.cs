@@ -50,6 +50,10 @@ namespace GbxRemoteNet.XmlRpc {
         /// Called when a callback occured from the XML-RPC server.
         /// </summary>
         public event CallbackAction OnCallback;
+        /// <summary>
+        /// Triggered when the client has been disconnected from the server.
+        /// </summary>
+        public event TaskAction OnDisconnected;
 
         public NadeoXmlRpcClient(string host, int port) {
             connectHost = host;
@@ -84,20 +88,47 @@ namespace GbxRemoteNet.XmlRpc {
                     }
                 }
             } catch (Exception e) {
-               logger.Error(e, "Receive loop raised an exception.");
+                logger.Error(e, $"Receive loop raised an exception: {e.Message}");
+                await DisconnectAsync();
             }
         }
 
         /// <summary>
         /// Connect to the remote XMLRPC server.
         /// </summary>
+        /// <param name="retries">Number of times to re-try connection.</param>
+        /// <param name="retryTimeout">Number of milliseconds to wait between each re-try.</param>
         /// <returns></returns>
-        public async Task ConnectAsync() {
+        public async Task<bool> ConnectAsync(int retries=0, int retryTimeout=1000) {
             logger.Debug("Client connecting to the remote XML-RPC server.");
             var connectAddr = await Dns.GetHostAddressesAsync(connectHost);
 
             tcpClient = new TcpClient();
-            await tcpClient.ConnectAsync(connectAddr[0], connectPort);
+
+            // try to connect
+            while (retries >= 0) {
+                try {
+                    await tcpClient.ConnectAsync(connectAddr[0], connectPort);
+
+                    if (tcpClient.Connected)
+                        break;
+                } catch (Exception e) {
+                    logger.Error(e, $"Exception occured when trying to connect to server: {e.Message}");
+                }
+
+                logger.Error("Failed to connect to server.");
+
+                retries--;
+
+                if (retries < 0)
+                    break;
+
+                await Task.Delay(retryTimeout);
+            }
+
+            if (retries < 0)
+                return false; // connection failed
+
             xmlRpcIO = new XmlRpcIO(tcpClient);
 
             logger.Debug("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
@@ -114,6 +145,7 @@ namespace GbxRemoteNet.XmlRpc {
             taskRecvLoop.Start();
 
             OnConnected?.Invoke();
+            return true;
         }
 
         /// <summary>
@@ -122,9 +154,16 @@ namespace GbxRemoteNet.XmlRpc {
         /// <returns></returns>
         public async Task DisconnectAsync() {
             logger.Debug("Client is disconnecting from XML-RPC server.");
-            recvCancel.Cancel();
-            await taskRecvLoop;
-            tcpClient.Close();
+            try {
+                recvCancel.Cancel();
+                await taskRecvLoop;
+                tcpClient.Close();
+            } catch (Exception e) {
+                logger.Warn(e, "An exception occured when trying to disconnect: {message}");
+            }
+
+            OnDisconnected?.Invoke();
+
             logger.Debug("Client disconnected from XML-RPC server.");
         }
 
