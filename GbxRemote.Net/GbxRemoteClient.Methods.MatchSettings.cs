@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
+    /// <summary>
+    /// Method Category: Match Settings
+    /// </summary>
     public partial class GbxRemoteClient {
         /// <summary>
         /// Set a list of maps defined in the playlist with the specified filename as the current selection of the server, and load the gameinfos from the same file. Only available to Admin.

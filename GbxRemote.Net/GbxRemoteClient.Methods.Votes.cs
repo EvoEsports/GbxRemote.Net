@@ -56,8 +56,8 @@ namespace GbxRemoteNet {
         /// Returns the vote currently in progress. The returned structure is { CallerLogin, CmdName, CmdParam }.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentCallVoteStruct> GetCurrentCallVoteAsync() =>
-            (CurrentCallVoteStruct)XmlRpcTypes.ToNativeValue<CurrentCallVoteStruct>(
+        public async Task<CurrentCallVote> GetCurrentCallVoteAsync() =>
+            (CurrentCallVote)XmlRpcTypes.ToNativeValue<CurrentCallVote>(
                 await CallOrFaultAsync("GetCurrentCallVote")
             );
 
@@ -75,8 +75,8 @@ namespace GbxRemoteNet {
         /// Get the current and next timeout for waiting for votes. The struct returned contains two fields 'CurrentValue' and 'NextValue'.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentNextValueStruct<int>> GetCallVoteTimeOutAsync() =>
-            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+        public async Task<CurrentNextValue<int>> GetCallVoteTimeOutAsync() =>
+            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetCallVoteTimeOut")
             );
 
@@ -105,7 +105,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="ratio"></param>
         /// <returns></returns>
-        public async Task<bool> SetCallVoteRatiosAsync(CallVoteRatioStruct[] ratios) =>
+        public async Task<bool> SetCallVoteRatiosAsync(CallVoteRatio[] ratios) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetCallVoteRatios", ratios)
             );
@@ -114,8 +114,8 @@ namespace GbxRemoteNet {
         /// Get the current ratios for passing votes.
         /// </summary>
         /// <returns></returns>
-        public async Task<CallVoteRatioStruct[]> GetCallVoteRatiosAsync() =>
-            (CallVoteRatioStruct[])XmlRpcTypes.ToNativeValue<CallVoteRatioStruct>(
+        public async Task<CallVoteRatio[]> GetCallVoteRatiosAsync() =>
+            (CallVoteRatio[])XmlRpcTypes.ToNativeValue<CallVoteRatio>(
                 await CallOrFaultAsync("GetCallVoteRatios")
             );
     }

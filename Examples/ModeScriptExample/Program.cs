@@ -1,5 +1,8 @@
 ﻿using GbxRemoteNet;
 using GbxRemoteNet.Structs;
+using GbxRemoteNet.XmlRpc;
+using GbxRemoteNet.XmlRpc.ExtraTypes;
+using GbxRemoteNet.XmlRpc.Types;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;

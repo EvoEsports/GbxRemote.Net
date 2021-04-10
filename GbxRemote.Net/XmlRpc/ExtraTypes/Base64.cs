@@ -8,6 +8,8 @@ namespace GbxRemoteNet.XmlRpc.ExtraTypes {
     public class Base64 : IEquatable<Base64> {
         private byte[] data;
 
+        public byte[] Data => data;
+
         public Base64(byte[] data) {
             this.data = data;
         }
@@ -17,7 +19,7 @@ namespace GbxRemoteNet.XmlRpc.ExtraTypes {
         }
 
         public bool Equals(Base64 other) {
-            return data.Equals(other.data);
+            return data.SequenceEqual(other.data);
         }
 
         public override string ToString() {

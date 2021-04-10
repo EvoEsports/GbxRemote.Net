@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.XmlRpc {
+    /// <summary>
+    /// The defined XML element names as defined by the XML-RPC protocol.
+    /// </summary>
     public class XmlRpcElementNames {
         public const string MethodCall = "methodCall";
         public const string MethodResponse = "methodResponse";

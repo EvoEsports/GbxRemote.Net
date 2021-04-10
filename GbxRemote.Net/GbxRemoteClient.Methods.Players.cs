@@ -95,8 +95,8 @@ namespace GbxRemoteNet {
         /// <param name="maxInfos"></param>
         /// <param name="startIndex"></param>
         /// <returns></returns>
-        public async Task<BanListEntryStruct[]> GetBanListAsync(int maxInfos, int startIndex) =>
-            (BanListEntryStruct[])XmlRpcTypes.ToNativeValue<BanListEntryStruct>(
+        public async Task<BanListEntry[]> GetBanListAsync(int maxInfos, int startIndex) =>
+            (BanListEntry[])XmlRpcTypes.ToNativeValue<BanListEntry>(
                 await CallOrFaultAsync("GetBanList", maxInfos, startIndex)
             );
         #endregion
@@ -147,8 +147,8 @@ namespace GbxRemoteNet {
         /// <param name="maxInfos"></param>
         /// <param name="startIndex"></param>
         /// <returns></returns>
-        public async Task<BlackListEntryStruct[]> GetBlackListAsync(int maxInfos, int startIndex) =>
-            (BlackListEntryStruct[])XmlRpcTypes.ToNativeValue<BlackListEntryStruct>(
+        public async Task<BlackListEntry[]> GetBlackListAsync(int maxInfos, int startIndex) =>
+            (BlackListEntry[])XmlRpcTypes.ToNativeValue<BlackListEntry>(
                 await CallOrFaultAsync("GetBanList", maxInfos, startIndex)
             );
 
@@ -229,8 +229,8 @@ namespace GbxRemoteNet {
         /// <param name="maxInfos"></param>
         /// <param name="startIndex"></param>
         /// <returns></returns>
-        public async Task<GuestListEntryStruct[]> GetGuestListAsync(int maxInfos, int startIndex) =>
-            (GuestListEntryStruct[])XmlRpcTypes.ToNativeValue<GuestListEntryStruct>(
+        public async Task<GuestListEntry[]> GetGuestListAsync(int maxInfos, int startIndex) =>
+            (GuestListEntry[])XmlRpcTypes.ToNativeValue<GuestListEntry>(
                 await CallOrFaultAsync("GetGuestList", maxInfos, startIndex)
             );
 
@@ -312,8 +312,8 @@ namespace GbxRemoteNet {
         /// <param name="maxInfos"></param>
         /// <param name="startIndex"></param>
         /// <returns></returns>
-        public async Task<IgnoreListEntryStruct[]> GetIgnoreListAsync(int maxInfos, int startIndex) =>
-            (IgnoreListEntryStruct[])XmlRpcTypes.ToNativeValue<IgnoreListEntryStruct>(
+        public async Task<IgnoreListEntry[]> GetIgnoreListAsync(int maxInfos, int startIndex) =>
+            (IgnoreListEntry[])XmlRpcTypes.ToNativeValue<IgnoreListEntry>(
                 await CallOrFaultAsync("CleanIgnoreList", maxInfos, startIndex)
             );
         #endregion
@@ -349,8 +349,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="billId"></param>
         /// <returns></returns>
-        public async Task<BillStateStruct> GetBillStateAsync(int billId) =>
-            (BillStateStruct)XmlRpcTypes.ToNativeValue<BillStateStruct>(
+        public async Task<BillState> GetBillStateAsync(int billId) =>
+            (BillState)XmlRpcTypes.ToNativeValue<BillState>(
                 await CallOrFaultAsync("SendBill", billId)
             );
         #endregion
@@ -366,8 +366,8 @@ namespace GbxRemoteNet {
         /// <param name="startIndex"></param>
         /// <param name="serverType">OPTIONAL: Used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers)</param>
         /// <returns></returns>
-        public async Task<PlayerInfoStruct[]> GetPlayerListAsync(int maxInfos=-1, int startIndex=0, int? serverType = -1) =>
-            (PlayerInfoStruct[])XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
+        public async Task<PlayerInfo[]> GetPlayerListAsync(int maxInfos=-1, int startIndex=0, int serverType = -1) =>
+            (PlayerInfo[])XmlRpcTypes.ToNativeValue<PlayerInfo>(
                 await CallOrFaultAsync("GetPlayerList", maxInfos, startIndex, serverType)
             );
 
@@ -381,8 +381,8 @@ namespace GbxRemoteNet {
         /// <param name="playerLogin"></param>
         /// <param name="serverType"></param>
         /// <returns></returns>
-        public async Task<PlayerInfoStruct> GetPlayerInfoAsync(string playerLogin, int serverType=1) =>
-            (PlayerInfoStruct)XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
+        public async Task<PlayerInfo> GetPlayerInfoAsync(string playerLogin, int serverType=1) =>
+            (PlayerInfo)XmlRpcTypes.ToNativeValue<PlayerInfo>(
                 await CallOrFaultAsync("GetPlayerInfo", playerLogin, serverType)
             );
 
@@ -392,8 +392,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="playerLogin"></param>
         /// <returns></returns>
-        public async Task<PlayerDetailedInfoStruct> GetDetailedPlayerInfoAsync(string playerLogin) =>
-            (PlayerDetailedInfoStruct)XmlRpcTypes.ToNativeValue<PlayerDetailedInfoStruct>(
+        public async Task<PlayerDetailedInfo> GetDetailedPlayerInfoAsync(string playerLogin) =>
+            (PlayerDetailedInfo)XmlRpcTypes.ToNativeValue<PlayerDetailedInfo>(
                 await CallOrFaultAsync("GetDetailedPlayerInfo", playerLogin)
             );
 
@@ -407,8 +407,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="serverType"></param>
         /// <returns></returns>
-        public async Task<PlayerInfoStruct> GetMainServerPlayerInfoAsync(int serverType) =>
-            (PlayerInfoStruct)XmlRpcTypes.ToNativeValue<PlayerInfoStruct>(
+        public async Task<PlayerInfo> GetMainServerPlayerInfoAsync(int serverType) =>
+            (PlayerInfo)XmlRpcTypes.ToNativeValue<PlayerInfo>(
                 await CallOrFaultAsync("GetMainServerPlayerInfo", serverType)
             );
 
@@ -418,8 +418,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="playerLogin"></param>
         /// <returns></returns>
-        public async Task<PlayerRankingStruct[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex) =>
-            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct>(
+        public async Task<PlayerRanking[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex) =>
+            (PlayerRanking[])XmlRpcTypes.ToNativeValue<PlayerRanking>(
                 await CallOrFaultAsync("GetCurrentRanking")
             );
 
@@ -429,8 +429,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="playerLogin"></param>
         /// <returns></returns>
-        public async Task<PlayerRankingStruct[]> GetCurrentRankingForLoginAsync(string playerLogin) =>
-            (PlayerRankingStruct[])XmlRpcTypes.ToNativeValue<PlayerRankingStruct>(
+        public async Task<PlayerRanking[]> GetCurrentRankingForLoginAsync(string playerLogin) =>
+            (PlayerRanking[])XmlRpcTypes.ToNativeValue<PlayerRanking>(
                 await CallOrFaultAsync("GetCurrentRankingForLogin")
             );
 
@@ -441,7 +441,7 @@ namespace GbxRemoteNet {
         /// <param name="playerScores"></param>
         /// <param name="silentMode"></param>
         /// <returns></returns>
-        public async Task<bool> ForceScoresAsync(PlayerScoreStruct[] playerScores, bool silentMode) =>
+        public async Task<bool> ForceScoresAsync(PlayerScore[] playerScores, bool silentMode) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ForceScores", playerScores, silentMode)
             );

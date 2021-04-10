@@ -16,8 +16,8 @@ namespace GbxRemoteNet {
         /// Returns a struct with the Name, TitleId, Version, Build and ApiVersion of the application remotely controlled.
         /// </summary>
         /// <returns></returns>
-        public async Task<VersionStruct> GetVersionAsync() =>
-            (VersionStruct)XmlRpcTypes.ToNativeValue<VersionStruct>(
+        public async Task<Structs.VersionInfo> GetVersionAsync() =>
+            (Structs.VersionInfo)XmlRpcTypes.ToNativeValue<Structs.VersionInfo>(
                 await CallOrFaultAsync("GetVersion")
             );
 
@@ -25,8 +25,8 @@ namespace GbxRemoteNet {
         /// Returns the current status of the server.
         /// </summary>
         /// <returns></returns>
-        public async Task<StatusStruct> GetStatusAsync() =>
-            (StatusStruct)XmlRpcTypes.ToNativeValue<StatusStruct>(
+        public async Task<Status> GetStatusAsync() =>
+            (Status)XmlRpcTypes.ToNativeValue<Status>(
                 await CallOrFaultAsync("GetStatus")
             );
 
@@ -96,8 +96,8 @@ namespace GbxRemoteNet {
         /// Get some system infos, including connection rates (in kbps).
         /// </summary>
         /// <returns></returns>
-        public async Task<SystemInfoStruct> GetSystemInfoAsync() =>
-            (SystemInfoStruct)XmlRpcTypes.ToNativeValue<SystemInfoStruct>(
+        public async Task<SystemInfo> GetSystemInfoAsync() =>
+            (SystemInfo)XmlRpcTypes.ToNativeValue<SystemInfo>(
                 await CallOrFaultAsync("GetSystemInfo")
             );
 
@@ -116,8 +116,8 @@ namespace GbxRemoteNet {
         /// Returns the list of tags and associated values set on this server. Only available to Admin.
         /// </summary>
         /// <returns></returns>
-        public async Task<ServerTagStruct[]> GetServerTagsAsync() =>
-            (ServerTagStruct[])XmlRpcTypes.ToNativeValue<ServerTagStruct>(
+        public async Task<ServerTag[]> GetServerTagsAsync() =>
+            (ServerTag[])XmlRpcTypes.ToNativeValue<ServerTag>(
                 await CallOrFaultAsync("GetServerTags")
             );
 
@@ -269,8 +269,8 @@ namespace GbxRemoteNet {
         /// Get the current and next maximum number of players allowed on server. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentNextValueStruct<int>> GetMaxPlayersAsync() =>
-            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+        public async Task<CurrentNextValue<int>> GetMaxPlayersAsync() =>
+            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetMaxPlayers")
             );
 
@@ -288,8 +288,8 @@ namespace GbxRemoteNet {
         /// Get the current and next maximum number of Spectators allowed on server. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentNextValueStruct<int>> GetMaxSpectatorsAsync() =>
-            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+        public async Task<CurrentNextValue<int>> GetMaxSpectatorsAsync() =>
+            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetMaxSpectators")
             );
 
@@ -310,8 +310,8 @@ namespace GbxRemoteNet {
         /// Get whether the server if a lobby, the number and maximum number of players currently managed by it. The struct returned contains 4 fields IsLobby, LobbyPlayers, LobbyMaxPlayers, and LobbyPlayersLevel.
         /// </summary>
         /// <returns></returns>
-        public async Task<LobbyInfoStruct> GetLobbyInfoAsync() =>
-            (LobbyInfoStruct)XmlRpcTypes.ToNativeValue<LobbyInfoStruct>(
+        public async Task<LobbyInfo> GetLobbyInfoAsync() =>
+            (LobbyInfo)XmlRpcTypes.ToNativeValue<LobbyInfo>(
                 await CallOrFaultAsync("GetLobbyInfo")
             );
 
@@ -452,8 +452,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="login"></param>
         /// <returns></returns>
-        public async Task<DemoTokenInfoStruct> GetDemoTokenInfosForPlayerAsync(string login) =>
-            (DemoTokenInfoStruct)XmlRpcTypes.ToNativeValue<DemoTokenInfoStruct>(
+        public async Task<DemoTokenInfo> GetDemoTokenInfosForPlayerAsync(string login) =>
+            (DemoTokenInfo)XmlRpcTypes.ToNativeValue<DemoTokenInfo>(
                 await CallOrFaultAsync("GetDemoTokenInfosForPlayer", login)
             );
 
@@ -509,8 +509,8 @@ namespace GbxRemoteNet {
         /// Get the current and next ladder mode on server. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentNextValueStruct<int>> GetLadderModeAsync() =>
-            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+        public async Task<CurrentNextValue<int>> GetLadderModeAsync() =>
+            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetLadderMode")
             );
 
@@ -518,8 +518,8 @@ namespace GbxRemoteNet {
         /// Get the ladder points limit for the players allowed on this server. The struct returned contains two fields LadderServerLimitMin and LadderServerLimitMax.
         /// </summary>
         /// <returns></returns>
-        public async Task<LadderServerLimitsStruct> GetLadderServerLimitsAsync() =>
-            (LadderServerLimitsStruct)XmlRpcTypes.ToNativeValue<LadderServerLimitsStruct>(
+        public async Task<LadderServerLimits> GetLadderServerLimitsAsync() =>
+            (LadderServerLimits)XmlRpcTypes.ToNativeValue<LadderServerLimits>(
                 await CallOrFaultAsync("GetLadderServerLimits")
             );
 
@@ -537,8 +537,8 @@ namespace GbxRemoteNet {
         /// Get the current and next network vehicle quality on server. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentNextValueStruct<int>> GetVehicleNetQualityAsync() =>
-            (CurrentNextValueStruct<int>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<int>>(
+        public async Task<CurrentNextValue<int>> GetVehicleNetQualityAsync() =>
+            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetVehicleNetQuality")
             );
 
@@ -547,7 +547,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        public async Task<bool> SetServerOptionsAsync(ServerOptionsStruct options) =>
+        public async Task<bool> SetServerOptionsAsync(ServerOptions options) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetServerOptions", options)
             );
@@ -556,8 +556,8 @@ namespace GbxRemoteNet {
         /// Returns a struct containing the server options: Name, Comment, Password, PasswordForSpectator, CurrentMaxPlayers, NextMaxPlayers, CurrentMaxSpectators, NextMaxSpectators, KeepPlayerSlots, IsP2PUpload, IsP2PDownload, CurrentLadderMode, NextLadderMode, CurrentVehicleNetQuality, NextVehicleNetQuality, CurrentCallVoteTimeOut, NextCallVoteTimeOut, CallVoteRatio, AllowMapDownload, AutoSaveReplays, RefereePassword, RefereeMode, AutoSaveValidationReplays, HideServer, CurrentUseChangingValidationSeed, NextUseChangingValidationSeed, ClientInputsMaxLatency, DisableHorns, DisableServiceAnnounces.
         /// </summary>
         /// <returns></returns>
-        public async Task<ServerOptionsStruct> GetServerOptionsAsync() =>
-            (ServerOptionsStruct)XmlRpcTypes.ToNativeValue<ServerOptionsStruct>(
+        public async Task<ServerOptions> GetServerOptionsAsync() =>
+            (ServerOptions)XmlRpcTypes.ToNativeValue<ServerOptions>(
                 await CallOrFaultAsync("GetServerOptions")
             );
 
@@ -567,7 +567,7 @@ namespace GbxRemoteNet {
         /// <param name="forced"></param>
         /// <param name="mods"></param>
         /// <returns></returns>
-        public async Task<bool> SetForcedModsAsync(bool forced, ModsStruct mods) =>
+        public async Task<bool> SetForcedModsAsync(bool forced, Mods mods) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetForcedMods", forced, mods)
             );
@@ -576,8 +576,8 @@ namespace GbxRemoteNet {
         /// Get the mods settings.
         /// </summary>
         /// <returns></returns>
-        public async Task<ForcedModsStruct> GetForcedModsAsync() =>
-            (ForcedModsStruct)XmlRpcTypes.ToNativeValue<ForcedModsStruct>(
+        public async Task<ForcedMods> GetForcedModsAsync() =>
+            (ForcedMods)XmlRpcTypes.ToNativeValue<ForcedMods>(
                 await CallOrFaultAsync("GetForcedMods")
             );
 
@@ -596,8 +596,8 @@ namespace GbxRemoteNet {
         /// Get the music setting.
         /// </summary>
         /// <returns></returns>
-        public async Task<MusicSettingStruct> GetForcedMusicAsync() =>
-            (MusicSettingStruct)XmlRpcTypes.ToNativeValue<MusicSettingStruct>(
+        public async Task<MusicSetting> GetForcedMusicAsync() =>
+            (MusicSetting)XmlRpcTypes.ToNativeValue<MusicSetting>(
                 await CallOrFaultAsync("GetForcedMusic")
             );
 
@@ -606,7 +606,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="skins"></param>
         /// <returns></returns>
-        public async Task<bool> SetForcedSkinsAsync(ForcedSkinStruct[] skins) =>
+        public async Task<bool> SetForcedSkinsAsync(ForcedSkin[] skins) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetForcedSkins", skins)
             );
@@ -615,8 +615,8 @@ namespace GbxRemoteNet {
         /// Get the current forced skins.
         /// </summary>
         /// <returns></returns>
-        public async Task<ForcedSkinStruct[]> GetForcedSkinsAsync() =>
-            (ForcedSkinStruct[])XmlRpcTypes.ToNativeValue<ForcedSkinStruct>(
+        public async Task<ForcedSkin[]> GetForcedSkinsAsync() =>
+            (ForcedSkin[])XmlRpcTypes.ToNativeValue<ForcedSkin>(
                 await CallOrFaultAsync("GetForcedSkins")
             );
 
@@ -681,8 +681,8 @@ namespace GbxRemoteNet {
         /// Get the current and next value of UseChangingValidationSeed. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
-        public async Task<CurrentNextValueStruct<bool>> GetUseChangingValidationSeedAsync() =>
-            (CurrentNextValueStruct<bool>)XmlRpcTypes.ToNativeValue<CurrentNextValueStruct<bool>>(
+        public async Task<CurrentNextValue<bool>> GetUseChangingValidationSeedAsync() =>
+            (CurrentNextValue<bool>)XmlRpcTypes.ToNativeValue<CurrentNextValue<bool>>(
                 await CallOrFaultAsync("GetUseChangingValidationSeed")
             );
 
@@ -719,8 +719,8 @@ namespace GbxRemoteNet {
         /// Each structure of the array PlayerNetInfos contains the following fields : Login, IPAddress, LastTransferTime, DeltaBetweenTwoLastNetState, PacketLossRate. Only available to SuperAdmin.
         /// </summary>
         /// <returns></returns>
-        public async Task<NetworkStatsStruct> GetNetworkStatsAsync() =>
-            (NetworkStatsStruct)XmlRpcTypes.ToNativeValue<NetworkStatsStruct>(
+        public async Task<NetworkStats> GetNetworkStatsAsync() =>
+            (NetworkStats)XmlRpcTypes.ToNativeValue<NetworkStats>(
                 await CallOrFaultAsync("GetNetworkStats")
             );
 

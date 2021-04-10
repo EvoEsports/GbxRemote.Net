@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
-    public class XmlRpcDouble : XmlRpcBaseType {
+    /// <summary>
+    /// Represents an XML-RPC double.
+    /// </summary>
+    public class XmlRpcDouble : XmlRpcBaseType, IEquatable<XmlRpcDouble> {
         public double Value;
 
         public XmlRpcDouble(double value) : base(null) {
@@ -17,6 +20,22 @@ namespace GbxRemoteNet.XmlRpc.Types {
             Value = Convert.ToDouble(element.Value);
         }
 
+        public bool Equals(XmlRpcDouble other) {
+            return Value.Equals(other.Value);
+        }
+
+        public override bool Equals(object obj) {
+            return Equals((XmlRpcDouble)obj);
+        }
+
+        public override int GetHashCode() {
+            return GetHashCode();
+        }
+
+        /// <summary>
+        /// Generate the XML element for this value.
+        /// </summary>
+        /// <returns>Generated element</returns>
         public override XElement GetXml() {
             return new XElement(XmlRpcElementNames.Double, Value);
         }

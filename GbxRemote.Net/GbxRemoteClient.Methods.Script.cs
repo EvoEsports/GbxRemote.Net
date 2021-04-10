@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
+    /// <summary>
+    /// Method Category: ModeScript
+    /// </summary>
     public partial class GbxRemoteClient {
         /// <summary>
         /// Get the current mode script.
@@ -32,8 +35,8 @@ namespace GbxRemoteNet {
         /// Returns the description of the current mode script, as a structure containing: Name, CompatibleTypes, Description, Version and the settings available.
         /// </summary>
         /// <returns></returns>
-        public async Task<ScriptInfoStruct> GetModeScriptInfoAsync() =>
-            (ScriptInfoStruct)XmlRpcTypes.ToNativeValue<ScriptInfoStruct>(
+        public async Task<ScriptInfo> GetModeScriptInfoAsync() =>
+            (ScriptInfo)XmlRpcTypes.ToNativeValue<ScriptInfo>(
                 await CallOrFaultAsync("GetModeScriptInfo")
             );
 

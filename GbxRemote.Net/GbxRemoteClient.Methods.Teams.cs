@@ -35,8 +35,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="team"></param>
         /// <returns></returns>
-        public async Task<TeamInfoStruct> GetTeamInfoAsync(int team) =>
-            (TeamInfoStruct)XmlRpcTypes.ToNativeValue<TeamInfoStruct>(
+        public async Task<TeamInfo> GetTeamInfoAsync(int team) =>
+            (TeamInfo)XmlRpcTypes.ToNativeValue<TeamInfo>(
                 await CallOrFaultAsync("GetTeamInfo", team)
             );
 
@@ -56,8 +56,8 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="team"></param>
         /// <returns></returns>
-        public async Task<ClubLinksStruct> GetForcedClubLinksAsync(int team) =>
-            (ClubLinksStruct)XmlRpcTypes.ToNativeValue<ClubLinksStruct>(
+        public async Task<ClubLinks> GetForcedClubLinksAsync(int team) =>
+            (ClubLinks)XmlRpcTypes.ToNativeValue<ClubLinks>(
                 await CallOrFaultAsync("GetForcedClubLinks", team)
             );
 

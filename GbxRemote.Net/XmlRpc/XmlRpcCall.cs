@@ -7,7 +7,15 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc {
+    /// <summary>
+    /// Represents a method call to the XML-RPC server.
+    /// </summary>
     public class XmlRpcCall : XmlRpcRequest {
+        /// <summary>
+        /// Creates a new XML-RPC call.
+        /// </summary>
+        /// <param name="method">Name of the method to call.</param>
+        /// <param name="args">Parameters of the call.</param>
         public XmlRpcCall(string method, params XmlRpcBaseType[] args) : base(XmlRpcElementNames.MethodCall) {
             XElement methodName = new(XmlRpcElementNames.MethodName, method);
             XElement arguments = new(XmlRpcElementNames.Params);

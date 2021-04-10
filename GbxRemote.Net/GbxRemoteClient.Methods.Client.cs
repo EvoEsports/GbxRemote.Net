@@ -120,8 +120,8 @@ namespace GbxRemoteNet {
         /// Returns the latest results from the current manialink page, as an array of structs {string Login, int PlayerId, int Result} Result==0 -> no answer, Result>0.... -> answer from the player.
         /// </summary>
         /// <returns></returns>
-        public async Task<ManialinkPageAnswerStruct[]> GetManialinkPageAnswersAsync() =>
-            (ManialinkPageAnswerStruct[])XmlRpcTypes.ToNativeValue<ManialinkPageAnswerStruct>(
+        public async Task<ManialinkPageAnswer[]> GetManialinkPageAnswersAsync() =>
+            (ManialinkPageAnswer[])XmlRpcTypes.ToNativeValue<ManialinkPageAnswer>(
                 await CallOrFaultAsync("GetManialinkPageAnswers")
             );
 

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace GbxRemoteNet.XmlRpc.Types {
-    public class XmlRpcInteger : XmlRpcBaseType {
+    /// <summary>
+    /// Represents an XML-RPC integer.
+    /// </summary>
+    public class XmlRpcInteger : XmlRpcBaseType, IEquatable<XmlRpcInteger> {
         public int Value;
 
         public XmlRpcInteger(int value) : base(null) {
@@ -17,6 +20,22 @@ namespace GbxRemoteNet.XmlRpc.Types {
             Value = Convert.ToInt32(element.Value);
         }
 
+        public bool Equals(XmlRpcInteger other) {
+            return Value.Equals(other.Value);
+        }
+
+        public override bool Equals(object obj) {
+            return Equals((XmlRpcInteger)obj);
+        }
+
+        public override int GetHashCode() {
+            return GetHashCode();
+        }
+
+        /// <summary>
+        /// Generate the XML element for this value.
+        /// </summary>
+        /// <returns>Generated element</returns>
         public override XElement GetXml() {
             return new XElement(XmlRpcElementNames.Integer, Value);
         }
