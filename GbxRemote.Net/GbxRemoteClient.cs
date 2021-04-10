@@ -49,8 +49,6 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
-            logger.Debug("Calling remote with method {method}", method);
-
             var msg = await CallAsync(method, MethodArgs(args));
 
             if (msg.IsFault) {

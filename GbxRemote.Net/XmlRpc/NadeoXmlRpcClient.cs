@@ -70,12 +70,12 @@ namespace GbxRemoteNet.XmlRpc {
                 while (!recvCancel.IsCancellationRequested) {
                     ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
-                    logger.Debug("================== MESSAGE START ==================");
-                    logger.Debug($"Message length: {response.Header.MessageLength}");
-                    logger.Debug($"Handle: {response.Header.Handle}");
-                    logger.Debug($"Is callback: {response.Header.IsCallback}");
-                    logger.Debug(response.MessageXml);
-                    logger.Debug("================== MESSAGE END ==================");
+                    logger.Trace("================== MESSAGE START ==================");
+                    logger.Trace($"Message length: {response.Header.MessageLength}");
+                    logger.Trace($"Handle: {response.Header.Handle}");
+                    logger.Trace($"Is callback: {response.Header.IsCallback}");
+                    logger.Trace(response.MessageXml);
+                    logger.Trace("================== MESSAGE END ==================");
 
                     if (response.IsCallback) {
                         // invoke listeners and
@@ -176,6 +176,9 @@ namespace GbxRemoteNet.XmlRpc {
             lock (handlerLock) {
                 if (handler + 1 == 0xffffffff)
                     handler = 0x80000000;
+
+                logger.Trace("Next handler value: {handler}", handler);
+
                 return handler++;
             }
         }
@@ -190,14 +193,16 @@ namespace GbxRemoteNet.XmlRpc {
             uint handle = await GetNextHandle();
             MethodCall call = new(method, handle, args);
 
-            logger.Debug("================== CALL START ==================");
-            logger.Debug(call.Call.MainDocument);
-            logger.Debug("================== CALL END ==================");
+            logger.Trace("Calling remote method: {method}", method);
+            logger.Trace("================== CALL START ==================");
+            logger.Trace(call.Call.MainDocument);
+            logger.Trace("================== CALL END ==================");
 
             responseHandles[handle] = new(false);
 
             byte[] data = await call.Serialize();
             await xmlRpcIO.WriteBytesAsync(data);
+
 
             // wait for response
             responseHandles[handle].WaitOne();
