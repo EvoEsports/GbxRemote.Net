@@ -2,7 +2,7 @@ using GbxRemoteNet.XmlRpc.ExtraTypes;
 using System;
 using Xunit;
 
-namespace GbxRemote.Net.Tests {
+namespace GbxRemote.Net.Tests.XmlRpcTests.ExtraTypesTests {
     public class Base64Tests {
         [Fact]
         public void Base64_String_Constructor_Correctly_Encodes_Bytes() {

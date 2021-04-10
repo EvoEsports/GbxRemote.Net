@@ -54,7 +54,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
-        private XmlRpcBaseType[] MethodArgs(params object[] args) {
+        public static XmlRpcBaseType[] MethodArgs(params object[] args) {
             logger.Debug("Converting C# types to XML-RPC");
             XmlRpcBaseType[] xmlRpcArgs = new XmlRpcBaseType[args.Length];
             

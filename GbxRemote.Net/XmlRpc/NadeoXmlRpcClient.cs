@@ -66,12 +66,12 @@ namespace GbxRemoteNet.XmlRpc {
                 while (!recvCancel.IsCancellationRequested) {
                     ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
-                    Console.WriteLine("================== MESSAGE START ==================");
-                    Console.WriteLine($"Message length: {response.Header.MessageLength}");
-                    Console.WriteLine($"Handle: {response.Header.Handle}");
-                    Console.WriteLine($"Is callback: {response.Header.IsCallback}");
-                    Console.WriteLine(response.MessageXml);
-                    Console.WriteLine("================== MESSAGE END ==================");
+                    logger.Debug("================== MESSAGE START ==================");
+                    logger.Debug($"Message length: {response.Header.MessageLength}");
+                    logger.Debug($"Handle: {response.Header.Handle}");
+                    logger.Debug($"Is callback: {response.Header.IsCallback}");
+                    logger.Debug(response.MessageXml);
+                    logger.Debug("================== MESSAGE END ==================");
 
                     if (response.IsCallback) {
                         // invoke listeners and
@@ -84,7 +84,7 @@ namespace GbxRemoteNet.XmlRpc {
                     }
                 }
             } catch (Exception e) {
-               logger.Error("Recieve Loop Exception", e);
+               logger.Error(e, "Receive loop raised an exception.");
             }
         }
 
@@ -150,6 +150,10 @@ namespace GbxRemoteNet.XmlRpc {
         public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args) {
             uint handle = await GetNextHandle();
             MethodCall call = new(method, handle, args);
+
+            logger.Debug("================== CALL START ==================");
+            logger.Debug(call.Call.MainDocument);
+            logger.Debug("================== CALL END ==================");
 
             responseHandles[handle] = new(false);
 

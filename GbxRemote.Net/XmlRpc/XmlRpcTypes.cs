@@ -168,7 +168,7 @@ namespace GbxRemoteNet.XmlRpc {
                 XmlRpcArray xmlArr = (XmlRpcArray)arr.Values[i];
                 result[i] = ToNativeArray<T>(xmlArr);
             }
-
+            
             return result;
         }
 
@@ -185,29 +185,22 @@ namespace GbxRemoteNet.XmlRpc {
 
             if (t == typeof(Base64)) { // base64
                 return new XmlRpcBase64((Base64)obj);
-
             } else if (t == typeof(bool)) { // boolean
                 return new XmlRpcBoolean((bool)obj);
-
             } else if (t == typeof(DateTime)) { // dateTime.iso8601
                 return new XmlRpcDateTime((DateTime)obj);
-
             } else if (t == typeof(double)) { // double
                 return new XmlRpcDouble((double)obj);
-            } else if (t == typeof(float)) {
+            } else if (t == typeof(float)) { // double
                 return new XmlRpcDouble((double)obj);
-
             } else if (t == typeof(int)) { // int/i4
                 return new XmlRpcInteger((int)obj);
-            } else if (t == typeof(uint)) {
+            } else if (t == typeof(uint)) { // int/i4
                 return new XmlRpcInteger((int)obj);
-
             } else if (t == typeof(string)) { // string
                 return new XmlRpcString((string)obj);
-
             } else if (t == typeof(DynamicObject)) { // struct
                 return new XmlRpcStruct(obj);
-
             } else if (t.IsArray) { // array
                 return ToXmlRpcArray(obj);
 

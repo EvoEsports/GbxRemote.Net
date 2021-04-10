@@ -1,4 +1,5 @@
 ﻿using GbxRemoteNet.XmlRpc;
+using GbxRemoteNet.XmlRpc.ExtraTypes;
 using GbxRemoteNet.XmlRpc.Types;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,63 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("system.methodHelp", method)
             );
 
-        // TODO: multicall
+        /// <summary>
+        /// Call multiple methods without multiple round-trip times.
+        /// </summary>
+        /// <param name="multicall">MultiCall object containing the calls to perform.</param>
+        /// <returns>An array of results for each call.</returns>
+        public async Task<object[]> MultiCallAsync(MultiCall multicall) {
+            List<XmlRpcBaseType> calls = new();
+
+            // build the call
+            foreach (var call in multicall.MethodCalls) {
+                string methodName = call.MethodName;
+                if (methodName.EndsWith("Async"))
+                    methodName = methodName.Substring(0, methodName.Length - 5);
+
+                XmlRpcBaseType[] args = MethodArgs(call.Arguments);
+                XmlRpcStruct callStruct = new(new Struct() {
+                    { "methodName", new XmlRpcString(methodName) },
+                    { "params", new XmlRpcArray(args) }
+                });
+
+                calls.Add(callStruct);
+            }
+
+            // run the call
+            XmlRpcArray multicallArgs = new(calls.ToArray());
+            var msg = await CallAsync("system.multicall", multicallArgs);
+
+            if (msg.IsFault) {
+                logger.Error("Multicall failed with reason: {message}", (XmlRpcFault)msg.ResponseData);
+                throw new XmlRpcFaultException((XmlRpcFault)msg.ResponseData);
+            }
+
+            // convert response to native values, should always be array if no error
+            XmlRpcArray results = (XmlRpcArray)msg.ResponseData;
+            object[] converted = new object[results.Values.Length];
+
+            for (int i = 0; i < converted.Length; i++) {
+                if (results.Values[i] is XmlRpcStruct) {
+                    // if struct we have a fault instead
+                    XmlRpcStruct faultStruct = (XmlRpcStruct)results.Values[i];
+
+                    converted[i] = new XmlRpcFault(
+                        ((XmlRpcInteger)faultStruct.Fields["faultCode"]).Value,
+                        ((XmlRpcString)faultStruct.Fields["faultString"]).Value
+                    );
+                } else {
+                    // else normal resutl
+                    XmlRpcArray resultArr = (XmlRpcArray)results.Values[i];
+
+                    if (resultArr.Values.Length == 0)
+                        converted[i] = null;
+                    else
+                        converted[i] = XmlRpcTypes.ToNativeValue<object>(resultArr.Values[0]);
+                }
+            }
+
+            return converted;
+        }
     }
 }

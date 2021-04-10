@@ -1,4 +1,3 @@
-
 namespace GbxRemoteNet.Structs {
     public class NetworkStats {
         public int Uptime;
