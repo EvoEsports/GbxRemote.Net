@@ -1,6 +1,6 @@
 namespace GbxRemoteNet.Structs {
     public class FileDesc {
-        public string fileName;
-        public string checksum;
+        public string FileName;
+        public string Checksum;
     }
 }
