@@ -3,6 +3,6 @@ namespace GbxRemoteNet.Structs {
         public string IPAddress;
         public int StateUpdateLatency;
         public int LatestNetworkActivity;
-        public float PacketLossRate;
+        public double PacketLossRate;
     }
 }

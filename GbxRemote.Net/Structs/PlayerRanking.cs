@@ -7,6 +7,6 @@ namespace GbxRemoteNet.Structs {
         public int[] BestCheckpoints;
         public int Score;
         public int NbrLapsFinished;
-        public float LadderScore;
+        public double LadderScore;
     }
 }
