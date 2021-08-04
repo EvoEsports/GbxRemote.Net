@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class ServerTag {
-        public string Name;
-        public string Value;
+        public string Name { get; set; }
+        public string Value { get; set; }
     }
 }

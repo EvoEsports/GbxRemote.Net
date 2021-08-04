@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class BlackListEntry {
-        public string Login;
+        public string Login { get; set; }
     }
 }

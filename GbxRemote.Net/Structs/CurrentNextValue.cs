@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class CurrentNextValue<T> {
-        public T CurrentValue;
-        public T NextValue;
+        public T CurrentValue { get; set; }
+        public T NextValue { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class Status {
-        public int Code;
-        public string Name;
+        public int Code { get; set; }
+        public string Name { get; set; }
     }
 }

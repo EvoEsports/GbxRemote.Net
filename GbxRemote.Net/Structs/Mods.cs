@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class Mods {
-        public string EnvName;
-        public string Url;
+        public string EnvName { get; set; }
+        public string Url { get; set; }
     }
 }

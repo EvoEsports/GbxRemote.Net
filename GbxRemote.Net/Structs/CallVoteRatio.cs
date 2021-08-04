@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class CallVoteRatio {
-        public string Command;
-        public double Ratio;
+        public string Command { get; set; }
+        public double Ratio { get; set; }
     }
 }

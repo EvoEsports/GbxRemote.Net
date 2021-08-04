@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class BillState {
-        public string State;
-        public string StateName;
-        public int TransactionId;
+        public string State { get; set; }
+        public string StateName { get; set; }
+        public int TransactionId { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 namespace GbxRemoteNet.Structs {
     public class MinimalPlayerInfo {
-        public string Login;
+        public string Login { get; set; }
     }
 }

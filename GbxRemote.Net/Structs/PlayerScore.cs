@@ -1,6 +1,6 @@
 namespace GbxRemoteNet.Structs {
     public class PlayerScore {
-        public int PlayerId;
-        public int Score;
+        public int PlayerId { get; set; }
+        public int Score { get; set; }
     }
 }

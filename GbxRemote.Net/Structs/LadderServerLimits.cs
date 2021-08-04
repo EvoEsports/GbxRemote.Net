@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class LadderServerLimits {
-        public double LadderServerLimitMin;
-        public double LadderServerLimitMax;
+        public double LadderServerLimitMin { get; set; }
+        public double LadderServerLimitMax { get; set; }
     }
 }

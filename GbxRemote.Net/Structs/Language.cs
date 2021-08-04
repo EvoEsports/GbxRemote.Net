@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.Structs {
     public class Language {
-        public string Lang;
-        public string Text;
+        public string Lang { get; set; }
+        public string Text { get; set; }
     }
 }
