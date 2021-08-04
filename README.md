@@ -8,7 +8,7 @@
     
 </div>
 
-A library for interacting with the [XML-RPC](http://xmlrpc.com/) protocol of [TrackMania](https://www.trackmania.com/) servers and similar titles built with [.NET Core](https://dotnet.microsoft.com/download). It is built using the [async task pattern](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model). It comes with pre-made methods for all the [documented XML-RPC methods](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Methods) provided by the trackmania server and allows you to easily hook into and react on callbacks. Interacting with [ModeScript](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Modescript-documentation) is also simplified through special features.
+A library for interacting with the [XML-RPC](http://xmlrpc.com/) protocol of [TrackMania](https://www.trackmania.com/) servers and similar titles built with [.NET 5](https://dotnet.microsoft.com/download). It is built using the [task async pattern (TAP)](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap). It comes with pre-made methods for all the [documented XML-RPC methods](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Methods) provided by the trackmania server and allows you to easily hook into and react on callbacks. Interacting with [ModeScript](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Modescript-documentation) is also simplified through special features.
 
 # Table of Contents
 - [Table of Contents](#table-of-contents)
