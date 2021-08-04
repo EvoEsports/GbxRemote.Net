@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>GbxRemoteNet</RootNamespace>
-    <Version>1.1.1-beta</Version>
+    <Version>1.1.1</Version>
     <Authors>Evo</Authors>
     <Description>GBXRemote client for connecting to the XML-RPC protocol of TrackMania servers.</Description>
     <Copyright>Evo © 2021</Copyright>
@@ -16,6 +16,8 @@
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageIcon>logo.png</PackageIcon>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <FileVersion>1.1.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
