@@ -66,5 +66,28 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.Utils {
 
             Assert.Equal(expected, cleaned);
         }
+
+        [Theory]
+        [InlineData(0x0, 0x0, 0x0, "$000")]
+        [InlineData(0x11, 0x11, 0x11, "$111")]
+        [InlineData(0x22, 0x22, 0x22, "$222")]
+        [InlineData(0x33, 0x33, 0x33, "$333")]
+        [InlineData(0x44, 0x44, 0x44, "$444")]
+        [InlineData(0x55, 0x55, 0x55, "$555")]
+        [InlineData(0x66, 0x66, 0x66, "$666")]
+        [InlineData(0x77, 0x77, 0x77, "$777")]
+        [InlineData(0x88, 0x88, 0x88, "$888")]
+        [InlineData(0x99, 0x99, 0x99, "$999")]
+        [InlineData(0xaa, 0xaa, 0xaa, "$AAA")]
+        [InlineData(0xbb, 0xbb, 0xbb, "$BBB")]
+        [InlineData(0xcc, 0xcc, 0xcc, "$CCC")]
+        [InlineData(0xdd, 0xdd, 0xdd, "$DDD")]
+        [InlineData(0xee, 0xee, 0xee, "$EEE")]
+        [InlineData(0xff, 0xff, 0xff, "$FFF")]
+        public void Test_TmColor_Returns_Correct_Format(byte ir, byte ig, byte ib, string expected) {
+            string result = Formatting.TmColor(ir, ig, ib);
+
+            Assert.Equal(expected, result);
+        }
     }
 }
