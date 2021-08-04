@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GbxRemoteNet.Structs {
+﻿namespace GbxRemoteNet.Structs {
     public class ScriptInfo {
         public string Name { get; set; }
         public string CompatibleMapTypes { get; set; }

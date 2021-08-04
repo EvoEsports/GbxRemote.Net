@@ -1,5 +1,3 @@
-using System;
-
 namespace GbxRemoteNet.Structs {
     public class LadderStats {
         public double LastMatchScore { get; set; }
