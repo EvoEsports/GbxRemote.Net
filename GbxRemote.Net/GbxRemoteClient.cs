@@ -15,6 +15,8 @@ namespace GbxRemoteNet {
     public partial class GbxRemoteClient : NadeoXmlRpcClient {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
+        private readonly GbxRemoteClientOptions Options;
+
         /// <summary>
         /// This is the API version the client will be using.
         /// </summary>
@@ -25,9 +27,19 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
         /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
-        public GbxRemoteClient(string host="127.0.0.1", int port=5000) : base(host, port) {
+        public GbxRemoteClient(string host, int port) : base(host, port) {
             OnCallback += GbxRemoteClient_OnCallback;
-            InvokeEventOnModeScriptMethodResponse = false;
+            Options = new();
+        }
+
+        /// <summary>
+        /// Create a new instance of the GBXRemote client.
+        /// </summary>
+        /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
+        /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
+        public GbxRemoteClient(string host, int port, GbxRemoteClientOptions options) : base(host, port) {
+            OnCallback += GbxRemoteClient_OnCallback;
+            Options = options;
         }
 
         /// <summary>
@@ -37,8 +49,6 @@ namespace GbxRemoteNet {
         /// <param name="args"></param>
         /// <returns></returns>
         private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
-            logger.Debug("Calling remote with method {method}", method);
-
             var msg = await CallAsync(method, MethodArgs(args));
 
             if (msg.IsFault) {
@@ -72,7 +82,10 @@ namespace GbxRemoteNet {
         /// <returns></returns>
         public async Task<bool> LoginAsync(string login, string password) {
             logger.Debug("Client connecting to GbxRemote");
-            await ConnectAsync();
+
+            if (!await ConnectAsync(Options.ConnectionRetries, Options.ConnectionRetryTimeout))
+                return false;
+
             await SetApiVersionAsync(ApiVersion);
 
             if (await AuthenticateAsync(login, password)) {

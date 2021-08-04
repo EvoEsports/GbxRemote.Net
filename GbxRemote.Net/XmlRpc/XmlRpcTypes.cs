@@ -127,7 +127,8 @@ namespace GbxRemoteNet.XmlRpc {
             // copy all the available fields to the instance
             foreach (var field in fields) {
                 if (xmlStruct.Fields.ContainsKey(field.Name)) {
-                    object objValue = ToNativeValue<object>(xmlStruct.Fields[field.Name], field.FieldType);
+                    var fieldType = field.FieldType.GetElementType() ?? field.FieldType;
+                    object objValue = ToNativeValue<object>(xmlStruct.Fields[field.Name], fieldType);
                     Type objType = objValue.GetType();
 
                     if (objType.IsArray) {

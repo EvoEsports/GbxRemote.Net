@@ -31,6 +31,7 @@ namespace BasicExample {
             var players = await client.GetPlayerListAsync();
 
             foreach (var player in players) {
+                var info = await client.GetDetailedPlayerInfoAsync(player.Login);
                 Console.WriteLine($"Login: {player.Login}, NickName: {player.NickName}");
             }
 

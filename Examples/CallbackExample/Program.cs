@@ -4,10 +4,13 @@ using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
 using System;
 using System.Dynamic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CallbackExample {
     class Program {
+        static CancellationTokenSource cancelToken = new CancellationTokenSource();
+
         static async Task MainAsync(string[] args) {
             // create client instance
             GbxRemoteClient client = new("trackmania.test.server", 5001);
@@ -32,11 +35,25 @@ namespace CallbackExample {
             client.OnStatusChanged += Client_OnStatusChanged;
             client.OnPlayerInfoChanged += Client_OnPlayerInfoChanged;
 
+            client.OnConnected += Client_OnConnected;
+            client.OnDisconnected += Client_OnDisconnected;
+
             // enable callbacks
             await client.EnableCallbackTypeAsync();
 
-            // wait indefinitely
-            await Task.Delay(-1);
+            // wait indefinitely or until disconnect
+            WaitHandle.WaitAny(new[] { cancelToken.Token.WaitHandle });
+        }
+
+        private static Task Client_OnDisconnected() {
+            Console.WriteLine("Client disconnected, exiting ...");
+            cancelToken.Cancel();
+            return Task.CompletedTask;
+        }
+
+        private static Task Client_OnConnected() {
+            Console.WriteLine("Connected!");
+            return Task.CompletedTask;
         }
 
         private static Task Client_OnPlayerInfoChanged(GbxRemoteNet.Structs.SPlayerInfo playerInfo) {

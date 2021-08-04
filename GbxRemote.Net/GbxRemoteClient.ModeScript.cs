@@ -11,12 +11,6 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient {
-        /// <summary>
-        /// If true, OnModeScriptCallback is triggered in addition when the callback
-        /// is a response for a ModeScript method call.
-        /// </summary>
-        public bool InvokeEventOnModeScriptMethodResponse { get; set; }
-
         private JObject ParseModeScriptCallback(MethodCall call) {
             XmlRpcArray dataArr = (XmlRpcArray)call.Arguments[1];
             XmlRpcString dataStr = (XmlRpcString)dataArr.Values[0];
@@ -53,7 +47,7 @@ namespace GbxRemoteNet {
                     msResponses[responseId] = data;
                     msSignals[responseId].Set();
 
-                    if (!InvokeEventOnModeScriptMethodResponse)
+                    if (!Options.InvokeEventOnModeScriptMethodResponse)
                         return Task.CompletedTask;
                 }
             }

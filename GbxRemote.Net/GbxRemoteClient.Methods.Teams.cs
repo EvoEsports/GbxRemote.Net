@@ -95,7 +95,7 @@ namespace GbxRemoteNet {
         /// <param name="playerLogin"></param>
         /// <param name="cameraType"></param>
         /// <returns></returns>
-        public async Task<bool> ForcePlayerTeamAsync(int playerLogin, int cameraType) =>
+        public async Task<bool> ForcePlayerTeamAsync(string playerLogin, int cameraType) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ForcePlayerTeam", playerLogin, cameraType)
             );
