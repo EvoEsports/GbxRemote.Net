@@ -30,6 +30,8 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.Utils {
         [InlineData("$zTest", "Test")]
         [InlineData("$ZTest", "Test")]
         [InlineData("$$Test", "Test")]
+        [InlineData("$<Test", "Test")]
+        [InlineData("$>Test", "Test")]
         public void CleanTMFormatting_Cleans_Control_Chars(string input, string expected) {
             string cleaned = input.CleanTMFormatting();
 
