@@ -49,45 +49,27 @@ dotnet add package GbxRemote.Net
 The following guide will give you an introduction on how to use the library. Make sure you also check out the [Examples](Examples/) for more complete examples on the usage.
 
 ## Creating an Async Context
-The client uses the task async pattern, which means you will have to manage an async context. An easy way to setup your program is this:
+The client uses the task async pattern, which means you will have to manage an async context. There are two ways for you to do this.
 
-.NET 2:
+If your program just starts directly off in an async context, all you need to do is use the async main method:
 ```csharp
-static async Task MainAsync(string[] args) {
+private static async Task Main(string[] args) {
+    // program code here ...
+
+    await Task.Delay(-1); // wait forever
+}
+```
+
+If you don't have an async context already from the start of the program, the other way is using the classic method with GetAwaiter:
+```csharp
+static async Task MyAsyncMethod() {
     // program code here ...
     
     Task.Delay(-1); // wait forever
 }
 
-static void Main(string[] args) {
-    MainAsync(args).GetAwaiter().GetResult();
-}
-```
-
-.NET 5:
-```csharp
-private static async Task Main(string[] args)
-{
-    GbxRemoteClient client = new("127.0.0.1", 5000);  // default values
-    await client.LoginAsync("SuperAdmin", "SuperAdmin"); // default values
-    client.OnAnyCallback += Client_OnAnyCallback;
-    await client.EnableCallbacksAsync(true);
-    await client.ChatSendServerMessageAsync("[GbxRemote.net] successfully connected.");
-
-
-    await Task.Delay(-1); // wait forever
-}
-
-private static Task Client_OnAnyCallback(GbxRemoteNet.XmlRpc.Packets.MethodCall call, object[] pars)
-{
-    switch (call.Method)
-    {
-        case "ManiaPlanet.PlayerChat":
-            Console.WriteLine($"[{(string)pars[1]}] { (string)pars[2]}");
-            break;
-    }
-
-    return Task.CompletedTask;
+static void Main() {
+    MyAsyncMethod().GetAwaiter().GetResult();
 }
 ```
 
