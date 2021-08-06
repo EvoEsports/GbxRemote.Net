@@ -15,7 +15,7 @@ using System.Xml.Linq;
 
 namespace BasicExample {
     class Program {
-        static async Task MainAsync(string[] args) {
+        static async Task Main(string[] args) {
             // create client instance
             GbxRemoteClient client = new("trackmania.test.server", 5001);
 
@@ -37,10 +37,6 @@ namespace BasicExample {
 
             // disconnect and clean up
             await client.DisconnectAsync();
-        }
-
-        static void Main(string[] args) {
-            MainAsync(args).GetAwaiter().GetResult();
         }
     }
 }

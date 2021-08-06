@@ -12,7 +12,7 @@ namespace ModeScriptExample {
         // create client instance
         static GbxRemoteClient client = new("trackmania.test.server", 5001);
 
-        static async Task MainAsync(string[] args) {
+        static async Task Main(string[] args) {
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {
                 Console.WriteLine("Failed to login.");
@@ -43,10 +43,6 @@ namespace ModeScriptExample {
                 var player = await client.GetPlayerInfoAsync(playerLogin);
                 Console.WriteLine($"{player.NickName } gave up");
             }
-        }
-
-        static void Main(string[] args) {
-            MainAsync(args).GetAwaiter().GetResult();
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MulticallExample {
     class Program {
-        static async Task MainAsync() {
+        static async Task Main() {
             // create client instance
             GbxRemoteClient client = new("trackmania.test.server", 5001);
 
@@ -42,10 +42,6 @@ namespace MulticallExample {
 
             // disconnect and clean up
             await client.DisconnectAsync();
-        }
-
-        static void Main(string[] args) {
-            MainAsync().GetAwaiter().GetResult();
         }
     }
 }
