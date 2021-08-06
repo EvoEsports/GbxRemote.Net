@@ -1,13 +1,11 @@
-using System;
-
 namespace GbxRemoteNet.Structs {
     public class LadderStats {
-        public double LastMatchScore;
-        public int NbrMatchWins;
-        public int NbrMatchDraws;
-        public int NbrMatchLosses;
-        public string TeamName;
-        public ZoneRanking[] PlayerRankings;
-        public object[] TeamRankings;
+        public double LastMatchScore { get; set; }
+        public int NbrMatchWins { get; set; }
+        public int NbrMatchDraws { get; set; }
+        public int NbrMatchLosses { get; set; }
+        public string TeamName { get; set; }
+        public ZoneRanking[] PlayerRankings { get; set; }
+        public object[] TeamRankings { get; set; }
     }
 }

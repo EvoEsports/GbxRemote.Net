@@ -1,46 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GbxRemoteNet.Structs {
+﻿namespace GbxRemoteNet.Structs {
     public class SPlayerRanking {
         /// <summary>
         /// TM2020
         /// </summary>
-        public string Login;
+        public string Login { get; set; }
         /// <summary>
         /// TM2020
         /// </summary>
-        public string NickName;
+        public string NickName { get; set; }
         /// <summary>
         /// TM2020
         /// </summary>
-        public string PlayerId;
+        public string PlayerId { get; set; }
         /// <summary>
         /// TM2020
         /// </summary>
-        public int Rank;
+        public int Rank { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        public int BestTime;
+        public int BestTime { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        public int[] BestCheckpoints;
+        public int[] BestCheckpoints { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        public int Score;
+        public int Score { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        public int NbrLapsFinished;
+        public int NbrLapsFinished { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        public double LadderScore;
+        public double LadderScore { get; set; }
     }
 }

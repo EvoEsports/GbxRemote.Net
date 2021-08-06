@@ -1,8 +1,8 @@
 ﻿namespace GbxRemoteNet.Structs {
     public class ScriptCommandDescs {
-        public string Name;
-        public string Desc;
-        public string Type;
-        public string Default;
+        public string Name { get; set; }
+        public string Desc { get; set; }
+        public string Type { get; set; }
+        public string Default { get; set; }
     }
 }

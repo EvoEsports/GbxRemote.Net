@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GbxRemoteNet.Structs {
+﻿namespace GbxRemoteNet.Structs {
     public class LobbyInfo {
-        public bool IsLobby;
-        public int LobbyPlayers;
-        public int LobbyMaxPlayers;
-        public double LobbyPlayersLevel;
+        public bool IsLobby { get; set; }
+        public int LobbyPlayers { get; set; }
+        public int LobbyMaxPlayers { get; set; }
+        public double LobbyPlayersLevel { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace CallbackExample {
     class Program {
         static CancellationTokenSource cancelToken = new CancellationTokenSource();
 
-        static async Task MainAsync(string[] args) {
+        static async Task Main(string[] args) {
             // create client instance
             GbxRemoteClient client = new("trackmania.test.server", 5001);
 
@@ -116,10 +116,6 @@ namespace CallbackExample {
             }
 
             return Task.CompletedTask;
-        }
-
-        static void Main(string[] args) {
-            MainAsync(args).GetAwaiter().GetResult();
         }
     }
 }

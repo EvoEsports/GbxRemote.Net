@@ -8,7 +8,7 @@
     
 </div>
 
-A library for interacting with the [XML-RPC](http://xmlrpc.com/) protocol of [TrackMania](https://www.trackmania.com/) servers and similar titles built with [.NET Core](https://dotnet.microsoft.com/download). It is built using the [async task pattern](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/task-asynchronous-programming-model). It comes with pre-made methods for all the [documented XML-RPC methods](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Methods) provided by the trackmania server and allows you to easily hook into and react on callbacks. Interacting with [ModeScript](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Modescript-documentation) is also simplified through special features.
+A library for interacting with the [XML-RPC](http://xmlrpc.com/) protocol of [TrackMania](https://www.trackmania.com/) servers and similar titles built with [.NET 5](https://dotnet.microsoft.com/download). It is built using the [task async pattern (TAP)](https://docs.microsoft.com/en-us/dotnet/standard/asynchronous-programming-patterns/task-based-asynchronous-pattern-tap). It comes with pre-made methods for all the [documented XML-RPC methods](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Methods) provided by the trackmania server and allows you to easily hook into and react on callbacks. Interacting with [ModeScript](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Modescript-documentation) is also simplified through special features.
 
 # Table of Contents
 - [Table of Contents](#table-of-contents)
@@ -49,16 +49,27 @@ dotnet add package GbxRemote.Net
 The following guide will give you an introduction on how to use the library. Make sure you also check out the [Examples](Examples/) for more complete examples on the usage.
 
 ## Creating an Async Context
-The client uses the task async pattern, which means you will have to manage an async context. An easy way to setup your program is this:
+The client uses the task async pattern, which means you will have to manage an async context. There are two ways for you to do this.
+
+If your program just starts directly off in an async context, all you need to do is use the async main method:
 ```csharp
-static async Task MainAsync(string[] args) {
+static async Task Main(string[] args) {
+    // program code here ...
+
+    await Task.Delay(-1); // wait forever
+}
+```
+
+If you don't have an async context already from the start of the program, the other way is using the classic method with GetAwaiter:
+```csharp
+static async Task MyAsyncMethod() {
     // program code here ...
     
     Task.Delay(-1); // wait forever
 }
 
-static void Main(string[] args) {
-    MainAsync(args).GetAwaiter().GetResult();
+static void Main() {
+    MyAsyncMethod().GetAwaiter().GetResult();
 }
 ```
 

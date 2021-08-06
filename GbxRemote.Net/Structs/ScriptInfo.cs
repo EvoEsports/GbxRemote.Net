@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GbxRemoteNet.Structs {
+﻿namespace GbxRemoteNet.Structs {
     public class ScriptInfo {
-        public string Name;
-        public string CompatibleMapTypes;
-        public string Description;
-        public string Version;
-        public ScriptParamDesc[] ParamDescs;
-        public ScriptCommandDescs[] CommandDescs;
+        public string Name { get; set; }
+        public string CompatibleMapTypes { get; set; }
+        public string Description { get; set; }
+        public string Version { get; set; }
+        public ScriptParamDesc[] ParamDescs { get; set; }
+        public ScriptCommandDescs[] CommandDescs { get; set; }
     }
 }
