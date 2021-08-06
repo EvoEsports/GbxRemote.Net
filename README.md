@@ -53,7 +53,7 @@ The client uses the task async pattern, which means you will have to manage an a
 
 If your program just starts directly off in an async context, all you need to do is use the async main method:
 ```csharp
-private static async Task Main(string[] args) {
+static async Task Main(string[] args) {
     // program code here ...
 
     await Task.Delay(-1); // wait forever
