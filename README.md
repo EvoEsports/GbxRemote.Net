@@ -65,7 +65,7 @@ If you don't have an async context already from the start of the program, the ot
 static async Task MyAsyncMethod() {
     // program code here ...
     
-    Task.Delay(-1); // wait forever
+    await Task.Delay(-1); // wait forever
 }
 
 static void Main() {
