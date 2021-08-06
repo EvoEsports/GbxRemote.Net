@@ -50,6 +50,8 @@ The following guide will give you an introduction on how to use the library. Mak
 
 ## Creating an Async Context
 The client uses the task async pattern, which means you will have to manage an async context. An easy way to setup your program is this:
+
+.NET 2:
 ```csharp
 static async Task MainAsync(string[] args) {
     // program code here ...
@@ -59,6 +61,33 @@ static async Task MainAsync(string[] args) {
 
 static void Main(string[] args) {
     MainAsync(args).GetAwaiter().GetResult();
+}
+```
+
+.NET 5:
+```csharp
+private static async Task Main(string[] args)
+{
+    GbxRemoteClient client = new("127.0.0.1", 5000);  // default values
+    await client.LoginAsync("SuperAdmin", "SuperAdmin"); // default values
+    client.OnAnyCallback += Client_OnAnyCallback;
+    await client.EnableCallbacksAsync(true);
+    await client.ChatSendServerMessageAsync("[GbxRemote.net] successfully connected.");
+
+
+    await Task.Delay(-1); // wait forever
+}
+
+private static Task Client_OnAnyCallback(GbxRemoteNet.XmlRpc.Packets.MethodCall call, object[] pars)
+{
+    switch (call.Method)
+    {
+        case "ManiaPlanet.PlayerChat":
+            Console.WriteLine($"[{(string)pars[1]}] { (string)pars[2]}");
+            break;
+    }
+
+    return Task.CompletedTask;
 }
 ```
 
