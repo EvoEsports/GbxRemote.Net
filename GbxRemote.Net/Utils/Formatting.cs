@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace GbxRemoteNet.Utils {
     public static class Formatting {
         const string HexCharset = "0123456789ABCDEF";
+        static Regex formatCleaner = new Regex(@"\$((L|H)\[.+\]|[\da-f]{3}|[\w\$\<\>]{1})", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         public static string CleanTMFormatting(this string str) {
-            return Regex.Replace(str, @"\$(L\[.+\]|[0-9a-fA-F]{3}|[\w\$\<\>]{1})", "", RegexOptions.IgnoreCase);
+            return formatCleaner.Replace(str, "");
         }
 
         public static string TmColor(byte r, byte g, byte b) {
