@@ -48,7 +48,7 @@ namespace GbxRemoteNet {
         /// <param name="method"></param>
         /// <param name="args"></param>
         /// <returns></returns>
-        private async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
+        public async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args) {
             var msg = await CallAsync(method, MethodArgs(args));
 
             if (msg.IsFault) {
@@ -57,6 +57,16 @@ namespace GbxRemoteNet {
             }
 
             return msg.ResponseData;
+        }
+
+        /// <summary>
+        /// Call a remote method on the server and return the recieved message.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public async Task<ResponseMessage> CallMethodAsync(string method, params object[] args) {
+            return await CallAsync(method, MethodArgs(args));
         }
 
         /// <summary>
