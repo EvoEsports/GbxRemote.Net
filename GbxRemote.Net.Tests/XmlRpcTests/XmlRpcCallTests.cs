@@ -79,7 +79,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
     </param>
     <param>
       <value>
-        <dateTime.iso8601>2021-04-06T16:36:44.1557489+02:00</dateTime.iso8601>
+        <dateTime.iso8601>2021-04-06T14:36:44.1557489Z</dateTime.iso8601>
       </value>
     </param>
     <param>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace GbxRemoteNet.XmlRpc.Types {
         }
 
         public XmlRpcDouble(XElement element) : base(element) {
-            Value = Convert.ToDouble(element.Value);
+            Value = Convert.ToDouble(element.Value, CultureInfo.InvariantCulture);
         }
 
         public bool Equals(XmlRpcDouble other) {
