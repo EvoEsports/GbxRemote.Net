@@ -38,7 +38,7 @@ namespace GbxRemoteNet.XmlRpc
         public string GenerateXML()
         {
             StringWriter sw = new StringWriter();
-            MainDocument.Save(sw);
+            MainDocument.Save(sw, SaveOptions.DisableFormatting);
             return sw.ToString();
         }
     }

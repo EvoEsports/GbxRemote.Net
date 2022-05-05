@@ -11,8 +11,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GbxRemoteNet.XmlRpc {
-    public class NadeoXmlRpcClient {
+namespace GbxRemoteNet.XmlRpc
+{
+    public class NadeoXmlRpcClient
+    {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         uint handler = 0x80000000;
@@ -55,7 +57,8 @@ namespace GbxRemoteNet.XmlRpc {
         /// </summary>
         public event TaskAction OnDisconnected;
 
-        public NadeoXmlRpcClient(string host, int port) {
+        public NadeoXmlRpcClient(string host, int port)
+        {
             connectHost = host;
             connectPort = port;
         }
@@ -63,11 +66,14 @@ namespace GbxRemoteNet.XmlRpc {
         /// <summary>
         /// Handles all responses from the XML-RPC server.
         /// </summary>
-        private async void RecvLoop() {
-            try {
+        private async void RecvLoop()
+        {
+            try
+            {
                 logger.Debug("Recieve loop initiated.");
 
-                while (!recvCancel.IsCancellationRequested) {
+                while (!recvCancel.IsCancellationRequested)
+                {
                     ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
                     logger.Trace("================== MESSAGE START ==================");
@@ -77,17 +83,22 @@ namespace GbxRemoteNet.XmlRpc {
                     logger.Trace(response.MessageXml);
                     logger.Trace("================== MESSAGE END ==================");
 
-                    if (response.IsCallback) {
+                    if (response.IsCallback)
+                    {
                         // invoke listeners and
                         // run callback handler in a new thread to avoid blocking of new responses
                         _ = Task.Run(() => OnCallback?.Invoke(new MethodCall(response)));
-                    } else if (responseHandles.ContainsKey(response.Header.Handle)) {
+                    }
+                    else if (responseHandles.ContainsKey(response.Header.Handle))
+                    {
                         // attempt to signal the call method
                         responseMessages[response.Header.Handle] = response;
                         responseHandles[response.Header.Handle].Set();
                     }
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 logger.Error(e, $"Receive loop raised an exception: {e.Message}");
                 await DisconnectAsync();
             }
@@ -99,20 +110,25 @@ namespace GbxRemoteNet.XmlRpc {
         /// <param name="retries">Number of times to re-try connection.</param>
         /// <param name="retryTimeout">Number of milliseconds to wait between each re-try.</param>
         /// <returns></returns>
-        public async Task<bool> ConnectAsync(int retries=0, int retryTimeout=1000) {
+        public async Task<bool> ConnectAsync(int retries = 0, int retryTimeout = 1000)
+        {
             logger.Debug("Client connecting to the remote XML-RPC server.");
             var connectAddr = await Dns.GetHostAddressesAsync(connectHost);
 
             tcpClient = new TcpClient();
 
             // try to connect
-            while (retries >= 0) {
-                try {
+            while (retries >= 0)
+            {
+                try
+                {
                     await tcpClient.ConnectAsync(connectAddr[0], connectPort);
 
                     if (tcpClient.Connected)
                         break;
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     logger.Error(e, $"Exception occured when trying to connect to server: {e.Message}");
                 }
 
@@ -135,7 +151,8 @@ namespace GbxRemoteNet.XmlRpc {
 
             // check header
             ConnectHeader header = await ConnectHeader.FromIOAsync(xmlRpcIO);
-            if (!header.IsValid) {
+            if (!header.IsValid)
+            {
                 logger.Error("Client is using an invalid header protocol: {header.protocol}", header.Protocol);
                 throw new Exception($"Invalid protocol: {header.Protocol}");
             }
@@ -152,13 +169,17 @@ namespace GbxRemoteNet.XmlRpc {
         /// Stop the recieve loop and disconnect.
         /// </summary>
         /// <returns></returns>
-        public async Task DisconnectAsync() {
+        public async Task DisconnectAsync()
+        {
             logger.Debug("Client is disconnecting from XML-RPC server.");
-            try {
+            try
+            {
                 recvCancel.Cancel();
                 await taskRecvLoop;
                 tcpClient.Close();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 logger.Warn(e, "An exception occured when trying to disconnect: {message}");
             }
 
@@ -171,9 +192,11 @@ namespace GbxRemoteNet.XmlRpc {
         /// Get the next handler value.
         /// </summary>
         /// <returns>The next handle value.</returns>
-        public async Task<uint> GetNextHandle() {
+        public async Task<uint> GetNextHandle()
+        {
             // lock because we may access this in multiple threads
-            lock (handlerLock) {
+            lock (handlerLock)
+            {
                 if (handler + 1 == 0xffffffff)
                     handler = 0x80000000;
 
@@ -189,7 +212,8 @@ namespace GbxRemoteNet.XmlRpc {
         /// <param name="method">Method name</param>
         /// <param name="args">Arguments to the method if available.</param>
         /// <returns>Response returned by the call.</returns>
-        public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args) {
+        public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args)
+        {
             uint handle = await GetNextHandle();
             MethodCall call = new(method, handle, args);
 

@@ -6,18 +6,21 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GbxRemoteNet.XmlRpc {
+namespace GbxRemoteNet.XmlRpc
+{
     /// <summary>
     /// Handles reading and writing to the XML-RPC server.
     /// </summary>
-    public class XmlRpcIO {
+    public class XmlRpcIO
+    {
         Stream stream;
 
         /// <summary>
         /// Create a new instance using the provided TCP connection.
         /// </summary>
         /// <param name="tcpClient">Instance to an active TCP connection.</param>
-        public XmlRpcIO(TcpClient tcpClient) {
+        public XmlRpcIO(TcpClient tcpClient)
+        {
             stream = tcpClient.GetStream();
         }
 
@@ -25,7 +28,8 @@ namespace GbxRemoteNet.XmlRpc {
         /// Creates a new instance using a stream.
         /// </summary>
         /// <param name="stream">This should be a stream that implements the XML-RPC protocol.</param>
-        public XmlRpcIO(Stream stream) {
+        public XmlRpcIO(Stream stream)
+        {
             this.stream = stream;
         }
 
@@ -37,10 +41,12 @@ namespace GbxRemoteNet.XmlRpc {
         /// </summary>
         /// <param name="n">Number of bytes to read.</param>
         /// <returns>The bytes that was read from the connection.</returns>
-        public async Task<byte[]> ReadBytesAsync(int n) {
+        public async Task<byte[]> ReadBytesAsync(int n)
+        {
             byte[] data = new byte[n];
             int count = 0;
-            while (n - count > 0) {
+            while (n - count > 0)
+            {
                 count += await stream.ReadAsync(data.AsMemory(count, n - count));
             }
             return data;
@@ -51,7 +57,8 @@ namespace GbxRemoteNet.XmlRpc {
         /// </summary>
         /// <param name="bytes">The bytes to write.</param>
         /// <returns></returns>
-        public async Task WriteBytesAsync(byte[] bytes) {
+        public async Task WriteBytesAsync(byte[] bytes)
+        {
             await stream.WriteAsync(bytes.AsMemory(0, bytes.Length));
             await stream.FlushAsync();
         }
