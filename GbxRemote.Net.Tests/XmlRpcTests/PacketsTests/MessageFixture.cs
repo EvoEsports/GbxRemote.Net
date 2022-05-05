@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
-    public class MessageFixture : IDisposable {
+namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests
+{
+    public class MessageFixture : IDisposable
+    {
         public readonly byte[] ConnectionHeaderBytes = new byte[] { 0xa, 0x0, 0x0, 0x0, 0x54, 0x65, 0x73, 0x74, 0x20, 0x49, 0x6e, 0x70, 0x75, 0x74 };
 
         public readonly byte[] MethodCallHeaderBytes = new byte[] { 0x63, 0x04, 0x0, 0x0, 0x05, 0x0, 0x0, 0x00 };
@@ -72,24 +74,29 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.PacketsTests {
         public readonly MessageHeader ExampleMethodResponseHeader = new(10, 0x80000005);
         public readonly MessageHeader ExampleMethodCallHeader = new(10, 0x5);
 
-        public void Dispose() {
+        public void Dispose()
+        {
         }
 
-        public XmlRpcIO NewIO(byte[] bytes) {
+        public XmlRpcIO NewIO(byte[] bytes)
+        {
             MemoryStream ms = new(bytes);
             return new XmlRpcIO(ms);
         }
 
-        public XmlRpcIO NewIO(string s) {
+        public XmlRpcIO NewIO(string s)
+        {
             return NewIO(Encoding.UTF8.GetBytes(s));
         }
 
-        public ResponseMessage GetMessage(byte[] bytes) {
+        public ResponseMessage GetMessage(byte[] bytes)
+        {
             XmlRpcIO io = NewIO(bytes);
             return ResponseMessage.FromIOAsync(io).GetAwaiter().GetResult();
         }
 
-        public ResponseMessage GetMessage(uint handle, string s) {
+        public ResponseMessage GetMessage(uint handle, string s)
+        {
             return new ResponseMessage(new MessageHeader(s.Length, handle), s);
         }
     }

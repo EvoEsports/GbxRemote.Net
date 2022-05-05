@@ -37,7 +37,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.TypesTests {
             XmlRpcDateTime entry7 = (XmlRpcDateTime)array.Values[6];
             XmlRpcBase64 entry8 = (XmlRpcBase64)array.Values[7];
 
-            DateTime expectedDateTime = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00");
+            DateTime expectedDateTime = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime();
             Base64 expectedBase64 = Base64.FromBase64String("VGVzdCBCYXNlNjQgU3RyaW5n");
 
             Assert.Equal(1, entry1.Value);
@@ -197,7 +197,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.TypesTests {
             int value10 = ((XmlRpcInteger)((XmlRpcArray)strct.Fields["Key8"]).Values[2]).Value;
 
             byte[] expectedValue6 = Base64.FromBase64String("VGVzdCBCYXNlNjQgU3RyaW5n").Data;
-            DateTime expectedValue7 = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00");
+            DateTime expectedValue7 = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime();
 
             Assert.Equal(1, value1);
             Assert.Equal(-2, value2);

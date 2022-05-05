@@ -48,9 +48,9 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.TypesTests {
         }
 
         [Theory]
-        [InlineData("2021-04-06T16:36:44.1557489+02:00", "<dateTime.iso8601>2021-04-06T16:36:44.1557489+02:00</dateTime.iso8601>")]
+        [InlineData("2021-04-06T16:36:44.1557489+02:00", "<dateTime.iso8601>2021-04-06T14:36:44.1557489Z</dateTime.iso8601>")]
         public void XmlRpcDateTime_GetXml_Returns_Correct_Element(string dtstring, string expected) {
-            XmlRpcDateTime datetime = new(DateTime.Parse(dtstring));
+            XmlRpcDateTime datetime = new(DateTime.Parse(dtstring).ToUniversalTime());
 
             string xml = datetime.GetXml().ToString();
 
@@ -60,7 +60,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.TypesTests {
         [Fact]
         public void XmlRpcDateTime_Correctly_Parses_XElement() {
             XElement element = new("value", "2021-04-06T16:36:44.1557489+02:00");
-            DateTime expected = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00");
+            DateTime expected = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime();
 
             XmlRpcDateTime datetime = new(element);
 

@@ -13,11 +13,11 @@ namespace GbxRemoteNet.XmlRpc.Types {
         public DateTime Value;
 
         public XmlRpcDateTime(DateTime value) : base(null) {
-            Value = value;
+            Value = value.ToUniversalTime();
         }
 
         public XmlRpcDateTime(XElement element) : base(element) {
-            Value = DateTime.Parse(element.Value);
+            Value = DateTime.Parse(element.Value).ToUniversalTime();
         }
 
         public bool Equals(XmlRpcDateTime other) {

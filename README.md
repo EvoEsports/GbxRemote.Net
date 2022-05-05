@@ -33,6 +33,10 @@ A library for interacting with the [XML-RPC](http://xmlrpc.com/) protocol of [Tr
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 
+# Support
+We give limited support for this library via our [Discord server](https://discord.gg/evotm) - if you have any questions on how to use this, please check out the User Guide below and the source code documentation first and foremost. If you're still stuck afterwards, feel free to ask in the #support channel on our Discord server.
+Please do not message any of the maintainers privately about getting support for this library.
+
 # Installation
 The client library is available on [Nuget](https://www.nuget.org/packages/GbxRemote.Net).
 
