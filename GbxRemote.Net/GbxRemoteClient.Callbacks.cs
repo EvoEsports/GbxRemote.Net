@@ -70,7 +70,20 @@ namespace GbxRemoteNet {
         /// <param name="statusName">A friendly string that represents the status.</param>
         /// <returns></returns>
         public delegate Task StatusChangedAction(int statusCode, string statusName);
+        /// <summary>
+        /// Action for when player info changed.
+        /// </summary>
+        /// <param name="playerUIid">New information about the player.</param>
         public delegate Task PlayerInfoChangedAction(SPlayerInfo playerInfo);
+        /// <summary>
+        /// Action for the OnStatusChanged event.
+        /// </summary>
+        /// <param name="playerUIid">Player's server ID</param>
+        /// <param name="login">Login of the player.</param>
+        /// <param name="answer">String representing the answer.</param>
+        /// <param name="entries">Key/Value of entries.</param>
+        /// <returns></returns>
+        public delegate Task PlayerManialinkPageAnswerAction(int playerUid, string login, string answer, SEntryVal[] entries);
 
         /// <summary>
         /// Triggered for all possible callbacks.
@@ -118,6 +131,10 @@ namespace GbxRemoteNet {
         /// a player joins or leaves. Gives you more detailed info about a player.
         /// </summary>
         public event PlayerInfoChangedAction OnPlayerInfoChanged;
+        /// <summary>
+        /// When a user triggers the page answer callback from a manialink.
+        /// </summary>
+        public event PlayerManialinkPageAnswerAction OnPlayerManialinkPageAnswer;
 
         /// <summary>
         /// Enable callbacks. If no parameter is provided,
@@ -214,6 +231,15 @@ namespace GbxRemoteNet {
                 case "ManiaPlanet.ModeScriptCallbackArray":
                 case "TrackMania.ModeScriptCallbackArray":
                     await HandleModeScriptCallback(call);
+                    break;
+                case "ManiaPlanet.PlayerManialinkPageAnswer":
+                case "TrackMania.PlayerManialinkPageAnswer":
+                    OnPlayerManialinkPageAnswer?.Invoke(
+                        (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[2]),
+                        (SEntryVal[])XmlRpcTypes.ToNativeValue<SEntryVal>(call.Arguments[3])
+                    );
                     break;
             }
 

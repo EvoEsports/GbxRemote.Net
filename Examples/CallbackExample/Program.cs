@@ -6,6 +6,7 @@ using System;
 using System.Dynamic;
 using System.Threading;
 using System.Threading.Tasks;
+using GbxRemoteNet.Structs;
 
 namespace CallbackExample {
     class Program {
@@ -13,7 +14,7 @@ namespace CallbackExample {
 
         static async Task Main(string[] args) {
             // create client instance
-            GbxRemoteClient client = new("trackmania.test.server", 5001);
+            GbxRemoteClient client = new("trackmania.test.server", 5000);
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {
@@ -34,6 +35,7 @@ namespace CallbackExample {
             client.OnEndMap += Client_OnEndMap;
             client.OnStatusChanged += Client_OnStatusChanged;
             client.OnPlayerInfoChanged += Client_OnPlayerInfoChanged;
+            client.OnPlayerManialinkPageAnswer += ClientOnOnPlayerManialinkPageAnswer;
 
             client.OnConnected += Client_OnConnected;
             client.OnDisconnected += Client_OnDisconnected;
@@ -43,6 +45,12 @@ namespace CallbackExample {
 
             // wait indefinitely or until disconnect
             WaitHandle.WaitAny(new[] { cancelToken.Token.WaitHandle });
+        }
+
+        private static Task ClientOnOnPlayerManialinkPageAnswer(int playerUid, string login, string answer, SEntryVal[] entries)
+        {
+            Console.WriteLine($"Player page answer: {playerUid} | {login}, Answer: {answer}");
+            return Task.CompletedTask;
         }
 
         private static Task Client_OnDisconnected() {
