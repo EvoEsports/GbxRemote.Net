@@ -295,5 +295,25 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
 
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void DynamicObject_To_XmlRpcStruct()
+        {
+            var obj = new DynamicObject();
+            
+            obj.Add("one", 1);
+            obj.Add("two", "two");
+            obj.Add("three", 3.3);
+
+            var result = XmlRpcTypes.ToXmlRpcValue(obj);
+            var expected = new XmlRpcStruct(new Struct
+            {
+                {"one", new XmlRpcInteger(1)},
+                {"two", new XmlRpcString("two")},
+                {"three", new XmlRpcDouble(3.3)}
+            });
+            
+            Assert.Equal(expected, result);
+        }
     }
 }
