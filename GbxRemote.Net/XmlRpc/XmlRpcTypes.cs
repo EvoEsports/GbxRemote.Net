@@ -201,7 +201,7 @@ namespace GbxRemoteNet.XmlRpc {
             } else if (t == typeof(string)) { // string
                 return new XmlRpcString((string)obj);
             } else if (t == typeof(DynamicObject)) { // struct
-                return new XmlRpcStruct(obj);
+                return new XmlRpcStruct((DynamicObject)obj);
             } else if (t.IsArray) { // array
                 return ToXmlRpcArray(obj);
 
