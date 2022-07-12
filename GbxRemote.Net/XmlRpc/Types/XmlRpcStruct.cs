@@ -40,7 +40,7 @@ namespace GbxRemoteNet.XmlRpc.Types {
         /// </summary>
         /// <param name="obj"></param>
         public XmlRpcStruct(object obj) : base(null) {
-            Type t = obj.GetType();
+            var t = obj.GetType();
             var fields = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             Fields = new Struct();
 
@@ -57,7 +57,7 @@ namespace GbxRemoteNet.XmlRpc.Types {
             Fields = new Struct();
 
             foreach (var kv in obj) {
-                Fields.Add(kv.Key, XmlRpcTypes.ToXmlRpcValue(obj));
+                Fields.Add(kv.Key, XmlRpcTypes.ToXmlRpcValue(kv.Value));
             }
         }
 
