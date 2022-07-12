@@ -16,10 +16,10 @@
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>logo_square.png</PackageIcon>
-    <AssemblyVersion>1.1.8.0</AssemblyVersion>
-    <FileVersion>1.1.8.0</FileVersion>
+    <AssemblyVersion>1.1.9.0</AssemblyVersion>
+    <FileVersion>1.1.9.0</FileVersion>
     <PackageIconUrl />
-    <PackageVersion>1.1.8</PackageVersion>
+    <PackageVersion>1.1.9</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
