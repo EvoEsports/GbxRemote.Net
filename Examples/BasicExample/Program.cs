@@ -1,23 +1,15 @@
 ﻿using GbxRemoteNet;
-using GbxRemoteNet.Structs;
-using GbxRemoteNet.XmlRpc;
-using GbxRemoteNet.XmlRpc.ExtraTypes;
-using GbxRemoteNet.XmlRpc.Packets;
 using System;
-using System.Buffers.Text;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
+using Examples.Common;
+using Microsoft.Extensions.Logging;
 
 namespace BasicExample {
     class Program {
-        static async Task Main(string[] args) {
+        static async Task Main(string[] args)
+        {
             // create client instance
-            GbxRemoteClient client = new("127.0.0.1", 5000);
+            GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {
@@ -34,7 +26,7 @@ namespace BasicExample {
                 var info = await client.GetDetailedPlayerInfoAsync(player.Login);
                 Console.WriteLine($"Login: {player.Login}, NickName: {player.NickName}");
             }
-
+            
             // disconnect and clean up
             await client.DisconnectAsync();
         }

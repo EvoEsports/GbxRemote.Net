@@ -6,11 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog" Version="4.7.9" />
+    <ProjectReference Include="..\..\GbxRemote.Net\GbxRemote.Net.csproj" />
+    <ProjectReference Include="..\Examples.Common\Examples.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\GbxRemote.Net\GbxRemote.Net.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

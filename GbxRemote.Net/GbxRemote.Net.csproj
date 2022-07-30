@@ -16,10 +16,10 @@
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>logo_square.png</PackageIcon>
-    <AssemblyVersion>1.1.10.0</AssemblyVersion>
-    <FileVersion>1.1.10.0</FileVersion>
+    <AssemblyVersion>2.0.0-alpha</AssemblyVersion>
+    <FileVersion>2.0.0-alpha</FileVersion>
     <PackageIconUrl />
-    <PackageVersion>1.1.10</PackageVersion>
+    <PackageVersion>2.0.0-alpha</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,14 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="NLog" Version="4.7.9" />
   </ItemGroup>
 
   <ItemGroup>

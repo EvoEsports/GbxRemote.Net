@@ -2,16 +2,17 @@
 using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc.ExtraTypes;
 using GbxRemoteNet.XmlRpc.Types;
-using NLog.Config;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Examples.Common;
+using Microsoft.Extensions.Logging;
 
 namespace MulticallExample {
     class Program {
         static async Task Main() {
             // create client instance
-            GbxRemoteClient client = new("127.0.0.1", 5000);
+            GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {
