@@ -39,9 +39,11 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
         /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
-        public GbxRemoteClient(string host, int port, GbxRemoteClientOptions options) : base(host, port) {
+        public GbxRemoteClient(string host, int port, GbxRemoteClientOptions options, ILogger logger=null) : base(host, port) {
             OnCallback += GbxRemoteClient_OnCallback;
             Options = options;
+
+            _logger = logger;
         }
 
         /// <summary>
