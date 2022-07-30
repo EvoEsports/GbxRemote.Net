@@ -149,8 +149,23 @@ namespace GbxRemoteNet.XmlRpc
 
             logger.Debug("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
 
+            // Cancellation token to cancel task if it takes longer than a second
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource.CancelAfter(1000);
+            
             // check header
-            ConnectHeader header = await ConnectHeader.FromIOAsync(xmlRpcIO);
+            ConnectHeader header = null;
+            try
+            {
+                header = await ConnectHeader.FromIOAsync(xmlRpcIO, cancellationTokenSource.Token);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, $"Exception occured when trying to get connect header: {e.Message}");
+                logger.Error("Failed to get connect header.");
+                return false;
+            }
+            
             if (!header.IsValid)
             {
                 logger.Error("Client is using an invalid header protocol: {header.protocol}", header.Protocol);
