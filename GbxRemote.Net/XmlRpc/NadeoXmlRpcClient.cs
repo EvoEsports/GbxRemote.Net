@@ -1,6 +1,5 @@
 ﻿using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
-using NLog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,12 +9,13 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace GbxRemoteNet.XmlRpc
 {
     public class NadeoXmlRpcClient
     {
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger _logger;
 
         uint handler = 0x80000000;
         object handlerLock = new();
@@ -57,10 +57,12 @@ namespace GbxRemoteNet.XmlRpc
         /// </summary>
         public event TaskAction OnDisconnected;
 
-        public NadeoXmlRpcClient(string host, int port)
+        public NadeoXmlRpcClient(string host, int port, ILogger logger=null)
         {
             connectHost = host;
             connectPort = port;
+
+            _logger = logger;
         }
 
         /// <summary>
@@ -70,18 +72,18 @@ namespace GbxRemoteNet.XmlRpc
         {
             try
             {
-                logger.Debug("Recieve loop initiated.");
+                _logger?.LogDebug("Recieve loop initiated.");
 
                 while (!recvCancel.IsCancellationRequested)
                 {
                     ResponseMessage response = await ResponseMessage.FromIOAsync(xmlRpcIO);
 
-                    logger.Trace("================== MESSAGE START ==================");
-                    logger.Trace($"Message length: {response.Header.MessageLength}");
-                    logger.Trace($"Handle: {response.Header.Handle}");
-                    logger.Trace($"Is callback: {response.Header.IsCallback}");
-                    logger.Trace(response.MessageXml);
-                    logger.Trace("================== MESSAGE END ==================");
+                    _logger?.LogTrace("================== MESSAGE START ==================");
+                    _logger?.LogTrace("Message length: {Length}", response.Header.MessageLength);
+                    _logger?.LogTrace("Handle: {Handle}", response.Header.Handle);
+                    _logger?.LogTrace("Is callback: {IsCallback}", response.Header.IsCallback);
+                    _logger?.LogTrace("{Xml}", response.MessageXml.ToString());
+                    _logger?.LogTrace("================== MESSAGE END ==================");
 
                     if (response.IsCallback)
                     {
@@ -99,7 +101,7 @@ namespace GbxRemoteNet.XmlRpc
             }
             catch (Exception e)
             {
-                logger.Error(e, $"Receive loop raised an exception: {e.Message}");
+                _logger.LogError("Receive loop raised an exception: {Msg}", e.Message);
                 await DisconnectAsync();
             }
         }
@@ -112,7 +114,7 @@ namespace GbxRemoteNet.XmlRpc
         /// <returns></returns>
         public async Task<bool> ConnectAsync(int retries = 0, int retryTimeout = 1000)
         {
-            logger.Debug("Client connecting to the remote XML-RPC server.");
+            _logger?.LogDebug("Client connecting to the remote XML-RPC server");
             var connectAddr = await Dns.GetHostAddressesAsync(connectHost);
 
             tcpClient = new TcpClient();
@@ -129,10 +131,10 @@ namespace GbxRemoteNet.XmlRpc
                 }
                 catch (Exception e)
                 {
-                    logger.Error(e, $"Exception occured when trying to connect to server: {e.Message}");
+                    _logger?.LogError("Exception occured when trying to connect to server: {Msg}", e.Message);
                 }
 
-                logger.Error("Failed to connect to server.");
+                _logger?.LogError("Failed to connect to server");
 
                 retries--;
 
@@ -147,7 +149,7 @@ namespace GbxRemoteNet.XmlRpc
 
             xmlRpcIO = new XmlRpcIO(tcpClient);
 
-            logger.Debug("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
+            _logger?.LogDebug("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
 
             // Cancellation token to cancel task if it takes longer than a second
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
@@ -161,14 +163,14 @@ namespace GbxRemoteNet.XmlRpc
             }
             catch (Exception e)
             {
-                logger.Error(e, $"Exception occured when trying to get connect header: {e.Message}");
-                logger.Error("Failed to get connect header.");
+                _logger?.LogError("Exception occured when trying to get connect header: {Msg}", e.Message);
+                _logger?.LogError("Failed to get connect header");
                 return false;
             }
             
             if (!header.IsValid)
             {
-                logger.Error("Client is using an invalid header protocol: {header.protocol}", header.Protocol);
+                _logger?.LogError("Client is using an invalid header protocol: {Protocol}", header.Protocol);
                 throw new Exception($"Invalid protocol: {header.Protocol}");
             }
 
@@ -186,7 +188,7 @@ namespace GbxRemoteNet.XmlRpc
         /// <returns></returns>
         public async Task DisconnectAsync()
         {
-            logger.Debug("Client is disconnecting from XML-RPC server.");
+            _logger?.LogDebug("Client is disconnecting from XML-RPC server");
             try
             {
                 recvCancel.Cancel();
@@ -195,12 +197,12 @@ namespace GbxRemoteNet.XmlRpc
             }
             catch (Exception e)
             {
-                logger.Warn(e, "An exception occured when trying to disconnect: {message}");
+                _logger?.LogWarning("An exception occured when trying to disconnect: {Message}", e.Message);
             }
 
             OnDisconnected?.Invoke();
 
-            logger.Debug("Client disconnected from XML-RPC server.");
+            _logger?.LogDebug("Client disconnected from XML-RPC server");
         }
 
         /// <summary>
@@ -215,7 +217,7 @@ namespace GbxRemoteNet.XmlRpc
                 if (handler + 1 == 0xffffffff)
                     handler = 0x80000000;
 
-                logger.Trace("Next handler value: {handler}", handler);
+                _logger?.LogTrace("Next handler value: {Handler}", handler);
 
                 return handler++;
             }
@@ -232,10 +234,10 @@ namespace GbxRemoteNet.XmlRpc
             uint handle = await GetNextHandle();
             MethodCall call = new(method, handle, args);
 
-            logger.Trace("Calling remote method: {method}", method);
-            logger.Trace("================== CALL START ==================");
-            logger.Trace(call.Call.MainDocument);
-            logger.Trace("================== CALL END ==================");
+            _logger?.LogTrace("Calling remote method: {Method}", method);
+            _logger?.LogTrace("================== CALL START ==================");
+            _logger?.LogTrace("{Xml}", call.Call.MainDocument.ToString());
+            _logger?.LogTrace("================== CALL END ==================");
 
             responseHandles[handle] = new(false);
 

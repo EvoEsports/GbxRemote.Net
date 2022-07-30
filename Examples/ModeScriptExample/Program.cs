@@ -6,11 +6,13 @@ using GbxRemoteNet.XmlRpc.Types;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
+using Examples.Common;
+using Microsoft.Extensions.Logging;
 
 namespace ModeScriptExample {
     class Program {
         // create client instance
-        static GbxRemoteClient client = new("127.0.0.1", 5000);
+        static GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
 
         static async Task Main(string[] args) {
             // connect and login

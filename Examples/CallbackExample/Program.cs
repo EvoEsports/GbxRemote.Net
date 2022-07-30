@@ -6,7 +6,9 @@ using System;
 using System.Dynamic;
 using System.Threading;
 using System.Threading.Tasks;
+using Examples.Common;
 using GbxRemoteNet.Structs;
+using Microsoft.Extensions.Logging;
 
 namespace CallbackExample {
     class Program {
@@ -14,7 +16,7 @@ namespace CallbackExample {
 
         static async Task Main(string[] args) {
             // create client instance
-            GbxRemoteClient client = new("127.0.0.1", 5000);
+            GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {

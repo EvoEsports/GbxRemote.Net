@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace GbxRemoteNet {
     /// <summary>
@@ -69,7 +70,7 @@ namespace GbxRemoteNet {
             var msg = await CallAsync("system.multicall", multicallArgs);
 
             if (msg.IsFault) {
-                logger.Error("Multicall failed with reason: {message}", (XmlRpcFault)msg.ResponseData);
+                _logger?.LogError("Multicall failed with reason: {Message}", (XmlRpcFault)msg.ResponseData);
                 throw new XmlRpcFaultException((XmlRpcFault)msg.ResponseData);
             }
 

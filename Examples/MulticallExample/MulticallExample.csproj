@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\GbxRemote.Net\GbxRemote.Net.csproj" />
+    <ProjectReference Include="..\Examples.Common\Examples.Common.csproj" />
   </ItemGroup>
 
 </Project>
