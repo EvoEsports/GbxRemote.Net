@@ -43,5 +43,7 @@ namespace GbxRemoteNet.XmlRpc.Types {
         public override int GetHashCode() {
             return GetHashCode();
         }
+
+        public override string ToString() => $"({FaultCode}) {FaultString}";
     }
 }
