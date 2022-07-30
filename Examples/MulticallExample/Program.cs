@@ -11,7 +11,7 @@ namespace MulticallExample {
     class Program {
         static async Task Main() {
             // create client instance
-            GbxRemoteClient client = new("trackmania.test.server", 5001);
+            GbxRemoteClient client = new("127.0.0.1", 5000);
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {
