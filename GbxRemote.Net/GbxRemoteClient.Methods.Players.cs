@@ -54,7 +54,7 @@ namespace GbxRemoteNet {
         /// <param name="message"></param>
         /// <param name="saveToFile"></param>
         /// <returns></returns>
-        public async Task<bool> BanAndBlackListAsync(string login, string message, string saveToFile = null) =>
+        public async Task<bool> BanAndBlackListAsync(string login, string message, bool saveToFile = false) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("BanAndBlackList", login, message, saveToFile)
             );
