@@ -23,5 +23,7 @@ namespace GbxRemoteNet.XmlRpc {
         public XmlRpcFaultException(XmlRpcFault fault) {
             Fault = fault;
         }
+
+        public override string Message => $"({Fault.FaultCode}) {Fault.FaultString}";
     }
 }
