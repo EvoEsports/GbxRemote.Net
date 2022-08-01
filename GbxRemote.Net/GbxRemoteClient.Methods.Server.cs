@@ -553,7 +553,7 @@ namespace GbxRemoteNet {
             );
 
         /// <summary>
-        /// Set new server options using the struct passed as parameters. This struct must contain the following fields : Name, Comment, Password, PasswordForSpectator, NextMaxPlayers, NextMaxSpectators, IsP2PUpload, IsP2PDownload, NextLadderMode, NextVehicleNetQuality, NextCallVoteTimeOut, CallVoteRatio, AllowMapDownload, AutoSaveReplays, and optionally for forever: RefereePassword, RefereeMode, AutoSaveValidationReplays, HideServer, UseChangingValidationSeed, ClientInputsMaxLatency, DisableHorns, DisableServiceAnnounces, KeepPlayerSlots, ServerPlugin. Only available to Admin. A change of NextMaxPlayers, NextMaxSpectators, NextLadderMode, NextVehicleNetQuality, NextCallVoteTimeOut or UseChangingValidationSeed requires a map restart to be taken into account.
+        /// Set new server options using the struct passed as parameters. This struct must contain the following fields : Name, Comment, Password, PasswordForSpectator, NextCallVoteTimeOut, CallVoteRatio. May additionally include any of the other members listed in RpcGetServerOptions. Only available to Admin. A change of NextMaxPlayers, NextMaxSpectators, NextCallVoteTimeOut requires a map restart to be taken into account.
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
