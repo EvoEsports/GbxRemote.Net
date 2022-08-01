@@ -281,6 +281,8 @@ foreach (string callback in ret["callbacks"].Values<string>())
                 Console.WriteLine($"- {callback}");
 ```
 
+The complete ModeScript documentation can be found [here](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Modescript-documentation).
+
 ### Convert to native type
 You can convert the modescript response to any .NET type that supports JSON conversion. When you create a type, we recommend to inherit the `ModeScriptResponse` class.
 For example if you want to get all callbacks of the current ModeScript, we can start creating a class called ModeScriptCallbacks:
@@ -312,8 +314,6 @@ arguments and convert them to a native object:
 var (response, documentation) = await client.GetModeScriptResponseAsync<ModeScriptResponse, string>("XmlRpc.GetDocumentation");
 Console.WriteLine(documentation);
 ```
-
-The complete ModeScript documentation can be found [here](https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Modescript-documentation).
 
 ### ModeScript Callbacks
 You can listen to any ModeScript callbacks by creating a listener for the `OnModeScriptCallback` event.
