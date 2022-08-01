@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GbxRemoteNet.Structs {
+﻿namespace GbxRemoteNet.Structs {
     public class SPlayerRanking {
         /// <summary>
         /// TM2020
@@ -21,27 +19,22 @@ namespace GbxRemoteNet.Structs {
         /// <summary>
         /// Legacy
         /// </summary>
-        [Obsolete]
         public int BestTime { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        [Obsolete]
         public int[] BestCheckpoints { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        [Obsolete]
         public int Score { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        [Obsolete]
         public int NbrLapsFinished { get; set; }
         /// <summary>
         /// Legacy
         /// </summary>
-        [Obsolete]
         public double LadderScore { get; set; }
     }
 }
