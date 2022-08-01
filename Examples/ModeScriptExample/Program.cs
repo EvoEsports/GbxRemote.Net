@@ -7,9 +7,15 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Threading.Tasks;
 using Examples.Common;
+using GbxRemoteNet.Structs.ModeScript;
 using Microsoft.Extensions.Logging;
 
 namespace ModeScriptExample {
+    public class CallbacksList : ModeScriptResponse
+    {
+        public string[] Callbacks { get; set; }
+    }
+    
     class Program {
         // create client instance
         static GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
@@ -30,10 +36,12 @@ namespace ModeScriptExample {
             await client.EnableCallbackTypeAsync();
 
             // get all modescript callbacks
-            var ret = await client.GetModeScriptResponseAsync("XmlRpc.GetCallbacksList");
+            var response = await client.GetModeScriptResponseAsync<CallbacksList>("XmlRpc.GetCallbacksList");
             Console.WriteLine("ModeScript Callbacks:");
-            foreach (string callback in ret["callbacks"].Values<string>())
+            foreach (var callback in response.Callbacks)
+            {
                 Console.WriteLine($"- {callback}");
+            }
 
             // wait indefinitely
             await Task.Delay(-1);
