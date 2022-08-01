@@ -21,26 +21,6 @@ namespace GbxRemoteNet {
                 await CallOrFaultAsync("AutoSaveReplays", autoSave)
             );
 
-        /// <summary>
-        /// Enable the autosaving on the server of validation replays, every time a player makes a new time. Only available to SuperAdmin.
-        /// </summary>
-        /// <param name="autoSave"></param>
-        /// <returns></returns>
-        [Obsolete]
-        public async Task<bool> AutoSaveValidationReplaysAsync(string autoSave) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("AutoSaveValidationReplays", autoSave)
-            );
-
-        /// <summary>
-        /// Returns if autosaving of all replays is enabled on the server.
-        /// </summary>
-        /// <returns></returns>
-        [Obsolete]
-        public async Task<bool> IsAutoSaveValidationReplaysEnabledAsync() =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("IsAutoSaveValidationReplaysEnabled")
-            );
 
         /// <summary>
         /// Saves the current replay (vizualisable replays with all players, but not validable). Pass a filename, or '' for an automatic filename. Only available to Admin.
