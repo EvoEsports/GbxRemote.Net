@@ -1,4 +1,7 @@
+using System;
+
 namespace GbxRemoteNet.Structs {
+    [Obsolete]
     public class NetworkStats {
         public int Uptime { get; set; }
         public int NbrConnection { get; set; }

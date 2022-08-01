@@ -420,7 +420,7 @@ namespace GbxRemoteNet {
         /// <returns></returns>
         public async Task<PlayerRanking[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex) =>
             (PlayerRanking[])XmlRpcTypes.ToNativeValue<PlayerRanking>(
-                await CallOrFaultAsync("GetCurrentRanking")
+                await CallOrFaultAsync("GetCurrentRanking", maxInfos, startRatingIndex)
             );
 
         /// <summary>
