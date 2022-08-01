@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
+using GbxRemoteNet.XmlRpc.ExtraTypes;
 
 namespace GbxRemoteNet.Structs {
-    public class ScriptSetting : Dictionary<string, object> {
-        // todo: these options are completely dynamic, find a good way
-        // for this.
+    public class ScriptSetting : DynamicObject {
     }
 }
