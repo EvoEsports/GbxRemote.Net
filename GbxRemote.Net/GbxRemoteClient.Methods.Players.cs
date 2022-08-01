@@ -525,5 +525,14 @@ namespace GbxRemoteNet {
             (bool) XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("DisableProfileSkins", disabled)
             );
+        
+        /// <summary>
+        /// Returns whether the custom skins are disabled.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> AreProfileSkinsDisabledAsync() =>
+            (bool) XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("AreProfileSkinsDisabled")
+            );
     }
 }
