@@ -309,7 +309,7 @@ is always a XMLRPC string which contains JSON encoded data, while the other ones
 So for exampel for the method `XmlRpc.GetDocumentation` we can use an overload of `GetModeScriptResponseAsync` to get both 
 arguments and convert them to a native object:
 ```csharp
-var (response, documentation) = await client.GetModeScriptResponseAsync<ModeScriptResponse, CallbacksList>("XmlRpc.GetDocumentation");
+var (response, documentation) = await client.GetModeScriptResponseAsync<ModeScriptResponse, string>("XmlRpc.GetDocumentation");
 Console.WriteLine(documentation);
 ```
 
