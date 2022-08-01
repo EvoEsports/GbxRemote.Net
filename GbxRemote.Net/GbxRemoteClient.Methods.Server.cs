@@ -212,6 +212,7 @@ namespace GbxRemoteNet {
         /// Returns true if this is a relay server.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> IsRelayServerAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("IsRelayServer")
@@ -349,6 +350,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="enable"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> EnableP2PUploadAsync(bool enable) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("EnableP2PUpload", enable)
@@ -358,6 +360,7 @@ namespace GbxRemoteNet {
         /// Returns if the peer-to-peer upload from server is enabled.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> IsP2PUploadAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("IsP2PUpload")
@@ -368,6 +371,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="enable"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> EnableP2PDownloadAsync(bool enable) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("EnableP2PDownload", enable)
@@ -377,6 +381,7 @@ namespace GbxRemoteNet {
         /// Returns if the peer-to-peer download for server is enabled.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> IsP2PDownloadAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("IsP2PDownload")
@@ -500,6 +505,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="mode"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetLadderModeAsync(int mode) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetLadderMode", mode)
@@ -509,6 +515,7 @@ namespace GbxRemoteNet {
         /// Get the current and next ladder mode on server. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetLadderModeAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetLadderMode")
@@ -518,6 +525,7 @@ namespace GbxRemoteNet {
         /// Get the ladder points limit for the players allowed on this server. The struct returned contains two fields LadderServerLimitMin and LadderServerLimitMax.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<LadderServerLimits> GetLadderServerLimitsAsync() =>
             (LadderServerLimits)XmlRpcTypes.ToNativeValue<LadderServerLimits>(
                 await CallOrFaultAsync("GetLadderServerLimits")
@@ -528,6 +536,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="quality"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetVehicleNetQualityAsync(int quality) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetVehicleNetQuality", quality)
@@ -537,6 +546,7 @@ namespace GbxRemoteNet {
         /// Get the current and next network vehicle quality on server. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetVehicleNetQualityAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetVehicleNetQuality")
@@ -634,6 +644,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetRefereePasswordAsync(string password) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetRefereePassword", password)
@@ -643,6 +654,7 @@ namespace GbxRemoteNet {
         /// Get the password for referee mode if called as Admin or Super Admin, else returns if a password is needed or not.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<string> GetRefereePasswordAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("GetRefereePassword")
@@ -653,6 +665,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="mode"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetRefereeModeAsync(int mode) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetRefereeMode", mode)
@@ -662,6 +675,7 @@ namespace GbxRemoteNet {
         /// Get the referee validation mode.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<int> GetRefereeModeAsync() =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("GetRefereeMode")
@@ -672,6 +686,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="useValidationSeed"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetUseChangingValidationSeedAsync(int useValidationSeed) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetUseChangingValidationSeed", useValidationSeed)
@@ -681,6 +696,7 @@ namespace GbxRemoteNet {
         /// Get the current and next value of UseChangingValidationSeed. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<bool>> GetUseChangingValidationSeedAsync() =>
             (CurrentNextValue<bool>)XmlRpcTypes.ToNativeValue<CurrentNextValue<bool>>(
                 await CallOrFaultAsync("GetUseChangingValidationSeed")

@@ -134,6 +134,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="chatTime">0 means no podium displayed.</param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetChatTimeAsync(int chatTime) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetChatTime", chatTime)
@@ -143,6 +144,7 @@ namespace GbxRemoteNet {
         /// Get the current and next chat time. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetChatTimeAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetChatTime")

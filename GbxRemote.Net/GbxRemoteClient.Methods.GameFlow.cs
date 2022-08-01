@@ -42,6 +42,7 @@ namespace GbxRemoteNet {
         /// In Rounds or Laps mode, force the end of round without waiting for all players to giveup/finish. Only available to Admin.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> ForceEndRoundAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ForceEndRound")
@@ -55,6 +56,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="gameInfo"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetGameInfosAsync(GameInfo gameInfo) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetGameInfos", gameInfo)
@@ -64,6 +66,7 @@ namespace GbxRemoteNet {
         /// Returns a struct containing the current game settings.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<GameInfo> GetCurrentGameInfoAsync() =>
             (GameInfo)XmlRpcTypes.ToNativeValue<GameInfo>(
                 await CallOrFaultAsync("GetCurrentGameInfo")
@@ -73,6 +76,7 @@ namespace GbxRemoteNet {
         /// Returns a struct containing the game settings for the next map.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<GameInfo> GetNextGameInfoAsync() =>
             (GameInfo)XmlRpcTypes.ToNativeValue<GameInfo>(
                 await CallOrFaultAsync("GetNextGameInfo")
@@ -82,6 +86,7 @@ namespace GbxRemoteNet {
         /// Returns a struct containing two other structures, the first containing the current game settings and the second the game settings for next map. The first structure is named CurrentGameInfos and the second NextGameInfos.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<GameInfo>> GetGameInfosAsync() =>
             (CurrentNextValue<GameInfo>)XmlRpcTypes.ToNativeValue<CurrentNextValue<GameInfo>>(
                 await CallOrFaultAsync("GetGameInfos")
@@ -92,6 +97,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="gamemode">Script (0), Rounds (1), TimeAttack (2), Team (3), Laps (4), Cup (5) and Stunts (6).</param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetGameModeAsync(int gamemode) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetGameMode", gamemode)
@@ -101,6 +107,7 @@ namespace GbxRemoteNet {
         /// Get the current game mode.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<int> GetGamemodeAsync() =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("GetGameMode")
@@ -111,6 +118,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="useWarmup"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetWarmUpAsync(bool useWarmup) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetWarmUp", useWarmup)
@@ -120,6 +128,7 @@ namespace GbxRemoteNet {
         /// Returns whether the server is in warm-up phase.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> GetWarmUpAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("GetWarmUp")
@@ -130,6 +139,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="finishTimeout">0 means default. 1 means adaptative to the duration of the map.</param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetFinishTimeoutAsync(int finishTimeout) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetFinishTimeout", finishTimeout)
@@ -139,6 +149,7 @@ namespace GbxRemoteNet {
         /// Get the current and next FinishTimeout. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetFinishTimeoutAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetFinishTimeout")
@@ -149,6 +160,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="warmupDuration">0 = no, otherwise it's the duration of the phase, expressed in number of rounds (in rounds/team mode), or in number of times the gold medal time (other modes).</param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetAllWarmUpDurationAsync(int warmupDuration) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetAllWarmUpDuration", warmupDuration)
@@ -158,6 +170,7 @@ namespace GbxRemoteNet {
         /// Get whether the automatic warm-up phase is enabled in all modes. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetAllWarmUpDurationAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetAllWarmUpDuration")
@@ -168,6 +181,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="disableRespawn"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetDisableRespawnAsync(bool disableRespawn) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetDisableRespawn", disableRespawn)
@@ -177,6 +191,7 @@ namespace GbxRemoteNet {
         /// Get whether players are disallowed to respawn. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<bool>> GetDisableRespawnAsync() =>
             (CurrentNextValue<bool>)XmlRpcTypes.ToNativeValue<CurrentNextValue<bool>>(
                 await CallOrFaultAsync("GetDisableRespawn")
@@ -196,6 +211,7 @@ namespace GbxRemoteNet {
         /// Get whether players are forced to show all opponents. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetForceShowAllOpponentsAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetTimeAttackLimit")
@@ -225,6 +241,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="timelimit"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetTimeAttackLimitAsync(int timelimit) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetTimeAttackLimit", timelimit)
@@ -244,6 +261,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="syncStartPeriod"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetTimeAttackSynchStartPeriodAsync(int syncStartPeriod) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetTimeAttackSynchStartPeriod", syncStartPeriod)
@@ -253,6 +271,7 @@ namespace GbxRemoteNet {
         /// Get the current and synchronized start period for time attack mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetTimeAttackSynchStartPeriodAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetTimeAttackSynchStartPeriod")
@@ -263,6 +282,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="timelimit"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetLapsTimeLimitAsync(int timelimit) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetLapsTimeLimit", timelimit)
@@ -272,6 +292,7 @@ namespace GbxRemoteNet {
         /// Get the current and next number of laps for rounds mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetLapsTimeLimitAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetLapsTimeLimit")
@@ -282,6 +303,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="nbrLaps"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetNbLapsAsync(int nbrLaps) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetNbLaps", nbrLaps)
@@ -291,6 +313,7 @@ namespace GbxRemoteNet {
         /// Get the current and next number of laps for laps mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetNbLapsAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetNbLaps")
@@ -301,6 +324,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="nbrLaps">0 = default, use the number of laps from the maps, otherwise forces the number of rounds for multilaps maps</param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetRoundForcedLapsAsync(int nbrLaps) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetRoundForcedLaps", nbrLaps)
@@ -310,6 +334,7 @@ namespace GbxRemoteNet {
         /// 	Get the current and next number of laps for rounds mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetRoundForcedLapsAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetRoundForcedLaps")
@@ -320,6 +345,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="limit"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetRoundPointsLimitAsync(int limit) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetRoundPointsLimit", limit)
@@ -329,6 +355,7 @@ namespace GbxRemoteNet {
         /// Get the current and next points limit for rounds mode (values returned depend on UseNewRulesRound). The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<string>> GetRoundPointsLimitAsync() =>
             (CurrentNextValue<string>)XmlRpcTypes.ToNativeValue<CurrentNextValue<string>>(
                 await CallOrFaultAsync("GetRoundPointsLimit")
@@ -341,6 +368,7 @@ namespace GbxRemoteNet {
         /// <param name="points">An array of points which should be sorted in a descending order from first to last</param>
         /// <param name="scoreConstraintCheck">Optional boolean to relax the constraint checking on the scores. </param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetRoundCustomPointsAsync(int[] points, bool scoreConstraintCheck = false) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetRoundCustomPoints", points, scoreConstraintCheck)
@@ -350,6 +378,7 @@ namespace GbxRemoteNet {
         /// Gets the points used for the scores in rounds mode.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<int[]> GetRoundCustomPointsAsync() =>
             (int[])XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("GetRoundCustomPoints")
@@ -360,6 +389,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="newRules"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetUseNewRulesRoundAsync(bool newRules) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetUseNewRulesRound", newRules)
@@ -369,6 +399,7 @@ namespace GbxRemoteNet {
         /// Get if the new rules are used for rounds mode (Current and next values). The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<string>> GetUseNewRulesRoundAsync() =>
             (CurrentNextValue<string>)XmlRpcTypes.ToNativeValue<CurrentNextValue<string>>(
                 await CallOrFaultAsync("GetUseNewRulesRound")
@@ -379,6 +410,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="maxPoints"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetMaxPointsTeamAsync(int maxPoints) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetMaxPointsTeam", maxPoints)
@@ -388,6 +420,7 @@ namespace GbxRemoteNet {
         /// Get the current and next number of maximum points per round for team mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetMaxPointsTeamAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetMaxPointsTeam")
@@ -398,6 +431,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="newRules"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetUseNewRulesTeamAsync(bool newRules) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetUseNewRulesTeam", newRules)
@@ -407,6 +441,7 @@ namespace GbxRemoteNet {
         /// Get if the new rules are used for team mode (Current and next values). The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<string>> GetUseNewRulesTeamAsync() =>
             (CurrentNextValue<string>)XmlRpcTypes.ToNativeValue<CurrentNextValue<string>>(
                 await CallOrFaultAsync("GetUseNewRulesTeam")
@@ -417,6 +452,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="points"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetCupPointsLimitAsync(int points) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetCupPointsLimit", points)
@@ -426,6 +462,7 @@ namespace GbxRemoteNet {
         /// Get the points needed for victory in Cup mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetCupPointsLimitAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetCupPointsLimit")
@@ -436,6 +473,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="nbrRounds"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetCupRoundsPerMapAsync(int nbrRounds) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetCupRoundsPerMap", nbrRounds)
@@ -445,6 +483,7 @@ namespace GbxRemoteNet {
         /// Get the number of rounds before going to next map in Cup mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetCupRoundsPerMapAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetCupRoundsPerMap")
@@ -455,6 +494,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="duration">0 = no, otherwise it's the duration of the phase, expressed in number of rounds.</param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetCupWarmUpDurationAsync(int duration) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetCupWarmUpDuration", duration)
@@ -464,6 +504,7 @@ namespace GbxRemoteNet {
         /// Get whether the automatic warm-up phase is enabled in Cup mode. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetCupWarmUpDurationAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetCupWarmUpDuration")
@@ -474,6 +515,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="nbWinners">Number of winners</param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> SetCupNbWinnersAsync(int nbWinners) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SetCupNbWinners", nbWinners)
@@ -483,6 +525,7 @@ namespace GbxRemoteNet {
         /// Get the number of winners to determine before the match is considered over. The struct returned contains two fields CurrentValue and NextValue.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<CurrentNextValue<int>> GetCupNbWinnersAsync() =>
             (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
                 await CallOrFaultAsync("GetCupNbWinners")
@@ -493,6 +536,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="enabled"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> ManualFlowControlEnableAsync(bool enabled) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ManualFlowControlEnable", enabled)
@@ -502,6 +546,7 @@ namespace GbxRemoteNet {
         /// Allows the game to proceed. Only available to Admin.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> ManualFlowControlProceedAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("ManualFlowControlProceed")
@@ -511,6 +556,7 @@ namespace GbxRemoteNet {
         /// Returns whether the manual control of the game flow is enabled. 0 = no, 1 = yes by the xml-rpc client making the call, 2 = yes, by some other xml-rpc client. Only available to Admin.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<int> ManualFlowControlIsEnabledAsync() =>
             (int)XmlRpcTypes.ToNativeValue<int>(
                 await CallOrFaultAsync("ManualFlowControlIsEnabled")
@@ -520,6 +566,7 @@ namespace GbxRemoteNet {
         /// Returns the transition that is currently blocked, or '' if none. (That's exactly the value last received by the callback.) Only available to Admin.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<string> ManualFlowControlGetCurTransitionAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("ManualFlowControlGetCurTransition")
@@ -529,6 +576,7 @@ namespace GbxRemoteNet {
         /// Returns the current match ending condition. Return values are: 'Playing', 'ChangeMap' or 'Finished'.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<string> CheckEndMatchConditionAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("CheckEndMatchCondition")

@@ -26,6 +26,7 @@ namespace GbxRemoteNet {
         /// </summary>
         /// <param name="autoSave"></param>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> AutoSaveValidationReplaysAsync(string autoSave) =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("AutoSaveValidationReplays", autoSave)
@@ -35,6 +36,7 @@ namespace GbxRemoteNet {
         /// Returns if autosaving of all replays is enabled on the server.
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public async Task<bool> IsAutoSaveValidationReplaysEnabledAsync() =>
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("IsAutoSaveValidationReplaysEnabled")
