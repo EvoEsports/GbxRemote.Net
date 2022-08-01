@@ -8,17 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GbxRemoteNet.XmlRpc;
+using GbxRemoteNet.XmlRpc.ExtraTypes;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace GbxRemoteNet {
     public partial class GbxRemoteClient {
-        private JObject ParseModeScriptCallback(MethodCall call) {
-            XmlRpcArray dataArr = (XmlRpcArray)call.Arguments[1];
-            XmlRpcString dataStr = (XmlRpcString)dataArr.Values[0];
-            return JObject.Parse(dataStr.Value);
+        private (JObject, XmlRpcBaseType[]) ParseModeScriptCallback(MethodCall call) {
+            var dataArr = (XmlRpcArray)call.Arguments[1];
+            var dataStr = (XmlRpcString)dataArr.Values[0];
+            var responseData = JObject.Parse(dataStr.Value);
+            var extraArgs = dataArr.Values[1..];
+            return (responseData, extraArgs);
         }
 
-        ConcurrentDictionary<string, JObject> msResponses = new ConcurrentDictionary<string, JObject>();
-        ConcurrentDictionary<string, ManualResetEvent> msSignals= new ConcurrentDictionary<string, ManualResetEvent>();
+        ConcurrentDictionary<string, (JObject, XmlRpcBaseType[])> _msResponses = new();
+        ConcurrentDictionary<string, ManualResetEvent> _msSignals = new();
 
         /// <summary>
         /// Action for the OnModeScriptCallback event-
@@ -38,14 +43,14 @@ namespace GbxRemoteNet {
         /// <param name="call"></param>
         /// <returns></returns>
         private Task HandleModeScriptCallback(MethodCall call) {
-            JObject data = ParseModeScriptCallback(call);
+            var (data, extraArgs) = ParseModeScriptCallback(call);
 
             if (data.ContainsKey("responseid")) {
-                string responseId = data["responseid"].Value<string>();
-                if (msSignals.ContainsKey(responseId)) {
+                var responseId = data["responseid"].Value<string>();
+                if (_msSignals.ContainsKey(responseId)) {
                     // we have a modescript callback response
-                    msResponses[responseId] = data;
-                    msSignals[responseId].Set();
+                    _msResponses[responseId] = (data, extraArgs);
+                    _msSignals[responseId].Set();
 
                     if (!Options.InvokeEventOnModeScriptMethodResponse)
                         return Task.CompletedTask;
@@ -67,21 +72,60 @@ namespace GbxRemoteNet {
         /// <param name="method">Name of the method.</param>
         /// <param name="args">Parameters to be passed with the method call.</param>
         /// <returns>Parsed JSON result from the method call.</returns>
-        public async Task<JObject> GetModeScriptResponseAsync(string method, params string[] args) {
-            string responseId = Guid.NewGuid().ToString();
-            List<string> passArgs = new(args);
+        public async Task<(JObject, XmlRpcBaseType[])> GetModeScriptResponseAsync(string method, params string[] args) {
+            var responseId = Guid.NewGuid().ToString();
+            var passArgs = new List<string>(args);
             passArgs.Add(responseId);
 
             // send call
-            msSignals[responseId] = new(false);
+            _msSignals[responseId] = new(false);
             await TriggerModeScriptEventArrayAsync(method, passArgs.ToArray());
 
             // wait for response
-            msSignals[responseId].WaitOne();
-            msResponses.Remove(responseId, out JObject response);
-            msSignals.Remove(responseId, out _);
+            _msSignals[responseId].WaitOne();
+            _msResponses.Remove(responseId, out var response);
+            _msSignals.Remove(responseId, out _);
 
             return response;
+        }
+
+        /// <summary>
+        /// Call a ModeScript method and wait for the response and convert it to a native type.
+        /// </summary>
+        /// <param name="method">Name of the method.</param>
+        /// <param name="args">Parameters to be passed with the method call.</param>
+        /// <typeparam name="TResponse">Type of the response data.</typeparam>
+        /// <returns>Parsed JSON result from the method call.</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task<TResponse> GetModeScriptResponseAsync<TResponse>(string method, params string[] args)
+        {
+            var (data, _) = await GetModeScriptResponseAsync(method, args);
+
+            return data.ToObject<TResponse>();
+        }
+
+        /// <summary>
+        /// Call a ModeScript method and wait for the response and convert it to a native type.
+        /// </summary>
+        /// <param name="method">Name of the method.</param>
+        /// <param name="args">Parameters to be passed with the method call.</param>
+        /// <typeparam name="TResponse">Type of the response data.</typeparam>
+        /// <typeparam name="TExtraArg">Type of the extra argument of the callback.</typeparam>
+        /// <returns>Parsed JSON result from the method call.</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task<(TResponse, TExtraArg)> GetModeScriptResponseAsync<TResponse, TExtraArg>(string method, params string[] args)
+        {
+            var (data, extraArg) = await GetModeScriptResponseAsync(method, args);
+            var dataNative = data.ToObject<TResponse>();
+
+            if (extraArg.Length < 1)
+            {
+                throw new InvalidOperationException("The response does not contain an extra argument.");
+            }
+
+            var extraArgNative = XmlRpcTypes.ToNativeValue<TExtraArg>(extraArg[0]);
+
+            return (dataNative, (TExtraArg) extraArgNative);
         }
     }
 }
