@@ -19,7 +19,7 @@ namespace GbxRemoteNet {
         /// <summary>
         /// This is the API version the client will be using.
         /// </summary>
-        public const string ApiVersion = "2013-04-16";
+        public const string DefaultApiVersion = "2022-03-21";
 
         /// <summary>
         /// Create a new instance of the GBXRemote client.
@@ -100,7 +100,7 @@ namespace GbxRemoteNet {
             if (!await ConnectAsync(Options.ConnectionRetries, Options.ConnectionRetryTimeout))
                 return false;
 
-            await SetApiVersionAsync(ApiVersion);
+            await SetApiVersionAsync(DefaultApiVersion);
 
             if (await AuthenticateAsync(login, password)) {
                 _logger?.LogDebug("Client connected to GbxRemote");
