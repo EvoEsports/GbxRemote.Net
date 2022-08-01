@@ -4,6 +4,7 @@ namespace GbxRemoteNet.Structs {
         public string Name { get; set; }
         public string FileName { get; set; }
         public string Author { get; set; }
+        public string AuthorNickname { get; set; }
         public string Environnement { get; set; }
         public string Mood { get; set; }
         public int BronzeTime { get; set; }

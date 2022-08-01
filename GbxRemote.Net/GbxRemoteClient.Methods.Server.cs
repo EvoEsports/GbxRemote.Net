@@ -209,15 +209,6 @@ namespace GbxRemoteNet {
             );
 
         /// <summary>
-        /// Returns true if this is a relay server.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> IsRelayServerAsync() =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("IsRelayServer")
-            );
-
-        /// <summary>
         /// Set a new password for the server. Only available to Admin.
         /// </summary>
         /// <param name="password"></param>
@@ -345,44 +336,6 @@ namespace GbxRemoteNet {
             );
 
         /// <summary>
-        /// Enable or disable peer-to-peer upload from server. Only available to Admin.
-        /// </summary>
-        /// <param name="enable"></param>
-        /// <returns></returns>
-        public async Task<bool> EnableP2PUploadAsync(bool enable) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("EnableP2PUpload", enable)
-            );
-
-        /// <summary>
-        /// Returns if the peer-to-peer upload from server is enabled.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> IsP2PUploadAsync() =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("IsP2PUpload")
-            );
-
-        /// <summary>
-        /// Enable or disable peer-to-peer download for server. Only available to Admin.
-        /// </summary>
-        /// <param name="enable"></param>
-        /// <returns></returns>
-        public async Task<bool> EnableP2PDownloadAsync(bool enable) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("EnableP2PDownload", enable)
-            );
-
-        /// <summary>
-        /// Returns if the peer-to-peer download for server is enabled.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> IsP2PDownloadAsync() =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("IsP2PDownload")
-            );
-
-        /// <summary>
         /// Allow clients to download maps from the server. Only available to Admin.
         /// </summary>
         /// <param name="allow"></param>
@@ -496,54 +449,7 @@ namespace GbxRemoteNet {
             );
 
         /// <summary>
-        /// Set a new ladder mode between ladder disabled (0) and forced (1). Only available to Admin. Requires a map restart to be taken into account.
-        /// </summary>
-        /// <param name="mode"></param>
-        /// <returns></returns>
-        public async Task<bool> SetLadderModeAsync(int mode) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("SetLadderMode", mode)
-            );
-
-        /// <summary>
-        /// Get the current and next ladder mode on server. The struct returned contains two fields CurrentValue and NextValue.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<CurrentNextValue<int>> GetLadderModeAsync() =>
-            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
-                await CallOrFaultAsync("GetLadderMode")
-            );
-
-        /// <summary>
-        /// Get the ladder points limit for the players allowed on this server. The struct returned contains two fields LadderServerLimitMin and LadderServerLimitMax.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<LadderServerLimits> GetLadderServerLimitsAsync() =>
-            (LadderServerLimits)XmlRpcTypes.ToNativeValue<LadderServerLimits>(
-                await CallOrFaultAsync("GetLadderServerLimits")
-            );
-
-        /// <summary>
-        /// Set the network vehicle quality to Fast (0) or High (1). Only available to Admin. Requires a map restart to be taken into account.
-        /// </summary>
-        /// <param name="quality"></param>
-        /// <returns></returns>
-        public async Task<bool> SetVehicleNetQualityAsync(int quality) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("SetVehicleNetQuality", quality)
-            );
-
-        /// <summary>
-        /// Get the current and next network vehicle quality on server. The struct returned contains two fields CurrentValue and NextValue.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<CurrentNextValue<int>> GetVehicleNetQualityAsync() =>
-            (CurrentNextValue<int>)XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
-                await CallOrFaultAsync("GetVehicleNetQuality")
-            );
-
-        /// <summary>
-        /// Set new server options using the struct passed as parameters. This struct must contain the following fields : Name, Comment, Password, PasswordForSpectator, NextMaxPlayers, NextMaxSpectators, IsP2PUpload, IsP2PDownload, NextLadderMode, NextVehicleNetQuality, NextCallVoteTimeOut, CallVoteRatio, AllowMapDownload, AutoSaveReplays, and optionally for forever: RefereePassword, RefereeMode, AutoSaveValidationReplays, HideServer, UseChangingValidationSeed, ClientInputsMaxLatency, DisableHorns, DisableServiceAnnounces, KeepPlayerSlots, ServerPlugin. Only available to Admin. A change of NextMaxPlayers, NextMaxSpectators, NextLadderMode, NextVehicleNetQuality, NextCallVoteTimeOut or UseChangingValidationSeed requires a map restart to be taken into account.
+        /// Set new server options using the struct passed as parameters. This struct must contain the following fields : Name, Comment, Password, PasswordForSpectator, NextCallVoteTimeOut, CallVoteRatio. May additionally include any of the other members listed in RpcGetServerOptions. Only available to Admin. A change of NextMaxPlayers, NextMaxSpectators, NextCallVoteTimeOut requires a map restart to be taken into account.
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
@@ -627,63 +533,6 @@ namespace GbxRemoteNet {
         public async Task<string> GetLastConnectionErrorMessageAsync() =>
             (string)XmlRpcTypes.ToNativeValue<string>(
                 await CallOrFaultAsync("GetLastConnectionErrorMessage")
-            );
-
-        /// <summary>
-        /// Set a new password for the referee mode. Only available to Admin.
-        /// </summary>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public async Task<bool> SetRefereePasswordAsync(string password) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("SetRefereePassword", password)
-            );
-
-        /// <summary>
-        /// Get the password for referee mode if called as Admin or Super Admin, else returns if a password is needed or not.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<string> GetRefereePasswordAsync() =>
-            (string)XmlRpcTypes.ToNativeValue<string>(
-                await CallOrFaultAsync("GetRefereePassword")
-            );
-
-        /// <summary>
-        /// Set the referee validation mode. 0 = validate the top3 players, 1 = validate all players. Only available to Admin.
-        /// </summary>
-        /// <param name="mode"></param>
-        /// <returns></returns>
-        public async Task<bool> SetRefereeModeAsync(int mode) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("SetRefereeMode", mode)
-            );
-
-        /// <summary>
-        /// Get the referee validation mode.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<int> GetRefereeModeAsync() =>
-            (int)XmlRpcTypes.ToNativeValue<int>(
-                await CallOrFaultAsync("GetRefereeMode")
-            );
-
-        /// <summary>
-        /// Set whether the game should use a variable validation seed or not. Only available to Admin. Requires a map restart to be taken into account.
-        /// </summary>
-        /// <param name="useValidationSeed"></param>
-        /// <returns></returns>
-        public async Task<bool> SetUseChangingValidationSeedAsync(int useValidationSeed) =>
-            (bool)XmlRpcTypes.ToNativeValue<bool>(
-                await CallOrFaultAsync("SetUseChangingValidationSeed", useValidationSeed)
-            );
-
-        /// <summary>
-        /// Get the current and next value of UseChangingValidationSeed. The struct returned contains two fields CurrentValue and NextValue.
-        /// </summary>
-        /// <returns></returns>
-        public async Task<CurrentNextValue<bool>> GetUseChangingValidationSeedAsync() =>
-            (CurrentNextValue<bool>)XmlRpcTypes.ToNativeValue<CurrentNextValue<bool>>(
-                await CallOrFaultAsync("GetUseChangingValidationSeed")
             );
 
         /// <summary>
