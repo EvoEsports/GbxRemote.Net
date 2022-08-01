@@ -515,5 +515,15 @@ namespace GbxRemoteNet {
             (bool)XmlRpcTypes.ToNativeValue<bool>(
                 await CallOrFaultAsync("SpectatorReleasePlayerSlotId", playerId)
             );
+
+        /// <summary>
+        /// Ignore players profile skin customisation. Only available to Admin.
+        /// </summary>
+        /// <param name="disabled"></param>
+        /// <returns></returns>
+        public async Task<bool> DisableProfileSkinsAsync(bool disabled = true) =>
+            (bool) XmlRpcTypes.ToNativeValue<bool>(
+                await CallOrFaultAsync("DisableProfileSkins", disabled)
+            );
     }
 }
