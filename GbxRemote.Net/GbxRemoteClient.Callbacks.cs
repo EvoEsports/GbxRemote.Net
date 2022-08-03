@@ -338,6 +338,11 @@ namespace GbxRemoteNet {
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[3])
                     );
                     break;
+                case "ManiaPlanet.PlayerAlliesChanged":
+                    OnPlayerAlliesChanged?.Invoke(
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0])
+                    );
+                    break;
             }
 
             // always invoke the OnAnyCallback event
