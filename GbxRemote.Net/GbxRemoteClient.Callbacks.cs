@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GbxRemoteNet.Enums;
+using GbxRemoteNet.Events;
 using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.ExtraTypes;
@@ -140,7 +142,7 @@ public partial class GbxRemoteClient
     /// <summary>
     ///     Triggered for all possible callbacks.
     /// </summary>
-    public event CallbackAction<object> OnAnyCallback;
+    public event EventHandler<CallbackEventArgs<object>> AnyCallback;
 
     /// <summary>
     ///     When a player connects to the server.
@@ -396,8 +398,14 @@ public partial class GbxRemoteClient
         }
 
         // always invoke the OnAnyCallback event
-        OnAnyCallback?.Invoke(call, (object[]) XmlRpcTypes.ToNativeValue<object>(
+        /* OnAnyCallback?.Invoke(call, (object[]) XmlRpcTypes.ToNativeValue<object>(
             new XmlRpcArray(call.Arguments)
-        ));
+        )); */
+
+        AnyCallback?.Invoke(this, new CallbackEventArgs<object>
+        {
+            Call = call,
+            Parameters = (object[]) XmlRpcTypes.ToNativeValue<object>(new XmlRpcArray(call.Arguments))
+        });
     }
 }

@@ -18,17 +18,17 @@
         <PackageIcon>logo_square.png</PackageIcon>
         <AssemblyVersion>2.0.0-alpha</AssemblyVersion>
         <FileVersion>2.0.0-alpha</FileVersion>
-        <PackageIconUrl/>
+        <PackageIconUrl />
         <PackageVersion>2.0.0-alpha</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="NLog.config"/>
+        <None Remove="NLog.config" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1"/>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
     <ItemGroup>

@@ -7,6 +7,7 @@ using System.Dynamic;
 using System.Threading;
 using System.Threading.Tasks;
 using Examples.Common;
+using GbxRemoteNet.Events;
 using GbxRemoteNet.Structs;
 using Microsoft.Extensions.Logging;
 
@@ -16,7 +17,7 @@ namespace CallbackExample {
 
         static async Task Main(string[] args) {
             // create client instance
-            GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Trace));
+            GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {
@@ -42,12 +43,23 @@ namespace CallbackExample {
 
             client.OnConnected += Client_OnConnected;
             client.OnDisconnected += Client_OnDisconnected;
+            
+            client.AnyCallback += ClientOnAnyCallback;
 
             // enable callbacks
             await client.EnableCallbackTypeAsync();
 
             // wait indefinitely or until disconnect
             WaitHandle.WaitAny(new[] { cancelToken.Token.WaitHandle });
+        }
+
+        private static void ClientOnAnyCallback(object sender, CallbackEventArgs<object> e)
+        {
+            Console.WriteLine($"Callback received: {e.Call.Method}\nParameters:");
+            foreach (var parameter in e.Parameters)
+            {
+                Console.WriteLine($"- {parameter.ToString()}");
+            }
         }
 
         private static Task ClientOnOnMapListModified(int curmapindex, int nextmapindex, bool islistmodified)
