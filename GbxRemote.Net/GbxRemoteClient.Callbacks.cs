@@ -89,9 +89,13 @@ namespace GbxRemoteNet {
         /// </summary>
         public delegate Task MapListModifiedAction(int curMapIndex, int nextMapIndex, bool isListModified);
         /// <summary>
-        /// Action for the tunnel data received action.
+        /// Action for the tunnel data received event.
         /// </summary>
         public delegate Task TunnelDataReceivedAction(int playerUid, string login, Base64 data);
+        /// <summary>
+        /// Action for vote updated event.
+        /// </summary>
+        public delegate Task VoteUpdatedAction(string stateName, string login, string cmdName, string cmdParam);
         
         /// <summary>
         /// Triggered for all possible callbacks.
@@ -150,6 +154,7 @@ namespace GbxRemoteNet {
         public event TaskAction OnServerStart;
         public event TaskAction OnServerStop;
         public event TunnelDataReceivedAction OnTunnelDataReceived;
+        public event VoteUpdatedAction OnVoteUpdated;
 
         /// <summary>
         /// Enable callbacks. If no parameter is provided,
@@ -277,6 +282,15 @@ namespace GbxRemoteNet {
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
                         (Base64)XmlRpcTypes.ToNativeValue<Base64>(call.Arguments[2])
+                    );
+                    break;
+                case "ManiaPlanet.VoteUpdated":
+                case "TrackMania.VoteUpdated":
+                    OnVoteUpdated?.Invoke(
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[2]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[3])
                     );
                     break;
             }
