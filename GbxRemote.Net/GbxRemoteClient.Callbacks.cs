@@ -78,13 +78,17 @@ namespace GbxRemoteNet {
         /// <summary>
         /// Action for the OnStatusChanged event.
         /// </summary>
-        /// <param name="playerUIid">Player's server ID</param>
+        /// <param name="playerUid">Player's server ID</param>
         /// <param name="login">Login of the player.</param>
         /// <param name="answer">String representing the answer.</param>
         /// <param name="entries">Key/Value of entries.</param>
         /// <returns></returns>
         public delegate Task PlayerManialinkPageAnswerAction(int playerUid, string login, string answer, SEntryVal[] entries);
-
+        /// <summary>
+        /// Action for the MapListModified event.
+        /// </summary>
+        public delegate Task MapListModifiedAction(int curMapIndex, int nextMapIndex, bool isListModified);
+        
         /// <summary>
         /// Triggered for all possible callbacks.
         /// </summary>
@@ -135,6 +139,10 @@ namespace GbxRemoteNet {
         /// When a user triggers the page answer callback from a manialink.
         /// </summary>
         public event PlayerManialinkPageAnswerAction OnPlayerManialinkPageAnswer;
+        /// <summary>
+        /// Triggered when the map list changed.
+        /// </summary>
+        public event MapListModifiedAction OnMapListModified;
 
         /// <summary>
         /// Enable callbacks. If no parameter is provided,
@@ -239,6 +247,13 @@ namespace GbxRemoteNet {
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[2]),
                         (SEntryVal[])XmlRpcTypes.ToNativeValue<SEntryVal>(call.Arguments[3])
+                    );
+                    break;
+                case "ManiaPlanet.MapListModified":
+                    OnMapListModified?.Invoke(
+                        (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
+                        (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[1]),
+                        (bool)XmlRpcTypes.ToNativeValue<bool>(call.Arguments[2])
                     );
                     break;
             }
