@@ -144,6 +144,9 @@ namespace GbxRemoteNet {
         /// </summary>
         public event MapListModifiedAction OnMapListModified;
 
+        public event TaskAction OnServerStart;
+        public event TaskAction OnServerStop;
+
         /// <summary>
         /// Enable callbacks. If no parameter is provided,
         /// all callbacks are enabled by default.
@@ -255,6 +258,12 @@ namespace GbxRemoteNet {
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[1]),
                         (bool)XmlRpcTypes.ToNativeValue<bool>(call.Arguments[2])
                     );
+                    break;
+                case "ManiaPlanet.ServerStart":
+                    OnServerStart?.Invoke();
+                    break;
+                case "ManiaPlanet.ServerStop":
+                    OnServerStop?.Invoke();
                     break;
             }
 
