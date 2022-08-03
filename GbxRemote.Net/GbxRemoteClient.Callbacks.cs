@@ -343,6 +343,18 @@ namespace GbxRemoteNet {
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0])
                     );
                     break;
+                case "ScriptCloud.LoadData":
+                    OnScriptCloudLoadData?.Invoke(
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
+                    );
+                    break;
+                case "ScriptCloud.SaveData":
+                    OnScriptCloudSaveData?.Invoke(
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
+                    );
+                    break;
             }
 
             // always invoke the OnAnyCallback event
