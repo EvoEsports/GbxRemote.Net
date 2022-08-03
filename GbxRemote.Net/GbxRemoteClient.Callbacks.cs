@@ -275,8 +275,8 @@ namespace GbxRemoteNet {
                 case "TrackMania.TunnelDataReceived":
                     OnTunnelDataReceived?.Invoke(
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
-                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
-                        (Base64)XmlRpcTypes.ToNativeValue<Base64>(call.Arguments[0])
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
+                        (Base64)XmlRpcTypes.ToNativeValue<Base64>(call.Arguments[2])
                     );
                     break;
             }
