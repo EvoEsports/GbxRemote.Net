@@ -87,15 +87,41 @@ namespace GbxRemoteNet {
         /// <summary>
         /// Action for the MapListModified event.
         /// </summary>
+        /// <param name="curMapIndex">Index of the current map.</param>
+        /// <param name="nextMapIndex">Index of the next map.</param>
+        /// <param name="isListModified">Whether the map list was modified or not.</param>
         public delegate Task MapListModifiedAction(int curMapIndex, int nextMapIndex, bool isListModified);
         /// <summary>
         /// Action for the tunnel data received event.
         /// </summary>
+        /// <param name="playerUid">ID of the player.</param>
+        /// <param name="login">The player's login.</param>
+        /// <param name="data">Data received from the player.</param>
         public delegate Task TunnelDataReceivedAction(int playerUid, string login, Base64 data);
         /// <summary>
         /// Action for vote updated event.
         /// </summary>
+        /// <param name="stateName">Name of the state, can be: NewVote, VoteCancelled, VotePassed or VoteFailed</param>
+        /// <param name="login">Login of the player.</param>
+        /// <param name="cmdName">Command name.</param>
+        /// <param name="cmdParam">Command parameter.</param>
         public delegate Task VoteUpdatedAction(string stateName, string login, string cmdName, string cmdParam);
+        /// <summary>
+        /// </summary>
+        /// <param name="billId">ID of the bill.</param>
+        /// <param name="state">State of the bill.</param>
+        /// <param name="stateName">State name of the bill.</param>
+        /// <param name="transactionId">ID of the bill transaction.</param>
+        public delegate Task BillUpdatedAction(int billId, int state, string stateName, int transactionId);
+        /// <summary>
+        /// </summary>
+        /// <param name="login">Login of the player that changed allies.</param>
+        public delegate Task PlayerAlliesChangedAction(string login);
+        /// <summary>
+        /// </summary>
+        /// <param name="type">The variable type.</param>
+        /// <param name="id">Id/name of the variable.</param>
+        public delegate Task ScriptCloudAction(string type, string id);
         
         /// <summary>
         /// Triggered for all possible callbacks.
@@ -151,10 +177,38 @@ namespace GbxRemoteNet {
         /// Triggered when the map list changed.
         /// </summary>
         public event MapListModifiedAction OnMapListModified;
+        /// <summary>
+        /// When the server is about to start.
+        /// </summary>
         public event TaskAction OnServerStart;
+        /// <summary>
+        /// When the server is about to stop.
+        /// </summary>
         public event TaskAction OnServerStop;
+        /// <summary>
+        /// Tunnel data received from a player.
+        /// </summary>
         public event TunnelDataReceivedAction OnTunnelDataReceived;
+        /// <summary>
+        /// When a current vote has been updated.
+        /// </summary>
         public event VoteUpdatedAction OnVoteUpdated;
+        /// <summary>
+        /// When a player bill is updated.
+        /// </summary>
+        public event BillUpdatedAction OnBillUpdated;
+        /// <summary>
+        /// When a player changed allies.
+        /// </summary>
+        public event PlayerAlliesChangedAction OnPlayerAlliesChanged;
+        /// <summary>
+        /// When a variable from the script cloud is loaded.
+        /// </summary>
+        public event ScriptCloudAction OnScriptCloudLoadData;
+        /// <summary>
+        /// When a variable from the script cloud is saved.
+        /// </summary>
+        public event ScriptCloudAction OnScriptCloudSaveData;
 
         /// <summary>
         /// Enable callbacks. If no parameter is provided,
@@ -179,21 +233,18 @@ namespace GbxRemoteNet {
         private async Task GbxRemoteClient_OnCallback(MethodCall call) {
             switch (call.Method) {
                 case "ManiaPlanet.PlayerConnect":
-                case "TrackMania.PlayerConnect":
                     OnPlayerConnect?.Invoke(
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                         (bool)XmlRpcTypes.ToNativeValue<bool>(call.Arguments[1])
                     );
                     break;
                 case "ManiaPlanet.PlayerDisconnect":
-                case "TrackMania.PlayerDisconnect":
                     OnPlayerDisconnect?.Invoke(
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
                     );
                     break;
                 case "ManiaPlanet.PlayerChat":
-                case "TrackMania.PlayerChat":
                     OnPlayerChat?.Invoke(
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
@@ -202,58 +253,48 @@ namespace GbxRemoteNet {
                     );
                     break;
                 case "ManiaPlanet.Echo":
-                case "TrackMania.Echo":
                     OnEcho?.Invoke(
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
                     );
                     break;
                 case "ManiaPlanet.BeginMatch":
-                case "TrackMania.BeginMatch":
                     OnBeginMatch?.Invoke();
                     break;
                 case "ManiaPlanet.EndMatch":
-                case "TrackMania.EndMatch":
                     OnEndMatch?.Invoke(
                         (SPlayerRanking[])XmlRpcTypes.ToNativeValue<SPlayerRanking>(call.Arguments[0]),
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[1])
                     );
                     break;
                 case "ManiaPlanet.BeginMap":
-                case "TrackMania.BeginMap":
                     OnBeginMap?.Invoke(
                         (SMapInfo)XmlRpcTypes.ToNativeValue<SMapInfo>(call.Arguments[0])
                     );
                     break;
                 case "ManiaPlanet.EndMap":
-                case "TrackMania.EndMap":
                     OnEndMap?.Invoke(
                         (SMapInfo)XmlRpcTypes.ToNativeValue<SMapInfo>(call.Arguments[0])
                     );
                     break;
                 case "ManiaPlanet.StatusChanged":
-                case "TrackMania.StatusChanged":
                     OnStatusChanged?.Invoke(
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
                     );
                     break;
                 case "ManiaPlanet.PlayerInfoChanged":
-                case "TrackMania.PlayerInfoChanged":
                     OnPlayerInfoChanged?.Invoke(
                         (SPlayerInfo)XmlRpcTypes.ToNativeValue<SPlayerInfo>(call.Arguments[0])
                     );
                     break;
                 case "ManiaPlanet.ModeScriptCallback":
-                case "TrackMania.ModeScriptCallback":
                     await HandleModeScriptCallback(call);
                     break;
                 case "ManiaPlanet.ModeScriptCallbackArray":
-                case "TrackMania.ModeScriptCallbackArray":
                     await HandleModeScriptCallback(call);
                     break;
                 case "ManiaPlanet.PlayerManialinkPageAnswer":
-                case "TrackMania.PlayerManialinkPageAnswer":
                     OnPlayerManialinkPageAnswer?.Invoke(
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
@@ -269,15 +310,12 @@ namespace GbxRemoteNet {
                     );
                     break;
                 case "ManiaPlanet.ServerStart":
-                case "TrackMania.ServerStart":
                     OnServerStart?.Invoke();
                     break;
                 case "ManiaPlanet.ServerStop":
-                case "TrackMania.ServerStop":
                     OnServerStop?.Invoke();
                     break;
                 case "ManiaPlanet.TunnelDataReceived":
-                case "TrackMania.TunnelDataReceived":
                     OnTunnelDataReceived?.Invoke(
                         (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
@@ -285,12 +323,19 @@ namespace GbxRemoteNet {
                     );
                     break;
                 case "ManiaPlanet.VoteUpdated":
-                case "TrackMania.VoteUpdated":
                     OnVoteUpdated?.Invoke(
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[2]),
                         (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[3])
+                    );
+                    break;
+                case "ManiaPlanet.BillUpdated":
+                    OnBillUpdated?.Invoke(
+                        (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
+                        (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[1]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[2]),
+                        (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[3])
                     );
                     break;
             }
