@@ -16,7 +16,7 @@ namespace CallbackExample {
 
         static async Task Main(string[] args) {
             // create client instance
-            GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
+            GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Trace));
 
             // connect and login
             if (!await client.LoginAsync("SuperAdmin", "SuperAdmin")) {
@@ -38,6 +38,7 @@ namespace CallbackExample {
             client.OnStatusChanged += Client_OnStatusChanged;
             client.OnPlayerInfoChanged += Client_OnPlayerInfoChanged;
             client.OnPlayerManialinkPageAnswer += ClientOnOnPlayerManialinkPageAnswer;
+            client.OnMapListModified += ClientOnOnMapListModified;
 
             client.OnConnected += Client_OnConnected;
             client.OnDisconnected += Client_OnDisconnected;
@@ -47,6 +48,12 @@ namespace CallbackExample {
 
             // wait indefinitely or until disconnect
             WaitHandle.WaitAny(new[] { cancelToken.Token.WaitHandle });
+        }
+
+        private static Task ClientOnOnMapListModified(int curmapindex, int nextmapindex, bool islistmodified)
+        {
+            Console.WriteLine("Map list modified.");
+            return Task.CompletedTask;
         }
 
         private static Task ClientOnOnPlayerManialinkPageAnswer(int playerUid, string login, string answer, SEntryVal[] entries)
