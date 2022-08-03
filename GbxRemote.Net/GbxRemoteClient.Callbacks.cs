@@ -88,6 +88,10 @@ namespace GbxRemoteNet {
         /// Action for the MapListModified event.
         /// </summary>
         public delegate Task MapListModifiedAction(int curMapIndex, int nextMapIndex, bool isListModified);
+        /// <summary>
+        /// Action for the tunnel data received action.
+        /// </summary>
+        public delegate Task TunnelDataReceivedAction(int playerUid, string login, Base64 data);
         
         /// <summary>
         /// Triggered for all possible callbacks.
@@ -143,9 +147,9 @@ namespace GbxRemoteNet {
         /// Triggered when the map list changed.
         /// </summary>
         public event MapListModifiedAction OnMapListModified;
-
         public event TaskAction OnServerStart;
         public event TaskAction OnServerStop;
+        public event TunnelDataReceivedAction OnTunnelDataReceived;
 
         /// <summary>
         /// Enable callbacks. If no parameter is provided,
@@ -260,10 +264,20 @@ namespace GbxRemoteNet {
                     );
                     break;
                 case "ManiaPlanet.ServerStart":
+                case "TrackMania.ServerStart":
                     OnServerStart?.Invoke();
                     break;
                 case "ManiaPlanet.ServerStop":
+                case "TrackMania.ServerStop":
                     OnServerStop?.Invoke();
+                    break;
+                case "ManiaPlanet.TunnelDataReceived":
+                case "TrackMania.TunnelDataReceived":
+                    OnTunnelDataReceived?.Invoke(
+                        (int)XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
+                        (string)XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
+                        (Base64)XmlRpcTypes.ToNativeValue<Base64>(call.Arguments[0])
+                    );
                     break;
             }
 
