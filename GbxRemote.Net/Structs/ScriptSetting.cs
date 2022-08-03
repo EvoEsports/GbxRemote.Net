@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using GbxRemoteNet.XmlRpc.ExtraTypes;
+﻿using GbxRemoteNet.XmlRpc.ExtraTypes;
 
-namespace GbxRemoteNet.Structs {
-    public class ScriptSetting : DynamicObject {
-    }
+namespace GbxRemoteNet.Structs;
+
+public class ScriptSetting : DynamicObject
+{
 }

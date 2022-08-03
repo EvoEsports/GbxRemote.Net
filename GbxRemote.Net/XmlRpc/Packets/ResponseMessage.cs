@@ -1,75 +1,84 @@
-﻿using GbxRemoteNet.XmlRpc.Types;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using GbxRemoteNet.XmlRpc.Types;
 
-namespace GbxRemoteNet.XmlRpc.Packets {
-    public class ResponseMessage : IPacket {
-        public MessageHeader Header;
-        public string RawMessage;
-        public XDocument MessageXml;
-        public bool IsFault;
-        public bool IsCallback => Header.IsCallback;
-        public XmlRpcBaseType ResponseData;
+namespace GbxRemoteNet.XmlRpc.Packets;
 
-        public ResponseMessage() { }
-        public ResponseMessage(MessageHeader header, string message) {
-            Header = header;
-            RawMessage = message;
-            MessageXml = XDocument.Parse(message);
-            IsFault = false;
+public class ResponseMessage : IPacket
+{
+    public MessageHeader Header;
+    public bool IsFault;
+    public XDocument MessageXml;
+    public string RawMessage;
+    public XmlRpcBaseType ResponseData;
 
-            if (!IsCallback) {
-                IsFault = MessageXml.Elements(XmlRpcElementNames.MethodResponse)
-                                    .First()
-                                    .Elements(XmlRpcElementNames.Fault)
-                                    .Any();
-                ResponseData = GetResponseData();
-            }
+    public ResponseMessage()
+    {
+    }
+
+    public ResponseMessage(MessageHeader header, string message)
+    {
+        Header = header;
+        RawMessage = message;
+        MessageXml = XDocument.Parse(message);
+        IsFault = false;
+
+        if (!IsCallback)
+        {
+            IsFault = MessageXml.Elements(XmlRpcElementNames.MethodResponse)
+                .First()
+                .Elements(XmlRpcElementNames.Fault)
+                .Any();
+            ResponseData = GetResponseData();
         }
+    }
 
-        /// <summary>
-        /// Convert the xml response to XML-RPC type data.
-        /// </summary>
-        /// <returns></returns>
-        public XmlRpcBaseType GetResponseData() {
-            if (IsCallback)
-                throw new InvalidOperationException("Message is not a response.");
+    public bool IsCallback => Header.IsCallback;
 
-            XElement response = MessageXml.Elements(XmlRpcElementNames.MethodResponse).First();
+    public Task<byte[]> Serialize()
+    {
+        throw new NotImplementedException();
+    }
 
-            if (IsFault)
-                return new XmlRpcFault(response.Elements(XmlRpcElementNames.Fault)
-                                               .First()
-                                               .Elements(XmlRpcElementNames.Value)
-                                               .First()
-                                               .Elements(XmlRpcElementNames.Struct)
-                                               .First());
+    /// <summary>
+    ///     Convert the xml response to XML-RPC type data.
+    /// </summary>
+    /// <returns></returns>
+    public XmlRpcBaseType GetResponseData()
+    {
+        if (IsCallback)
+            throw new InvalidOperationException("Message is not a response.");
 
-            XElement valueElement = response.Elements(XmlRpcElementNames.Params)
-                                            .First()
-                                            .Elements(XmlRpcElementNames.Param)
-                                            .First()
-                                            .Elements(XmlRpcElementNames.Value)
-                                            .First()
-                                            .Elements()
-                                            .First();
+        var response = MessageXml.Elements(XmlRpcElementNames.MethodResponse).First();
 
-            return XmlRpcTypes.ElementToInstance(valueElement);
-        }
+        if (IsFault)
+            return new XmlRpcFault(response.Elements(XmlRpcElementNames.Fault)
+                .First()
+                .Elements(XmlRpcElementNames.Value)
+                .First()
+                .Elements(XmlRpcElementNames.Struct)
+                .First());
 
-        public static async Task<ResponseMessage> FromIOAsync(XmlRpcIO io) {
-            var header = await MessageHeader.FromIOAsync(io);
-            var message = Encoding.UTF8.GetString(await io.ReadBytesAsync(header.MessageLength));
+        var valueElement = response.Elements(XmlRpcElementNames.Params)
+            .First()
+            .Elements(XmlRpcElementNames.Param)
+            .First()
+            .Elements(XmlRpcElementNames.Value)
+            .First()
+            .Elements()
+            .First();
 
-            return new ResponseMessage(header, message);
-        }
+        return XmlRpcTypes.ElementToInstance(valueElement);
+    }
 
-        public Task<byte[]> Serialize() {
-            throw new NotImplementedException();
-        }
+    public static async Task<ResponseMessage> FromIOAsync(XmlRpcIO io)
+    {
+        var header = await MessageHeader.FromIOAsync(io);
+        var message = Encoding.UTF8.GetString(await io.ReadBytesAsync(header.MessageLength));
+
+        return new ResponseMessage(header, message);
     }
 }
