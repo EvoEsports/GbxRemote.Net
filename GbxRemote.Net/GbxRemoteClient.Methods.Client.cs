@@ -151,9 +151,9 @@ public partial class GbxRemoteClient
     ///     Result} Result==0 -> no answer, Result>0.... -> answer from the player.
     /// </summary>
     /// <returns></returns>
-    public async Task<ManialinkPageAnswer[]> GetManialinkPageAnswersAsync()
+    public async Task<TmManialinkPageAnswer[]> GetManialinkPageAnswersAsync()
     {
-        return (ManialinkPageAnswer[]) XmlRpcTypes.ToNativeValue<ManialinkPageAnswer>(
+        return (TmManialinkPageAnswer[]) XmlRpcTypes.ToNativeValue<TmManialinkPageAnswer>(
             await CallOrFaultAsync("GetManialinkPageAnswers")
         );
     }

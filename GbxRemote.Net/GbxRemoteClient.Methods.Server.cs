@@ -14,9 +14,9 @@ public partial class GbxRemoteClient
     ///     Returns a struct with the Name, TitleId, Version, Build and ApiVersion of the application remotely controlled.
     /// </summary>
     /// <returns></returns>
-    public async Task<VersionInfo> GetVersionAsync()
+    public async Task<TmVersionInfo> GetVersionAsync()
     {
-        return (VersionInfo) XmlRpcTypes.ToNativeValue<VersionInfo>(
+        return (TmVersionInfo) XmlRpcTypes.ToNativeValue<TmVersionInfo>(
             await CallOrFaultAsync("GetVersion")
         );
     }
@@ -25,9 +25,9 @@ public partial class GbxRemoteClient
     ///     Returns the current status of the server.
     /// </summary>
     /// <returns></returns>
-    public async Task<Status> GetStatusAsync()
+    public async Task<TmStatus> GetStatusAsync()
     {
-        return (Status) XmlRpcTypes.ToNativeValue<Status>(
+        return (TmStatus) XmlRpcTypes.ToNativeValue<TmStatus>(
             await CallOrFaultAsync("GetStatus")
         );
     }
@@ -113,9 +113,9 @@ public partial class GbxRemoteClient
     ///     Get some system infos, including connection rates (in kbps).
     /// </summary>
     /// <returns></returns>
-    public async Task<SystemInfo> GetSystemInfoAsync()
+    public async Task<TmSystemInfo> GetSystemInfoAsync()
     {
-        return (SystemInfo) XmlRpcTypes.ToNativeValue<SystemInfo>(
+        return (TmSystemInfo) XmlRpcTypes.ToNativeValue<TmSystemInfo>(
             await CallOrFaultAsync("GetSystemInfo")
         );
     }
@@ -137,9 +137,9 @@ public partial class GbxRemoteClient
     ///     Returns the list of tags and associated values set on this server. Only available to Admin.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServerTag[]> GetServerTagsAsync()
+    public async Task<TmServerTag[]> GetServerTagsAsync()
     {
-        return (ServerTag[]) XmlRpcTypes.ToNativeValue<ServerTag>(
+        return (TmServerTag[]) XmlRpcTypes.ToNativeValue<TmServerTag>(
             await CallOrFaultAsync("GetServerTags")
         );
     }
@@ -315,9 +315,9 @@ public partial class GbxRemoteClient
     ///     CurrentValue and NextValue.
     /// </summary>
     /// <returns></returns>
-    public async Task<CurrentNextValue<int>> GetMaxPlayersAsync()
+    public async Task<TmCurrentNextValue<int>> GetMaxPlayersAsync()
     {
-        return (CurrentNextValue<int>) XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
+        return (TmCurrentNextValue<int>) XmlRpcTypes.ToNativeValue<TmCurrentNextValue<int>>(
             await CallOrFaultAsync("GetMaxPlayers")
         );
     }
@@ -339,9 +339,9 @@ public partial class GbxRemoteClient
     ///     CurrentValue and NextValue.
     /// </summary>
     /// <returns></returns>
-    public async Task<CurrentNextValue<int>> GetMaxSpectatorsAsync()
+    public async Task<TmCurrentNextValue<int>> GetMaxSpectatorsAsync()
     {
-        return (CurrentNextValue<int>) XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
+        return (TmCurrentNextValue<int>) XmlRpcTypes.ToNativeValue<TmCurrentNextValue<int>>(
             await CallOrFaultAsync("GetMaxSpectators")
         );
     }
@@ -368,9 +368,9 @@ public partial class GbxRemoteClient
     ///     returned contains 4 fields IsLobby, LobbyPlayers, LobbyMaxPlayers, and LobbyPlayersLevel.
     /// </summary>
     /// <returns></returns>
-    public async Task<LobbyInfo> GetLobbyInfoAsync()
+    public async Task<TmLobbyInfo> GetLobbyInfoAsync()
     {
-        return (LobbyInfo) XmlRpcTypes.ToNativeValue<LobbyInfo>(
+        return (TmLobbyInfo) XmlRpcTypes.ToNativeValue<TmLobbyInfo>(
             await CallOrFaultAsync("GetLobbyInfo")
         );
     }
@@ -495,9 +495,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="login"></param>
     /// <returns></returns>
-    public async Task<DemoTokenInfo> GetDemoTokenInfosForPlayerAsync(string login)
+    public async Task<TmDemoTokenInfo> GetDemoTokenInfosForPlayerAsync(string login)
     {
-        return (DemoTokenInfo) XmlRpcTypes.ToNativeValue<DemoTokenInfo>(
+        return (TmDemoTokenInfo) XmlRpcTypes.ToNativeValue<TmDemoTokenInfo>(
             await CallOrFaultAsync("GetDemoTokenInfosForPlayer", login)
         );
     }
@@ -556,7 +556,7 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="options"></param>
     /// <returns></returns>
-    public async Task<bool> SetServerOptionsAsync(ServerOptions options)
+    public async Task<bool> SetServerOptionsAsync(TmServerOptions options)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetServerOptions", options)
@@ -572,9 +572,9 @@ public partial class GbxRemoteClient
     ///     ClientInputsMaxLatency, DisableHorns, DisableServiceAnnounces.
     /// </summary>
     /// <returns></returns>
-    public async Task<ServerOptions> GetServerOptionsAsync()
+    public async Task<TmServerOptions> GetServerOptionsAsync()
     {
-        return (ServerOptions) XmlRpcTypes.ToNativeValue<ServerOptions>(
+        return (TmServerOptions) XmlRpcTypes.ToNativeValue<TmServerOptions>(
             await CallOrFaultAsync("GetServerOptions")
         );
     }
@@ -587,7 +587,7 @@ public partial class GbxRemoteClient
     /// <param name="forced"></param>
     /// <param name="mods"></param>
     /// <returns></returns>
-    public async Task<bool> SetForcedModsAsync(bool forced, Mods mods)
+    public async Task<bool> SetForcedModsAsync(bool forced, TmMods mods)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetForcedMods", forced, mods)
@@ -598,9 +598,9 @@ public partial class GbxRemoteClient
     ///     Get the mods settings.
     /// </summary>
     /// <returns></returns>
-    public async Task<ForcedMods> GetForcedModsAsync()
+    public async Task<TmForcedMods> GetForcedModsAsync()
     {
-        return (ForcedMods) XmlRpcTypes.ToNativeValue<ForcedMods>(
+        return (TmForcedMods) XmlRpcTypes.ToNativeValue<TmForcedMods>(
             await CallOrFaultAsync("GetForcedMods")
         );
     }
@@ -624,9 +624,9 @@ public partial class GbxRemoteClient
     ///     Get the music setting.
     /// </summary>
     /// <returns></returns>
-    public async Task<MusicSetting> GetForcedMusicAsync()
+    public async Task<TmMusicSetting> GetForcedMusicAsync()
     {
-        return (MusicSetting) XmlRpcTypes.ToNativeValue<MusicSetting>(
+        return (TmMusicSetting) XmlRpcTypes.ToNativeValue<TmMusicSetting>(
             await CallOrFaultAsync("GetForcedMusic")
         );
     }
@@ -639,7 +639,7 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="skins"></param>
     /// <returns></returns>
-    public async Task<bool> SetForcedSkinsAsync(ForcedSkin[] skins)
+    public async Task<bool> SetForcedSkinsAsync(TmForcedSkin[] skins)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetForcedSkins", skins)
@@ -650,9 +650,9 @@ public partial class GbxRemoteClient
     ///     Get the current forced skins.
     /// </summary>
     /// <returns></returns>
-    public async Task<ForcedSkin[]> GetForcedSkinsAsync()
+    public async Task<TmForcedSkin[]> GetForcedSkinsAsync()
     {
-        return (ForcedSkin[]) XmlRpcTypes.ToNativeValue<ForcedSkin>(
+        return (TmForcedSkin[]) XmlRpcTypes.ToNativeValue<TmForcedSkin>(
             await CallOrFaultAsync("GetForcedSkins")
         );
     }
@@ -711,9 +711,9 @@ public partial class GbxRemoteClient
     ///     DeltaBetweenTwoLastNetState, PacketLossRate. Only available to SuperAdmin.
     /// </summary>
     /// <returns></returns>
-    public async Task<NetworkStats> GetNetworkStatsAsync()
+    public async Task<TmNetworkStats> GetNetworkStatsAsync()
     {
-        return (NetworkStats) XmlRpcTypes.ToNativeValue<NetworkStats>(
+        return (TmNetworkStats) XmlRpcTypes.ToNativeValue<TmNetworkStats>(
             await CallOrFaultAsync("GetNetworkStats")
         );
     }

@@ -17,7 +17,7 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="map">Information about the map that will be/was played.</param>
     /// <returns></returns>
-    public delegate Task BeginEndMapAction(SMapInfo map);
+    public delegate Task BeginEndMapAction(TmSMapInfo map);
 
     /// <summary>
     /// </summary>
@@ -50,7 +50,7 @@ public partial class GbxRemoteClient
     /// <param name="rankings">Array containing the ranking results of the match.</param>
     /// <param name="winnerTeam">The ID of the team that won the match if the Teams gamemode is played.</param>
     /// <returns></returns>
-    public delegate Task EndMatchAction(SPlayerRanking[] rankings, int winnerTeam);
+    public delegate Task EndMatchAction(TmSPlayerRanking[] rankings, int winnerTeam);
 
     /// <summary>
     ///     Action for the MapListModified event.
@@ -95,7 +95,7 @@ public partial class GbxRemoteClient
     ///     Action for when player info changed.
     /// </summary>
     /// <param name="playerUIid">New information about the player.</param>
-    public delegate Task PlayerInfoChangedAction(SPlayerInfo playerInfo);
+    public delegate Task PlayerInfoChangedAction(TmSPlayerInfo playerInfo);
 
     /// <summary>
     ///     Action for the OnStatusChanged event.
@@ -106,7 +106,7 @@ public partial class GbxRemoteClient
     /// <param name="entries">Key/Value of entries.</param>
     /// <returns></returns>
     public delegate Task PlayerManialinkPageAnswerAction(int playerUid, string login, string answer,
-        SEntryVal[] entries);
+        TmSEntryVal[] entries);
 
     /// <summary>
     /// </summary>
@@ -303,18 +303,18 @@ public partial class GbxRemoteClient
                 break;
             case "ManiaPlanet.EndMatch":
                 OnEndMatch?.Invoke(
-                    (SPlayerRanking[]) XmlRpcTypes.ToNativeValue<SPlayerRanking>(call.Arguments[0]),
+                    (TmSPlayerRanking[]) XmlRpcTypes.ToNativeValue<TmSPlayerRanking>(call.Arguments[0]),
                     (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[1])
                 );
                 break;
             case "ManiaPlanet.BeginMap":
                 OnBeginMap?.Invoke(
-                    (SMapInfo) XmlRpcTypes.ToNativeValue<SMapInfo>(call.Arguments[0])
+                    (TmSMapInfo) XmlRpcTypes.ToNativeValue<TmSMapInfo>(call.Arguments[0])
                 );
                 break;
             case "ManiaPlanet.EndMap":
                 OnEndMap?.Invoke(
-                    (SMapInfo) XmlRpcTypes.ToNativeValue<SMapInfo>(call.Arguments[0])
+                    (TmSMapInfo) XmlRpcTypes.ToNativeValue<TmSMapInfo>(call.Arguments[0])
                 );
                 break;
             case "ManiaPlanet.StatusChanged":
@@ -325,7 +325,7 @@ public partial class GbxRemoteClient
                 break;
             case "ManiaPlanet.PlayerInfoChanged":
                 OnPlayerInfoChanged?.Invoke(
-                    (SPlayerInfo) XmlRpcTypes.ToNativeValue<SPlayerInfo>(call.Arguments[0])
+                    (TmSPlayerInfo) XmlRpcTypes.ToNativeValue<TmSPlayerInfo>(call.Arguments[0])
                 );
                 break;
             case "ManiaPlanet.ModeScriptCallback":
@@ -339,7 +339,7 @@ public partial class GbxRemoteClient
                     (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
                     (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[2]),
-                    (SEntryVal[]) XmlRpcTypes.ToNativeValue<SEntryVal>(call.Arguments[3])
+                    (TmSEntryVal[]) XmlRpcTypes.ToNativeValue<TmSEntryVal>(call.Arguments[3])
                 );
                 break;
             case "ManiaPlanet.MapListModified":

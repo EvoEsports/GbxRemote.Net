@@ -8,7 +8,7 @@ public class EndMatchEventArgs : EventArgs
     /// <summary>
     /// Array containing the ranking results of the match.
     /// </summary>
-    public SPlayerRanking[] Rankings { get; set; }
+    public TmSPlayerRanking[] Rankings { get; set; }
     /// <summary>
     /// The ID of the team that won the match if the Teams game-mode is played.
     /// </summary>

@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace ModeScriptExample;
 
-public class CallbacksList : ModeScriptResponse
+public class CallbacksList : TmModeScriptResponse
 {
     public string[] Callbacks { get; set; }
 }

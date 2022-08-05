@@ -50,9 +50,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <returns></returns>
     [Obsolete]
-    public async Task<GameInfo> GetCurrentGameInfoAsync()
+    public async Task<TmGameInfo> GetCurrentGameInfoAsync()
     {
-        return (GameInfo) XmlRpcTypes.ToNativeValue<GameInfo>(
+        return (TmGameInfo) XmlRpcTypes.ToNativeValue<TmGameInfo>(
             await CallOrFaultAsync("GetCurrentGameInfo")
         );
     }
@@ -62,9 +62,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <returns></returns>
     [Obsolete]
-    public async Task<GameInfo> GetNextGameInfoAsync()
+    public async Task<TmGameInfo> GetNextGameInfoAsync()
     {
-        return (GameInfo) XmlRpcTypes.ToNativeValue<GameInfo>(
+        return (TmGameInfo) XmlRpcTypes.ToNativeValue<TmGameInfo>(
             await CallOrFaultAsync("GetNextGameInfo")
         );
     }
@@ -75,9 +75,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <returns></returns>
     [Obsolete]
-    public async Task<CurrentNextValue<GameInfo>> GetGameInfosAsync()
+    public async Task<TmCurrentNextValue<TmGameInfo>> GetGameInfosAsync()
     {
-        return (CurrentNextValue<GameInfo>) XmlRpcTypes.ToNativeValue<CurrentNextValue<GameInfo>>(
+        return (TmCurrentNextValue<TmGameInfo>) XmlRpcTypes.ToNativeValue<TmCurrentNextValue<TmGameInfo>>(
             await CallOrFaultAsync("GetGameInfos")
         );
     }
@@ -115,9 +115,9 @@ public partial class GbxRemoteClient
     ///     NextValue.
     /// </summary>
     /// <returns></returns>
-    public async Task<CurrentNextValue<string>> GetScriptNameAsync()
+    public async Task<TmCurrentNextValue<string>> GetScriptNameAsync()
     {
-        return (CurrentNextValue<string>) XmlRpcTypes.ToNativeValue<CurrentNextValue<string>>(
+        return (TmCurrentNextValue<string>) XmlRpcTypes.ToNativeValue<TmCurrentNextValue<string>>(
             await CallOrFaultAsync("GetScriptName")
         );
     }
@@ -128,9 +128,9 @@ public partial class GbxRemoteClient
     ///     NextValue.
     /// </summary>
     /// <returns></returns>
-    public async Task<CurrentNextValue<int>> GetTimeAttackLimitAsync()
+    public async Task<TmCurrentNextValue<int>> GetTimeAttackLimitAsync()
     {
-        return (CurrentNextValue<int>) XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
+        return (TmCurrentNextValue<int>) XmlRpcTypes.ToNativeValue<TmCurrentNextValue<int>>(
             await CallOrFaultAsync("GetTimeAttackLimit")
         );
     }

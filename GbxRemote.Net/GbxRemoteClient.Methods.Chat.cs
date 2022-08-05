@@ -29,7 +29,7 @@ public partial class GbxRemoteClient
     /// <param name="lang"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public async Task<bool> ChatSendServerMessageToLanguageAsync(Language[] lang, string message)
+    public async Task<bool> ChatSendServerMessageToLanguageAsync(TmLanguage[] lang, string message)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("ChatSendServerMessage", lang, message)
@@ -83,7 +83,7 @@ public partial class GbxRemoteClient
     /// <param name="lang"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public async Task<bool> ChatSendToLanguageAsync(Language[] lang, string message)
+    public async Task<bool> ChatSendToLanguageAsync(TmLanguage[] lang, string message)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("ChatSendToLanguage", lang, message)

@@ -65,9 +65,9 @@ public partial class GbxRemoteClient
     ///     Returns the vote currently in progress. The returned structure is { CallerLogin, CmdName, CmdParam }.
     /// </summary>
     /// <returns></returns>
-    public async Task<CurrentCallVote> GetCurrentCallVoteAsync()
+    public async Task<TmCurrentCallVote> GetCurrentCallVoteAsync()
     {
-        return (CurrentCallVote) XmlRpcTypes.ToNativeValue<CurrentCallVote>(
+        return (TmCurrentCallVote) XmlRpcTypes.ToNativeValue<TmCurrentCallVote>(
             await CallOrFaultAsync("GetCurrentCallVote")
         );
     }
@@ -90,9 +90,9 @@ public partial class GbxRemoteClient
     ///     'NextValue'.
     /// </summary>
     /// <returns></returns>
-    public async Task<CurrentNextValue<int>> GetCallVoteTimeOutAsync()
+    public async Task<TmCurrentNextValue<int>> GetCallVoteTimeOutAsync()
     {
-        return (CurrentNextValue<int>) XmlRpcTypes.ToNativeValue<CurrentNextValue<int>>(
+        return (TmCurrentNextValue<int>) XmlRpcTypes.ToNativeValue<TmCurrentNextValue<int>>(
             await CallOrFaultAsync("GetCallVoteTimeOut")
         );
     }
@@ -127,7 +127,7 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="ratio"></param>
     /// <returns></returns>
-    public async Task<bool> SetCallVoteRatiosAsync(CallVoteRatio[] ratios)
+    public async Task<bool> SetCallVoteRatiosAsync(TmCallVoteRatio[] ratios)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetCallVoteRatios", ratios)
@@ -138,9 +138,9 @@ public partial class GbxRemoteClient
     ///     Get the current ratios for passing votes.
     /// </summary>
     /// <returns></returns>
-    public async Task<CallVoteRatio[]> GetCallVoteRatiosAsync()
+    public async Task<TmCallVoteRatio[]> GetCallVoteRatiosAsync()
     {
-        return (CallVoteRatio[]) XmlRpcTypes.ToNativeValue<CallVoteRatio>(
+        return (TmCallVoteRatio[]) XmlRpcTypes.ToNativeValue<TmCallVoteRatio>(
             await CallOrFaultAsync("GetCallVoteRatios")
         );
     }

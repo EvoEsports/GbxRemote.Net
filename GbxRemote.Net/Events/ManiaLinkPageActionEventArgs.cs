@@ -15,5 +15,5 @@ public class ManiaLinkPageActionEventArgs : PlayerEventArgs
     /// <summary>
     /// Key/Value of entries.
     /// </summary>
-    public SEntryVal[] Entries { get; set; }
+    public TmSEntryVal[] Entries { get; set; }
 }

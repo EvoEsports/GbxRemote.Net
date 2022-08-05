@@ -38,9 +38,9 @@ public partial class GbxRemoteClient
     ///     Version and the settings available.
     /// </summary>
     /// <returns></returns>
-    public async Task<ScriptInfo> GetModeScriptInfoAsync()
+    public async Task<TmScriptInfo> GetModeScriptInfoAsync()
     {
-        return (ScriptInfo) XmlRpcTypes.ToNativeValue<ScriptInfo>(
+        return (TmScriptInfo) XmlRpcTypes.ToNativeValue<TmScriptInfo>(
             await CallOrFaultAsync("GetModeScriptInfo")
         );
     }

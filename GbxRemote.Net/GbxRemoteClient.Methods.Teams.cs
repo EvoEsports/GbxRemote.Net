@@ -38,9 +38,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="team"></param>
     /// <returns></returns>
-    public async Task<TeamInfo> GetTeamInfoAsync(int team)
+    public async Task<TmTeamInfo> GetTeamInfoAsync(int team)
     {
-        return (TeamInfo) XmlRpcTypes.ToNativeValue<TeamInfo>(
+        return (TmTeamInfo) XmlRpcTypes.ToNativeValue<TmTeamInfo>(
             await CallOrFaultAsync("GetTeamInfo", team)
         );
     }
@@ -63,9 +63,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="team"></param>
     /// <returns></returns>
-    public async Task<ClubLinks> GetForcedClubLinksAsync(int team)
+    public async Task<TmClubLinks> GetForcedClubLinksAsync(int team)
     {
-        return (ClubLinks) XmlRpcTypes.ToNativeValue<ClubLinks>(
+        return (TmClubLinks) XmlRpcTypes.ToNativeValue<TmClubLinks>(
             await CallOrFaultAsync("GetForcedClubLinks", team)
         );
     }

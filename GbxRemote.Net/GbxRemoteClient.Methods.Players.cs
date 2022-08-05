@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
 
@@ -29,9 +30,9 @@ public partial class GbxRemoteClient
     ///     including the servers)
     /// </param>
     /// <returns></returns>
-    public async Task<PlayerInfo[]> GetPlayerListAsync(int maxInfos = -1, int startIndex = 0, int serverType = -1)
+    public async Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos = -1, int startIndex = 0, int serverType = -1)
     {
-        return (PlayerInfo[]) XmlRpcTypes.ToNativeValue<PlayerInfo>(
+        return (TmPlayerInfo[]) XmlRpcTypes.ToNativeValue<TmPlayerInfo>(
             await CallOrFaultAsync("GetPlayerList", maxInfos, startIndex, serverType)
         );
     }
@@ -52,9 +53,9 @@ public partial class GbxRemoteClient
     /// <param name="playerLogin"></param>
     /// <param name="serverType"></param>
     /// <returns></returns>
-    public async Task<PlayerInfo> GetPlayerInfoAsync(string playerLogin, int serverType = 1)
+    public async Task<TmPlayerInfo> GetPlayerInfoAsync(string playerLogin, int serverType = 1)
     {
-        return (PlayerInfo) XmlRpcTypes.ToNativeValue<PlayerInfo>(
+        return (TmPlayerInfo) XmlRpcTypes.ToNativeValue<TmPlayerInfo>(
             await CallOrFaultAsync("GetPlayerInfo", playerLogin, serverType)
         );
     }
@@ -69,9 +70,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="playerLogin"></param>
     /// <returns></returns>
-    public async Task<PlayerDetailedInfo> GetDetailedPlayerInfoAsync(string playerLogin)
+    public async Task<TmPlayerDetailedInfo> GetDetailedPlayerInfoAsync(string playerLogin)
     {
-        return (PlayerDetailedInfo) XmlRpcTypes.ToNativeValue<PlayerDetailedInfo>(
+        return (TmPlayerDetailedInfo) XmlRpcTypes.ToNativeValue<TmPlayerDetailedInfo>(
             await CallOrFaultAsync("GetDetailedPlayerInfo", playerLogin)
         );
     }
@@ -94,9 +95,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="serverType"></param>
     /// <returns></returns>
-    public async Task<PlayerInfo> GetMainServerPlayerInfoAsync(int serverType)
+    public async Task<TmPlayerInfo> GetMainServerPlayerInfoAsync(int serverType)
     {
-        return (PlayerInfo) XmlRpcTypes.ToNativeValue<PlayerInfo>(
+        return (TmPlayerInfo) XmlRpcTypes.ToNativeValue<TmPlayerInfo>(
             await CallOrFaultAsync("GetMainServerPlayerInfo", serverType)
         );
     }
@@ -112,9 +113,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="playerLogin"></param>
     /// <returns></returns>
-    public async Task<PlayerRanking[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex)
+    public async Task<TmPlayerRanking[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex)
     {
-        return (PlayerRanking[]) XmlRpcTypes.ToNativeValue<PlayerRanking>(
+        return (TmPlayerRanking[]) XmlRpcTypes.ToNativeValue<TmPlayerRanking>(
             await CallOrFaultAsync("GetCurrentRanking", maxInfos, startRatingIndex)
         );
     }
@@ -128,9 +129,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="playerLogin"></param>
     /// <returns></returns>
-    public async Task<PlayerRanking[]> GetCurrentRankingForLoginAsync(string playerLogin)
+    public async Task<TmPlayerRanking[]> GetCurrentRankingForLoginAsync(string playerLogin)
     {
-        return (PlayerRanking[]) XmlRpcTypes.ToNativeValue<PlayerRanking>(
+        return (TmPlayerRanking[]) XmlRpcTypes.ToNativeValue<TmPlayerRanking>(
             await CallOrFaultAsync("GetCurrentRankingForLogin")
         );
     }
@@ -144,7 +145,7 @@ public partial class GbxRemoteClient
     /// <param name="playerScores"></param>
     /// <param name="silentMode"></param>
     /// <returns></returns>
-    public async Task<bool> ForceScoresAsync(PlayerScore[] playerScores, bool silentMode)
+    public async Task<bool> ForceScoresAsync(TmPlayerScore[] playerScores, bool silentMode)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("ForceScores", playerScores, silentMode)
@@ -368,9 +369,9 @@ public partial class GbxRemoteClient
     /// <param name="maxInfos"></param>
     /// <param name="startIndex"></param>
     /// <returns></returns>
-    public async Task<BanListEntry[]> GetBanListAsync(int maxInfos, int startIndex)
+    public async Task<TmBanListEntry[]> GetBanListAsync(int maxInfos, int startIndex)
     {
-        return (BanListEntry[]) XmlRpcTypes.ToNativeValue<BanListEntry>(
+        return (TmBanListEntry[]) XmlRpcTypes.ToNativeValue<TmBanListEntry>(
             await CallOrFaultAsync("GetBanList", maxInfos, startIndex)
         );
     }
@@ -433,9 +434,9 @@ public partial class GbxRemoteClient
     /// <param name="maxInfos"></param>
     /// <param name="startIndex"></param>
     /// <returns></returns>
-    public async Task<BlackListEntry[]> GetBlackListAsync(int maxInfos, int startIndex)
+    public async Task<TmBlackListEntry[]> GetBlackListAsync(int maxInfos, int startIndex)
     {
-        return (BlackListEntry[]) XmlRpcTypes.ToNativeValue<BlackListEntry>(
+        return (TmBlackListEntry[]) XmlRpcTypes.ToNativeValue<TmBlackListEntry>(
             await CallOrFaultAsync("GetBanList", maxInfos, startIndex)
         );
     }
@@ -535,9 +536,9 @@ public partial class GbxRemoteClient
     /// <param name="maxInfos"></param>
     /// <param name="startIndex"></param>
     /// <returns></returns>
-    public async Task<GuestListEntry[]> GetGuestListAsync(int maxInfos, int startIndex)
+    public async Task<TmGuestListEntry[]> GetGuestListAsync(int maxInfos, int startIndex)
     {
-        return (GuestListEntry[]) XmlRpcTypes.ToNativeValue<GuestListEntry>(
+        return (TmGuestListEntry[]) XmlRpcTypes.ToNativeValue<TmGuestListEntry>(
             await CallOrFaultAsync("GetGuestList", maxInfos, startIndex)
         );
     }
@@ -637,9 +638,9 @@ public partial class GbxRemoteClient
     /// <param name="maxInfos"></param>
     /// <param name="startIndex"></param>
     /// <returns></returns>
-    public async Task<IgnoreListEntry[]> GetIgnoreListAsync(int maxInfos, int startIndex)
+    public async Task<TmIgnoreListEntry[]> GetIgnoreListAsync(int maxInfos, int startIndex)
     {
-        return (IgnoreListEntry[]) XmlRpcTypes.ToNativeValue<IgnoreListEntry>(
+        return (TmIgnoreListEntry[]) XmlRpcTypes.ToNativeValue<TmIgnoreListEntry>(
             await CallOrFaultAsync("CleanIgnoreList", maxInfos, startIndex)
         );
     }
@@ -657,6 +658,7 @@ public partial class GbxRemoteClient
     /// <param name="planets"></param>
     /// <param name="label"></param>
     /// <returns></returns>
+    [Obsolete]
     public async Task<int> PayAsync(string login, int planets, string label)
     {
         return (int) XmlRpcTypes.ToNativeValue<int>(
@@ -675,6 +677,7 @@ public partial class GbxRemoteClient
     /// <param name="label"></param>
     /// <param name="loginTo"></param>
     /// <returns></returns>
+    [Obsolete]
     public async Task<int> SendBillAsync(string loginFrom, int planets, string label, string loginTo = null)
     {
         return (int) XmlRpcTypes.ToNativeValue<int>(
@@ -689,9 +692,10 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="billId"></param>
     /// <returns></returns>
-    public async Task<BillState> GetBillStateAsync(int billId)
+    [Obsolete]
+    public async Task<TmBillState> GetBillStateAsync(int billId)
     {
-        return (BillState) XmlRpcTypes.ToNativeValue<BillState>(
+        return (TmBillState) XmlRpcTypes.ToNativeValue<TmBillState>(
             await CallOrFaultAsync("SendBill", billId)
         );
     }

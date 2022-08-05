@@ -87,9 +87,9 @@ public partial class GbxRemoteClient
     ///     (NbLaps and NbCheckpoints are also present but always set to -1)
     /// </summary>
     /// <returns></returns>
-    public async Task<MapInfo> GetCurrentMapInfoAsync()
+    public async Task<TmMapInfo> GetCurrentMapInfoAsync()
     {
-        return (MapInfo) XmlRpcTypes.ToNativeValue<MapInfo>(
+        return (TmMapInfo) XmlRpcTypes.ToNativeValue<TmMapInfo>(
             await CallOrFaultAsync("GetCurrentMapInfo")
         );
     }
@@ -101,9 +101,9 @@ public partial class GbxRemoteClient
     ///     (NbLaps and NbCheckpoints are also present but always set to -1)
     /// </summary>
     /// <returns></returns>
-    public async Task<MapInfo> GetNextMapInfoAsync()
+    public async Task<TmMapInfo> GetNextMapInfoAsync()
     {
-        return (MapInfo) XmlRpcTypes.ToNativeValue<MapInfo>(
+        return (TmMapInfo) XmlRpcTypes.ToNativeValue<TmMapInfo>(
             await CallOrFaultAsync("GetNextMapInfo")
         );
     }
@@ -116,9 +116,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="filename"></param>
     /// <returns></returns>
-    public async Task<MapInfo> GetMapInfoAsync(string filename)
+    public async Task<TmMapInfo> GetMapInfoAsync(string filename)
     {
-        return (MapInfo) XmlRpcTypes.ToNativeValue<MapInfo>(
+        return (TmMapInfo) XmlRpcTypes.ToNativeValue<TmMapInfo>(
             await CallOrFaultAsync("GetMapInfo", filename)
         );
     }
@@ -145,9 +145,9 @@ public partial class GbxRemoteClient
     /// <param name="maxInfos"></param>
     /// <param name="startIndex"></param>
     /// <returns></returns>
-    public async Task<MapInfo[]> GetMapListAsync(int maxInfos, int startIndex)
+    public async Task<TmMapInfo[]> GetMapListAsync(int maxInfos, int startIndex)
     {
-        return (MapInfo[]) XmlRpcTypes.ToNativeValue<MapInfo>(
+        return (TmMapInfo[]) XmlRpcTypes.ToNativeValue<TmMapInfo>(
             await CallOrFaultAsync("GetMapList", maxInfos, startIndex)
         );
     }

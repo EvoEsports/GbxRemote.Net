@@ -8,5 +8,5 @@ public class MapEventArgs : EventArgs
     /// <summary>
     /// Information about the map that will be/was played.
     /// </summary>
-    public SMapInfo Map { get; set; }
+    public TmSMapInfo Map { get; set; }
 }

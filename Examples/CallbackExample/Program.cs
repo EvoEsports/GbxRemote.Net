@@ -67,7 +67,7 @@ internal class Program
     }
 
     private static Task ClientOnOnPlayerManialinkPageAnswer(int playerUid, string login, string answer,
-        SEntryVal[] entries)
+        TmSEntryVal[] entries)
     {
         Console.WriteLine($"Player page answer: {playerUid} | {login}, Answer: {answer}");
         return Task.CompletedTask;
@@ -86,7 +86,7 @@ internal class Program
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerInfoChanged(SPlayerInfo playerInfo)
+    private static Task Client_OnPlayerInfoChanged(TmSPlayerInfo playerInfo)
     {
         Console.WriteLine($"Player info changed for: {playerInfo.NickName}");
         return Task.CompletedTask;
@@ -98,19 +98,19 @@ internal class Program
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEndMap(SMapInfo map)
+    private static Task Client_OnEndMap(TmSMapInfo map)
     {
         Console.WriteLine($"End map: {map.Name}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnBeginMap(SMapInfo map)
+    private static Task Client_OnBeginMap(TmSMapInfo map)
     {
         Console.WriteLine($"Begin map: {map.Name}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEndMatch(SPlayerRanking[] rankings, int winnerTeam)
+    private static Task Client_OnEndMatch(TmSPlayerRanking[] rankings, int winnerTeam)
     {
         Console.WriteLine("Match ended, rankings:");
         foreach (var ranking in rankings)
