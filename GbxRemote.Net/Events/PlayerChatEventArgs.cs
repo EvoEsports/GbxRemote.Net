@@ -3,9 +3,9 @@
 public class PlayerChatEventArgs : PlayerEventArgs
 {
     /// <summary>
-    /// The player's UID.
+    /// The Id of the player on the server.
     /// </summary>
-    public string PlayerUid { get; set; }
+    public int PlayerId { get; set; }
     /// <summary>
     /// Contents of the chat message.
     /// </summary>

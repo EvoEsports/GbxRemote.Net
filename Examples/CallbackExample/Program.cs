@@ -45,7 +45,7 @@ internal class Program
         client.OnConnected += Client_OnConnected;
         client.OnDisconnected += Client_OnDisconnected;
 
-        client.AnyCallback += ClientOnAnyCallback;
+        client.AnyCallback += Client_OnAnyCallback;
 
         // enable callbacks
         await client.EnableCallbackTypeAsync();
@@ -54,22 +54,15 @@ internal class Program
         WaitHandle.WaitAny(new[] {cancelToken.Token.WaitHandle});
     }
 
-    private static void ClientOnAnyCallback(object sender, CallbackEventArgs<object> e)
-    {
-        Console.WriteLine($"Callback received: {e.Call.Method}\nParameters:");
-        foreach (var parameter in e.Parameters) Console.WriteLine($"- {parameter}");
-    }
-
-    private static Task ClientOnOnMapListModified(int curmapindex, int nextmapindex, bool islistmodified)
+    private static Task ClientOnOnMapListModified(object sender, MapListModifiedEventArgs e)
     {
         Console.WriteLine("Map list modified.");
         return Task.CompletedTask;
     }
 
-    private static Task ClientOnOnPlayerManialinkPageAnswer(int playerUid, string login, string answer,
-        TmSEntryVal[] entries)
+    private static Task ClientOnOnPlayerManialinkPageAnswer(object sender, ManiaLinkPageActionEventArgs e)
     {
-        Console.WriteLine($"Player page answer: {playerUid} | {login}, Answer: {answer}");
+        Console.WriteLine($"Player page answer: {e.PlayerId} | {e.Login}, Answer: {e.Answer}");
         return Task.CompletedTask;
     }
 
@@ -86,73 +79,73 @@ internal class Program
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerInfoChanged(TmSPlayerInfo playerInfo)
+    private static Task Client_OnPlayerInfoChanged(object sender, PlayerInfoChangedEventArgs e)
     {
-        Console.WriteLine($"Player info changed for: {playerInfo.NickName}");
+        Console.WriteLine($"Player info changed for: {e.PlayerInfo.NickName}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnStatusChanged(int statusCode, string statusName)
+    private static Task Client_OnStatusChanged(object sender, StatusChangedEventArgs e)
     {
-        Console.WriteLine($"[Status Changed] {statusCode}: {statusName}");
+        Console.WriteLine($"[Status Changed] {e.StatusCode}: {e.StatusName}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEndMap(TmSMapInfo map)
+    private static Task Client_OnEndMap(object sender, MapEventArgs e)
     {
-        Console.WriteLine($"End map: {map.Name}");
+        Console.WriteLine($"End map: {e.Map.Name}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnBeginMap(TmSMapInfo map)
+    private static Task Client_OnBeginMap(object sender, MapEventArgs e)
     {
-        Console.WriteLine($"Begin map: {map.Name}");
+        Console.WriteLine($"Begin map: {e.Map.Name}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEndMatch(TmSPlayerRanking[] rankings, int winnerTeam)
+    private static Task Client_OnEndMatch(object sender, EndMatchEventArgs e)
     {
         Console.WriteLine("Match ended, rankings:");
-        foreach (var ranking in rankings)
+        foreach (var ranking in e.Rankings)
             Console.WriteLine($"- {ranking.Login}: {ranking.Rank}");
 
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnBeginMatch()
+    private static Task Client_OnBeginMatch(object sender, EventArgs e)
     {
         Console.WriteLine("New match begun.");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEcho(string internalParam, string publicParam)
+    private static Task Client_OnEcho(object sender, EchoEventArgs e)
     {
-        Console.WriteLine($"[Echo] internal: {internalParam}, public: {publicParam}");
+        Console.WriteLine($"[Echo] internal: {e.InternalParam}, public: {e.InternalParam}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerChat(int playerUid, string login, string text, bool isRegisteredCmd)
+    private static Task Client_OnPlayerChat(object sender, PlayerChatEventArgs e)
     {
-        Console.WriteLine($"[Chat] {login}: {text}");
+        Console.WriteLine($"[Chat] {e.Login}: {e.Text}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerDisconnect(string login, string reason)
+    private static Task Client_OnPlayerDisconnect(object sender, PlayerDisconnectEventArgs e)
     {
-        Console.WriteLine($"Player disconnected: {login}");
+        Console.WriteLine($"Player disconnected: {e.Login}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerConnect(string login, bool isSpectator)
+    private static Task Client_OnPlayerConnect(object sender, PlayerConnectEventArgs e)
     {
-        Console.WriteLine($"Player connected: {login}");
+        Console.WriteLine($"Player connected: {e.Login}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnAnyCallback(MethodCall call, object[] pars)
+    private static Task Client_OnAnyCallback(object sender, CallbackEventArgs<object> e)
     {
-        Console.WriteLine($"[Any callback] {call.Method}:");
-        foreach (var par in pars) Console.WriteLine($"- {par}");
+        Console.WriteLine($"[Any callback] {e.Call.Method}:");
+        foreach (var par in e.Parameters) Console.WriteLine($"- {par}");
 
         return Task.CompletedTask;
     }
