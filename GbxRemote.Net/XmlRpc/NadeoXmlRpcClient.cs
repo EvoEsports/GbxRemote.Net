@@ -102,7 +102,7 @@ public class NadeoXmlRpcClient
         }
         catch (Exception e)
         {
-            _logger.LogError("Receive loop raised an exception: {Msg}", e.Message);
+            _logger?.LogError("Receive loop raised an exception: {Msg}", e.Message);
             await DisconnectAsync();
         }
     }
@@ -150,7 +150,7 @@ public class NadeoXmlRpcClient
 
         _xmlRpcIo = new XmlRpcIO(_tcpClient);
 
-        _logger?.LogDebug("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
+        _logger?.LogDebug("Client connected to XML-RPC server with IP: {Address}", connectAddr.ToString());
 
         // Cancellation token to cancel task if it takes longer than a second
         var cancellationTokenSource = new CancellationTokenSource();

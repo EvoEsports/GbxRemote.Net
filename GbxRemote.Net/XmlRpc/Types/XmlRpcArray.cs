@@ -66,7 +66,7 @@ public class XmlRpcArray : XmlRpcBaseType, IEquatable<XmlRpcArray>
 
     public override int GetHashCode()
     {
-        return GetHashCode();
+        return base.GetHashCode();
     }
 
     /// <summary>
