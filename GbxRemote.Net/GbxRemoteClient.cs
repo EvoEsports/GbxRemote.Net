@@ -18,7 +18,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     public const string DefaultApiVersion = "2022-03-21";
 
     private readonly ILogger _logger;
-    private readonly GbxRemoteClientOptions Options;
+    private readonly GbxRemoteClientOptions _options;
 
     /// <summary>
     ///     Create a new instance of the GBXRemote client.
@@ -29,7 +29,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     public GbxRemoteClient(string host, int port, ILogger logger = null) : base(host, port, logger)
     {
         OnCallback += GbxRemoteClient_OnCallback;
-        Options = new GbxRemoteClientOptions();
+        _options = new GbxRemoteClientOptions();
 
         _logger = logger;
     }
@@ -43,7 +43,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
         port)
     {
         OnCallback += GbxRemoteClient_OnCallback;
-        Options = options;
+        _options = options;
 
         _logger = logger;
     }
@@ -104,7 +104,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     {
         _logger?.LogDebug("Client connecting to GbxRemote");
 
-        if (!await ConnectAsync(Options.ConnectionRetries, Options.ConnectionRetryTimeout))
+        if (!await ConnectAsync(_options.ConnectionRetries, _options.ConnectionRetryTimeout))
             return false;
 
         await SetApiVersionAsync(DefaultApiVersion);

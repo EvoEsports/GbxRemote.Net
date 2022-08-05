@@ -19,7 +19,7 @@ public partial class GbxRemoteClient
     /// <summary>
     ///     Triggered for all possible callbacks.
     /// </summary>
-    public event AsyncEventHandler<CallbackEventArgs<object>> AnyCallback;
+    public event AsyncEventHandler<CallbackEventArgs<object>> OnAnyCallback;
 
     /// <summary>
     ///     When a player connects to the server.
@@ -304,7 +304,7 @@ public partial class GbxRemoteClient
                 break;
         }
 
-        AnyCallback?.Invoke(this, new CallbackEventArgs<object>
+        OnAnyCallback?.Invoke(this, new CallbackEventArgs<object>
         {
             Call = call,
             Parameters = (object[]) XmlRpcTypes.ToNativeValue<object>(new XmlRpcArray(call.Arguments))

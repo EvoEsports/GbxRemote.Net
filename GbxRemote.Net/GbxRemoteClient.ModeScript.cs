@@ -56,7 +56,7 @@ public partial class GbxRemoteClient
                 _msResponses[responseId] = (data, extraArgs);
                 _msSignals[responseId].Set();
 
-                if (!Options.InvokeEventOnModeScriptMethodResponse)
+                if (!_options.InvokeEventOnModeScriptMethodResponse)
                     return Task.CompletedTask;
             }
         }
