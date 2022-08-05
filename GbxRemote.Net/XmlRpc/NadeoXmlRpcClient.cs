@@ -73,7 +73,7 @@ public class NadeoXmlRpcClient
     {
         try
         {
-            _logger?.LogDebug("Recieve loop initiated.");
+            _logger?.LogDebug("Receive loop initiated");
 
             while (!_recvCancel.IsCancellationRequested)
             {
