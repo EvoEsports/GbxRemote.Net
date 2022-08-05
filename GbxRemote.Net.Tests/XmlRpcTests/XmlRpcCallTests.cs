@@ -40,7 +40,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                     new XmlRpcInteger(2),
                     new XmlRpcInteger(3)
                 }),
-                new XmlRpcStruct(new Struct() {
+                new XmlRpcStruct(new GbxStruct() {
                     { "Key1", new XmlRpcString("Value 1") },
                     { "Key2", new XmlRpcString("Value 2") },
                     { "Key3", new XmlRpcString("Value 3") }
