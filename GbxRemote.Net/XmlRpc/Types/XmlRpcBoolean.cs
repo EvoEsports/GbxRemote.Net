@@ -37,7 +37,7 @@ public class XmlRpcBoolean : XmlRpcBaseType, IEquatable<XmlRpcBoolean>
 
     public override int GetHashCode()
     {
-        return GetHashCode();
+        return base.GetHashCode();
     }
 
     /// <summary>

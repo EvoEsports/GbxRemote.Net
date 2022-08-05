@@ -32,7 +32,7 @@ public class XmlRpcString : XmlRpcBaseType, IEquatable<XmlRpcString>
 
     public override int GetHashCode()
     {
-        return GetHashCode();
+        return base.GetHashCode();
     }
 
     /// <summary>
