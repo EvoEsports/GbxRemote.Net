@@ -11,11 +11,12 @@ internal class Program
     private static async Task Main(string[] args)
     {
         // create client instance
-        GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
+        GbxRemoteClient client = new("127.0.0.2", 5001, Logger.New<Program>(LogLevel.Debug));
 
         // connect and login
         if (!await client.LoginAsync("SuperAdmin", "SuperAdmin"))
         {
+            await client.GetLastConnectionErrorMessageAsync();
             Console.WriteLine("Failed to login.");
             return;
         }

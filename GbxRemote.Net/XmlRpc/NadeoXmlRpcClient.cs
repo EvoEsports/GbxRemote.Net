@@ -232,6 +232,11 @@ public class NadeoXmlRpcClient
     /// <returns>Response returned by the call.</returns>
     public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args)
     {
+        if (!tcpClient.Connected)
+        {
+            throw new InvalidOperationException("Client is not connected. Failed to call remote XMLRPC method.");
+        }
+        
         var handle = await GetNextHandle();
         MethodCall call = new(method, handle, args);
 
