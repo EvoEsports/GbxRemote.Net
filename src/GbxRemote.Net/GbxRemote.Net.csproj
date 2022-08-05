@@ -11,35 +11,25 @@
         <PackageTags>gbxremote,xmlrpc,client,trackmania</PackageTags>
         <PackageReleaseNotes>This is the second BETA version of the client.</PackageReleaseNotes>
         <RepositoryUrl>https://github.com/EvoTM/GbxRemote.Net</RepositoryUrl>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <RepositoryType>Git</RepositoryType>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>logo_square.png</PackageIcon>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <AssemblyVersion>2.0.0</AssemblyVersion>
         <FileVersion>2.0.0</FileVersion>
         <PackageIconUrl />
         <PackageVersion>2.0.0</PackageVersion>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="NLog.config" />
+        <None Include="../../logo_square.png" Pack="true" PackagePath="\" />
+        <None Include="../../LICENSE" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <None Include="..\LICENSE">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
-        <None Include="..\logo_square.png">
-            <Pack>True</Pack>
-            <PackagePath></PackagePath>
-        </None>
     </ItemGroup>
 
 </Project>
