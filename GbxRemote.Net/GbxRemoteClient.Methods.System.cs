@@ -66,7 +66,7 @@ public partial class GbxRemoteClient
                 methodName = methodName.Substring(0, methodName.Length - 5);
 
             var args = MethodArgs(call.Arguments);
-            XmlRpcStruct callStruct = new(new Struct
+            XmlRpcStruct callStruct = new(new GbxStruct
             {
                 {"methodName", new XmlRpcString(methodName)},
                 {"params", new XmlRpcArray(args)}

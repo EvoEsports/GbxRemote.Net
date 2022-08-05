@@ -57,7 +57,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                         new XElement("name", "Key4"),
                         new XElement("value", new XElement("double", 4))
                 )
-                ), new XmlRpcStruct(new Struct() {
+                ), new XmlRpcStruct(new GbxStruct() {
                     { "Key1", new XmlRpcInteger(1) },
                     { "Key2", new XmlRpcInteger(2) },
                     { "Key3", new XmlRpcString("3") },
@@ -109,7 +109,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                 new XmlRpcString("3"),
                 new XmlRpcDouble(4),
             }), new object[] { 1, 2, "3", (double)4 } },
-            new object[]{ new XmlRpcStruct(new Struct() {
+            new object[]{ new XmlRpcStruct(new GbxStruct() {
                 { "Key1", new XmlRpcInteger(1) },
                 { "Key2", new XmlRpcInteger(2) },
                 { "Key3", new XmlRpcString("3") },
@@ -131,7 +131,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
 
         [Fact]
         public void ToNativeStruct_Returns_DynamicObject_If_Object_Type() {
-            XmlRpcStruct str = new(new Struct());
+            XmlRpcStruct str = new(new GbxStruct());
             object result = XmlRpcTypes.ToNativeStruct<object>(str);
 
             Assert.IsType<DynamicObject>(result);
@@ -139,7 +139,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
 
         [Fact]
         public void ToNativeStruct_Returns_DynamicObject_If_DynamicObject_Type() {
-            XmlRpcStruct str = new(new Struct());
+            XmlRpcStruct str = new(new GbxStruct());
             object result = XmlRpcTypes.ToNativeStruct<DynamicObject>(str);
 
             Assert.IsType<DynamicObject>(result);
@@ -164,7 +164,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
         }
         [Fact]
         public void ToNativeStruct_Returns_Correct_Values_In_Custom_Struct() {
-            XmlRpcStruct str = new XmlRpcStruct(new Struct() {
+            XmlRpcStruct str = new XmlRpcStruct(new GbxStruct() {
                 { "Field1", new XmlRpcInteger(3425) },
                 { "Field2", new XmlRpcDouble(325.235) },
                 { "Field3", new XmlRpcString("Test String") },
@@ -177,7 +177,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                     new XmlRpcInteger(2),
                     new XmlRpcInteger(3)
                 }) },
-                { "Field9", new XmlRpcStruct(new Struct(){
+                { "Field9", new XmlRpcStruct(new GbxStruct(){
                     { "Field1", new XmlRpcInteger(1) },
                     { "Field2", new XmlRpcInteger(2) },
                     { "Field3", new XmlRpcInteger(3) }
@@ -268,7 +268,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                 Field1=1,
                 Field2=2,
                 Field3=3
-            }, new XmlRpcStruct(new Struct(){
+            }, new XmlRpcStruct(new GbxStruct(){
                 { "Field1", new XmlRpcInteger(1) },
                 { "Field2", new XmlRpcInteger(2) },
                 { "Field3", new XmlRpcInteger(3) }
@@ -306,7 +306,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             obj.Add("three", 3.3);
 
             var result = XmlRpcTypes.ToXmlRpcValue(obj);
-            var expected = new XmlRpcStruct(new Struct
+            var expected = new XmlRpcStruct(new GbxStruct
             {
                 {"one", new XmlRpcInteger(1)},
                 {"two", new XmlRpcString("two")},

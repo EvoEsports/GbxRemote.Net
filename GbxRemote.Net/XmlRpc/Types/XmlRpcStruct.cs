@@ -11,16 +11,16 @@ namespace GbxRemoteNet.XmlRpc.Types;
 /// </summary>
 public class XmlRpcStruct : XmlRpcBaseType, IEquatable<XmlRpcStruct>
 {
-    public Struct Fields;
+    public GbxStruct Fields;
 
-    public XmlRpcStruct(Struct fields) : base(null)
+    public XmlRpcStruct(GbxStruct fields) : base(null)
     {
         Fields = fields;
     }
 
     public XmlRpcStruct(XElement element) : base(element)
     {
-        Fields = new Struct();
+        Fields = new GbxStruct();
         var members = element.Elements(XmlRpcElementNames.Member);
 
         foreach (var member in members)
@@ -45,7 +45,7 @@ public class XmlRpcStruct : XmlRpcBaseType, IEquatable<XmlRpcStruct>
     {
         var t = obj.GetType();
         var fields = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        Fields = new Struct();
+        Fields = new GbxStruct();
 
         foreach (var field in fields)
             Fields.Add(field.Name, XmlRpcTypes.ToXmlRpcValue(t.GetProperty(field.Name).GetValue(obj)));
@@ -57,7 +57,7 @@ public class XmlRpcStruct : XmlRpcBaseType, IEquatable<XmlRpcStruct>
     /// <param name="obj"></param>
     public XmlRpcStruct(DynamicObject obj) : base(null)
     {
-        Fields = new Struct();
+        Fields = new GbxStruct();
 
         foreach (var kv in obj) Fields.Add(kv.Key, XmlRpcTypes.ToXmlRpcValue(kv.Value));
     }

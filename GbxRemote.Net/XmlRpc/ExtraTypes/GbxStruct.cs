@@ -3,6 +3,6 @@ using GbxRemoteNet.XmlRpc.Types;
 
 namespace GbxRemoteNet.XmlRpc.ExtraTypes;
 
-public class Struct : Dictionary<string, XmlRpcBaseType>
+public class GbxStruct : Dictionary<string, XmlRpcBaseType>
 {
 }
