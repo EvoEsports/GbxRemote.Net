@@ -16,10 +16,10 @@
         <RepositoryType>Git</RepositoryType>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>logo_square.png</PackageIcon>
-        <AssemblyVersion>2.0.0-alpha</AssemblyVersion>
-        <FileVersion>2.0.0-alpha</FileVersion>
+        <AssemblyVersion>2.0.0</AssemblyVersion>
+        <FileVersion>2.0.0</FileVersion>
         <PackageIconUrl />
-        <PackageVersion>2.0.0-alpha</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
