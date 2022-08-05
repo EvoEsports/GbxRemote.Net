@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using GbxRemoteNet.Exceptions;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
 using Microsoft.Extensions.Logging;
@@ -171,7 +172,7 @@ public class NadeoXmlRpcClient
         if (!header.IsValid)
         {
             _logger?.LogError("Client is using an invalid header protocol: {Protocol}", header.Protocol);
-            throw new Exception($"Invalid protocol: {header.Protocol}");
+            throw new InvalidProtocolException(header.Protocol);
         }
 
         recvCancel = new CancellationTokenSource();

@@ -1,7 +1,7 @@
 ﻿using System;
 using GbxRemoteNet.XmlRpc.Types;
 
-namespace GbxRemoteNet.XmlRpc;
+namespace GbxRemoteNet.Exceptions;
 
 /// <summary>
 ///     Exception thrown if a fault occured.

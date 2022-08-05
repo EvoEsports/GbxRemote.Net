@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using GbxRemoteNet.Exceptions;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
