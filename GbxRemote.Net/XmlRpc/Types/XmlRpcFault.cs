@@ -45,7 +45,7 @@ public class XmlRpcFault : XmlRpcBaseType, IEquatable<XmlRpcFault>
 
     public override int GetHashCode()
     {
-        return GetHashCode();
+        return base.GetHashCode();
     }
 
     public override string ToString()

@@ -45,7 +45,7 @@ internal class Program
         client.OnConnected += Client_OnConnected;
         client.OnDisconnected += Client_OnDisconnected;
 
-        client.AnyCallback += Client_OnAnyCallback;
+        client.OnAnyCallback += Client_OnAnyCallback;
 
         // enable callbacks
         await client.EnableCallbackTypeAsync();

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.ExtraTypes;
@@ -711,6 +712,7 @@ public partial class GbxRemoteClient
     ///     DeltaBetweenTwoLastNetState, PacketLossRate. Only available to SuperAdmin.
     /// </summary>
     /// <returns></returns>
+    [Obsolete]
     public async Task<TmNetworkStats> GetNetworkStatsAsync()
     {
         return (TmNetworkStats) XmlRpcTypes.ToNativeValue<TmNetworkStats>(

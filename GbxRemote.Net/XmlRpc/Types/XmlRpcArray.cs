@@ -51,6 +51,11 @@ public class XmlRpcArray : XmlRpcBaseType, IEquatable<XmlRpcArray>
     /// <returns>True if equal, false if not.</returns>
     public bool Equals(XmlRpcArray other)
     {
+        if (other == null)
+        {
+            return false;
+        }
+        
         return Values.SequenceEqual(other.Values);
     }
 
@@ -66,7 +71,7 @@ public class XmlRpcArray : XmlRpcBaseType, IEquatable<XmlRpcArray>
 
     public override int GetHashCode()
     {
-        return GetHashCode();
+        return base.GetHashCode();
     }
 
     /// <summary>

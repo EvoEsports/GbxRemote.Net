@@ -32,7 +32,7 @@ public class XmlRpcDateTime : XmlRpcBaseType, IEquatable<XmlRpcDateTime>
 
     public override int GetHashCode()
     {
-        return GetHashCode();
+        return base.GetHashCode();
     }
 
     /// <summary>

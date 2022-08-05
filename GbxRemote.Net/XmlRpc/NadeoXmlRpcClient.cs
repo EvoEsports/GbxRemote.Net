@@ -29,24 +29,24 @@ public class NadeoXmlRpcClient
     private readonly ILogger _logger;
 
     // connection
-    private readonly string connectHost;
-    private readonly int connectPort;
+    private readonly string _connectHost;
+    private readonly int _connectPort;
 
-    private uint handler = 0x80000000;
-    private readonly object handlerLock = new();
-    private CancellationTokenSource recvCancel;
-    private readonly ConcurrentDictionary<uint, ManualResetEvent> responseHandles = new();
-    private readonly ConcurrentDictionary<uint, ResponseMessage> responseMessages = new();
+    private uint _handler = 0x80000000;
+    private readonly object _handlerLock = new();
+    private CancellationTokenSource _recvCancel;
+    private readonly ConcurrentDictionary<uint, ManualResetEvent> _responseHandles = new();
+    private readonly ConcurrentDictionary<uint, ResponseMessage> _responseMessages = new();
 
     // recvieve
-    private Task taskRecvLoop;
-    private TcpClient tcpClient;
-    private XmlRpcIO xmlRpcIO;
+    private Task _taskRecvLoop;
+    private TcpClient _tcpClient;
+    private XmlRpcIO _xmlRpcIo;
 
     public NadeoXmlRpcClient(string host, int port, ILogger logger = null)
     {
-        connectHost = host;
-        connectPort = port;
+        _connectHost = host;
+        _connectPort = port;
 
         _logger = logger;
     }
@@ -73,11 +73,11 @@ public class NadeoXmlRpcClient
     {
         try
         {
-            _logger?.LogDebug("Recieve loop initiated.");
+            _logger?.LogDebug("Receive loop initiated");
 
-            while (!recvCancel.IsCancellationRequested)
+            while (!_recvCancel.IsCancellationRequested)
             {
-                var response = await ResponseMessage.FromIOAsync(xmlRpcIO);
+                var response = await ResponseMessage.FromIOAsync(_xmlRpcIo);
 
                 _logger?.LogTrace("================== MESSAGE START ==================");
                 _logger?.LogTrace("Message length: {Length}", response.Header.MessageLength);
@@ -92,17 +92,17 @@ public class NadeoXmlRpcClient
                     // run callback handler in a new thread to avoid blocking of new responses
                     _ = Task.Run(() => OnCallback?.Invoke(new MethodCall(response)));
                 }
-                else if (responseHandles.ContainsKey(response.Header.Handle))
+                else if (_responseHandles.ContainsKey(response.Header.Handle))
                 {
                     // attempt to signal the call method
-                    responseMessages[response.Header.Handle] = response;
-                    responseHandles[response.Header.Handle].Set();
+                    _responseMessages[response.Header.Handle] = response;
+                    _responseHandles[response.Header.Handle].Set();
                 }
             }
         }
         catch (Exception e)
         {
-            _logger.LogError("Receive loop raised an exception: {Msg}", e.Message);
+            _logger?.LogError("Receive loop raised an exception: {Msg}", e.Message);
             await DisconnectAsync();
         }
     }
@@ -116,18 +116,18 @@ public class NadeoXmlRpcClient
     public async Task<bool> ConnectAsync(int retries = 0, int retryTimeout = 1000)
     {
         _logger?.LogDebug("Client connecting to the remote XML-RPC server");
-        var connectAddr = await Dns.GetHostAddressesAsync(connectHost);
+        var connectAddr = await Dns.GetHostAddressesAsync(_connectHost);
 
-        tcpClient = new TcpClient();
+        _tcpClient = new TcpClient();
 
         // try to connect
         while (retries >= 0)
         {
             try
             {
-                await tcpClient.ConnectAsync(connectAddr[0], connectPort);
+                await _tcpClient.ConnectAsync(connectAddr[0], _connectPort);
 
-                if (tcpClient.Connected)
+                if (_tcpClient.Connected)
                     break;
             }
             catch (Exception e)
@@ -148,9 +148,9 @@ public class NadeoXmlRpcClient
         if (retries < 0)
             return false; // connection failed
 
-        xmlRpcIO = new XmlRpcIO(tcpClient);
+        _xmlRpcIo = new XmlRpcIO(_tcpClient);
 
-        _logger?.LogDebug("Client connected to XML-RPC server with IP: {connectAddr}", connectAddr);
+        _logger?.LogDebug("Client connected to XML-RPC server with IP: {Address}", connectAddr.ToString());
 
         // Cancellation token to cancel task if it takes longer than a second
         var cancellationTokenSource = new CancellationTokenSource();
@@ -160,7 +160,7 @@ public class NadeoXmlRpcClient
         ConnectHeader header = null;
         try
         {
-            header = await ConnectHeader.FromIOAsync(xmlRpcIO, cancellationTokenSource.Token);
+            header = await ConnectHeader.FromIOAsync(_xmlRpcIo, cancellationTokenSource.Token);
         }
         catch (Exception e)
         {
@@ -175,9 +175,9 @@ public class NadeoXmlRpcClient
             throw new InvalidProtocolException(header.Protocol);
         }
 
-        recvCancel = new CancellationTokenSource();
-        taskRecvLoop = new Task(RecvLoop, recvCancel.Token);
-        taskRecvLoop.Start();
+        _recvCancel = new CancellationTokenSource();
+        _taskRecvLoop = new Task(RecvLoop, _recvCancel.Token);
+        _taskRecvLoop.Start();
 
         OnConnected?.Invoke();
         return true;
@@ -192,9 +192,9 @@ public class NadeoXmlRpcClient
         _logger?.LogDebug("Client is disconnecting from XML-RPC server");
         try
         {
-            recvCancel.Cancel();
-            await taskRecvLoop;
-            tcpClient.Close();
+            _recvCancel.Cancel();
+            await _taskRecvLoop;
+            _tcpClient.Close();
         }
         catch (Exception e)
         {
@@ -213,14 +213,14 @@ public class NadeoXmlRpcClient
     public async Task<uint> GetNextHandle()
     {
         // lock because we may access this in multiple threads
-        lock (handlerLock)
+        lock (_handlerLock)
         {
-            if (handler + 1 == 0xffffffff)
-                handler = 0x80000000;
+            if (_handler + 1 == 0xffffffff)
+                _handler = 0x80000000;
 
-            _logger?.LogTrace("Next handler value: {Handler}", handler);
+            _logger?.LogTrace("Next handler value: {Handler}", _handler);
 
-            return handler++;
+            return _handler++;
         }
     }
 
@@ -232,7 +232,7 @@ public class NadeoXmlRpcClient
     /// <returns>Response returned by the call.</returns>
     public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args)
     {
-        if (!tcpClient.Connected)
+        if (!_tcpClient.Connected)
         {
             throw new InvalidOperationException("Client is not connected. Failed to call remote XMLRPC method.");
         }
@@ -245,15 +245,15 @@ public class NadeoXmlRpcClient
         _logger?.LogTrace("{Xml}", call.Call.MainDocument.ToString());
         _logger?.LogTrace("================== CALL END ==================");
 
-        responseHandles[handle] = new ManualResetEvent(false);
+        _responseHandles[handle] = new ManualResetEvent(false);
 
         var data = await call.Serialize();
-        await xmlRpcIO.WriteBytesAsync(data);
+        await _xmlRpcIo.WriteBytesAsync(data);
 
 
         // wait for response
-        responseHandles[handle].WaitOne();
-        var message = responseMessages[handle];
+        _responseHandles[handle].WaitOne();
+        var message = _responseMessages[handle];
         return message;
     }
 }

@@ -18,18 +18,18 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     public const string DefaultApiVersion = "2022-03-21";
 
     private readonly ILogger _logger;
-    private readonly GbxRemoteClientOptions Options;
+    private readonly GbxRemoteClientOptions _options;
 
     /// <summary>
     ///     Create a new instance of the GBXRemote client.
     /// </summary>
     /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
     /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
-    /// <param name="logger"></param>
+    /// <param name="logger">Logger to use.</param>
     public GbxRemoteClient(string host, int port, ILogger logger = null) : base(host, port, logger)
     {
         OnCallback += GbxRemoteClient_OnCallback;
-        Options = new GbxRemoteClientOptions();
+        _options = new GbxRemoteClientOptions();
 
         _logger = logger;
     }
@@ -39,11 +39,13 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     /// </summary>
     /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
     /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
+    /// <param name="options">Options for the Gbx client.</param>
+    /// <param name="logger">Logger to use.</param>
     public GbxRemoteClient(string host, int port, GbxRemoteClientOptions options, ILogger logger = null) : base(host,
         port)
     {
         OnCallback += GbxRemoteClient_OnCallback;
-        Options = options;
+        _options = options;
 
         _logger = logger;
     }
@@ -104,7 +106,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     {
         _logger?.LogDebug("Client connecting to GbxRemote");
 
-        if (!await ConnectAsync(Options.ConnectionRetries, Options.ConnectionRetryTimeout))
+        if (!await ConnectAsync(_options.ConnectionRetries, _options.ConnectionRetryTimeout))
             return false;
 
         await SetApiVersionAsync(DefaultApiVersion);

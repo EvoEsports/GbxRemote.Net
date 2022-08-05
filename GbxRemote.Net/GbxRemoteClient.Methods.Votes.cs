@@ -112,7 +112,6 @@ public partial class GbxRemoteClient
     /// <summary>
     ///     Get the current default ratio for passing a vote. This value lies between 0 and 1.
     /// </summary>
-    /// <param name="ratio"></param>
     /// <returns></returns>
     public async Task<double> GetCallVoteRatioAsync()
     {
@@ -125,7 +124,7 @@ public partial class GbxRemoteClient
     ///     Set the ratios list for passing specific votes. The parameter is an array of structs {string Command, double
     ///     Ratio}, ratio is in [0,1] or -1 for vote disabled. Only available to Admin.
     /// </summary>
-    /// <param name="ratio"></param>
+    /// <param name="ratios"></param>
     /// <returns></returns>
     public async Task<bool> SetCallVoteRatiosAsync(TmCallVoteRatio[] ratios)
     {
