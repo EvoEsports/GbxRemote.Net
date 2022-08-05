@@ -31,7 +31,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R>(Func<Task<R>> method)
+    public MultiCall Add<TReturn>(Func<Task<TReturn>> method)
     {
         return AddMethod(method.Method.Name);
     }
@@ -40,7 +40,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1>(Func<T1, Task<R>> method, T1 a1, params object[] args)
+    public MultiCall Add<TReturn, T1>(Func<T1, Task<TReturn>> method, T1 a1, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, args);
     }
@@ -49,7 +49,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2>(Func<T1, T2, Task<R>> method, T1 a1, T2 a2, params object[] args)
+    public MultiCall Add<TReturn, T1, T2>(Func<T1, T2, Task<TReturn>> method, T1 a1, T2 a2, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, args);
     }
@@ -58,7 +58,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3>(Func<T1, T2, T3, Task<R>> method, T1 a1, T2 a2, T3 a3, params object[] args)
+    public MultiCall Add<TReturn, T1, T2, T3>(Func<T1, T2, T3, Task<TReturn>> method, T1 a1, T2 a2, T3 a3, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, args);
     }
@@ -67,7 +67,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3, T4>(Func<T1, T2, T3, T4, Task<R>> method, T1 a1, T2 a2, T3 a3, T4 a4,
+    public MultiCall Add<TReturn, T1, T2, T3, T4>(Func<T1, T2, T3, T4, Task<TReturn>> method, T1 a1, T2 a2, T3 a3, T4 a4,
         params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, a4, args);
@@ -77,7 +77,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, Task<R>> method, T1 a1, T2 a2, T3 a3, T4 a4,
+    public MultiCall Add<TReturn, T1, T2, T3, T4, T5>(Func<T1, T2, T3, T4, T5, Task<TReturn>> method, T1 a1, T2 a2, T3 a3, T4 a4,
         T5 a5, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, a4, a5, args);
@@ -87,7 +87,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, Task<R>> method, T1 a1, T2 a2, T3 a3,
+    public MultiCall Add<TReturn, T1, T2, T3, T4, T5, T6>(Func<T1, T2, T3, T4, T5, T6, Task<TReturn>> method, T1 a1, T2 a2, T3 a3,
         T4 a4, T5 a5, T6 a6, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, a4, a5, a6, args);
@@ -97,7 +97,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, Task<R>> method, T1 a1, T2 a2,
+    public MultiCall Add<TReturn, T1, T2, T3, T4, T5, T6, T7>(Func<T1, T2, T3, T4, T5, T6, T7, Task<TReturn>> method, T1 a1, T2 a2,
         T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, a4, a5, a6, a7, args);
@@ -107,7 +107,7 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<R>> method, T1 a1,
+    public MultiCall Add<TReturn, T1, T2, T3, T4, T5, T6, T7, T8>(Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TReturn>> method, T1 a1,
         T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7, T8 a8, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, a4, a5, a6, a7, a8, args);
@@ -117,8 +117,8 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
-        Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<R>> method, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7,
+    public MultiCall Add<TReturn, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+        Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, Task<TReturn>> method, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7,
         T8 a8, T9 a9, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, a4, a5, a6, a7, a8, a9, args);
@@ -128,8 +128,8 @@ public class MultiCall
     ///     Add a call to this multicall using a c# method.
     /// </summary>
     /// <returns>Multicall object so you can chain these methods.</returns>
-    public MultiCall Add<R, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
-        Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<R>> method, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7,
+    public MultiCall Add<TReturn, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+        Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, Task<TReturn>> method, T1 a1, T2 a2, T3 a3, T4 a4, T5 a5, T6 a6, T7 a7,
         T8 a8, T9 a9, T10 a10, params object[] args)
     {
         return AddMethod(method.Method.Name, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, args);

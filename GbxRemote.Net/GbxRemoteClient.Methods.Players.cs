@@ -111,7 +111,8 @@ public partial class GbxRemoteClient
     ///     trackmania modes it also contains BestTime, Score, NbrLapsFinished, LadderScore, and an array BestCheckpoints that
     ///     contains the checkpoint times for the best race.
     /// </summary>
-    /// <param name="playerLogin"></param>
+    /// <param name="maxInfos"></param>
+    /// <param name="startRatingIndex"></param>
     /// <returns></returns>
     public async Task<TmPlayerRanking[]> GetCurrentRankingAsync(int maxInfos, int startRatingIndex)
     {

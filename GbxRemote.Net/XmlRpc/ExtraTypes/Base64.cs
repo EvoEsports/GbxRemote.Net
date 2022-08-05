@@ -20,6 +20,11 @@ public class Base64 : IEquatable<Base64>
 
     public bool Equals(Base64 other)
     {
+        if (other == null)
+        {
+            return false;
+        }
+        
         return Data.SequenceEqual(other.Data);
     }
 

@@ -25,7 +25,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     /// </summary>
     /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
     /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
-    /// <param name="logger"></param>
+    /// <param name="logger">Logger to use.</param>
     public GbxRemoteClient(string host, int port, ILogger logger = null) : base(host, port, logger)
     {
         OnCallback += GbxRemoteClient_OnCallback;
@@ -39,6 +39,8 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     /// </summary>
     /// <param name="host">The address to the TrackMania server. Default: 127.0.0.1</param>
     /// <param name="port">The port the XML-RPC server is listening to on your TrackMania server. Default: 5000</param>
+    /// <param name="options">Options for the Gbx client.</param>
+    /// <param name="logger">Logger to use.</param>
     public GbxRemoteClient(string host, int port, GbxRemoteClientOptions options, ILogger logger = null) : base(host,
         port)
     {
