@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using GbxRemoteNet.Exceptions;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
@@ -124,7 +125,7 @@ public partial class GbxRemoteClient
         var dataNative = data.ToObject<TResponse>();
 
         if (extraArg.Length < 1)
-            throw new InvalidOperationException("The response does not contain an extra argument.");
+            throw new XmlRpcResponseException("The response does not contain an extra argument.");
 
         var extraArgNative = XmlRpcTypes.ToNativeValue<TExtraArg>(extraArg[0]);
 

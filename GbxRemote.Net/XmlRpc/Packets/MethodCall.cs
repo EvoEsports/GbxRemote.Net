@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GbxRemoteNet.Exceptions;
 using GbxRemoteNet.XmlRpc.Types;
 
 namespace GbxRemoteNet.XmlRpc.Packets;
@@ -24,7 +25,7 @@ public class MethodCall : IPacket
     public MethodCall(ResponseMessage response)
     {
         if (!response.IsCallback)
-            throw new InvalidOperationException("Response must be a callback.");
+            throw new XmlRpcResponseNotACallbackException();
 
         Handle = response.Header.Handle;
 

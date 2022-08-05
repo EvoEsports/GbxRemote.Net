@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using GbxRemoteNet.Exceptions;
 using GbxRemoteNet.XmlRpc.Types;
 
 namespace GbxRemoteNet.XmlRpc.Packets;
@@ -50,7 +51,7 @@ public class ResponseMessage : IPacket
     public XmlRpcBaseType GetResponseData()
     {
         if (IsCallback)
-            throw new InvalidOperationException("Message is not a response.");
+            throw new XmlRpcNotAResponseException();
 
         var response = MessageXml.Elements(XmlRpcElementNames.MethodResponse).First();
 
