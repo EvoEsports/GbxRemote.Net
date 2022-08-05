@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ModeScript </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="ModeScript ">
+    <meta name="generator" content="docfx 2.59.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="../index.html">
+                <ul>
+                  <li><img id="logo" height="32" class="svg" src="../logo.png" alt=""></li>
+                  <li><strong>GbxRemote.Net Docs</strong></li>
+                </ul>
+              </a>
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="modescript">ModeScript</h1>
+
+<p>ModeScript is a feature in GBXRemote to interact with the functionality of game modes and maniascript on the server. These functions have special callbacks and is called through the <code>TriggerModeScript*</code> methods. Due to way it is set up, you must call a ModeScript method through one of these methods and wait for the response in a callback. GbxRemote.NET tries to simplify this a bit by providing a method that can call a ModeScript method and wait for a response all in one:</p>
+<pre><code class="lang-csharp">Task&lt;JObject&gt; GetModeScriptResponseAsync(string method, params string[] args)
+</code></pre>
+<p>ModeScript returns responses in JSON, so you will get a <code>JObject</code> back from <a href="https://www.newtonsoft.com/json">Json.NET</a> which holds the response.
+So for example, let's say you want to get a list of callbacks and print them:</p>
+<pre><code class="lang-csharp">JObject (ret, _) = await client.GetModeScriptResponseAsync(&quot;XmlRpc.GetCallbacksList&quot;)
+
+foreach (string callback in ret[&quot;callbacks&quot;].Values&lt;string&gt;())
+                Console.WriteLine($&quot;- {callback}&quot;);
+</code></pre>
+<p>The complete ModeScript documentation can be found <a href="https://wiki.trackmania.io/en/dedicated-server/XML-RPC/Modescript-documentation">here</a>.</p>
+<h2 id="convert-to-native-type">Convert to native type</h2>
+<p>You can convert the modescript response to any .NET type that supports JSON conversion. When you create a type, we recommend to inherit the <code>ModeScriptResponse</code> class.
+For example if you want to get all callbacks of the current ModeScript, we can start creating a class called ModeScriptCallbacks:</p>
+<pre><code class="lang-csharp">public class CallbacksList : ModeScriptResponse
+{
+    public string[] Callbacks { get; set; }
+}
+</code></pre>
+<p>You can now use the an overload of <code>GetModeScriptResponseAsync</code> to get the response into an object of <code>CallbacksList</code>:</p>
+<pre><code class="lang-csharp">var response = await client.GetModeScriptResponseAsync&lt;CallbacksList&gt;(&quot;XmlRpc.GetCallbacksList&quot;);
+Console.WriteLine(&quot;ModeScript Callbacks:&quot;);
+foreach (var callback in response.Callbacks)
+{
+    Console.WriteLine($&quot;- {callback}&quot;);
+}
+</code></pre>
+<h2 id="extra-response-arguments">Extra response arguments</h2>
+<p>Some ModeScript methods returns multiple arguments in their callback. For example the <code>XmlRpc.GetDocumentation</code> returns the
+argument which contains the response id and in addition a string that contains the documentation itself. The first argument
+is always a XMLRPC string which contains JSON encoded data, while the other ones can be any XMLRPC argument type.</p>
+<p>So for exampel for the method <code>XmlRpc.GetDocumentation</code> we can use an overload of <code>GetModeScriptResponseAsync</code> to get both
+arguments and convert them to a native object:</p>
+<pre><code class="lang-csharp">var (response, documentation) = await client.GetModeScriptResponseAsync&lt;ModeScriptResponse, string&gt;(&quot;XmlRpc.GetDocumentation&quot;);
+Console.WriteLine(documentation);
+</code></pre>
+<h2 id="modescript-callbacks">ModeScript Callbacks</h2>
+<p>You can listen to any ModeScript callbacks by creating a listener for the <code>OnModeScriptCallback</code> event.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p><a href="extensions.md">Find extensions to the library</a></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/EvoTM/GbxRemote.Net/blob/new-documentation/src/docfx/guide/modescript.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2022 <strong>Evo</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

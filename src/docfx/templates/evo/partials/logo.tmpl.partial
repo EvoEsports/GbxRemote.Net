@@ -1,0 +1,6 @@
+<a class="navbar-brand" href="{{_rel}}index.html">
+  <ul>
+    <li><img id="logo" height="32" class="svg" src="{{_rel}}{{{_appLogoPath}}}{{^_appLogoPath}}logo.png{{/_appLogoPath}}" alt="{{_appName}}" ></li>
+    <li><strong>GbxRemote.Net Docs</strong></li>
+  </ul>
+</a>

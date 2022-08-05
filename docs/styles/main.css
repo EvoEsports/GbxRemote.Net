@@ -1,0 +1,129 @@
+:root {
+    --color-primary: #FF0058;
+    --color-background: #242424;
+    --color-background-secondary: #363636;
+    --color-input-background: #303030;
+    --color-text: #D2D5D5;
+    --color-link: #EAECEC;
+    --color-text-faint: #606060;
+    --color-link-hover: #CDD1D1;
+    --color-faint-border: #3B3B3B;
+    --color-nav-default: #A0A0A0;
+    --color-nav-hover: #BCBCBC;
+    --color-table-border: #363636;
+    --color-table-bg-odd: #292929;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+a {
+    color: var(--color-link);
+    font-weight: bold;
+}
+
+a:hover {
+    color: var(--color-link-hover);
+}
+
+pre {
+    color: var(--color-text);
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-background);
+}
+
+code {
+    background-color: var(--color-background-secondary);
+    color: var(--color-text);
+}
+
+.hljs {
+color: var(--color-text);
+}
+
+.breadcrumb {
+    background-color: var(--color-background);
+}
+
+.navbar-default {
+    background-color: var(--color-background);
+    border: none;
+}
+
+.navbar-inverse {
+    background-color: var(--color-background);
+    border: none;
+}
+
+.navbar-brand {
+    font-size: 20px;
+    padding-top: 10px;
+    margin-right: 10px;
+}
+
+.navbar-brand ul {
+    list-style: none;
+}
+
+.navbar-brand ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+.navbar-inverse .navbar-nav > .active > a {
+    background-color: var(--color-background-secondary);
+}
+
+.footer {
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-faint-border);
+}
+
+.form-control, input {
+    background-color: var(--color-input-background);
+    color: var(--color-text);
+    border: none;
+}
+
+body .toc, .sidetoc, .sidefilter, .toc-filter {
+    background-color: var(--color-background);
+    border: none;
+}
+
+.toc .nav > li.active > a {
+    color: var(--color-link);
+}
+
+.toc-filter, input {
+    padding: 3px;
+}
+
+.contribution-link {
+    color: var(--color-text-faint);
+}
+
+.sideaffix > div.contribution > ul > li > a.contribution-link:hover {
+    background-color: var(--color-background);
+}
+
+.expand-stub::before {
+    color: var(--color-text-faint);
+}
+
+.toc .nav > li > a {
+    color: var(--color-nav-default);
+}
+
+.toc .nav > li > a:hover {
+    color: var(--color-nav-hover);
+}
+
+.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+    border: 1px solid var(--color-table-border);
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: var(--color-table-bg-odd);
+}
