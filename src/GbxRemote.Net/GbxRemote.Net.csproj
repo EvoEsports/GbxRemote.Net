@@ -3,10 +3,10 @@
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>GbxRemoteNet</RootNamespace>
-        <Version>1.1.10</Version>
+        <Version>2.0.0</Version>
         <Authors>Evo</Authors>
         <Description>GBXRemote client for connecting to the XML-RPC protocol of TrackMania servers.</Description>
-        <Copyright>Evo © 2021</Copyright>
+        <Copyright>Evo © 2022</Copyright>
         <PackageProjectUrl>https://github.com/EvoTM/GbxRemote.Net</PackageProjectUrl>
         <PackageTags>gbxremote,xmlrpc,client,trackmania</PackageTags>
         <PackageReleaseNotes>This is the second BETA version of the client.</PackageReleaseNotes>
@@ -20,11 +20,13 @@
         <PackageIconUrl />
         <PackageVersion>2.0.0</PackageVersion>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
         <None Include="../../logo_square.png" Pack="true" PackagePath="\" />
         <None Include="../../LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
