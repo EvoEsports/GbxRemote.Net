@@ -20,7 +20,7 @@ using System;
 using GbxRemoteNet;
 
 // create client instance
-GbxRemoteClient client = new("127.0.0.2", 5000);
+GbxRemoteClient client = new("127.0.0.1", 5000);
 
 // connect and login
 if (!await client.LoginAsync("SuperAdmin", "SuperAdmin"))
