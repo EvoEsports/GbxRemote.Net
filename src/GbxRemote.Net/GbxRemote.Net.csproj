@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <RootNamespace>GbxRemoteNet</RootNamespace>
+        <Version>2.0.0</Version>
+        <Authors>Evo</Authors>
+        <Description>GBXRemote client for connecting to the XML-RPC protocol of TrackMania servers.</Description>
+        <Copyright>Evo © 2022</Copyright>
+        <PackageProjectUrl>https://github.com/EvoTM/GbxRemote.Net</PackageProjectUrl>
+        <PackageTags>gbxremote,xmlrpc,client,trackmania</PackageTags>
+        <PackageReleaseNotes>This is the second BETA version of the client.</PackageReleaseNotes>
+        <RepositoryUrl>https://github.com/EvoTM/GbxRemote.Net</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageIcon>logo_square.png</PackageIcon>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <AssemblyVersion>2.0.0</AssemblyVersion>
+        <FileVersion>2.0.0</FileVersion>
+        <PackageIconUrl />
+        <PackageVersion>2.0.0</PackageVersion>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../logo_square.png" Pack="true" PackagePath="\" />
+        <None Include="../../LICENSE" Pack="true" PackagePath="\" />
+        <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+</Project>

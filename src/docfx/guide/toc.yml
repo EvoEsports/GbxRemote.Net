@@ -1,0 +1,17 @@
+- name: Introduction
+  href: index.md
+- name: Installation
+  href: installation.md
+- name: Client setup & Connection
+  href: client-setup.md
+- name: Calling Methods
+  href: calling-methods.md
+  items:
+    - name: Multicall
+      href: multicall.md
+- name: Callbacks
+  href: callbacks.md
+- name: ModeScript
+  href: modescript.md
+- name: Extensions/Addons
+  href: extensions.md

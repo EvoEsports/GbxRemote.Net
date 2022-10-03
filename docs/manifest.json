@@ -1,0 +1,1572 @@
+{
+  "homepages": [],
+  "source_base_path": "E:/projects/dotnet/GbxRemote.Net/src/docfx",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Enums.CallbackType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Enums.CallbackType.html",
+          "hash": "zMuuBw1eYgY6uL36tQxNXw7XOqhvdy0BM/uLTnS2DiU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Enums.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Enums.html",
+          "hash": "7qsVrM/ZLTGJvmpbcrSQ4HhYaA84PQmRCW47/q6s3p0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.BillUpdatedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.BillUpdatedEventArgs.html",
+          "hash": "hUq1s9bVUURxEnelCq/keClOmRQnAqYbSLQ82wb9WB0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.CallbackEventArgs-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.CallbackEventArgs-1.html",
+          "hash": "CcTi9ziGBWger8N7t6e4oaRP2+5DEskss5XtfW99mD8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.EchoEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.EchoEventArgs.html",
+          "hash": "GajGty+qzc+JbkXXhdF4DAOjDWXq8rPx36Aly5DS92I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.EndMatchEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.EndMatchEventArgs.html",
+          "hash": "sBXsvYRSCA1yLOgqs1WhzZaBaV5djd/h3dYfRNL38D4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.ManiaLinkPageActionEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.ManiaLinkPageActionEventArgs.html",
+          "hash": "Vh+4fueUniDMNodWPkV6BpCc/uyr6xXqSqXl3J6QdqA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.MapEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.MapEventArgs.html",
+          "hash": "l+uY18wSoTmmEigMPm1x3Zep23jOeeIvxNFDc5RDTf8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.MapListModifiedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.MapListModifiedEventArgs.html",
+          "hash": "llzYPwMPkH/drl6asfYwmwj/b8I3FwxTYBpzRzQuQVk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.PlayerChatEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.PlayerChatEventArgs.html",
+          "hash": "RPmRuQJWuhGiiV+j+x6pmJnLtP9giHa7T19Z3Z7xLTE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.PlayerConnectEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.PlayerConnectEventArgs.html",
+          "hash": "SD+lerDaqOc4WyzuxvHYx/Z5+YEr9W1mjqXQwkSuPws="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.PlayerDisconnectEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.PlayerDisconnectEventArgs.html",
+          "hash": "OpscbrqJblgpJALF7ZFWHmYXuIZkpOfw6yVUU+visrk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.PlayerEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.PlayerEventArgs.html",
+          "hash": "rc2W5nClMwJj+Qvm4bnBksQ7qG11fCaaSwQzCAM7iJQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.PlayerInfoChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.PlayerInfoChangedEventArgs.html",
+          "hash": "SGDa+4EofDSnSCEDbm606ZVgYbbE6jBRihnjQj/f8Ng="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.ScriptCloudEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.ScriptCloudEventArgs.html",
+          "hash": "qdd+0tLUtidliOssD7XLICSJ9B1S6pquo2z+6UR2Jns="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.StatusChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.StatusChangedEventArgs.html",
+          "hash": "i3p7Ix0J1XhveuW0yhze7RH7Wnw5WslXYWhyESdDORk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.TunnelDataEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.TunnelDataEventArgs.html",
+          "hash": "GQwaBu+v09aQlN9KCAhWkxbmO7WMIaJAiKgGEonJENE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.VoteUpdatedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.VoteUpdatedEventArgs.html",
+          "hash": "Jf+wz8b0Oc6YZzbHZ3VMttRNsOUqO/x7MOWnWOxlpV8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Events.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Events.html",
+          "hash": "MRj/g+LwaQ8sBslGwpnDtG5TCGR3i+Hkbtwl6bEnK8Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Exceptions.InvalidProtocolException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Exceptions.InvalidProtocolException.html",
+          "hash": "BT+A/mM8DwXLhIgP4lR22atRGnKS5Oot8VQdz0WQt+k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcFaultException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcFaultException.html",
+          "hash": "L/j0+E+UtuPwrD2gE8jGmDLGuyE1Tj1fwABHl01qDpc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcNotAResponseException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcNotAResponseException.html",
+          "hash": "PstfFvF2eMvuhIzRYwcJnJKbhaVlVfA9Hwt0ea/FWYo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcResponseException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcResponseException.html",
+          "hash": "w3kGO2gBTOlN6R2FBYWbd9NcytD2Z+PqjpFIs8aiQ+8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcResponseNotACallbackException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Exceptions.XmlRpcResponseNotACallbackException.html",
+          "hash": "JdFlsYswwQto5BUcCzcScpFqZIeY6UARHbogwZc7+/c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Exceptions.html",
+          "hash": "Y8Je4FOgVhTjqfmvfm2l6N1JI5jADNQmAq3zThMuRvU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.GbxRemoteClient.AsyncEventHandler-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.GbxRemoteClient.AsyncEventHandler-1.html",
+          "hash": "Hh+8FwpKlwNIbSF5lODn3BWiQ4vv4OhdsatzTSgcLuM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.GbxRemoteClient.AsyncEventHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.GbxRemoteClient.AsyncEventHandler.html",
+          "hash": "vI1y1Bf5HAloxuQBotQ2C9bNbN50Ect66hcOM72WH6k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.GbxRemoteClient.ModeScriptCallbackAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.GbxRemoteClient.ModeScriptCallbackAction.html",
+          "hash": "iznZa+rW/8oNx9E+ZGub6RGy6dHKUE7qZgSBm4sMS14="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.GbxRemoteClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.GbxRemoteClient.html",
+          "hash": "/Fy7+7ULnpoKXNLDdSKNs2Uyc1c3/uwTquInR+phAO0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.GbxRemoteClientOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.GbxRemoteClientOptions.html",
+          "hash": "9UIF+qEYtvaFILtM2GlNOVeskxrSAsCtzrv/o3biLhM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.MultiCall.MethodInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.MultiCall.MethodInfo.html",
+          "hash": "sfeCD6EO+bfD8FdQdHaGT5/Tx+bTwU4Bg6GVveVm8lM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.MultiCall.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.MultiCall.html",
+          "hash": "A1/v4sSwjBmFS5YG4mYb/Q+bf2tigXTHQqPl4C5x2cE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.ModeScript.TmModeScriptResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.ModeScript.TmModeScriptResponse.html",
+          "hash": "HPj932uOfYHhhhVdrQwcy/3YF0easN+OBMjwKEgIR/M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.ModeScript.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.ModeScript.html",
+          "hash": "HXmtZT0pXizLCdm9pqOHK6r3FTVWSVITBhvbpGvmdPc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmBanListEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmBanListEntry.html",
+          "hash": "TemRvG37uHjOzyqy4uPcxyqvnjPbNiQw2gSuqinmrSU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmBillState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmBillState.html",
+          "hash": "rfGdW0mk3QAw8B8R3RpL/a4CYNKray6Q2dSNqfNHOrI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmBlackListEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmBlackListEntry.html",
+          "hash": "yvPEqmKOldL284fKnVBWg7kdOyopurWb47DyToZ3NSY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmCallVoteRatio.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmCallVoteRatio.html",
+          "hash": "jnS7yVGqgHqEoOOUL9kywuGIFfEbCY5iY15Q2WRNOzo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmClubLinks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmClubLinks.html",
+          "hash": "P1FT37zsbZreKGvSXc9SdU6j7TOVEMaqaZDvzShbU+w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmCurrentCallVote.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmCurrentCallVote.html",
+          "hash": "jeGu01QNoipio7bDorcE7QChmMu2kAJB7zbnwD4wsxo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmCurrentNextValue-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmCurrentNextValue-1.html",
+          "hash": "esWcaxfvoQJXHaQJ3FXvTjr5Ejj7PL81BSoMbyXK1zc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmDemoTokenInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmDemoTokenInfo.html",
+          "hash": "tupBG3LszrGvBHAyExH9V9SwaWZZUPT48foVYowF0xY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmForcedMods.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmForcedMods.html",
+          "hash": "PzwyMlAJVOMuJkuIpEmaZBRuRTZXO4+Jx5e0kyMPnnI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmForcedSkin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmForcedSkin.html",
+          "hash": "kYcMzSpGcrdZu78UNcMUvxxqp2xhTCvjwmHapVQzpx4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmGameInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmGameInfo.html",
+          "hash": "j5eNLjlq+iM9vX5NP0rvrK7c3SQPJJdH+Pkkty+coK8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmGuestListEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmGuestListEntry.html",
+          "hash": "okgr5ANCSrU3OFQ3iFwsWhBrbzE2fp5W98gS6A43EBY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmIgnoreListEntry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmIgnoreListEntry.html",
+          "hash": "ndCPOIp/U0dt9h1Npnhug5WXeYHSN/7yBEBpcPn3+QA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmLadderServerLimits.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmLadderServerLimits.html",
+          "hash": "YLrErcv2epoykk/5vxU4D2ErJdaqZXUiwpWu96FF0Zg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmLadderStats.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmLadderStats.html",
+          "hash": "ZVG0SxG7EAfdfBNWqeQedbsZ3mxEZeVFh3abK295Tnc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmLanguage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmLanguage.html",
+          "hash": "zi4KvntXwQISmSfQbdBfIt7raNm7vmmxhO8f7PGUxys="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmLobbyInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmLobbyInfo.html",
+          "hash": "xno8WVQ62ZLkvUyYG7usEBBqynh76X/j9cZBTbcKkO0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmManialinkPageAnswer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmManialinkPageAnswer.html",
+          "hash": "kwh02T20A8q+/fcXnJzdZcQLVYzCPyk9QO6zwPV7NOw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmMapInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmMapInfo.html",
+          "hash": "xBMG3OuL05VShzkZyxUcACzGAoIfL3t2uQNAwP14e1I="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmMinimalPlayerInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmMinimalPlayerInfo.html",
+          "hash": "D7mZ5M7/OI+MlLob2et8UnebAr45NgD+DK6mHulHNHg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmMods.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmMods.html",
+          "hash": "eWq+X1oRCH/bHAbHPD6fpncok539XlU3c8Qlla53qUw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmMusicSetting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmMusicSetting.html",
+          "hash": "XPEmcSbRw+ULFOCDQGn/5Fxn28hvt+qbHUmSR/JmxDM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmNetworkStats.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmNetworkStats.html",
+          "hash": "EA8h+3gegTq4C3RZ0n8kA+24lEknPOzdQzomx+QtD0E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmPackDesc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmPackDesc.html",
+          "hash": "ACCbRhPjfE2SL6mA5/aJ3peJSRsvKGB0Jh/ExuWUy9M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmPlayerDetailedInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmPlayerDetailedInfo.html",
+          "hash": "SvljEGAa5Ipulc03KNuztDfG/bGc5vpSmHKFThq19FA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmPlayerInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmPlayerInfo.html",
+          "hash": "QmeeRlvn4Eo7UMF5cUByj/2UrZjLU/fcGGmZMZwlNcs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmPlayerRanking.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmPlayerRanking.html",
+          "hash": "VSc5FnH84OtrqYDFtv7mp8hGZsiX2sowJjF0FezvIZw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmPlayerScore.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmPlayerScore.html",
+          "hash": "u8x3V7sIJJoXCUIC2bVJIdbpalx11MuYsxbl4Fh5ie4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmSEntryVal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmSEntryVal.html",
+          "hash": "EUGk5iWmcQ83pB0bC5yTQGZwmHqP9iDf94M8vSWuMlo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmSMapInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmSMapInfo.html",
+          "hash": "VEfwgKt7sjta2jJC4aSJjkJUjRjvNQwoAQ8FREHO+1A="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmSPlayerInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmSPlayerInfo.html",
+          "hash": "mj21nb25lerPMPVr8un6Q8oCHfb6v6cAy6kW9YC7uKo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmSPlayerRanking.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmSPlayerRanking.html",
+          "hash": "92z4Ti7I81wrJ0SSQxZehhUD3amilyeZQyRhrrR0XQw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmScriptCommandDescs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmScriptCommandDescs.html",
+          "hash": "OLhTrn/0nIk/URkrlr2Y0yRaLRlh+BSUagbF2bBwiIk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmScriptInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmScriptInfo.html",
+          "hash": "BFtetSow0CW6J2Jlh0+6bSFJ5JEzl4KFDZWRoECTybc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmScriptParamDesc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmScriptParamDesc.html",
+          "hash": "1jSVcW3A2qLImiiuW5sPH8wrIcDki8hztp3uia/MXxs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmScriptSetting.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmScriptSetting.html",
+          "hash": "8h+fxf2dEIVNrXlr+4usR0gW3JpExkt/RpNx3IX3uXg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmServerOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmServerOptions.html",
+          "hash": "j0qVPf53GW3HevhCD1ciDLEWnbJdAwX4OLIpmxocdrs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmServerTag.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmServerTag.html",
+          "hash": "Cn+geKtNnjsgCBwl9EvIs4yzr0XQu0aqWLj+huiXoP4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmSkin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmSkin.html",
+          "hash": "NxDDECHl57bzmwqLmmWT5MOWeF/n1THzd0JL8HMrWWM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmStatus.html",
+          "hash": "WFS2fcx99urcr7hMeuubLwoxSOThYTcwVsv/E+7JXKE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmSystemInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmSystemInfo.html",
+          "hash": "60R3g5U8LL2OyxogcXLeoDjhCrHVhUQ9J3+wuZ4pKek="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmTeamInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmTeamInfo.html",
+          "hash": "9ikno72hSjnBfK7vWO+J7AT+db9/ALKbgHIsH39vHGc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmVersionInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmVersionInfo.html",
+          "hash": "O7TBRB/OtkkNb5k07pLEWxwNNUaeixA7t7Fj70im9zg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.TmZoneRanking.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.TmZoneRanking.html",
+          "hash": "4Wvs9L5tH7jKiskiNneU/MYLqWJ3TCQMYgSkovCKtyY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.Structs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.Structs.html",
+          "hash": "TJzGtkHSbGgRmF2JkKfUyvcJfz+uW+6Mg/92TP5iYqI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.Base64.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.Base64.html",
+          "hash": "yREmQra4U4TZ6zikRGJnKL+vyhic/8uI4MwcWFX+Cpw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.DynamicObject.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.DynamicObject.html",
+          "hash": "zxPz4cgtzvRfF1jXATuAWsN21kRS5Uy6m6GN2AIGMtk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.GbxStruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.GbxStruct.html",
+          "hash": "Y5w3lLIvtQ818l6hfm5jqFLhaLhXYCMDNPD1o+BB68E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.ExtraTypes.html",
+          "hash": "6B/5Az0/kCjTQrpLMZsrwVGTHHRf+ff6zrVpd2U5u8M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.NadeoXmlRpcClient.CallbackAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.NadeoXmlRpcClient.CallbackAction.html",
+          "hash": "+ViY/k5U2QdQ7d9shR+b7XhCGfR0ReiFjw6/27N8FZs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.NadeoXmlRpcClient.TaskAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.NadeoXmlRpcClient.TaskAction.html",
+          "hash": "2ebbVdkQBorg/MIukprnVMAY2LxWdNpvDCwDfwqzYnQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.NadeoXmlRpcClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.NadeoXmlRpcClient.html",
+          "hash": "hoM2kyVfVqRjbYWIIPVR/y3T+fb+ySKdtODB1tiMnb8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Packets.ConnectHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Packets.ConnectHeader.html",
+          "hash": "+nNkkic160UO6APZ4+9wGEn5K2P3zc0zvSXiiFmXPAs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Packets.IPacket.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Packets.IPacket.html",
+          "hash": "zMoJ6ByJngBP19nnoufvbtatsXBZmn6uv1vSTpz+an0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Packets.MessageHeader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Packets.MessageHeader.html",
+          "hash": "J+4kRo4tGZTU93wAq0oyGqMbzJVnqdAUZBAjw+8mUK0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Packets.MethodCall.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Packets.MethodCall.html",
+          "hash": "e+GEbz5l3m4YZhzXwaeT9UO6kAdkLf+OGnS/DIT4gyI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Packets.ResponseMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Packets.ResponseMessage.html",
+          "hash": "vQhW2ALBGyFH8S6ZIehYzV/+PLo96MD7H9MP69NO5d0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Packets.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Packets.html",
+          "hash": "RvWjxwrMuyjxoB0AiV6diA6bvof3jjowrH4QsP/aqbs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcArray.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcArray.html",
+          "hash": "C4DOX/+VZkFBnrx+AwC+FkBL15W8cfx4d2yfhi/hmIM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcBase64.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcBase64.html",
+          "hash": "RU8RkPRxNTdSm2SuR3fJlb095cCqz9Eixl2lRqMj2nA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcBaseType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcBaseType.html",
+          "hash": "UEyhd9u3ukfWjNKZp574pHQ8zpv6tx8sTx34iojnSWY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcBoolean.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcBoolean.html",
+          "hash": "wyvmDaXaI8qjaYy+dRlVRdatIMedHk4msQRRlw8aM+M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcDateTime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcDateTime.html",
+          "hash": "yu50DaAuw0qOs0/d50Ojcm7Q9NOHrEQaiyCL9WCPMew="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcDouble.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcDouble.html",
+          "hash": "+OmYnhAxGfuUID/gfddX13TGm8ZB03ay7uX70u9Opes="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcFault.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcFault.html",
+          "hash": "qWhEXXs/562SdtVlMu2OiQNwt+4pmaJi0eK/V1mas90="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcInteger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcInteger.html",
+          "hash": "yateJZYFmq8CKUG+liZto2Am5ibHkS23UyGkB7EL76k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcString.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcString.html",
+          "hash": "AZfzMSDJYjT+I0fEiGjTQYU5aIHP2wssu4Y9/S20fAw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcStruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.XmlRpcStruct.html",
+          "hash": "QYfH0zvSJVWHakf+Tchmo5YbXxCdIbIp/6QRFrUST7M="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.Types.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.Types.html",
+          "hash": "xRlccpDodn/zeYV5IwJBfpHHJIEx5sf1a4ExMEa4Ohw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcCall.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcCall.html",
+          "hash": "gmXFFu7AVDk+izYy3x7z9lAHI7/NUccBO9pStKATdY4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcElementNames.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcElementNames.html",
+          "hash": "qVOke5m95U1KgYvAY7GVvj1a4TI8pgE/jua4ZCtR6Bw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcIO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcIO.html",
+          "hash": "7RbMeWErkbYdn26v/37wJEkiPKfChzH/WbPc5H/DWvY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcRequest.html",
+          "hash": "VPN84YExXzq8X2IcIeMKcgV4sgRKEgcG+iTvn+LtFYI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcTypes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.XmlRpcTypes.html",
+          "hash": "e72XVkmKkSII+gAfSIBdOmiCC3mmiBKcUl/xzbpcCEs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.XmlRpc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.XmlRpc.html",
+          "hash": "LA9dk/glxf5Dvg84t/iGTjf0Qdr3Ijbyn8sCowwK9yI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/GbxRemoteNet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/GbxRemoteNet.html",
+          "hash": "hnUOtL+oJN+LUwz5DXljdPJKTlWPhdRq0x3DfCaTbRI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "wRdRr6HgUA+MnHW4fKzRZ1Mq9dAHr5rapNX9d9Lu7lA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "tGGZcqvDEscdbqtnz0OtAZqecqa/o4UYPDcjV6IRnyE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "guide/callbacks.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/callbacks.html",
+          "hash": "86iJsIuXcqASBziGSWLMWU+NwKlhF3cBZl8G2azdS7Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "guide/calling-methods.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/calling-methods.html",
+          "hash": "dh7iAqsDrjV+XuuHhOrnG6ZNb/djuCUvVJiHfQtZqlA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guide/client-setup.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/client-setup.html",
+          "hash": "IbU1jqZFEn0jVyQ4WBP3j196CBkuY/s61xw1td4Xgl8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guide/extensions.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/extensions.html",
+          "hash": "cgPz6ng1+3PQFcQYAX82Nr0lDleO+KctfH/iMbgr59s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "guide/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/index.html",
+          "hash": "nMVwU/FkFZ2XYFVD6uNrCvOp/BrxhgnccMMh/EPgao4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guide/installation.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/installation.html",
+          "hash": "ph1wMEbx710FhRX8kCUZ4ZstHi0k2JEIZ8dPyXA3PiA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guide/modescript.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/modescript.html",
+          "hash": "G+gVMOM0IYe+zPfdlD5k5zqAsNIgems+7ZhvaFh9/w8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "guide/multicall.md",
+      "output": {
+        ".html": {
+          "relative_path": "guide/multicall.html",
+          "hash": "T1Ze8I2TWzIjE9HGphqZ2I4tXc+SedmN8y1rcqYumTA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "guide/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "guide/toc.html",
+          "hash": "qGuWAYxlp6pIImy9O3EcL0JmQ+wvAxqIsX4HRS9+8GQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "KnE3R/L/yS7FmIZGSNyctgMRpvoRaTxWkHchZYGaKus="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "fIn3d5KrPNuB774w4Qei3flyHoSCP7ZbPDpknAOok5o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": true,
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 10,
+          "skipped_file_count": 10
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 110,
+          "skipped_file_count": 110
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
