@@ -1,0 +1,29 @@
+name: Run Tests
+on:
+  push:
+    branches: [dev]
+  pull_request:
+    types: [opened, reopened, edited]
+
+jobs:
+  build_and_test:
+    env:
+      SOLUTION: 'src/GbxRemote.Net.sln'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure .NET 6
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Setup Dependencies
+        run: dotnet restore $SOLUTION
+      
+      - name: Build Solution
+        run: dotnet build $SOLUTION --configuration Debug --no-restore
+        
+      - name: Run Tests
+        run: dotnet test $SOLUTION /p:Configuration=Debug --no-restore --no-build --verbosity normal
