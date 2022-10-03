@@ -1,38 +1,26 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Examples.Common;
 using GbxRemoteNet;
-using Microsoft.Extensions.Logging;
 
-namespace BasicExample;
+// create client instance
+GbxRemoteClient client = new("127.0.0.2", 5001);
 
-internal class Program
+// connect and login
+if (!await client.LoginAsync("SuperAdmin", "SuperAdmin"))
 {
-    private static async Task Main(string[] args)
-    {
-        // create client instance
-        GbxRemoteClient client = new("127.0.0.2", 5001, Logger.New<Program>(LogLevel.Debug));
-
-        // connect and login
-        if (!await client.LoginAsync("SuperAdmin", "SuperAdmin"))
-        {
-            await client.GetLastConnectionErrorMessageAsync();
-            Console.WriteLine("Failed to login.");
-            return;
-        }
-
-        Console.WriteLine("Connected and authenticated!");
-
-        // get player list
-        var players = await client.GetPlayerListAsync();
-
-        foreach (var player in players)
-        {
-            var info = await client.GetDetailedPlayerInfoAsync(player.Login);
-            Console.WriteLine($"Login: {player.Login}, NickName: {player.NickName}");
-        }
-
-        // disconnect and clean up
-        await client.DisconnectAsync();
-    }
+    Console.WriteLine("Failed to login.");
+    return;
 }
+
+Console.WriteLine("Connected and authenticated!");
+
+// get player list
+var players = await client.GetPlayerListAsync();
+
+foreach (var player in players)
+{
+    var info = await client.GetDetailedPlayerInfoAsync(player.Login);
+    Console.WriteLine($"Login: {player.Login}, NickName: {player.NickName}");
+}
+
+// disconnect and clean up
+await client.DisconnectAsync();
