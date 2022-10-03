@@ -16,7 +16,7 @@ jobs:
 
     env:
       BUILD_CONFIG: 'Release'
-      SOLUTION: 'GbxRemote.Net.sln'
+      SOLUTION: 'src/GbxRemote.Net.sln'
 
     runs-on: ubuntu-latest
 
