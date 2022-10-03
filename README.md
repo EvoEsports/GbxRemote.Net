@@ -46,6 +46,8 @@ foreach (var player in players)
 await client.DisconnectAsync();
 ```
 
+To learn more about the usage of this library, head over to the [main documentation](https://docs.evotm.com/).
+
 # Documentation
 The full documentation with API reference can be found [here](https://docs.evotm.com/).
 
