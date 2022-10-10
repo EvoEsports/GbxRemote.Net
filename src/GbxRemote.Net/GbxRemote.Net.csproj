@@ -15,7 +15,6 @@
         <PackageIcon>logo_square.png</PackageIcon>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageIconUrl />
-        <PackageVersion>2.0.0</PackageVersion>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
