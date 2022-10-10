@@ -163,7 +163,7 @@ public partial class GbxRemoteClient
         switch (call.Method)
         {
             case "ManiaPlanet.PlayerConnect":
-                await InternalInvokeEventsAsync(OnPlayerChat?.GetInvocationList(), new PlayerConnectEventArgs
+                await InternalInvokeEventsAsync(OnPlayerConnect?.GetInvocationList(), new PlayerConnectEventArgs
                 {
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                     IsSpectator = (bool) XmlRpcTypes.ToNativeValue<bool>(call.Arguments[1])
