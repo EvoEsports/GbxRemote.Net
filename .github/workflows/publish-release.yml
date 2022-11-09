@@ -25,7 +25,7 @@ jobs:
         run: dotnet build $SOLUTION --configuration Release -p:Version=${{github.ref_name}} --no-restore
         
       - name: Run Tests
-        run: dotnet test $SOLUTION /p:Configuration=Release --no-restore --no-build --verbosity normal
+        run: dotnet test $SOLUTION --no-restore --no-build --verbosity normal
       
       - name: Nuget Pack
         run: dotnet pack $SOLUTION /p:Version=${{github.ref_name}} -c Release --no-build --output package/
