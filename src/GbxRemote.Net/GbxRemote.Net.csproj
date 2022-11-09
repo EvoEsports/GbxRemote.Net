@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
         <RootNamespace>GbxRemoteNet</RootNamespace>
         <Authors>Evo</Authors>
         <Description>GBXRemote client for connecting to the XML-RPC protocol of TrackMania servers.</Description>
@@ -17,6 +16,7 @@
         <PackageIconUrl />
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
