@@ -136,10 +136,10 @@ public partial class GbxRemoteClient
     /// <param name="enable"></param>
     /// <param name="forward"></param>
     /// <returns></returns>
-    public async Task<bool> ChatEnableManualRoutingAsync(bool enable, bool forward)
+    public async Task<bool> ChatEnableManualRoutingAsync(bool enable=true, bool forward=false)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
-            await CallOrFaultAsync("ChatSendToId", enable, forward)
+            await CallOrFaultAsync("ChatEnableManualRouting", enable, forward)
         );
     }
 
