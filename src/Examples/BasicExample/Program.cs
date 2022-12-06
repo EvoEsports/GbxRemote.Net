@@ -11,7 +11,7 @@ internal class Program
     private static async Task Main(string[] args)
     {
         // create client instance
-        GbxRemoteClient client = new("172.28.235.218", 5000, Logger.New<Program>(LogLevel.Trace));
+        GbxRemoteClient client = new("127.0.0.2", 5001, Logger.New<Program>(LogLevel.Debug));
 
         // connect and login
         if (!await client.LoginAsync("SuperAdmin", "SuperAdmin"))
