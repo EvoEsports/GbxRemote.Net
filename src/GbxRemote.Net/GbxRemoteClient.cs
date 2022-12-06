@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using GbxRemoteNet.Exceptions;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
@@ -87,7 +88,9 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     /// <returns></returns>
     public XmlRpcBaseType[] MethodArgs(params object[] args)
     {
-        _logger?.LogDebug("Converting C# types to XML-RPC");
+        _logger?.LogTrace("Converting C# types to XML-RPC. Types to convert: {List}",
+            string.Join(", ", args.Select(a => a.GetType().ToString())));
+        
         var xmlRpcArgs = new XmlRpcBaseType[args.Length];
 
         for (var i = 0; i < args.Length; i++)
