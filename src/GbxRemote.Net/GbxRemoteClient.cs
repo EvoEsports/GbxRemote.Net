@@ -89,7 +89,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     public XmlRpcBaseType[] MethodArgs(params object[] args)
     {
         _logger?.LogTrace("Converting C# types to XML-RPC. Types to convert: {List}",
-            string.Join(", ", args.Select(a => a.GetType().ToString())));
+            string.Join(", ", args.Select(a => a?.GetType().ToString())));
         
         var xmlRpcArgs = new XmlRpcBaseType[args.Length];
 
