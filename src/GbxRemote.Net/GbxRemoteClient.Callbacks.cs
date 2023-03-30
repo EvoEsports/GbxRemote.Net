@@ -182,7 +182,8 @@ public partial class GbxRemoteClient
                     PlayerId = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
                     Text = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[2]),
-                    IsRegisteredCmd = (bool) XmlRpcTypes.ToNativeValue<bool>(call.Arguments[3])
+                    IsRegisteredCmd = (bool) XmlRpcTypes.ToNativeValue<bool>(call.Arguments[3]),
+                    Options = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[4])
                 });
                 break;
             case "ManiaPlanet.Echo":
