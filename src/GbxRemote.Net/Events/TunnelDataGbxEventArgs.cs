@@ -2,7 +2,7 @@
 
 namespace GbxRemoteNet.Events;
 
-public class TunnelDataEventArgs : PlayerEventArgs
+public class TunnelDataGbxEventArgs : PlayerGbxEventArgs
 {
     /// <summary>
     /// ID of the player on the server.
@@ -11,5 +11,5 @@ public class TunnelDataEventArgs : PlayerEventArgs
     /// <summary>
     /// Data received from the player.
     /// </summary>
-    public Base64 Data { get; set; }
+    public GbxBase64 Data { get; set; }
 }

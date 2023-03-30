@@ -56,9 +56,9 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="login"></param>
     /// <returns></returns>
-    public async Task<Base64> GetValidationReplayAsync(string login)
+    public async Task<GbxBase64> GetValidationReplayAsync(string login)
     {
-        return (Base64) XmlRpcTypes.ToNativeValue<Base64>(
+        return (GbxBase64) XmlRpcTypes.ToNativeValue<GbxBase64>(
             await CallOrFaultAsync("GetValidationReplay", login)
         );
     }

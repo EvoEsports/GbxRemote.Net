@@ -2,7 +2,7 @@
 
 namespace GbxRemoteNet.Events;
 
-public class ManiaLinkPageActionEventArgs : PlayerEventArgs
+public class ManiaLinkPageActionGbxEventArgs : PlayerGbxEventArgs
 {
     /// <summary>
     /// Player's server ID.

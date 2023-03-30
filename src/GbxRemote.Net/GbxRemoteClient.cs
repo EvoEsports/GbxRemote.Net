@@ -16,7 +16,7 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
     /// <summary>
     ///     This is the API version the client will be using.
     /// </summary>
-    public const string DefaultApiVersion = "2022-03-21";
+    public const string DefaultApiVersion = "2023-03-24";
 
     private readonly ILogger _logger;
     private readonly GbxRemoteClientOptions _options;

@@ -32,7 +32,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                 new XmlRpcString("Test String"),
                 new XmlRpcInteger(123),
                 new XmlRpcDouble(2134.523),
-                new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")),
+                new GbxRemoteNet.XmlRpc.Types.XmlRpcBase64(GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=")),
                 new XmlRpcBoolean(true),
                 new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime()),
                 new XmlRpcArray(new XmlRpcBaseType[] {

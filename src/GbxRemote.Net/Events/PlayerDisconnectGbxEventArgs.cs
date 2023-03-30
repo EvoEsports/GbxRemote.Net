@@ -1,6 +1,6 @@
 ﻿namespace GbxRemoteNet.Events;
 
-public class PlayerDisconnectEventArgs : PlayerEventArgs
+public class PlayerDisconnectGbxEventArgs : PlayerGbxEventArgs
 {
     /// <summary>
     /// The reason the player disconnected.

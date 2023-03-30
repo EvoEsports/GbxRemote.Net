@@ -3,7 +3,7 @@ using GbxRemoteNet.Structs;
 
 namespace GbxRemoteNet.Events;
 
-public class EndMatchEventArgs : EventArgs
+public class EndMatchGbxEventArgs : EventArgs
 {
     /// <summary>
     /// Array containing the ranking results of the match.

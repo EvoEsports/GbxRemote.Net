@@ -54,13 +54,13 @@ internal class Program
         WaitHandle.WaitAny(new[] {cancelToken.Token.WaitHandle});
     }
 
-    private static Task ClientOnOnMapListModified(object sender, MapListModifiedEventArgs e)
+    private static Task ClientOnOnMapListModified(object sender, MapListModifiedGbxEventArgs e)
     {
         Console.WriteLine("Map list modified.");
         return Task.CompletedTask;
     }
 
-    private static Task ClientOnOnPlayerManialinkPageAnswer(object sender, ManiaLinkPageActionEventArgs e)
+    private static Task ClientOnOnPlayerManialinkPageAnswer(object sender, ManiaLinkPageActionGbxEventArgs e)
     {
         Console.WriteLine($"Player page answer: {e.PlayerId} | {e.Login}, Answer: {e.Answer}");
         return Task.CompletedTask;
@@ -79,31 +79,31 @@ internal class Program
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerInfoChanged(object sender, PlayerInfoChangedEventArgs e)
+    private static Task Client_OnPlayerInfoChanged(object sender, PlayerInfoChangedGbxEventArgs e)
     {
         Console.WriteLine($"Player info changed for: {e.PlayerInfo.NickName}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnStatusChanged(object sender, StatusChangedEventArgs e)
+    private static Task Client_OnStatusChanged(object sender, StatusChangedGbxEventArgs e)
     {
         Console.WriteLine($"[Status Changed] {e.StatusCode}: {e.StatusName}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEndMap(object sender, MapEventArgs e)
+    private static Task Client_OnEndMap(object sender, MapGbxEventArgs e)
     {
         Console.WriteLine($"End map: {e.Map.Name}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnBeginMap(object sender, MapEventArgs e)
+    private static Task Client_OnBeginMap(object sender, MapGbxEventArgs e)
     {
         Console.WriteLine($"Begin map: {e.Map.Name}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEndMatch(object sender, EndMatchEventArgs e)
+    private static Task Client_OnEndMatch(object sender, EndMatchGbxEventArgs e)
     {
         Console.WriteLine("Match ended, rankings:");
         foreach (var ranking in e.Rankings)
@@ -118,31 +118,31 @@ internal class Program
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnEcho(object sender, EchoEventArgs e)
+    private static Task Client_OnEcho(object sender, EchoGbxEventArgs e)
     {
         Console.WriteLine($"[Echo] internal: {e.InternalParam}, public: {e.InternalParam}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerChat(object sender, PlayerChatEventArgs e)
+    private static Task Client_OnPlayerChat(object sender, PlayerChatGbxEventArgs e)
     {
         Console.WriteLine($"[Chat] {e.Login}: {e.Text}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerDisconnect(object sender, PlayerDisconnectEventArgs e)
+    private static Task Client_OnPlayerDisconnect(object sender, PlayerDisconnectGbxEventArgs e)
     {
         Console.WriteLine($"Player disconnected: {e.Login}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnPlayerConnect(object sender, PlayerConnectEventArgs e)
+    private static Task Client_OnPlayerConnect(object sender, PlayerConnectGbxEventArgs e)
     {
         Console.WriteLine($"Player connected: {e.Login}");
         return Task.CompletedTask;
     }
 
-    private static Task Client_OnAnyCallback(object sender, CallbackEventArgs<object> e)
+    private static Task Client_OnAnyCallback(object sender, CallbackGbxEventArgs<object> e)
     {
         Console.WriteLine($"[Any callback] {e.Call.Method}:");
         foreach (var par in e.Parameters) Console.WriteLine($"- {par}");

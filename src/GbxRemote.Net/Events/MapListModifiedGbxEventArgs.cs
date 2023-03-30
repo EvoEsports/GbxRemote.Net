@@ -2,7 +2,7 @@
 
 namespace GbxRemoteNet.Events;
 
-public class MapListModifiedEventArgs : EventArgs
+public class MapListModifiedGbxEventArgs : EventArgs
 {
     /// <summary>
     /// Index of the current map.

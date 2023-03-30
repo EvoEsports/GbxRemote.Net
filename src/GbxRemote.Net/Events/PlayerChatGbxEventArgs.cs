@@ -1,6 +1,6 @@
 ﻿namespace GbxRemoteNet.Events;
 
-public class PlayerChatEventArgs : PlayerEventArgs
+public class PlayerChatGbxEventArgs : PlayerGbxEventArgs
 {
     /// <summary>
     /// The Id of the player on the server.
@@ -14,4 +14,9 @@ public class PlayerChatEventArgs : PlayerEventArgs
     /// Whether the message is a command or not.
     /// </summary>
     public bool IsRegisteredCmd { get; set; }
+    /// <summary>
+    /// Chat options that indicates the message channel.
+    /// 0: Default, 1: ToSpectatorCurrent, 2: ToSpectatorAll, 3: ToTeam
+    /// </summary>
+    public int Options { get; set; }
 }

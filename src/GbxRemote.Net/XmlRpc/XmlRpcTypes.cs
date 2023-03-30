@@ -27,7 +27,7 @@ public static class XmlRpcTypes
         {XmlRpcElementNames.Struct.ToLower(), typeof(XmlRpcStruct)},
 
         // base64
-        {XmlRpcElementNames.Base64.ToLower(), typeof(XmlRpcBase64)},
+        {XmlRpcElementNames.Base64.ToLower(), typeof(Types.XmlRpcBase64)},
 
         // boolean
         {XmlRpcElementNames.Boolean.ToLower(), typeof(XmlRpcBoolean)},
@@ -78,8 +78,8 @@ public static class XmlRpcTypes
 
         var t = xmlValue.GetType();
 
-        if (t == typeof(XmlRpcBase64))
-            return ((XmlRpcBase64) xmlValue).Value;
+        if (t == typeof(Types.XmlRpcBase64))
+            return ((Types.XmlRpcBase64) xmlValue).Value;
         if (t == typeof(XmlRpcBoolean))
             return ((XmlRpcBoolean) xmlValue).Value;
         if (t == typeof(XmlRpcDateTime))
@@ -111,10 +111,10 @@ public static class XmlRpcTypes
         if (instanceType == null)
             t = typeof(T);
 
-        if (t == typeof(DynamicObject) || t == typeof(object))
+        if (t == typeof(GbxDynamicObject) || t == typeof(object))
         {
             // just copy the value if we have a dynamic object
-            DynamicObject obj = new();
+            GbxDynamicObject obj = new();
 
             foreach (var kv in xmlStruct.Fields)
                 obj.Add(kv.Key, ToNativeValue<object>(kv.Value));
@@ -193,8 +193,8 @@ public static class XmlRpcTypes
 
         var t = obj.GetType();
 
-        if (t == typeof(Base64)) // base64
-            return new XmlRpcBase64((Base64) obj);
+        if (t == typeof(GbxBase64)) // base64
+            return new Types.XmlRpcBase64((GbxBase64) obj);
         if (t == typeof(bool)) // boolean
             return new XmlRpcBoolean((bool) obj);
         if (t == typeof(DateTime)) // dateTime.iso8601
@@ -209,8 +209,8 @@ public static class XmlRpcTypes
             return new XmlRpcInteger((int) obj);
         if (t == typeof(string)) // string
             return new XmlRpcString((string) obj);
-        if (t == typeof(DynamicObject)) // struct
-            return new XmlRpcStruct((DynamicObject) obj);
+        if (t == typeof(GbxDynamicObject)) // struct
+            return new XmlRpcStruct((GbxDynamicObject) obj);
         if (t.IsArray) // array
             return ToXmlRpcArray(obj);
         if (t.IsClass) // struct

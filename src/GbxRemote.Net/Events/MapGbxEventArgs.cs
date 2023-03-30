@@ -3,7 +3,7 @@ using GbxRemoteNet.Structs;
 
 namespace GbxRemoteNet.Events;
 
-public class MapEventArgs : EventArgs
+public class MapGbxEventArgs : EventArgs
 {
     /// <summary>
     /// Information about the map that will be/was played.

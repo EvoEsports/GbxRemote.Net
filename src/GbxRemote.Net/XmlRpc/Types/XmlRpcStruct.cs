@@ -55,7 +55,7 @@ public class XmlRpcStruct : XmlRpcBaseType, IEquatable<XmlRpcStruct>
     ///     Create a struct from a dynamic object.
     /// </summary>
     /// <param name="obj"></param>
-    public XmlRpcStruct(DynamicObject obj) : base(null)
+    public XmlRpcStruct(GbxDynamicObject obj) : base(null)
     {
         Fields = new GbxStruct();
 

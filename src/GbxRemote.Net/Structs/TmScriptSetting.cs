@@ -2,6 +2,6 @@
 
 namespace GbxRemoteNet.Structs;
 
-public class TmScriptSetting : DynamicObject
+public class TmScriptSetting : GbxDynamicObject
 {
 }
