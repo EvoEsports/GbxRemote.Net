@@ -19,28 +19,28 @@ public partial class GbxRemoteClient
     /// <summary>
     ///     Triggered for all possible callbacks.
     /// </summary>
-    public event AsyncEventHandler<CallbackEventArgs<object>> OnAnyCallback;
+    public event AsyncEventHandler<CallbackGbxEventArgs<object>> OnAnyCallback;
 
     /// <summary>
     ///     When a player connects to the server.
     /// </summary>
-    public event AsyncEventHandler<PlayerConnectEventArgs> OnPlayerConnect;
+    public event AsyncEventHandler<PlayerConnectGbxEventArgs> OnPlayerConnect;
 
     /// <summary>
     ///     When a player disconnects from the server.
     /// </summary>
-    public event AsyncEventHandler<PlayerDisconnectEventArgs> OnPlayerDisconnect;
+    public event AsyncEventHandler<PlayerDisconnectGbxEventArgs> OnPlayerDisconnect;
 
     /// <summary>
     ///     When a player sends a chat message.
     /// </summary>
-    public event AsyncEventHandler<PlayerChatEventArgs> OnPlayerChat;
+    public event AsyncEventHandler<PlayerChatGbxEventArgs> OnPlayerChat;
 
     /// <summary>
     ///     When a echo message is sent. Can be used for communication with other.
     ///     XMLRPC-clients.
     /// </summary>
-    public event AsyncEventHandler<EchoEventArgs> OnEcho;
+    public event AsyncEventHandler<EchoGbxEventArgs> OnEcho;
 
     /// <summary>
     ///     When the match itself starts, triggered after begin map.
@@ -50,38 +50,38 @@ public partial class GbxRemoteClient
     /// <summary>
     ///     When the match ends, does not give a lot of info in TM2020.
     /// </summary>
-    public event AsyncEventHandler<EndMatchEventArgs> OnEndMatch;
+    public event AsyncEventHandler<EndMatchGbxEventArgs> OnEndMatch;
 
     /// <summary>
     ///     When the map has loaded on the server.
     /// </summary>
-    public event AsyncEventHandler<MapEventArgs> OnBeginMap;
+    public event AsyncEventHandler<MapGbxEventArgs> OnBeginMap;
 
     /// <summary>
     ///     When the map unloads from the server.
     /// </summary>
-    public event AsyncEventHandler<MapEventArgs> OnEndMap;
+    public event AsyncEventHandler<MapGbxEventArgs> OnEndMap;
 
     /// <summary>
     ///     When the server status changed.
     /// </summary>
-    public event AsyncEventHandler<StatusChangedEventArgs> OnStatusChanged;
+    public event AsyncEventHandler<StatusChangedGbxEventArgs> OnStatusChanged;
 
     /// <summary>
     ///     When data about a player changed, it is usually called when
     ///     a player joins or leaves. Gives you more detailed info about a player.
     /// </summary>
-    public event AsyncEventHandler<PlayerInfoChangedEventArgs> OnPlayerInfoChanged;
+    public event AsyncEventHandler<PlayerInfoChangedGbxEventArgs> OnPlayerInfoChanged;
 
     /// <summary>
     ///     When a user triggers the page answer callback from a manialink.
     /// </summary>
-    public event AsyncEventHandler<ManiaLinkPageActionEventArgs> OnPlayerManialinkPageAnswer;
+    public event AsyncEventHandler<ManiaLinkPageActionGbxEventArgs> OnPlayerManialinkPageAnswer;
 
     /// <summary>
     ///     Triggered when the map list changed.
     /// </summary>
-    public event AsyncEventHandler<MapListModifiedEventArgs> OnMapListModified;
+    public event AsyncEventHandler<MapListModifiedGbxEventArgs> OnMapListModified;
 
     /// <summary>
     ///     When the server is about to start.
@@ -96,47 +96,47 @@ public partial class GbxRemoteClient
     /// <summary>
     ///     Tunnel data received from a player.
     /// </summary>
-    public event AsyncEventHandler<TunnelDataEventArgs> OnTunnelDataReceived;
+    public event AsyncEventHandler<TunnelDataGbxEventArgs> OnTunnelDataReceived;
 
     /// <summary>
     ///     When a current vote has been updated.
     /// </summary>
-    public event AsyncEventHandler<VoteUpdatedEventArgs> OnVoteUpdated;
+    public event AsyncEventHandler<VoteUpdatedGbxEventArgs> OnVoteUpdated;
 
     /// <summary>
     ///     When a player bill is updated.
     /// </summary>
-    public event AsyncEventHandler<BillUpdatedEventArgs> OnBillUpdated;
+    public event AsyncEventHandler<BillUpdatedGbxEventArgs> OnBillUpdated;
 
     /// <summary>
     ///     When a player changed allies.
     /// </summary>
-    public event AsyncEventHandler<PlayerEventArgs> OnPlayerAlliesChanged;
+    public event AsyncEventHandler<PlayerGbxEventArgs> OnPlayerAlliesChanged;
 
     /// <summary>
     ///     When a variable from the script cloud is loaded.
     /// </summary>
-    public event AsyncEventHandler<ScriptCloudEventArgs> OnScriptCloudLoadData;
+    public event AsyncEventHandler<ScriptCloudGbxEventArgs> OnScriptCloudLoadData;
 
     /// <summary>
     ///     When a variable from the script cloud is saved.
     /// </summary>
-    public event AsyncEventHandler<ScriptCloudEventArgs> OnScriptCloudSaveData;
+    public event AsyncEventHandler<ScriptCloudGbxEventArgs> OnScriptCloudSaveData;
 
     /// <summary>
     ///     Enable callbacks. If no parameter is provided,
     ///     all callbacks are enabled by default.
     /// </summary>
-    /// <param name="callbackType"></param>
+    /// <param name="gbxCallbackType"></param>
     /// <returns></returns>
     public async Task EnableCallbackTypeAsync(
-        CallbackType callbackType = CallbackType.Internal | CallbackType.ModeScript | CallbackType.Checkpoints)
+        GbxCallbackType gbxCallbackType = GbxCallbackType.Internal | GbxCallbackType.ModeScript | GbxCallbackType.Checkpoints)
     {
-        if (callbackType.HasFlag(CallbackType.Internal))
+        if (gbxCallbackType.HasFlag(GbxCallbackType.Internal))
             await EnableCallbacksAsync(true);
-        if (callbackType.HasFlag(CallbackType.ModeScript))
+        if (gbxCallbackType.HasFlag(GbxCallbackType.ModeScript))
             await TriggerModeScriptEventArrayAsync("XmlRpc.EnableCallbacks", "true");
-        if (callbackType.HasFlag(CallbackType.Checkpoints))
+        if (gbxCallbackType.HasFlag(GbxCallbackType.Checkpoints))
             await TriggerModeScriptEventArrayAsync("Trackmania.Event.SetCurLapCheckpointsMode", "always");
     }
 
@@ -163,21 +163,21 @@ public partial class GbxRemoteClient
         switch (call.Method)
         {
             case "ManiaPlanet.PlayerConnect":
-                await InternalInvokeEventsAsync(OnPlayerConnect?.GetInvocationList(), new PlayerConnectEventArgs
+                await InternalInvokeEventsAsync(OnPlayerConnect?.GetInvocationList(), new PlayerConnectGbxEventArgs
                 {
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                     IsSpectator = (bool) XmlRpcTypes.ToNativeValue<bool>(call.Arguments[1])
                 });
                 break;
             case "ManiaPlanet.PlayerDisconnect":
-                await InternalInvokeEventsAsync(OnPlayerDisconnect?.GetInvocationList(), new PlayerDisconnectEventArgs
+                await InternalInvokeEventsAsync(OnPlayerDisconnect?.GetInvocationList(), new PlayerDisconnectGbxEventArgs
                 {
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                     Reason = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
                 });
                 break;
             case "ManiaPlanet.PlayerChat":
-                await InternalInvokeEventsAsync(OnPlayerChat?.GetInvocationList(), new PlayerChatEventArgs
+                await InternalInvokeEventsAsync(OnPlayerChat?.GetInvocationList(), new PlayerChatGbxEventArgs
                 {
                     PlayerId = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
@@ -187,7 +187,7 @@ public partial class GbxRemoteClient
                 });
                 break;
             case "ManiaPlanet.Echo":
-                await InternalInvokeEventsAsync(OnEcho?.GetInvocationList(), new EchoEventArgs
+                await InternalInvokeEventsAsync(OnEcho?.GetInvocationList(), new EchoGbxEventArgs
                 {
                     InternalParam = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                     PublicParam = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
@@ -197,33 +197,33 @@ public partial class GbxRemoteClient
                 await InternalInvokeEventsAsync(OnBeginMatch?.GetInvocationList(), new EventArgs());
                 break;
             case "ManiaPlanet.EndMatch":
-                await InternalInvokeEventsAsync(OnEndMatch?.GetInvocationList(), new EndMatchEventArgs
+                await InternalInvokeEventsAsync(OnEndMatch?.GetInvocationList(), new EndMatchGbxEventArgs
                 {
                     Rankings = (TmSPlayerRanking[]) XmlRpcTypes.ToNativeValue<TmSPlayerRanking>(call.Arguments[0]),
                     WinnerTeam = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[1])
                 });
                 break;
             case "ManiaPlanet.BeginMap":
-                await InternalInvokeEventsAsync(OnBeginMap?.GetInvocationList(), new MapEventArgs
+                await InternalInvokeEventsAsync(OnBeginMap?.GetInvocationList(), new MapGbxEventArgs
                 {
                     Map = (TmSMapInfo) XmlRpcTypes.ToNativeValue<TmSMapInfo>(call.Arguments[0])
                 });
                 break;
             case "ManiaPlanet.EndMap":
-                await InternalInvokeEventsAsync(OnEndMap?.GetInvocationList(), new MapEventArgs
+                await InternalInvokeEventsAsync(OnEndMap?.GetInvocationList(), new MapGbxEventArgs
                 {
                     Map = (TmSMapInfo) XmlRpcTypes.ToNativeValue<TmSMapInfo>(call.Arguments[0])
                 });
                 break;
             case "ManiaPlanet.StatusChanged":
-                await InternalInvokeEventsAsync(OnStatusChanged?.GetInvocationList(), new StatusChangedEventArgs
+                await InternalInvokeEventsAsync(OnStatusChanged?.GetInvocationList(), new StatusChangedGbxEventArgs
                 {
                     StatusCode = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     StatusName = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
                 });
                 break;
             case "ManiaPlanet.PlayerInfoChanged":
-                await InternalInvokeEventsAsync(OnPlayerInfoChanged?.GetInvocationList(), new PlayerInfoChangedEventArgs
+                await InternalInvokeEventsAsync(OnPlayerInfoChanged?.GetInvocationList(), new PlayerInfoChangedGbxEventArgs
                 {
                     PlayerInfo = (TmSPlayerInfo) XmlRpcTypes.ToNativeValue<TmSPlayerInfo>(call.Arguments[0])
                 });
@@ -235,7 +235,7 @@ public partial class GbxRemoteClient
                 await HandleModeScriptCallback(call);
                 break;
             case "ManiaPlanet.PlayerManialinkPageAnswer":
-                await InternalInvokeEventsAsync(OnPlayerManialinkPageAnswer?.GetInvocationList(), new ManiaLinkPageActionEventArgs
+                await InternalInvokeEventsAsync(OnPlayerManialinkPageAnswer?.GetInvocationList(), new ManiaLinkPageActionGbxEventArgs
                 {
                     PlayerId = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
@@ -244,7 +244,7 @@ public partial class GbxRemoteClient
                 });
                 break;
             case "ManiaPlanet.MapListModified":
-                await InternalInvokeEventsAsync(OnMapListModified?.GetInvocationList(), new MapListModifiedEventArgs
+                await InternalInvokeEventsAsync(OnMapListModified?.GetInvocationList(), new MapListModifiedGbxEventArgs
                 {
                     CurrentMapIndex = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     NextMapIndex = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[1]),
@@ -258,15 +258,15 @@ public partial class GbxRemoteClient
                 await InternalInvokeEventsAsync(OnServerStop?.GetInvocationList(), new EventArgs());
                 break;
             case "ManiaPlanet.TunnelDataReceived":
-                await InternalInvokeEventsAsync(OnTunnelDataReceived?.GetInvocationList(), new TunnelDataEventArgs
+                await InternalInvokeEventsAsync(OnTunnelDataReceived?.GetInvocationList(), new TunnelDataGbxEventArgs
                 {
                     PlayerId = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
-                    Data = (Base64) XmlRpcTypes.ToNativeValue<Base64>(call.Arguments[2])
+                    Data = (GbxBase64) XmlRpcTypes.ToNativeValue<GbxBase64>(call.Arguments[2])
                 });
                 break;
             case "ManiaPlanet.VoteUpdated":
-                await InternalInvokeEventsAsync(OnVoteUpdated?.GetInvocationList(), new VoteUpdatedEventArgs
+                await InternalInvokeEventsAsync(OnVoteUpdated?.GetInvocationList(), new VoteUpdatedGbxEventArgs
                 {
                     StateName = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1]),
@@ -275,7 +275,7 @@ public partial class GbxRemoteClient
                 });
                 break;
             case "ManiaPlanet.BillUpdated":
-                await InternalInvokeEventsAsync(OnBillUpdated?.GetInvocationList(), new BillUpdatedEventArgs
+                await InternalInvokeEventsAsync(OnBillUpdated?.GetInvocationList(), new BillUpdatedGbxEventArgs
                 {
                     BillId = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[0]),
                     State = (int) XmlRpcTypes.ToNativeValue<int>(call.Arguments[1]),
@@ -284,20 +284,20 @@ public partial class GbxRemoteClient
                 });
                 break;
             case "ManiaPlanet.PlayerAlliesChanged":
-                await InternalInvokeEventsAsync(OnPlayerAlliesChanged?.GetInvocationList(), new PlayerEventArgs
+                await InternalInvokeEventsAsync(OnPlayerAlliesChanged?.GetInvocationList(), new PlayerGbxEventArgs
                 {
                     Login = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0])
                 });
                 break;
             case "ScriptCloud.LoadData":
-                await InternalInvokeEventsAsync(OnScriptCloudLoadData?.GetInvocationList(), new ScriptCloudEventArgs
+                await InternalInvokeEventsAsync(OnScriptCloudLoadData?.GetInvocationList(), new ScriptCloudGbxEventArgs
                 {
                     Type = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                     Id = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
                 });
                 break;
             case "ScriptCloud.SaveData":
-                await InternalInvokeEventsAsync(OnScriptCloudSaveData?.GetInvocationList(), new ScriptCloudEventArgs
+                await InternalInvokeEventsAsync(OnScriptCloudSaveData?.GetInvocationList(), new ScriptCloudGbxEventArgs
                 {
                     Type = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[0]),
                     Id = (string) XmlRpcTypes.ToNativeValue<string>(call.Arguments[1])
@@ -305,7 +305,7 @@ public partial class GbxRemoteClient
                 break;
         }
 
-        OnAnyCallback?.Invoke(this, new CallbackEventArgs<object>
+        OnAnyCallback?.Invoke(this, new CallbackGbxEventArgs<object>
         {
             Call = call,
             Parameters = (object[]) XmlRpcTypes.ToNativeValue<object>(new XmlRpcArray(call.Arguments))

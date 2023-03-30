@@ -50,7 +50,7 @@ public partial class GbxRemoteClient
     /// <param name="fileName"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    public async Task<bool> WriteFileAsync(string fileName, Base64 data)
+    public async Task<bool> WriteFileAsync(string fileName, GbxBase64 data)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("WriteFile", fileName, data)
@@ -63,7 +63,7 @@ public partial class GbxRemoteClient
     /// <param name="id"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    public async Task<bool> TunnelSendDataToIdAsync(int id, Base64 data)
+    public async Task<bool> TunnelSendDataToIdAsync(int id, GbxBase64 data)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("TunnelSendDataToId", id, data)
@@ -77,7 +77,7 @@ public partial class GbxRemoteClient
     /// <param name="login"></param>
     /// <param name="data"></param>
     /// <returns></returns>
-    public async Task<bool> TunnelSendDataToLoginAsync(string login, Base64 data)
+    public async Task<bool> TunnelSendDataToLoginAsync(string login, GbxBase64 data)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("TunnelSendDataToLogin", login, data)

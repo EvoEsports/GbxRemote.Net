@@ -4,21 +4,21 @@ using System.Text;
 
 namespace GbxRemoteNet.XmlRpc.ExtraTypes;
 
-public class Base64 : IEquatable<Base64>
+public class GbxBase64 : IEquatable<GbxBase64>
 {
-    public Base64(byte[] data)
+    public GbxBase64(byte[] data)
     {
         Data = data;
     }
 
-    public Base64(string data)
+    public GbxBase64(string data)
     {
         Data = Encoding.UTF8.GetBytes(data);
     }
 
     public byte[] Data { get; }
 
-    public bool Equals(Base64 other)
+    public bool Equals(GbxBase64 other)
     {
         if (other == null)
         {
@@ -33,8 +33,8 @@ public class Base64 : IEquatable<Base64>
         return Convert.ToBase64String(Data);
     }
 
-    public static Base64 FromBase64String(string data)
+    public static GbxBase64 FromBase64String(string data)
     {
-        return new Base64(Convert.FromBase64String(data));
+        return new GbxBase64(Convert.FromBase64String(data));
     }
 }

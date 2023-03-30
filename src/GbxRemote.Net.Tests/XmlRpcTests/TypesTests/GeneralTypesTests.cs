@@ -14,7 +14,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.TypesTests {
         [InlineData("VGVzdCBTdHJpbmc=", "<base64>VGVzdCBTdHJpbmc=</base64>")]
         [InlineData("", "<base64></base64>")]
         public void XmlRpcBase64_GetXml_Returns_Correct_Element(string input, string expected) {
-            XmlRpcBase64 base64 = new(Base64.FromBase64String(input));
+            GbxRemoteNet.XmlRpc.Types.XmlRpcBase64 base64 = new(GbxBase64.FromBase64String(input));
 
             string xml = base64.GetXml().ToString();
 

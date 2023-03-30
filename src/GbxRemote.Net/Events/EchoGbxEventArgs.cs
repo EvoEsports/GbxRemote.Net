@@ -2,7 +2,7 @@
 
 namespace GbxRemoteNet.Events;
 
-public class EchoEventArgs : EventArgs
+public class EchoGbxEventArgs : EventArgs
 {
     /// <summary>
     /// First argument, in-case of a vote, it is the vote message.

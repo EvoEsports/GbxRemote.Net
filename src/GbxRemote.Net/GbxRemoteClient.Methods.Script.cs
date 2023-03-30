@@ -49,9 +49,9 @@ public partial class GbxRemoteClient
     ///     Returns the current settings of the mode script.
     /// </summary>
     /// <returns></returns>
-    public async Task<DynamicObject> GetModeScriptSettingsAsync()
+    public async Task<GbxDynamicObject> GetModeScriptSettingsAsync()
     {
-        return (DynamicObject) XmlRpcTypes.ToNativeValue<DynamicObject>(
+        return (GbxDynamicObject) XmlRpcTypes.ToNativeValue<GbxDynamicObject>(
             await CallOrFaultAsync("GetModeScriptSettings")
         );
     }
@@ -61,7 +61,7 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="modescriptSettings"></param>
     /// <returns></returns>
-    public async Task<bool> SetModeScriptSettingsAsync(DynamicObject modescriptSettings)
+    public async Task<bool> SetModeScriptSettingsAsync(GbxDynamicObject modescriptSettings)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetModeScriptSettings", modescriptSettings)
@@ -73,7 +73,7 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="commands"></param>
     /// <returns></returns>
-    public async Task<bool> SendModeScriptCommandsAsync(DynamicObject commands)
+    public async Task<bool> SendModeScriptCommandsAsync(GbxDynamicObject commands)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SendModeScriptCommands", commands)
@@ -86,7 +86,7 @@ public partial class GbxRemoteClient
     /// <param name="settings"></param>
     /// <param name="modeScript"></param>
     /// <returns></returns>
-    public async Task<bool> SetModeScriptSettingsAndCommandsAsync(DynamicObject settings, DynamicObject modeScript)
+    public async Task<bool> SetModeScriptSettingsAndCommandsAsync(GbxDynamicObject settings, GbxDynamicObject modeScript)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetModeScriptSettingsAndCommands", settings, modeScript)
@@ -97,9 +97,9 @@ public partial class GbxRemoteClient
     ///     Returns the current xml-rpc variables of the mode script.
     /// </summary>
     /// <returns></returns>
-    public async Task<DynamicObject> GetModeScriptVariablesAsync()
+    public async Task<GbxDynamicObject> GetModeScriptVariablesAsync()
     {
-        return (DynamicObject) XmlRpcTypes.ToNativeValue<DynamicObject>(
+        return (GbxDynamicObject) XmlRpcTypes.ToNativeValue<GbxDynamicObject>(
             await CallOrFaultAsync("GetModeScriptVariables")
         );
     }
@@ -109,7 +109,7 @@ public partial class GbxRemoteClient
     /// </summary>
     /// <param name="xmlRpcVar"></param>
     /// <returns></returns>
-    public async Task<bool> SetModeScriptVariablesAsync(DynamicObject xmlRpcVar)
+    public async Task<bool> SetModeScriptVariablesAsync(GbxDynamicObject xmlRpcVar)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetModeScriptVariables", xmlRpcVar)
@@ -149,7 +149,7 @@ public partial class GbxRemoteClient
     /// <param name="filename">OPTIONAL: Name the filename relative to Scripts/directory</param>
     /// <param name="script">OPTIONAL: The script #Settings to apply.</param>
     /// <returns></returns>
-    public async Task<bool> SetServerPluginAsync(bool forceReload, string filename = null, DynamicObject script = null)
+    public async Task<bool> SetServerPluginAsync(bool forceReload, string filename = null, GbxDynamicObject script = null)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetServerPlugin", forceReload, filename, script)
@@ -160,9 +160,9 @@ public partial class GbxRemoteClient
     ///     Get the ServerPlugin current settings.
     /// </summary>
     /// <returns></returns>
-    public async Task<DynamicObject> GetServerPluginAsync()
+    public async Task<GbxDynamicObject> GetServerPluginAsync()
     {
-        return (DynamicObject) XmlRpcTypes.ToNativeValue<DynamicObject>(
+        return (GbxDynamicObject) XmlRpcTypes.ToNativeValue<GbxDynamicObject>(
             await CallOrFaultAsync("GetServerPlugin")
         );
     }
@@ -171,9 +171,9 @@ public partial class GbxRemoteClient
     ///     Send an event to the server script. Only available to Admin.
     /// </summary>
     /// <returns></returns>
-    public async Task<DynamicObject> GetServerPluginVariablesAsync()
+    public async Task<GbxDynamicObject> GetServerPluginVariablesAsync()
     {
-        return (DynamicObject) XmlRpcTypes.ToNativeValue<DynamicObject>(
+        return (GbxDynamicObject) XmlRpcTypes.ToNativeValue<GbxDynamicObject>(
             await CallOrFaultAsync("GetServerPluginVariables")
         );
     }
@@ -210,9 +210,9 @@ public partial class GbxRemoteClient
     /// <param name="type"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<DynamicObject> GetScriptCloudVariablesAsync(string type, string id)
+    public async Task<GbxDynamicObject> GetScriptCloudVariablesAsync(string type, string id)
     {
-        return (DynamicObject) XmlRpcTypes.ToNativeValue<DynamicObject>(
+        return (GbxDynamicObject) XmlRpcTypes.ToNativeValue<GbxDynamicObject>(
             await CallOrFaultAsync("GetScriptCloudVariables")
         );
     }
@@ -224,7 +224,7 @@ public partial class GbxRemoteClient
     /// <param name="id"></param>
     /// <param name="variables"></param>
     /// <returns></returns>
-    public async Task<bool> SetScriptCloudVariablesAsync(string type, string id, DynamicObject variables)
+    public async Task<bool> SetScriptCloudVariablesAsync(string type, string id, GbxDynamicObject variables)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetScriptCloudVariables")

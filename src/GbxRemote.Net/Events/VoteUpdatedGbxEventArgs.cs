@@ -1,6 +1,6 @@
 ﻿namespace GbxRemoteNet.Events;
 
-public class VoteUpdatedEventArgs : PlayerEventArgs
+public class VoteUpdatedGbxEventArgs : PlayerGbxEventArgs
 {
     /// <summary>
     /// Name of the state, can be: NewVote, VoteCancelled, VotePassed or VoteFailed

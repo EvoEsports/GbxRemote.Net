@@ -3,7 +3,7 @@
 namespace GbxRemoteNet.Enums;
 
 [Flags]
-public enum CallbackType
+public enum GbxCallbackType
 {
     Internal,
     ModeScript,

@@ -28,7 +28,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             new object[]{ new XElement("boolean", "0"), new XmlRpcBoolean(false) },
             new object[]{ new XElement("double", "34534.1234"), new XmlRpcDouble(34534.1234) },
             new object[]{ new XElement("dateTime.iso8601", "2021-04-06T14:36:44.1557489Z"), new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime()) },
-            new object[]{ new XElement("base64", "VGVzdCBTdHJpbmc="), new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) },
+            new object[]{ new XElement("base64", "VGVzdCBTdHJpbmc="), new GbxRemoteNet.XmlRpc.Types.XmlRpcBase64(GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=")) },
             new object[]{ new XElement("array", new XElement("data",
                     new XElement("value", new XElement("i4", 1)),
                     new XElement("value", new XElement("int", 2)),
@@ -101,7 +101,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             new object[]{ new XmlRpcBoolean(false), false },
             new object[]{ new XmlRpcBoolean(true), true },
             new object[]{ new XmlRpcString("Test String"), "Test String" },
-            new object[]{ new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")), Base64.FromBase64String("VGVzdCBTdHJpbmc=") },
+            new object[]{ new GbxRemoteNet.XmlRpc.Types.XmlRpcBase64(GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=")), GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=") },
             new object[]{ new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime()), DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime() },
             new object[]{ new XmlRpcArray(new XmlRpcBaseType[] {
                 new XmlRpcInteger(1),
@@ -114,7 +114,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                 { "Key2", new XmlRpcInteger(2) },
                 { "Key3", new XmlRpcString("3") },
                 { "Key4", new XmlRpcDouble(4) }
-            }), new DynamicObject(){
+            }), new GbxDynamicObject(){
                 { "Key1", 1 },
                 { "Key2", 2 },
                 { "Key3", "3" },
@@ -134,15 +134,15 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             XmlRpcStruct str = new(new GbxStruct());
             object result = XmlRpcTypes.ToNativeStruct<object>(str);
 
-            Assert.IsType<DynamicObject>(result);
+            Assert.IsType<GbxDynamicObject>(result);
         }
 
         [Fact]
         public void ToNativeStruct_Returns_DynamicObject_If_DynamicObject_Type() {
             XmlRpcStruct str = new(new GbxStruct());
-            object result = XmlRpcTypes.ToNativeStruct<DynamicObject>(str);
+            object result = XmlRpcTypes.ToNativeStruct<GbxDynamicObject>(str);
 
-            Assert.IsType<DynamicObject>(result);
+            Assert.IsType<GbxDynamicObject>(result);
         }
 
         public class ExampleStruct {
@@ -151,7 +151,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             public string Field3 { get; set; }
             public bool Field4 { get; set; }
             public bool Field5 { get; set; }
-            public Base64 Field6 { get; set; }
+            public GbxBase64 Field6 { get; set; }
             public DateTime Field7 { get; set; }
             public int[] Field8 { get; set; }
             public ExampleSubStruct Field9 { get; set; }
@@ -170,7 +170,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
                 { "Field3", new XmlRpcString("Test String") },
                 { "Field4", new XmlRpcBoolean(true) },
                 { "Field5", new XmlRpcBoolean(false) },
-                { "Field6", new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) },
+                { "Field6", new GbxRemoteNet.XmlRpc.Types.XmlRpcBase64(GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=")) },
                 { "Field7", new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime()) },
                 { "Field8", new XmlRpcArray(new XmlRpcBaseType[]{ 
                     new XmlRpcInteger(1),
@@ -186,7 +186,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
 
             ExampleStruct result = (ExampleStruct)XmlRpcTypes.ToNativeStruct<ExampleStruct>(str);
 
-            Base64 field6Expected = Base64.FromBase64String("VGVzdCBTdHJpbmc=");
+            GbxBase64 field6Expected = GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=");
             DateTime field7Expected = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime();
 
             Assert.NotNull(result);
@@ -258,7 +258,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             new object[]{ 734.267, new XmlRpcDouble(734.267) },
             new object[]{ DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime(), new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime()) },
             new object[]{ "Test String", new XmlRpcString("Test String") },
-            new object[]{ Base64.FromBase64String("VGVzdCBTdHJpbmc="), new XmlRpcBase64(Base64.FromBase64String("VGVzdCBTdHJpbmc=")) },
+            new object[]{ GbxBase64.FromBase64String("VGVzdCBTdHJpbmc="), new GbxRemoteNet.XmlRpc.Types.XmlRpcBase64(GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=")) },
             new object[]{ new int[] { 1, 2, 3 }, new XmlRpcArray(new XmlRpcBaseType[] { 
                 new XmlRpcInteger(1),
                 new XmlRpcInteger(2),
@@ -299,7 +299,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
         [Fact]
         public void DynamicObject_To_XmlRpcStruct()
         {
-            var obj = new DynamicObject();
+            var obj = new GbxDynamicObject();
             
             obj.Add("one", 1);
             obj.Add("two", "two");

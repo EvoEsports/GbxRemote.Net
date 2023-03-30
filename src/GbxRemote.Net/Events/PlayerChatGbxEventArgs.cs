@@ -1,6 +1,6 @@
 ﻿namespace GbxRemoteNet.Events;
 
-public class PlayerChatEventArgs : PlayerEventArgs
+public class PlayerChatGbxEventArgs : PlayerGbxEventArgs
 {
     /// <summary>
     /// The Id of the player on the server.

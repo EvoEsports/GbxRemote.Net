@@ -2,7 +2,7 @@
 
 namespace GbxRemoteNet.Events;
 
-public class BillUpdatedEventArgs : EventArgs
+public class BillUpdatedGbxEventArgs : EventArgs
 {
     /// <summary>
     /// ID of the bill.

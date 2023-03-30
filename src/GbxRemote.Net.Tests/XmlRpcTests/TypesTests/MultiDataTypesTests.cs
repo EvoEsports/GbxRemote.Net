@@ -35,10 +35,10 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.TypesTests {
             XmlRpcInteger entry5 = (XmlRpcInteger)array.Values[4];
             XmlRpcDouble entry6 = (XmlRpcDouble)array.Values[5];
             XmlRpcDateTime entry7 = (XmlRpcDateTime)array.Values[6];
-            XmlRpcBase64 entry8 = (XmlRpcBase64)array.Values[7];
+            GbxRemoteNet.XmlRpc.Types.XmlRpcBase64 entry8 = (GbxRemoteNet.XmlRpc.Types.XmlRpcBase64)array.Values[7];
 
             DateTime expectedDateTime = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime();
-            Base64 expectedBase64 = Base64.FromBase64String("VGVzdCBCYXNlNjQgU3RyaW5n");
+            GbxBase64 expectedBase64 = GbxBase64.FromBase64String("VGVzdCBCYXNlNjQgU3RyaW5n");
 
             Assert.Equal(1, entry1.Value);
             Assert.Equal(2, entry2.Value);
@@ -190,13 +190,13 @@ namespace GbxRemote.Net.Tests.XmlRpcTests.TypesTests {
             string value3 = ((XmlRpcString)strct.Fields["Key3"]).Value;
             bool value4 = ((XmlRpcBoolean)strct.Fields["Key4"]).Value;
             double value5 = ((XmlRpcDouble)strct.Fields["Key5"]).Value;
-            Base64 value6 = ((XmlRpcBase64)strct.Fields["Key6"]).Value;
+            GbxBase64 value6 = ((GbxRemoteNet.XmlRpc.Types.XmlRpcBase64)strct.Fields["Key6"]).Value;
             DateTime value7 = ((XmlRpcDateTime)strct.Fields["Key7"]).Value;
             int value8 = ((XmlRpcInteger)((XmlRpcArray)strct.Fields["Key8"]).Values[0]).Value;
             int value9 = ((XmlRpcInteger)((XmlRpcArray)strct.Fields["Key8"]).Values[1]).Value;
             int value10 = ((XmlRpcInteger)((XmlRpcArray)strct.Fields["Key8"]).Values[2]).Value;
 
-            byte[] expectedValue6 = Base64.FromBase64String("VGVzdCBCYXNlNjQgU3RyaW5n").Data;
+            byte[] expectedValue6 = GbxBase64.FromBase64String("VGVzdCBCYXNlNjQgU3RyaW5n").Data;
             DateTime expectedValue7 = DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime();
 
             Assert.Equal(1, value1);

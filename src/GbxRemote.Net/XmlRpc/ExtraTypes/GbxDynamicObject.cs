@@ -2,6 +2,6 @@
 
 namespace GbxRemoteNet.XmlRpc.ExtraTypes;
 
-public class DynamicObject : Dictionary<string, object>
+public class GbxDynamicObject : Dictionary<string, object>
 {
 }

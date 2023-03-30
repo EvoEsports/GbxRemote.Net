@@ -2,7 +2,7 @@
 
 namespace GbxRemoteNet.Events;
 
-public class StatusChangedEventArgs : EventArgs
+public class StatusChangedGbxEventArgs : EventArgs
 {
     /// <summary>
     /// Code/ID of the status.

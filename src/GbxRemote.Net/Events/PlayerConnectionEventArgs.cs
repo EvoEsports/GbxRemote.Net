@@ -1,6 +1,6 @@
 ﻿namespace GbxRemoteNet.Events;
 
-public class PlayerConnectEventArgs : PlayerEventArgs
+public class PlayerConnectGbxEventArgs : PlayerGbxEventArgs
 {
     /// <summary>
     /// Whether the player is in spectator mode.

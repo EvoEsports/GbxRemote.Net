@@ -2,7 +2,7 @@
 
 namespace GbxRemoteNet.Events;
 
-public class PlayerEventArgs : EventArgs
+public class PlayerGbxEventArgs : EventArgs
 {
     /// <summary>
     /// Login name/id of the player.

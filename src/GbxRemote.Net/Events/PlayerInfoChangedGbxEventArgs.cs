@@ -3,7 +3,7 @@ using GbxRemoteNet.Structs;
 
 namespace GbxRemoteNet.Events;
 
-public class PlayerInfoChangedEventArgs : EventArgs
+public class PlayerInfoChangedGbxEventArgs : EventArgs
 {
     /// <summary>
     /// New information about the player.
