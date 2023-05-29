@@ -160,7 +160,7 @@ public partial class GbxRemoteClient
     /// <param name="playerLogin"></param>
     /// <param name="cameraType"></param>
     /// <returns></returns>
-    public async Task<bool> ForceSpectatorAsync(int playerLogin, int cameraType)
+    public async Task<bool> ForceSpectatorAsync(string playerLogin, int cameraType)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("ForceSpectator", playerLogin, cameraType)
