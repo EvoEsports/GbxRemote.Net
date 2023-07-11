@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using GbxRemoteNet.Exceptions;
 using GbxRemoteNet.Interfaces;
+using GbxRemoteNet.Interfaces.XmlRpc;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;

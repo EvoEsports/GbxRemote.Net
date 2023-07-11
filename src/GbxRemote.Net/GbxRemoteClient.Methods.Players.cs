@@ -10,19 +10,27 @@ namespace GbxRemoteNet;
 /// </summary>
 public partial class GbxRemoteClient
 {
-    public async Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos = -1, int startIndex = 0, int serverType = -1)
+    public async Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos, int startIndex, int serverType)
     {
         return (TmPlayerInfo[]) XmlRpcTypes.ToNativeValue<TmPlayerInfo>(
             await CallOrFaultAsync("GetPlayerList", maxInfos, startIndex, serverType)
         );
     }
 
-    public async Task<TmPlayerInfo> GetPlayerInfoAsync(string playerLogin, int serverType = 1)
+    public Task<TmPlayerInfo[]> GetPlayerListAsync() => GetPlayerListAsync(-1, 0, -1);
+    public Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos) => GetPlayerListAsync(maxInfos, 0, -1);
+
+    public Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos, int startIndex) =>
+        GetPlayerListAsync(maxInfos, startIndex, -1);
+
+    public async Task<TmPlayerInfo> GetPlayerInfoAsync(string playerLogin, int serverType)
     {
         return (TmPlayerInfo) XmlRpcTypes.ToNativeValue<TmPlayerInfo>(
             await CallOrFaultAsync("GetPlayerInfo", playerLogin, serverType)
         );
     }
+
+    public Task<TmPlayerInfo> GetPlayerInfoAsync(string playerLogin) => GetPlayerInfoAsync(playerLogin, 1);
 
     public async Task<TmPlayerDetailedInfo> GetDetailedPlayerInfoAsync(string playerLogin)
     {
@@ -101,12 +109,14 @@ public partial class GbxRemoteClient
         );
     }
 
-    public async Task<bool> DisableProfileSkinsAsync(bool disabled = true)
+    public async Task<bool> DisableProfileSkinsAsync(bool disabled)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("DisableProfileSkins", disabled)
         );
     }
+
+    public Task<bool> DisableProfileSkinsAsync() => DisableProfileSkinsAsync(true);
 
     public async Task<bool> AreProfileSkinsDisabledAsync()
     {
@@ -117,37 +127,45 @@ public partial class GbxRemoteClient
 
     #region Kicking
 
-    public async Task<bool> KickAsync(string login, string message = null)
+    public async Task<bool> KickAsync(string login, string message)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("Kick", login, message)
         );
     }
 
-    public async Task<bool> KickIdAsync(int id, string message = null)
+    public Task<bool> KickAsync(string login) => KickAsync(login, null);
+
+    public async Task<bool> KickIdAsync(int id, string message)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("KickId", id, message)
         );
     }
 
+    public Task<bool> KickIdAsync(int id) => KickIdAsync(id, null);
+
     #endregion
 
     #region Ban List
 
-    public async Task<bool> BanAsync(string login, string message = null)
+    public async Task<bool> BanAsync(string login, string message)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("Ban", login, message)
         );
     }
 
-    public async Task<bool> BanAndBlackListAsync(string login, string message, bool saveToFile = false)
+    public Task<bool> BanAsync(string login) => BanAsync(login, null);
+
+    public async Task<bool> BanAndBlackListAsync(string login, string message, bool saveToFile)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("BanAndBlackList", login, message, saveToFile)
         );
     }
+
+    public Task<bool> BanAndBlackListAsync(string login, string message) => BanAndBlackListAsync(login, message, false);
 
     public async Task<bool> BanIdAsync(int id, string message)
     {

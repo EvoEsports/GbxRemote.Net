@@ -45,6 +45,9 @@ public partial class GbxRemoteClient
             await TriggerModeScriptEventArrayAsync("Trackmania.Event.SetCurLapCheckpointsMode", "always");
     }
 
+    public Task EnableCallbackTypeAsync() =>
+        EnableCallbackTypeAsync(GbxCallbackType.ModeScript | GbxCallbackType.Internal | GbxCallbackType.Checkpoints);
+
     private async Task InternalInvokeEventsAsync(Delegate[]? invocationList, EventArgs e)
     {
         if (invocationList == null)

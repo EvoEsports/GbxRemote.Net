@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
 
@@ -37,6 +38,9 @@ public partial class GbxRemoteClient
         );
     }
 
+    public Task<bool> ChatSendServerMessageToLoginAsync(string message, IEnumerable<string> playerLogins) =>
+        ChatSendServerMessageToLoginAsync(message, string.Join(',', playerLogins));
+
     public async Task<bool> ChatSendAsync(string message)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
@@ -58,6 +62,9 @@ public partial class GbxRemoteClient
         );
     }
 
+    public Task<bool> ChatSendToLoginAsync(string message, IEnumerable<string> playerLogins) =>
+        ChatSendToLoginAsync(message, string.Join(',', playerLogins));
+
     public async Task<bool> ChatSendToIdAsync(string message, int playerId)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
@@ -72,12 +79,15 @@ public partial class GbxRemoteClient
         );
     }
 
-    public async Task<bool> ChatEnableManualRoutingAsync(bool enable=true, bool forward=false)
+    public async Task<bool> ChatEnableManualRoutingAsync(bool enable, bool forward)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("ChatEnableManualRouting", enable, forward)
         );
     }
+
+    public Task<bool> ChatEnableManualRoutingAsync() =>
+        ChatEnableManualRoutingAsync(true, false);
 
     public async Task<bool> ChatForwardToLoginAsync(string text, string senderLogin, string destinationLogin)
     {

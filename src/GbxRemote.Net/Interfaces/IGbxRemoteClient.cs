@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GbxRemoteNet.Enums;
 using GbxRemoteNet.Events;
+using GbxRemoteNet.Interfaces.XmlRpc;
 using GbxRemoteNet.Structs;
-using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.ExtraTypes;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GbxRemoteNet.Interfaces;
 
-public interface IGbxRemoteClient
+public interface IGbxRemoteClient : INadeoXmlRpcClient
 {
     #region General Methods
 
@@ -173,9 +173,7 @@ public interface IGbxRemoteClient
     /// Enable all callbacks.
     /// </summary>
     /// <returns></returns>
-    public Task EnableCallbackTypeAsync() =>
-        EnableCallbackTypeAsync(GbxCallbackType.Internal | GbxCallbackType.ModeScript | GbxCallbackType.Checkpoints);
-
+    public Task EnableCallbackTypeAsync();
     #endregion
 
     #region Methods
@@ -223,8 +221,7 @@ public interface IGbxRemoteClient
     /// <param name="message">The message to send.</param>
     /// <param name="playerLogins">Logins to send the message to.</param>
     /// <returns></returns>
-    public Task<bool> ChatSendServerMessageToLoginAsync(string message, IEnumerable<string> playerLogins) =>
-        ChatSendServerMessageToLoginAsync(message, string.Join(',', playerLogins));
+    public Task<bool> ChatSendServerMessageToLoginAsync(string message, IEnumerable<string> playerLogins);
 
     /// <summary>
     /// Send a text message to all clients. Only available to Admin.
@@ -258,8 +255,7 @@ public interface IGbxRemoteClient
     /// </summary>
     /// <param name="message">Message to send to the chat.</param>
     /// <param name="playerLogins">List of logins to send the message to.</param>
-    public Task<bool> ChatSendToLoginAsync(string message, IEnumerable<string> playerLogins) =>
-        ChatSendToLoginAsync(message, string.Join(',', playerLogins));
+    public Task<bool> ChatSendToLoginAsync(string message, IEnumerable<string> playerLogins);
 
     /// <summary>
     /// Send a text message to the client with the specified PlayerId. Only available to Admin.
@@ -283,8 +279,14 @@ public interface IGbxRemoteClient
     /// <param name="enable">Whether to enable manual chat routing or not.</param>
     /// <param name="forward">Whether to forward all messages to the chat.</param>
     /// <returns></returns>
-    public Task<bool> ChatEnableManualRoutingAsync(bool enable = true, bool forward = false);
-
+    public Task<bool> ChatEnableManualRoutingAsync(bool enable, bool forward);
+    
+    /// <summary>
+    /// Enable manual chat routing and disable forwarding.
+    /// </summary>
+    /// <returns></returns>
+    public Task<bool> ChatEnableManualRoutingAsync();
+    
     /// <summary>
     /// (Text, SenderLogin, DestLogin) Send a text message to the specified DestLogin (or everybody if empty) on behalf of
     /// SenderLogin. DestLogin can be a single login or a list of comma-separated logins. Only available if manual routing
@@ -730,7 +732,67 @@ public interface IGbxRemoteClient
     /// including the servers)
     /// </param>
     /// <returns></returns>
-    public Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos = -1, int startIndex = 0, int serverType = -1);
+    public Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos, int startIndex, int serverType);
+    
+    /// <summary>
+    /// Returns the list of players on the server. This method take two parameters. The first parameter specifies the
+    /// maximum number of infos to be returned, and the second one the starting index in the list, an optional 3rd
+    /// parameter is used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers).
+    /// The list is an array of PlayerInfo structures. Forever PlayerInfo struct is: Login, NickName, PlayerId, TeamId,
+    /// SpectatorStatus, LadderRanking, and Flags.
+    /// LadderRanking is 0 when not in official mode,
+    /// Flags = ForceSpectator(0,1,2) + IsReferee * 10 + IsPodiumReady * 100 + StereoDisplayMode * 1000 +
+    /// IsManagedByAnOtherServer * 10000 + IsServer * 100000 + HasPlayerSlot * 1000000 + IsBroadcasting * 10000000 +
+    /// HasJoinedGame * 100000000
+    /// SpectatorStatus = Spectator + TemporarySpectator * 10 + PureSpectator * 100 + AutoTarget * 1000 + CurrentTargetId *
+    /// 10000
+    /// </summary>
+    /// OPTIONAL: Used for compatibility: struct version (0 = united, 1 = forever, 2 = forever,
+    /// including the servers)
+    /// </param>
+    /// <returns></returns>
+    public Task<TmPlayerInfo[]> GetPlayerListAsync();
+    
+    /// <summary>
+    /// Returns the list of players on the server. This method take two parameters. The first parameter specifies the
+    /// maximum number of infos to be returned, and the second one the starting index in the list, an optional 3rd
+    /// parameter is used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers).
+    /// The list is an array of PlayerInfo structures. Forever PlayerInfo struct is: Login, NickName, PlayerId, TeamId,
+    /// SpectatorStatus, LadderRanking, and Flags.
+    /// LadderRanking is 0 when not in official mode,
+    /// Flags = ForceSpectator(0,1,2) + IsReferee * 10 + IsPodiumReady * 100 + StereoDisplayMode * 1000 +
+    /// IsManagedByAnOtherServer * 10000 + IsServer * 100000 + HasPlayerSlot * 1000000 + IsBroadcasting * 10000000 +
+    /// HasJoinedGame * 100000000
+    /// SpectatorStatus = Spectator + TemporarySpectator * 10 + PureSpectator * 100 + AutoTarget * 1000 + CurrentTargetId *
+    /// 10000
+    /// </summary>
+    /// <param name="maxInfos"></param>
+    /// OPTIONAL: Used for compatibility: struct version (0 = united, 1 = forever, 2 = forever,
+    /// including the servers)
+    /// </param>
+    /// <returns></returns>
+    public Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos);
+    
+    /// <summary>
+    /// Returns the list of players on the server. This method take two parameters. The first parameter specifies the
+    /// maximum number of infos to be returned, and the second one the starting index in the list, an optional 3rd
+    /// parameter is used for compatibility: struct version (0 = united, 1 = forever, 2 = forever, including the servers).
+    /// The list is an array of PlayerInfo structures. Forever PlayerInfo struct is: Login, NickName, PlayerId, TeamId,
+    /// SpectatorStatus, LadderRanking, and Flags.
+    /// LadderRanking is 0 when not in official mode,
+    /// Flags = ForceSpectator(0,1,2) + IsReferee * 10 + IsPodiumReady * 100 + StereoDisplayMode * 1000 +
+    /// IsManagedByAnOtherServer * 10000 + IsServer * 100000 + HasPlayerSlot * 1000000 + IsBroadcasting * 10000000 +
+    /// HasJoinedGame * 100000000
+    /// SpectatorStatus = Spectator + TemporarySpectator * 10 + PureSpectator * 100 + AutoTarget * 1000 + CurrentTargetId *
+    /// 10000
+    /// </summary>
+    /// <param name="maxInfos"></param>
+    /// <param name="startIndex"></param>
+    /// OPTIONAL: Used for compatibility: struct version (0 = united, 1 = forever, 2 = forever,
+    /// including the servers)
+    /// </param>
+    /// <returns></returns>
+    public Task<TmPlayerInfo[]> GetPlayerListAsync(int maxInfos, int startIndex);
 
     /// <summary>
     /// Returns a struct containing the infos on the player with the specified login, with an optional parameter for
@@ -748,7 +810,24 @@ public interface IGbxRemoteClient
     /// <param name="playerLogin"></param>
     /// <param name="serverType"></param>
     /// <returns></returns>
-    public Task<TmPlayerInfo> GetPlayerInfoAsync(string playerLogin, int serverType = 1);
+    public Task<TmPlayerInfo> GetPlayerInfoAsync(string playerLogin, int serverType);
+    
+    /// <summary>
+    /// Returns a struct containing the infos on the player with the specified login, with an optional parameter for
+    /// compatibility: struct version (0 = united, 1 = forever). The structure is identical to the ones from GetPlayerList.
+    /// Forever PlayerInfo struct is: Login, NickName, PlayerId, TeamId, SpectatorStatus, LadderRanking, and Flags.
+    /// LadderRanking is 0 when not in official mode,
+    /// Flags = ForceSpectator(0,1,2) + IsReferee * 10 + IsPodiumReady * 100 + StereoDisplayMode * 1000 +
+    /// IsManagedByAnOtherServer * 10000 + IsServer * 100000 + HasPlayerSlot * 1000000 + IsBroadcasting * 10000000 +
+    /// HasJoinedGame * 100000000
+    /// SpectatorStatus = Spectator + TemporarySpectator * 10 + PureSpectator * 100 + AutoTarget * 1000 + CurrentTargetId *
+    /// 10000
+    /// Each structure of the array Skins contains two fields Environnement and a struct PackDesc. Each structure PackDesc,
+    /// as well as the struct Avatar, contains two fields FileName and Checksum.
+    /// </summary>
+    /// <param name="playerLogin"></param>
+    /// <returns></returns>
+    public Task<TmPlayerInfo> GetPlayerInfoAsync(string playerLogin);
 
     /// <summary>
     /// Returns a struct containing the infos on the player with the specified login. The structure contains the following
@@ -883,7 +962,13 @@ public interface IGbxRemoteClient
     /// </summary>
     /// <param name="disabled"></param>
     /// <returns></returns>
-    public Task<bool> DisableProfileSkinsAsync(bool disabled = true);
+    public Task<bool> DisableProfileSkinsAsync(bool disabled);
+    
+    /// <summary>
+    /// Ignore players profile skin customisation. Only available to Admin.
+    /// </summary>
+    /// <returns></returns>
+    public Task<bool> DisableProfileSkinsAsync();
 
     /// <summary>
     /// Returns whether the custom skins are disabled.
@@ -899,7 +984,14 @@ public interface IGbxRemoteClient
     /// <param name="login"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public Task<bool> KickAsync(string login, string message = null);
+    public Task<bool> KickAsync(string login, string message);
+    
+    /// <summary>
+    /// Kick the player with the specified login, with an optional message. Only available to Admin.
+    /// </summary>
+    /// <param name="login"></param>
+    /// <returns></returns>
+    public Task<bool> KickAsync(string login);
 
     /// <summary>
     /// Kick the player with the specified PlayerId, with an optional message. Only available to Admin.
@@ -907,7 +999,14 @@ public interface IGbxRemoteClient
     /// <param name="id"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public Task<bool> KickIdAsync(int id, string message = null);
+    public Task<bool> KickIdAsync(int id, string message);
+    
+    /// <summary>
+    /// Kick the player with the specified PlayerId, with an optional message. Only available to Admin.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    public Task<bool> KickIdAsync(int id);
 
     #endregion
 
@@ -919,7 +1018,14 @@ public interface IGbxRemoteClient
     /// <param name="login"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public Task<bool> BanAsync(string login, string message = null);
+    public Task<bool> BanAsync(string login, string message);
+    
+    /// <summary>
+    /// Ban the player with the specified login, with an optional message. Only available to Admin.
+    /// </summary>
+    /// <param name="login"></param>
+    /// <returns></returns>
+    public Task<bool> BanAsync(string login);
 
     /// <summary>
     /// Ban the player with the specified login, with a message. Add it to the black list, and optionally save the new
@@ -929,7 +1035,16 @@ public interface IGbxRemoteClient
     /// <param name="message"></param>
     /// <param name="saveToFile"></param>
     /// <returns></returns>
-    public Task<bool> BanAndBlackListAsync(string login, string message, bool saveToFile = false);
+    public Task<bool> BanAndBlackListAsync(string login, string message, bool saveToFile);
+    
+    /// <summary>
+    /// Ban the player with the specified login, with a message. Add it to the black list, and optionally save the new
+    /// list. Only available to Admin.
+    /// </summary>
+    /// <param name="login"></param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    public Task<bool> BanAndBlackListAsync(string login, string message);
 
     /// <summary>
     /// Ban the player with the specified PlayerId, with an optional message. Only available to Admin.
@@ -1180,7 +1295,6 @@ public interface IGbxRemoteClient
     /// <returns></returns>
     public Task<bool> AutoSaveReplaysAsync(string autoSave);
 
-
     /// <summary>
     /// Saves the current replay (vizualisable replays with all players, but not validable). Pass a filename, or '' for an
     /// automatic filename. Only available to Admin.
@@ -1294,8 +1408,22 @@ public interface IGbxRemoteClient
     /// <param name="filename">OPTIONAL: Name the filename relative to Scripts/directory</param>
     /// <param name="script">OPTIONAL: The script #Settings to apply.</param>
     /// <returns></returns>
-    public Task<bool> SetServerPluginAsync(bool forceReload, string filename = null,
-        GbxDynamicObject script = null);
+    public Task<bool> SetServerPluginAsync(bool forceReload, string filename, GbxDynamicObject script);
+    
+    /// <summary>
+    /// Set the ServerPlugin settings.
+    /// </summary>
+    /// <param name="forceReload">Whether to reload from disk</param>
+    /// <returns></returns>
+    public Task<bool> SetServerPluginAsync(bool forceReload);
+    
+    /// <summary>
+    /// Set the ServerPlugin settings.
+    /// </summary>
+    /// <param name="forceReload">Whether to reload from disk</param>
+    /// <param name="filename">OPTIONAL: Name the filename relative to Scripts/directory</param>
+    /// <returns></returns>
+    public Task<bool> SetServerPluginAsync(bool forceReload, string filename);
 
     /// <summary>
     /// Get the ServerPlugin current settings.

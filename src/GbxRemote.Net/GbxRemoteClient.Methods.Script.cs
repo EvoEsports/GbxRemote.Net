@@ -87,12 +87,17 @@ public partial class GbxRemoteClient
         );
     }
 
-    public async Task<bool> SetServerPluginAsync(bool forceReload, string filename = null, GbxDynamicObject script = null)
+    public async Task<bool> SetServerPluginAsync(bool forceReload, string filename, GbxDynamicObject script)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
             await CallOrFaultAsync("SetServerPlugin", forceReload, filename, script)
         );
     }
+
+    public Task<bool> SetServerPluginAsync(bool forceReload) => SetServerPluginAsync(forceReload, null, null);
+
+    public Task<bool> SetServerPluginAsync(bool forceReload, string filename) =>
+        SetServerPluginAsync(forceReload, filename, null);
 
     public async Task<GbxDynamicObject> GetServerPluginAsync()
     {

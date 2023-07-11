@@ -5,27 +5,15 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using GbxRemoteNet.Exceptions;
+using GbxRemoteNet.Interfaces.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
 using Microsoft.Extensions.Logging;
 
 namespace GbxRemoteNet.XmlRpc;
 
-public class NadeoXmlRpcClient
+public class NadeoXmlRpcClient : INadeoXmlRpcClient
 {
-    /// <summary>
-    ///     Action for the OnCallback event.
-    /// </summary>
-    /// <param name="call">Information about the call.</param>
-    /// <returns></returns>
-    public delegate Task CallbackAction(MethodCall call);
-
-    /// <summary>
-    ///     Generic action for events.
-    /// </summary>
-    /// <returns></returns>
-    public delegate Task TaskAction();
-
     private readonly ILogger _logger;
 
     // connection
@@ -51,68 +39,12 @@ public class NadeoXmlRpcClient
         _logger = logger;
     }
 
-    /// <summary>
-    ///     Invoked when the client is connected to the XML-RPC server.
-    /// </summary>
-    public event TaskAction OnConnected;
+    public event INadeoXmlRpcClient.TaskAction OnConnected;
 
-    /// <summary>
-    ///     Called when a callback occured from the XML-RPC server.
-    /// </summary>
-    public event CallbackAction OnCallback;
+    public event INadeoXmlRpcClient.CallbackAction OnCallback;
 
-    /// <summary>
-    ///     Triggered when the client has been disconnected from the server.
-    /// </summary>
-    public event TaskAction OnDisconnected;
+    public event INadeoXmlRpcClient.TaskAction OnDisconnected;
 
-    /// <summary>
-    ///     Handles all responses from the XML-RPC server.
-    /// </summary>
-    private async void RecvLoop()
-    {
-        try
-        {
-            _logger?.LogDebug("Receive loop initiated");
-
-            while (!_recvCancel.IsCancellationRequested)
-            {
-                var response = await ResponseMessage.FromIOAsync(_xmlRpcIo);
-
-                _logger?.LogTrace("================== MESSAGE START ==================");
-                _logger?.LogTrace("Message length: {Length}", response.Header.MessageLength);
-                _logger?.LogTrace("Handle: {Handle}", response.Header.Handle);
-                _logger?.LogTrace("Is callback: {IsCallback}", response.Header.IsCallback);
-                _logger?.LogTrace("{Xml}", response.MessageXml.ToString());
-                _logger?.LogTrace("================== MESSAGE END ==================");
-
-                if (response.IsCallback)
-                {
-                    // invoke listeners and
-                    // run callback handler in a new thread to avoid blocking of new responses
-                    _ = Task.Run(() => OnCallback?.Invoke(new MethodCall(response)));
-                }
-                else if (_responseHandles.ContainsKey(response.Header.Handle))
-                {
-                    // attempt to signal the call method
-                    _responseMessages[response.Header.Handle] = response;
-                    _responseHandles[response.Header.Handle].Set();
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            _logger?.LogError("Receive loop raised an exception: {Msg}", e.Message);
-            await DisconnectAsync();
-        }
-    }
-
-    /// <summary>
-    ///     Connect to the remote XMLRPC server.
-    /// </summary>
-    /// <param name="retries">Number of times to re-try connection.</param>
-    /// <param name="retryTimeout">Number of milliseconds to wait between each re-try.</param>
-    /// <returns></returns>
     public async Task<bool> ConnectAsync(int retries = 0, int retryTimeout = 1000)
     {
         _logger?.LogDebug("Client connecting to the remote XML-RPC server");
@@ -183,10 +115,6 @@ public class NadeoXmlRpcClient
         return true;
     }
 
-    /// <summary>
-    ///     Stop the recieve loop and disconnect.
-    /// </summary>
-    /// <returns></returns>
     public async Task DisconnectAsync()
     {
         _logger?.LogDebug("Client is disconnecting from XML-RPC server");
@@ -206,10 +134,6 @@ public class NadeoXmlRpcClient
         _logger?.LogDebug("Client disconnected from XML-RPC server");
     }
 
-    /// <summary>
-    ///     Get the next handler value.
-    /// </summary>
-    /// <returns>The next handle value.</returns>
     public async Task<uint> GetNextHandle()
     {
         // lock because we may access this in multiple threads
@@ -224,12 +148,6 @@ public class NadeoXmlRpcClient
         }
     }
 
-    /// <summary>
-    ///     Call a remote method.
-    /// </summary>
-    /// <param name="method">Method name</param>
-    /// <param name="args">Arguments to the method if available.</param>
-    /// <returns>Response returned by the call.</returns>
     public async Task<ResponseMessage> CallAsync(string method, params XmlRpcBaseType[] args)
     {
         if (!_tcpClient.Connected)
@@ -255,5 +173,46 @@ public class NadeoXmlRpcClient
         _responseHandles[handle].WaitOne();
         var message = _responseMessages[handle];
         return message;
+    }
+    
+    /// <summary>
+    ///     Handles all responses from the XML-RPC server.
+    /// </summary>
+    private async void RecvLoop()
+    {
+        try
+        {
+            _logger?.LogDebug("Receive loop initiated");
+
+            while (!_recvCancel.IsCancellationRequested)
+            {
+                var response = await ResponseMessage.FromIOAsync(_xmlRpcIo);
+
+                _logger?.LogTrace("================== MESSAGE START ==================");
+                _logger?.LogTrace("Message length: {Length}", response.Header.MessageLength);
+                _logger?.LogTrace("Handle: {Handle}", response.Header.Handle);
+                _logger?.LogTrace("Is callback: {IsCallback}", response.Header.IsCallback);
+                _logger?.LogTrace("{Xml}", response.MessageXml.ToString());
+                _logger?.LogTrace("================== MESSAGE END ==================");
+
+                if (response.IsCallback)
+                {
+                    // invoke listeners and
+                    // run callback handler in a new thread to avoid blocking of new responses
+                    _ = Task.Run(() => OnCallback?.Invoke(new MethodCall(response)));
+                }
+                else if (_responseHandles.ContainsKey(response.Header.Handle))
+                {
+                    // attempt to signal the call method
+                    _responseMessages[response.Header.Handle] = response;
+                    _responseHandles[response.Header.Handle].Set();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            _logger?.LogError("Receive loop raised an exception: {Msg}", e.Message);
+            await DisconnectAsync();
+        }
     }
 }
