@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using GbxRemoteNet.Exceptions;
+using GbxRemoteNet.Interfaces;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
@@ -11,7 +12,7 @@ namespace GbxRemoteNet;
 /// <summary>
 ///     GBXRemote client for connecting to and managing TrackMania servers through XML-RPC.
 /// </summary>
-public partial class GbxRemoteClient : NadeoXmlRpcClient
+public partial class GbxRemoteClient : NadeoXmlRpcClient, IGbxRemoteClient
 {
     /// <summary>
     ///     This is the API version the client will be using.
@@ -51,12 +52,6 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
         _logger = logger;
     }
 
-    /// <summary>
-    ///     Call a remote method and throw an exception if a fault occured.
-    /// </summary>
-    /// <param name="method"></param>
-    /// <param name="args"></param>
-    /// <returns></returns>
     public async Task<XmlRpcBaseType> CallOrFaultAsync(string method, params object[] args)
     {
         var msg = await CallAsync(method, MethodArgs(args));
@@ -70,22 +65,11 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
         return msg.ResponseData;
     }
 
-    /// <summary>
-    ///     Call a remote method on the server and return the recieved message.
-    /// </summary>
-    /// <param name="method"></param>
-    /// <param name="args"></param>
-    /// <returns></returns>
     public async Task<ResponseMessage> CallMethodAsync(string method, params object[] args)
     {
         return await CallAsync(method, MethodArgs(args));
     }
-
-    /// <summary>
-    ///     Convert C# type values to XML-RPC type values and create an argument list.
-    /// </summary>
-    /// <param name="args"></param>
-    /// <returns></returns>
+    
     public XmlRpcBaseType[] MethodArgs(params object[] args)
     {
         _logger?.LogTrace("Converting C# types to XML-RPC. Types to convert: {List}",
@@ -99,12 +83,6 @@ public partial class GbxRemoteClient : NadeoXmlRpcClient
         return xmlRpcArgs;
     }
 
-    /// <summary>
-    ///     Connect and login to GBXRemote.
-    /// </summary>
-    /// <param name="login"></param>
-    /// <param name="password"></param>
-    /// <returns></returns>
     public async Task<bool> LoginAsync(string login, string password)
     {
         _logger?.LogDebug("Client connecting to GbxRemote");
