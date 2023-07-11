@@ -6,24 +6,10 @@ using GbxRemoteNet.XmlRpc;
 namespace GbxRemoteNet;
 
 /// <summary>
-///     Method Category: Teams
+/// Method Category: Teams
 /// </summary>
 public partial class GbxRemoteClient
 {
-    /// <summary>
-    ///     Set Team names and colors (deprecated). Only available to Admin.
-    /// </summary>
-    /// <param name="par1"></param>
-    /// <param name="par2"></param>
-    /// <param name="par3"></param>
-    /// <param name="par4"></param>
-    /// <param name="par5"></param>
-    /// <param name="par6"></param>
-    /// <param name="par7"></param>
-    /// <param name="par8"></param>
-    /// <param name="par9"></param>
-    /// <returns></returns>
-    [Obsolete("Deprecated and not used in TM2 and later games.")]
     public async Task<string> SetTeamInfoAsync(string par1, double par2, string par3, string par4, double par5,
         string par6, string par7, double par8, string par9)
     {
@@ -32,12 +18,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Return Team info for a given clan (0 = no clan, 1, 2). The structure contains: Name, ZonePath, City, EmblemUrl,
-    ///     HuePrimary, HueSecondary, RGB, ClubLinkUrl. Only available to Admin.
-    /// </summary>
-    /// <param name="team"></param>
-    /// <returns></returns>
     public async Task<TmTeamInfo> GetTeamInfoAsync(int team)
     {
         return (TmTeamInfo) XmlRpcTypes.ToNativeValue<TmTeamInfo>(
@@ -45,12 +25,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Set the clublinks to use for the two clans. Only available to Admin.
-    /// </summary>
-    /// <param name="clubLink1"></param>
-    /// <param name="clubLink2"></param>
-    /// <returns></returns>
     public async Task<bool> SetForcedClubLinksAsync(string clubLink1, string clubLink2)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
@@ -58,11 +32,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Get the forced clublinks.
-    /// </summary>
-    /// <param name="team"></param>
-    /// <returns></returns>
     public async Task<TmClubLinks> GetForcedClubLinksAsync(int team)
     {
         return (TmClubLinks) XmlRpcTypes.ToNativeValue<TmClubLinks>(
@@ -70,12 +39,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Set whether the players can choose their side or if the teams are forced by the server (using ForcePlayerTeam()).
-    ///     Only available to Admin.
-    /// </summary>
-    /// <param name="forced"></param>
-    /// <returns></returns>
     public async Task<bool> SetForcedTeamsAsync(bool forced)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
@@ -83,10 +46,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Returns whether the players can choose their side or if the teams are forced by the server.
-    /// </summary>
-    /// <returns></returns>
     public async Task<bool> GetForcedTeamsAsync()
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
@@ -94,10 +53,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Returns the current winning team for the race in progress. (-1: if not in team mode, or draw match)
-    /// </summary>
-    /// <returns></returns>
     public async Task<int> GetCurrentWinnerTeamAsync()
     {
         return (int) XmlRpcTypes.ToNativeValue<int>(
@@ -105,13 +60,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Force the team of the player. Only available in team mode. You have to pass the login and the team number (0 or 1).
-    ///     Only available to Admin.
-    /// </summary>
-    /// <param name="playerLogin"></param>
-    /// <param name="cameraType"></param>
-    /// <returns></returns>
     public async Task<bool> ForcePlayerTeamAsync(string playerLogin, int cameraType)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
@@ -119,13 +67,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Force the team of the player. Only available in team mode. You have to pass the playerid and the team number (0 or
-    ///     1). Only available to Admin.
-    /// </summary>
-    /// <param name="playerId"></param>
-    /// <param name="cameraType"></param>
-    /// <returns></returns>
     public async Task<bool> ForcePlayerTeamIdAsync(int playerId, int cameraType)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(

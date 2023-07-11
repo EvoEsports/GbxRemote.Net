@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using GbxRemoteNet.Exceptions;
+using GbxRemoteNet.Interfaces;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.Packets;
 using GbxRemoteNet.XmlRpc.Types;
@@ -13,14 +14,6 @@ namespace GbxRemoteNet;
 
 public partial class GbxRemoteClient
 {
-    /// <summary>
-    ///     Action for the OnModeScriptCallback event-
-    /// </summary>
-    /// <param name="method">Name of the method that was called.</param>
-    /// <param name="data">Parsed JSON data that came with the callback.</param>
-    /// <returns></returns>
-    public delegate Task ModeScriptCallbackAction(string method, JObject data);
-
     private readonly ConcurrentDictionary<string, (JObject, XmlRpcBaseType[])> _msResponses = new();
     private readonly ConcurrentDictionary<string, ManualResetEvent> _msSignals = new();
 
@@ -36,7 +29,7 @@ public partial class GbxRemoteClient
     /// <summary>
     ///     Triggered when any ModeScript callback is sent from the server.
     /// </summary>
-    public event ModeScriptCallbackAction OnModeScriptCallback;
+    public event IGbxRemoteClient.ModeScriptCallbackAction OnModeScriptCallback;
 
     /// <summary>
     ///     Handle modescript callbacks and parse them.
