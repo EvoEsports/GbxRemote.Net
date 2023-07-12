@@ -9,14 +9,10 @@ using Microsoft.Extensions.Logging;
 namespace GbxRemoteNet;
 
 /// <summary>
-///     Method Category: System
+/// Method Category: System
 /// </summary>
 public partial class GbxRemoteClient
 {
-    /// <summary>
-    ///     Return an array of all available XML-RPC methods on this server.
-    /// </summary>
-    /// <returns></returns>
     public async Task<string[]> SystemListMethodsAsync()
     {
         return (string[]) XmlRpcTypes.ToNativeValue<string>(
@@ -24,12 +20,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Given the name of a method, return an array of legal signatures. Each signature is an array of strings. The first
-    ///     item of each signature is the return type, and any others items are parameter types.
-    /// </summary>
-    /// <param name="method"></param>
-    /// <returns></returns>
     public async Task<string[][]> SystemMethodSignatureAsync(string method)
     {
         return XmlRpcTypes.ToNative2DArray<string>((XmlRpcArray)
@@ -37,11 +27,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Given the name of a method, return a help string.
-    /// </summary>
-    /// <param name="method"></param>
-    /// <returns></returns>
     public async Task<string> SystemMethodHelpAsync(string method)
     {
         return (string) XmlRpcTypes.ToNativeValue<string>(
@@ -49,11 +34,6 @@ public partial class GbxRemoteClient
         );
     }
 
-    /// <summary>
-    ///     Call multiple methods without multiple round-trip times.
-    /// </summary>
-    /// <param name="multicall">MultiCall object containing the calls to perform.</param>
-    /// <returns>An array of results for each call.</returns>
     public async Task<object[]> MultiCallAsync(MultiCall multicall)
     {
         List<XmlRpcBaseType> calls = new();
@@ -102,7 +82,7 @@ public partial class GbxRemoteClient
             }
             else
             {
-                // else normal resutl
+                // else normal result
                 var resultArr = (XmlRpcArray) results.Values[i];
 
                 if (resultArr.Values.Length == 0)

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using GbxRemoteNet.Enums;
 using GbxRemoteNet.Events;
+using GbxRemoteNet.Interfaces;
 using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc;
 using GbxRemoteNet.XmlRpc.ExtraTypes;
@@ -12,125 +13,29 @@ namespace GbxRemoteNet;
 
 public partial class GbxRemoteClient
 {
-    public delegate Task AsyncEventHandler(object sender, EventArgs e);
+    public event IGbxRemoteClient.AsyncEventHandler<CallbackGbxEventArgs<object>> OnAnyCallback;
+    public event IGbxRemoteClient.AsyncEventHandler<PlayerConnectGbxEventArgs> OnPlayerConnect;
+    public event IGbxRemoteClient.AsyncEventHandler<PlayerDisconnectGbxEventArgs> OnPlayerDisconnect;
+    public event IGbxRemoteClient.AsyncEventHandler<PlayerChatGbxEventArgs> OnPlayerChat;
+    public event IGbxRemoteClient.AsyncEventHandler<EchoGbxEventArgs> OnEcho;
+    public event IGbxRemoteClient.AsyncEventHandler OnBeginMatch;
+    public event IGbxRemoteClient.AsyncEventHandler<EndMatchGbxEventArgs> OnEndMatch;
+    public event IGbxRemoteClient.AsyncEventHandler<MapGbxEventArgs> OnBeginMap;
+    public event IGbxRemoteClient.AsyncEventHandler<MapGbxEventArgs> OnEndMap;
+    public event IGbxRemoteClient.AsyncEventHandler<StatusChangedGbxEventArgs> OnStatusChanged;
+    public event IGbxRemoteClient.AsyncEventHandler<PlayerInfoChangedGbxEventArgs> OnPlayerInfoChanged;
+    public event IGbxRemoteClient.AsyncEventHandler<ManiaLinkPageActionGbxEventArgs> OnPlayerManialinkPageAnswer;
+    public event IGbxRemoteClient.AsyncEventHandler<MapListModifiedGbxEventArgs> OnMapListModified;
+    public event IGbxRemoteClient.AsyncEventHandler OnServerStart;
+    public event IGbxRemoteClient.AsyncEventHandler OnServerStop;
+    public event IGbxRemoteClient.AsyncEventHandler<TunnelDataGbxEventArgs> OnTunnelDataReceived;
+    public event IGbxRemoteClient.AsyncEventHandler<VoteUpdatedGbxEventArgs> OnVoteUpdated;
+    public event IGbxRemoteClient.AsyncEventHandler<BillUpdatedGbxEventArgs> OnBillUpdated;
+    public event IGbxRemoteClient.AsyncEventHandler<PlayerGbxEventArgs> OnPlayerAlliesChanged;
+    public event IGbxRemoteClient.AsyncEventHandler<ScriptCloudGbxEventArgs> OnScriptCloudLoadData;
+    public event IGbxRemoteClient.AsyncEventHandler<ScriptCloudGbxEventArgs> OnScriptCloudSaveData;
 
-    public delegate Task AsyncEventHandler<TArgs>(object sender, TArgs e);
-    
-    /// <summary>
-    ///     Triggered for all possible callbacks.
-    /// </summary>
-    public event AsyncEventHandler<CallbackGbxEventArgs<object>> OnAnyCallback;
-
-    /// <summary>
-    ///     When a player connects to the server.
-    /// </summary>
-    public event AsyncEventHandler<PlayerConnectGbxEventArgs> OnPlayerConnect;
-
-    /// <summary>
-    ///     When a player disconnects from the server.
-    /// </summary>
-    public event AsyncEventHandler<PlayerDisconnectGbxEventArgs> OnPlayerDisconnect;
-
-    /// <summary>
-    ///     When a player sends a chat message.
-    /// </summary>
-    public event AsyncEventHandler<PlayerChatGbxEventArgs> OnPlayerChat;
-
-    /// <summary>
-    ///     When a echo message is sent. Can be used for communication with other.
-    ///     XMLRPC-clients.
-    /// </summary>
-    public event AsyncEventHandler<EchoGbxEventArgs> OnEcho;
-
-    /// <summary>
-    ///     When the match itself starts, triggered after begin map.
-    /// </summary>
-    public event AsyncEventHandler OnBeginMatch;
-
-    /// <summary>
-    ///     When the match ends, does not give a lot of info in TM2020.
-    /// </summary>
-    public event AsyncEventHandler<EndMatchGbxEventArgs> OnEndMatch;
-
-    /// <summary>
-    ///     When the map has loaded on the server.
-    /// </summary>
-    public event AsyncEventHandler<MapGbxEventArgs> OnBeginMap;
-
-    /// <summary>
-    ///     When the map unloads from the server.
-    /// </summary>
-    public event AsyncEventHandler<MapGbxEventArgs> OnEndMap;
-
-    /// <summary>
-    ///     When the server status changed.
-    /// </summary>
-    public event AsyncEventHandler<StatusChangedGbxEventArgs> OnStatusChanged;
-
-    /// <summary>
-    ///     When data about a player changed, it is usually called when
-    ///     a player joins or leaves. Gives you more detailed info about a player.
-    /// </summary>
-    public event AsyncEventHandler<PlayerInfoChangedGbxEventArgs> OnPlayerInfoChanged;
-
-    /// <summary>
-    ///     When a user triggers the page answer callback from a manialink.
-    /// </summary>
-    public event AsyncEventHandler<ManiaLinkPageActionGbxEventArgs> OnPlayerManialinkPageAnswer;
-
-    /// <summary>
-    ///     Triggered when the map list changed.
-    /// </summary>
-    public event AsyncEventHandler<MapListModifiedGbxEventArgs> OnMapListModified;
-
-    /// <summary>
-    ///     When the server is about to start.
-    /// </summary>
-    public event AsyncEventHandler OnServerStart;
-
-    /// <summary>
-    ///     When the server is about to stop.
-    /// </summary>
-    public event AsyncEventHandler OnServerStop;
-
-    /// <summary>
-    ///     Tunnel data received from a player.
-    /// </summary>
-    public event AsyncEventHandler<TunnelDataGbxEventArgs> OnTunnelDataReceived;
-
-    /// <summary>
-    ///     When a current vote has been updated.
-    /// </summary>
-    public event AsyncEventHandler<VoteUpdatedGbxEventArgs> OnVoteUpdated;
-
-    /// <summary>
-    ///     When a player bill is updated.
-    /// </summary>
-    public event AsyncEventHandler<BillUpdatedGbxEventArgs> OnBillUpdated;
-
-    /// <summary>
-    ///     When a player changed allies.
-    /// </summary>
-    public event AsyncEventHandler<PlayerGbxEventArgs> OnPlayerAlliesChanged;
-
-    /// <summary>
-    ///     When a variable from the script cloud is loaded.
-    /// </summary>
-    public event AsyncEventHandler<ScriptCloudGbxEventArgs> OnScriptCloudLoadData;
-
-    /// <summary>
-    ///     When a variable from the script cloud is saved.
-    /// </summary>
-    public event AsyncEventHandler<ScriptCloudGbxEventArgs> OnScriptCloudSaveData;
-
-    /// <summary>
-    ///     Enable callbacks. If no parameter is provided,
-    ///     all callbacks are enabled by default.
-    /// </summary>
-    /// <param name="gbxCallbackType"></param>
-    /// <returns></returns>
-    public async Task EnableCallbackTypeAsync(
-        GbxCallbackType gbxCallbackType = GbxCallbackType.Internal | GbxCallbackType.ModeScript | GbxCallbackType.Checkpoints)
+    public async Task EnableCallbackTypeAsync(GbxCallbackType gbxCallbackType)
     {
         if (gbxCallbackType.HasFlag(GbxCallbackType.Internal))
             await EnableCallbacksAsync(true);
@@ -139,6 +44,9 @@ public partial class GbxRemoteClient
         if (gbxCallbackType.HasFlag(GbxCallbackType.Checkpoints))
             await TriggerModeScriptEventArrayAsync("Trackmania.Event.SetCurLapCheckpointsMode", "always");
     }
+
+    public Task EnableCallbackTypeAsync() =>
+        EnableCallbackTypeAsync(GbxCallbackType.ModeScript | GbxCallbackType.Internal | GbxCallbackType.Checkpoints);
 
     private async Task InternalInvokeEventsAsync(Delegate[]? invocationList, EventArgs e)
     {

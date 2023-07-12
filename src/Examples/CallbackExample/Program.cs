@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Examples.Common;
 using GbxRemoteNet;
 using GbxRemoteNet.Events;
+using GbxRemoteNet.Interfaces;
 using GbxRemoteNet.Structs;
 using GbxRemoteNet.XmlRpc.Packets;
 using Microsoft.Extensions.Logging;
@@ -17,7 +18,7 @@ internal class Program
     private static async Task Main(string[] args)
     {
         // create client instance
-        GbxRemoteClient client = new("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
+        var client = new GbxRemoteClient("127.0.0.1", 5001, Logger.New<Program>(LogLevel.Debug));
 
         // connect and login
         if (!await client.LoginAsync("SuperAdmin", "SuperAdmin"))

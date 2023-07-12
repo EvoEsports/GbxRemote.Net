@@ -1,7 +1,7 @@
 ﻿namespace GbxRemoteNet;
 
 /// <summary>
-///     Uncategorized methods.
+/// Uncategorized methods.
 /// </summary>
 public partial class GbxRemoteClient
 {
