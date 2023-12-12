@@ -9,26 +9,14 @@ namespace GbxRemoteNet.XmlRpc;
 /// <summary>
 ///     Handles reading and writing to the XML-RPC server.
 /// </summary>
-public class XmlRpcIO
+public class XmlRpcIO(Stream stream)
 {
-    private readonly Stream _stream;
-
     /// <summary>
     ///     Create a new instance using the provided TCP connection.
     /// </summary>
     /// <param name="tcpClient">Instance to an active TCP connection.</param>
-    public XmlRpcIO(TcpClient tcpClient)
+    public XmlRpcIO(TcpClient tcpClient) : this(tcpClient.GetStream())
     {
-        _stream = tcpClient.GetStream();
-    }
-
-    /// <summary>
-    ///     Creates a new instance using a stream.
-    /// </summary>
-    /// <param name="stream">This should be a stream that implements the XML-RPC protocol.</param>
-    public XmlRpcIO(Stream stream)
-    {
-        this._stream = stream;
     }
 
     /// <summary>
@@ -43,7 +31,7 @@ public class XmlRpcIO
     {
         var data = new byte[n];
         var count = 0;
-        while (n - count > 0) count += await _stream.ReadAsync(data.AsMemory(count, n - count));
+        while (n - count > 0) count += await stream.ReadAsync(data.AsMemory(count, n - count));
         return data;
     }
 
@@ -63,7 +51,7 @@ public class XmlRpcIO
     {
         var data = new byte[n];
         var count = 0;
-        while (n - count > 0) count += await _stream.ReadAsync(data.AsMemory(count, n - count), token);
+        while (n - count > 0) count += await stream.ReadAsync(data.AsMemory(count, n - count), token);
         return data;
     }
 
@@ -74,7 +62,7 @@ public class XmlRpcIO
     /// <returns></returns>
     public async Task WriteBytesAsync(byte[] bytes)
     {
-        await _stream.WriteAsync(bytes.AsMemory(0, bytes.Length));
-        await _stream.FlushAsync();
+        await stream.WriteAsync(bytes.AsMemory(0, bytes.Length));
+        await stream.FlushAsync();
     }
 }

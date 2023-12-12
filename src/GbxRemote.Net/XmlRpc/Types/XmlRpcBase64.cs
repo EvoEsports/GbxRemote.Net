@@ -12,16 +12,16 @@ public class XmlRpcBase64 : XmlRpcBaseType, IEquatable<XmlRpcBase64>
     /// <summary>
     ///     Native value of the XML-RPC value.
     /// </summary>
-    public ExtraTypes.GbxBase64 Value;
+    public GbxBase64 Value;
 
-    public XmlRpcBase64(ExtraTypes.GbxBase64 value) : base(null)
+    public XmlRpcBase64(GbxBase64 value) : base(null)
     {
         Value = value;
     }
 
     public XmlRpcBase64(XElement element) : base(element)
     {
-        Value = ExtraTypes.GbxBase64.FromBase64String(element.Value);
+        Value = GbxBase64.FromBase64String(element.Value);
     }
 
     public bool Equals(XmlRpcBase64 other)

@@ -101,7 +101,7 @@ namespace GbxRemote.Net.Tests.XmlRpcTests {
             new object[]{ new XmlRpcBoolean(false), false },
             new object[]{ new XmlRpcBoolean(true), true },
             new object[]{ new XmlRpcString("Test String"), "Test String" },
-            new object[]{ new GbxRemoteNet.XmlRpc.Types.XmlRpcBase64(GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=")), GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=") },
+            new object[]{ new XmlRpcBase64(GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=")), GbxBase64.FromBase64String("VGVzdCBTdHJpbmc=") },
             new object[]{ new XmlRpcDateTime(DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime()), DateTime.Parse("2021-04-06T16:36:44.1557489+02:00").ToUniversalTime() },
             new object[]{ new XmlRpcArray(new XmlRpcBaseType[] {
                 new XmlRpcInteger(1),

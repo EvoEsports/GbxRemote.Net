@@ -5,20 +5,10 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.XmlRpc.Packets;
 
-public class ConnectHeader : IPacket
+public class ConnectHeader(int length, string protocol) : IPacket
 {
-    public int Length;
-    public string Protocol;
-
-    public ConnectHeader()
-    {
-    }
-
-    public ConnectHeader(int length, string protocol)
-    {
-        Length = length;
-        Protocol = protocol;
-    }
+    public int Length = length;
+    public string Protocol = protocol;
 
     public bool IsValid => Protocol.Equals("GBXRemote 2");
 

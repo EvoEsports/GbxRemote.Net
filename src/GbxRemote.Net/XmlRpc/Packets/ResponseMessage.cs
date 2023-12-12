@@ -16,10 +16,6 @@ public class ResponseMessage : IPacket
     public string RawMessage;
     public XmlRpcBaseType ResponseData;
 
-    public ResponseMessage()
-    {
-    }
-
     public ResponseMessage(MessageHeader header, string message)
     {
         Header = header;
