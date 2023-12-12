@@ -5,17 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GbxRemoteNet.XmlRpc.ExtraTypes {
-    public class Base64 : IEquatable<Base64> {
-        private byte[] data;
+    public class Base64(byte[] data) : IEquatable<Base64> {
+        private byte[] data = data;
 
         public byte[] Data => data;
 
-        public Base64(byte[] data) {
-            this.data = data;
-        }
-
-        public Base64(string data) {
-            this.data = Encoding.UTF8.GetBytes(data);
+        public Base64(string data) : this(Encoding.UTF8.GetBytes(data))
+        {
         }
 
         public bool Equals(Base64 other) {

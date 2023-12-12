@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.XmlRpc
 {
-    public class NadeoXmlRpcClient
+    public class NadeoXmlRpcClient(string host, int port)
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
@@ -23,8 +23,6 @@ namespace GbxRemoteNet.XmlRpc
         ConcurrentDictionary<uint, ResponseMessage> responseMessages = new();
 
         // connection
-        string connectHost;
-        int connectPort;
         TcpClient tcpClient;
         XmlRpcIO xmlRpcIO;
 
@@ -56,12 +54,6 @@ namespace GbxRemoteNet.XmlRpc
         /// Triggered when the client has been disconnected from the server.
         /// </summary>
         public event TaskAction OnDisconnected;
-
-        public NadeoXmlRpcClient(string host, int port)
-        {
-            connectHost = host;
-            connectPort = port;
-        }
 
         /// <summary>
         /// Handles all responses from the XML-RPC server.
@@ -113,7 +105,7 @@ namespace GbxRemoteNet.XmlRpc
         public async Task<bool> ConnectAsync(int retries = 0, int retryTimeout = 1000)
         {
             logger.Debug("Client connecting to the remote XML-RPC server.");
-            var connectAddr = await Dns.GetHostAddressesAsync(connectHost);
+            var connectAddr = await Dns.GetHostAddressesAsync(host);
 
             tcpClient = new TcpClient();
 
@@ -122,7 +114,7 @@ namespace GbxRemoteNet.XmlRpc
             {
                 try
                 {
-                    await tcpClient.ConnectAsync(connectAddr[0], connectPort);
+                    await tcpClient.ConnectAsync(connectAddr[0], port);
 
                     if (tcpClient.Connected)
                         break;

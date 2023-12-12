@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>GbxRemoteNet</RootNamespace>
     <Version>1.1.7</Version>
     <Authors>Evo</Authors>
@@ -20,6 +19,7 @@
     <FileVersion>1.1.7.0</FileVersion>
     <PackageIconUrl />
     <PackageVersion>1.1.7</PackageVersion>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
