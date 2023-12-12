@@ -3,20 +3,10 @@ using System.Threading.Tasks;
 
 namespace GbxRemoteNet.XmlRpc.Packets;
 
-public class MessageHeader : IPacket
+public class MessageHeader(int length, uint handle) : IPacket
 {
-    public uint Handle;
-    public int MessageLength;
-
-    public MessageHeader()
-    {
-    }
-
-    public MessageHeader(int length, uint handle)
-    {
-        MessageLength = length;
-        Handle = handle;
-    }
+    public uint Handle = handle;
+    public int MessageLength = length;
 
     /// <summary>
     ///     Whether the message is a callback.

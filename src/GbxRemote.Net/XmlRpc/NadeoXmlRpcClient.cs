@@ -12,13 +12,9 @@ using Microsoft.Extensions.Logging;
 
 namespace GbxRemoteNet.XmlRpc;
 
-public class NadeoXmlRpcClient : INadeoXmlRpcClient
+public class NadeoXmlRpcClient(string host, int port, ILogger logger = null) : INadeoXmlRpcClient
 {
-    private readonly ILogger _logger;
-
     // connection
-    private readonly string _connectHost;
-    private readonly int _connectPort;
 
     private uint _handler = 0x80000000;
     private readonly object _handlerLock = new();
@@ -31,14 +27,6 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
     private TcpClient _tcpClient;
     private XmlRpcIO _xmlRpcIo;
 
-    public NadeoXmlRpcClient(string host, int port, ILogger logger = null)
-    {
-        _connectHost = host;
-        _connectPort = port;
-
-        _logger = logger;
-    }
-
     public event INadeoXmlRpcClient.TaskAction OnConnected;
 
     public event INadeoXmlRpcClient.CallbackAction OnCallback;
@@ -47,8 +35,8 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
 
     public async Task<bool> ConnectAsync(int retries = 0, int retryTimeout = 1000)
     {
-        _logger?.LogDebug("Client connecting to the remote XML-RPC server");
-        var connectAddr = await Dns.GetHostAddressesAsync(_connectHost);
+        logger?.LogDebug("Client connecting to the remote XML-RPC server");
+        var connectAddr = await Dns.GetHostAddressesAsync(host);
 
         _tcpClient = new TcpClient();
 
@@ -57,17 +45,17 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
         {
             try
             {
-                await _tcpClient.ConnectAsync(connectAddr[0], _connectPort);
+                await _tcpClient.ConnectAsync(connectAddr[0], port);
 
                 if (_tcpClient.Connected)
                     break;
             }
             catch (Exception e)
             {
-                _logger?.LogError("Exception occured when trying to connect to server: {Msg}", e.Message);
+                logger?.LogError("Exception occured when trying to connect to server: {Msg}", e.Message);
             }
 
-            _logger?.LogError("Failed to connect to server");
+            logger?.LogError("Failed to connect to server");
 
             retries--;
 
@@ -82,7 +70,7 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
 
         _xmlRpcIo = new XmlRpcIO(_tcpClient);
 
-        _logger?.LogDebug("Client connected to XML-RPC server with IP: {Address}", connectAddr.ToString());
+        logger?.LogDebug("Client connected to XML-RPC server with IP: {Address}", connectAddr.ToString());
 
         // Cancellation token to cancel task if it takes longer than a second
         var cancellationTokenSource = new CancellationTokenSource();
@@ -96,14 +84,14 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
         }
         catch (Exception e)
         {
-            _logger?.LogError("Exception occured when trying to get connect header: {Msg}", e.Message);
-            _logger?.LogError("Failed to get connect header");
+            logger?.LogError("Exception occured when trying to get connect header: {Msg}", e.Message);
+            logger?.LogError("Failed to get connect header");
             return false;
         }
 
         if (!header.IsValid)
         {
-            _logger?.LogError("Client is using an invalid header protocol: {Protocol}", header.Protocol);
+            logger?.LogError("Client is using an invalid header protocol: {Protocol}", header.Protocol);
             throw new InvalidProtocolException(header.Protocol);
         }
 
@@ -117,7 +105,7 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
 
     public async Task DisconnectAsync()
     {
-        _logger?.LogDebug("Client is disconnecting from XML-RPC server");
+        logger?.LogDebug("Client is disconnecting from XML-RPC server");
         try
         {
             _recvCancel.Cancel();
@@ -126,12 +114,12 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
         }
         catch (Exception e)
         {
-            _logger?.LogWarning("An exception occured when trying to disconnect: {Message}", e.Message);
+            logger?.LogWarning("An exception occured when trying to disconnect: {Message}", e.Message);
         }
 
         OnDisconnected?.Invoke();
 
-        _logger?.LogDebug("Client disconnected from XML-RPC server");
+        logger?.LogDebug("Client disconnected from XML-RPC server");
     }
 
     public async Task<uint> GetNextHandle()
@@ -142,7 +130,7 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
             if (_handler + 1 == 0xffffffff)
                 _handler = 0x80000000;
 
-            _logger?.LogTrace("Next handler value: {Handler}", _handler);
+            logger?.LogTrace("Next handler value: {Handler}", _handler);
 
             return _handler++;
         }
@@ -158,10 +146,10 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
         var handle = await GetNextHandle();
         MethodCall call = new(method, handle, args);
 
-        _logger?.LogTrace("Calling remote method: {Method}", method);
-        _logger?.LogTrace("================== CALL START ==================");
-        _logger?.LogTrace("{Xml}", call.Call.MainDocument.ToString());
-        _logger?.LogTrace("================== CALL END ==================");
+        logger?.LogTrace("Calling remote method: {Method}", method);
+        logger?.LogTrace("================== CALL START ==================");
+        logger?.LogTrace("{Xml}", call.Call.MainDocument.ToString());
+        logger?.LogTrace("================== CALL END ==================");
 
         _responseHandles[handle] = new ManualResetEvent(false);
 
@@ -182,18 +170,18 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
     {
         try
         {
-            _logger?.LogDebug("Receive loop initiated");
+            logger?.LogDebug("Receive loop initiated");
 
             while (!_recvCancel.IsCancellationRequested)
             {
                 var response = await ResponseMessage.FromIOAsync(_xmlRpcIo);
 
-                _logger?.LogTrace("================== MESSAGE START ==================");
-                _logger?.LogTrace("Message length: {Length}", response.Header.MessageLength);
-                _logger?.LogTrace("Handle: {Handle}", response.Header.Handle);
-                _logger?.LogTrace("Is callback: {IsCallback}", response.Header.IsCallback);
-                _logger?.LogTrace("{Xml}", response.MessageXml.ToString());
-                _logger?.LogTrace("================== MESSAGE END ==================");
+                logger?.LogTrace("================== MESSAGE START ==================");
+                logger?.LogTrace("Message length: {Length}", response.Header.MessageLength);
+                logger?.LogTrace("Handle: {Handle}", response.Header.Handle);
+                logger?.LogTrace("Is callback: {IsCallback}", response.Header.IsCallback);
+                logger?.LogTrace("{Xml}", response.MessageXml.ToString());
+                logger?.LogTrace("================== MESSAGE END ==================");
 
                 if (response.IsCallback)
                 {
@@ -211,7 +199,7 @@ public class NadeoXmlRpcClient : INadeoXmlRpcClient
         }
         catch (Exception e)
         {
-            _logger?.LogError("Receive loop raised an exception: {Msg}", e.Message);
+            logger?.LogError("Receive loop raised an exception: {Msg}", e.Message);
             await DisconnectAsync();
         }
     }

@@ -2,7 +2,4 @@
 
 namespace GbxRemoteNet.Exceptions;
 
-public class InvalidProtocolException : InvalidOperationException
-{
-    public InvalidProtocolException(string protocol) : base($"Invalid protocol: {protocol}") {}
-}
+public class InvalidProtocolException(string protocol) : InvalidOperationException($"Invalid protocol: {protocol}");

@@ -2,10 +2,4 @@
 
 namespace GbxRemoteNet.Exceptions;
 
-public class XmlRpcResponseException : InvalidOperationException
-{
-    public XmlRpcResponseException(string message) : base(message)
-    {
-        
-    }
-}
+public class XmlRpcResponseException(string message) : InvalidOperationException(message);
