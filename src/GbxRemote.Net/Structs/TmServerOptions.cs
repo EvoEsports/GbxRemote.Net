@@ -16,7 +16,7 @@ public class TmServerOptions
     public bool? AutoSaveReplays { get; set; }
     public bool? AllowMapDownload { get; set; }
     public bool? KeepPlayerSlots { get; set; }
-    public bool? HideServer { get; set; }
+    public int? HideServer { get; set; }
     public int? ClientInputsMaxLatency { get; set; }
     public bool? DisableHorns { get; set; }
     public bool? DisableServiceAnnounces { get; set; }
