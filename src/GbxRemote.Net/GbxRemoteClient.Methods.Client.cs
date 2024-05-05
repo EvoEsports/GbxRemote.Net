@@ -90,7 +90,7 @@ public partial class GbxRemoteClient
     public async Task<bool> SendOpenLinkToLoginAsync(string playerLogin, string url, int linkType)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
-            await CallOrFaultAsync("SendOpenLinkToId", playerLogin, url, linkType)
+            await CallOrFaultAsync("SendOpenLinkToLogin", playerLogin, url, linkType)
         );
     }
 
