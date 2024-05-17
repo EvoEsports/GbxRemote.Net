@@ -27,7 +27,7 @@ public partial class GbxRemoteClient
     public async Task<bool> SetNextMapIndexAsync(int mapIndex)
     {
         return (bool) XmlRpcTypes.ToNativeValue<bool>(
-            await CallOrFaultAsync("SetNextMapIndex")
+            await CallOrFaultAsync("SetNextMapIndex", mapIndex)
         );
     }
     
