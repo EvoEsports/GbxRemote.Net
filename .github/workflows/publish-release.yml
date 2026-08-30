@@ -9,6 +9,9 @@ jobs:
     env:
       SOLUTION: 'src/GbxRemote.Net.sln'
     runs-on: ubuntu-latest
+    permissions:
+        id-token: write
+        contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v3
