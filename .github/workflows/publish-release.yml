@@ -8,6 +8,7 @@ jobs:
   build:
     env:
       SOLUTION: 'src/GbxRemote.Net.sln'
+      PROJECT: 'src/GbxRemote.Net/GbxRemote.Net.csproj'
     runs-on: ubuntu-latest
     permissions:
         id-token: write
@@ -31,7 +32,7 @@ jobs:
         run: dotnet test $SOLUTION /p:Configuration=Release --verbosity normal
       
       - name: Nuget Pack
-        run: dotnet pack $SOLUTION /p:Version=${{github.ref_name}} -c Release --no-build --output package/
+        run: dotnet pack $PROJECT /p:Version=${{github.ref_name}} -c Release --no-build --output package/
       
       - name: Upload Artifact
         uses: actions/upload-artifact@v7
